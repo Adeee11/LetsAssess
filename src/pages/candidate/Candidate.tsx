@@ -17,7 +17,7 @@ const Candidate = () => {
 
             {selectedTest &&
 
-                <Test topic={selectedTest} />
+                <Test topic={selectedTest} backToDashBoard={()=>setSelectedTest(null)} />
             }
         </>
 

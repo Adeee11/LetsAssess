@@ -8,15 +8,11 @@ const data = {
         [
             {
                 "quesId":1,
-                "quesValue": `In below code snippet, in what order will the margins be added?
-                
-                p {
-                    margin: 25px 50px 75px 100px;
-                  }`,
+                "quesValue": "In below code snippet, in what order will the margins be added?",
                      
                 "quesType":"mcq",
-                "useCustomComponent":false,
-                "props":null,
+                "useCustomComponent":true,
+                "props":{"type": "code", "content": 'p {\n      margin: 25px 50px 75px 100px:\n  }', "format": "css"},
                 "options": [
                     {
                         "optionId":1,
@@ -54,19 +50,27 @@ const data = {
                 "options": [
                     {   
                         "optionId":1, 
-                        "optionValue":"Radio button"
+                        "optionValue":"Radio button",
+                        "useCustomComponent":false,
+                        "optionProps":null
                     }, 
                         {
                             "optionId":2,
-                            "optionValue":"textArea"
+                            "optionValue":"textArea",
+                            "useCustomComponent":false,
+                        "optionProps":null
                         }, 
                         {
                             "optionId":3,
-                            "optionValue":"Checkbox"
+                            "optionValue":"Checkbox",
+                            "useCustomComponent":false,
+                        "optionProps":null
                         }, 
                         {
                             "optionId":4,
-                            "optionValue":"Radio or checkbox"
+                            "optionValue":"Radio or checkbox",
+                            "useCustomComponent":false,
+                        "optionProps":null
                         }],
                 "correctOption": ["Checkbox"]
             },
@@ -89,10 +93,10 @@ const data = {
             "props":null,
                 "quesValue": "Which of the following CSS properties can be used for hiding an element in the DOM without changing the layout of the page?",
                 "options": [
-                     {"useCustomComponent":false,"optionProps":null,"optionId":1,"optionValue":"display='none'"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"visibility='none'"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"visibility='hidden'"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"display='hidden'"}
+                     {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'display:none', "format": "css"},"optionId":1,"optionValue":"display:none"}, 
+                     {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'visibility:none', "format": "css"},"optionId":2,"optionValue":"visibility:none"}, 
+                     {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'visibility:hidden', "format": "css"},"optionId":3,"optionValue":"visibility:hidden"}, 
+                     {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'display:hidden', "format": "css"},"optionId":4,"optionValue":"display:hidden"}
                 ],
                 "correctOption": ["visibility='hidden'"]
             },
@@ -197,16 +201,16 @@ const data = {
             },
             { "quesId":13,
             "quesType":"mcq",
-            "useCustomComponent":false,
-            "props":null,
-                "quesValue": "Which property is used to adjust the space between text characters?",
+            "useCustomComponent":true,
+                "props":{"type": "code", "content": "<body>\n\n    <p class=\"rem\">paragraph rem element</p>\n\n    <p class=\"em\">paragraph em element</p>\n\n</body>", "format": "css"},
+                "quesValue": "Using the following HTML and CSS example, what will the equivalent pixel value be for the .em and .rem elements?",
                 "options": [
-                     {"useCustomComponent":false,"optionProps":null,"optionId":1,"optionValue":"Text-transform"},
-                     {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"font-variant"},
-                     {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"font-style"},
-                     {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"letter-spacing"}
+                     {"useCustomComponent":false,"optionProps":null,"optionId":1,"optionValue":"the .rem value will be equivalent to 15px, the .em value will be 40 px."},
+                     {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"the .rem value will be equivalent to 15px, the .em value will be 20 px."},
+                     {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"the .rem value will be equivalent to 25px, the .em value will be 20 px."},
+                     {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"the .rem value will be equivalent to 20px, the .em value will be 40 px."}
                     ],
-                "correctOption": "letter-spacing"
+                "correctOption": ["the .rem value will be equivalent to 15px, the .em value will be 40 px."]
             },
             { "quesId":14,
             "quesType":"mcq",
@@ -258,18 +262,39 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}],
                 "correctOption": ["No"]
             },
-            { "quesId":18,
-            "quesType":"mcq",
-            "useCustomComponent":false,
-            "props":null,
-                "quesValue": "Which of the following colors contain equal amount of RGB?",
+            {
+                "quesId":18,
+                "quesValue": "What will be the width of the div element given below?",                     
+                "quesType":"mcq",
+                "useCustomComponent":true,
+                "props":{"type": "code", "content": 'div{\n      width: 310px;\n      padding: 20px;\n      border: 5px solid blue;\n      margin: 0;\n}', "format": "css"},
                 "options": [
-                     {"useCustomComponent":false,"optionProps":null,"optionId":1,"optionValue":"White"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"Gray"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"Black"}, 
-                     {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"All of the above"}
+                    {
+                        "optionId":1,
+                        "optionValue":"310px",
+                        "useCustomComponent":false,
+                        "optionProps":null
+                    },
+                    {
+                        "optionId":2,
+                        "optionValue":"350px",
+                        "useCustomComponent":false,
+                        "optionProps":null
+                    },
+                    {
+                        "optionId":3,
+                        "optionValue":"355px",
+                        "useCustomComponent":false,
+                        "optionProps":null
+                    },
+                    {
+                        "optionId":4,
+                        "optionValue":"360px",
+                        "useCustomComponent":false,
+                        "optionProps":null
+                    }
                 ],
-                "correctOption": ["All of the above"]
+                "correctOption":["360px"]
             },
             { "quesId":19,
             "quesType":"mcq",
@@ -294,7 +319,8 @@ const data = {
                        {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"a:hover, a:visited, a:link, a:acitive"},
                        {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"a:visited, a:link, a:active, a:hover"}],
                 "correctOption": ["a:link, a:visited, a:hover, a:acitive"]
-            }
+            },
+            
 
         ]
 }

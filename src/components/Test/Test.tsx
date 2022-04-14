@@ -1,32 +1,47 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     Column,
     Container,
     Section,
     Option,
     Question,
-    Timer
+    Timer, 
+    QuestionCode,
+    OptionCode
 } from './Test.styled';
 import CountdownTimer from './CountdownTimer'
 import { data } from './jstest';
+import CustomComponent from '../CustomComponent/CustomComponent';
 
 export const LocalContext = React.createContext({});
 
 
 type propsType = {
-    topic: string | null
+    topic: string | null,
+    backToDashBoard:()=>void
 }
 
 
 
-const Test = ({ topic }: propsType) => {
+const Test = ({ topic , backToDashBoard}: propsType) => {
     const [queNo, setQueNo] = useState(0);
     const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>([]);
+
+    useEffect(() => {
+        window.addEventListener("beforeunload", (e)=>{
+            e.preventDefault();
+            const message ="if you refresh you marked as failed";
+            e.returnValue = message;
+            return message;           
+        });
+       
+      }, []);
 
 
     const submitHandler = () => {
         alert(selectedOpt);
         console.log("selected option", selectedOpt);
+        backToDashBoard();
     }
 
     const nextQuestion = () => {
@@ -80,7 +95,7 @@ const Test = ({ topic }: propsType) => {
         submitHandler: submitHandler
     }
 
-   
+
 
     console.log(selectedOpt);
     return (
@@ -92,6 +107,13 @@ const Test = ({ topic }: propsType) => {
                         <div className='subject'>{data.title}</div>
                         <div className='description'> {`Question ${queNo + 1} of ${data.Questions.length}`} </div>
                         <Question>{data.Questions[queNo].quesValue}</Question>
+
+                        {data.Questions[queNo].useCustomComponent === true &&
+                            <QuestionCode>
+                                <CustomComponent data={data.Questions[queNo].props} />
+                            </QuestionCode>
+                        }
+
                     </Column>
 
                     <Column>
@@ -127,7 +149,14 @@ const Test = ({ topic }: propsType) => {
                                             className={selectedOpt[queNo] == opt.optionValue ? "act" : ""}
                                             onClick={() => selectOpt(opt.optionValue)}
                                         >
-                                            <span>{opt.optionValue}</span>
+                                          {!opt.useCustomComponent && <span>{opt.optionValue}</span>}
+                                            
+                                            {opt.useCustomComponent &&
+                                            <OptionCode>
+                                                <CustomComponent data={opt.optionProps}/>
+                                            </OptionCode>
+                                            }    
+                                            
                                             <span className='sn'>{index + 1}</span>
                                         </Option>}
                                 </div>
