@@ -20,7 +20,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-app.get("/", (rreq, res) => {
+app.get("/", (req, res) => {
   res.send("Firebase API");
 });
 
@@ -90,6 +90,36 @@ app.get("/assessment/:id", async (req, res) => {
   const data = removeCorrectOption(
     JSON.parse(JSON.stringify(documentSnapShot.data()))
   );
+  res.json(data);
+});
+
+// ADDING RESULTS
+app.post("/result", async (req, res) => {
+  const data = req.body.data;
+  const assessmentId = slugify(req.body.assessmentId.toLowerCase());
+  const docRef = firestore.doc(`results/${assessmentId}`);
+  const result = await docRef.set(data);
+  console.log("Result", result);
+  res.sendStatus(200);
+});
+
+// Add candidate for a particular assessment
+app.post("/result/add-candidate", async (req, res) => {
+  const data = req.body.candidate;
+  const assessmentId = slugify(req.body.assessmentId.toLowerCase());
+  const docRef = firestore.doc(`results/${assessmentId}`);
+  await docRef.update({
+    candidates: admin.firestore.FieldValue.arrayUnion(data),
+  });
+  res.sendStatus(200);
+});
+
+// fetch users who submitted  a particular test
+app.get("/result/:id", async (req, res) => {
+  const assessmentId = req.params.id;
+  const docRef = firestore.doc(`results/${assessmentId}`);
+  const documentSnapShot = await docRef.get();
+  const data = documentSnapShot.data();
   res.json(data);
 });
 
