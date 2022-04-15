@@ -8,8 +8,9 @@ import {
 import Home from './pages';
 
 import { User } from './pages/user';
-
 import { Candidate } from './pages/candidate';
+import { Dashboard } from './pages/user/Dashboard';
+
 function App() {
   return (
     <AppContainer>
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />}></Route>
           <Route path="/user" element={<User />}></Route>
+          <Route path="/user/dashboard" element={<Dashboard />}></Route>
           <Route path="/candidate" element={<Candidate />}></Route>
         </Routes>
       </Router>

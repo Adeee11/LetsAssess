@@ -12,7 +12,7 @@ const data = {
                      
                 "quesType":"mcq",
                 "useCustomComponent":true,
-                "props":{"type": "code", "content": 'p {\n      margin: 25px 50px 75px 100px:\n  }', "format": "css"},
+                "props":{"type": "code", "content": "p {\n      margin: 25px 50px 75px 100px:\n  }", "format": "css"},
                 "options": [
                     {
                         "optionId":1,
@@ -39,7 +39,7 @@ const data = {
                         "optionProps":null
                     }
                 ],
-                "correctOption":"Top, Right, Bottom, Left"
+                "correctOption":1
             },
             {
                 "quesId":2,
@@ -72,7 +72,7 @@ const data = {
                             "useCustomComponent":false,
                         "optionProps":null
                         }],
-                "correctOption": ["Checkbox"]
+                "correctOption": 3
             },
             {
                 "quesValue": "How can you ensure that all necessary fields are populated before a form can be submitted?",
@@ -85,7 +85,7 @@ const data = {
                     {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"On the server , evaluates all the controls for data and returns an error page for missing content."},
                     {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"Add the required attribute on each control so the user gets a message that the field is required."},
                     {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"Add a label to the page to let users know which controls they must fill in."}],
-                    "correctOption":["Add the required attribute on each control so the user gets a message that the field is required."]
+                    "correctOption":3
                 },
             { "quesId":4,
             "quesType":"mcq",
@@ -98,7 +98,7 @@ const data = {
                      {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'visibility:hidden', "format": "css"},"optionId":3,"optionValue":"visibility:hidden"}, 
                      {"useCustomComponent":true,"optionProps":{"type": "code", "content": 'display:hidden', "format": "css"},"optionId":4,"optionValue":"display:hidden"}
                 ],
-                "correctOption": ["visibility='hidden'"]
+                "correctOption": 3
             },
             { "quesId":5,
             "quesType":"mcq",
@@ -110,7 +110,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"box-shadow: black -5px 5px;"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"box-shadow: black 5px -5px;"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"box-shadow: black -5px -5px;"}],
-                "correctOption": ["box-shadow: black 5px 5px;"]
+                "correctOption": 1
             },
             { "quesId":6,
             "quesType":"mcq",
@@ -123,7 +123,7 @@ const data = {
                    {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"Relative"},
                    {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}
                 ],
-                "correctOption": ["Fixed"]
+                "correctOption": 2
             },
             { "quesId":7,
             "quesType":"mcq",
@@ -135,7 +135,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"The top-left corner of its parent element"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"Centered inside the window"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"Centered inside its parent element"}],
-                "correctOption": ["The top-left corner of its parent element"]
+                "correctOption": 2
             },
             { "quesId":8,
             "quesType":"mcq",
@@ -147,7 +147,7 @@ const data = {
                         {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"skew"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"translate"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"scale"}],
-                "correctOption": ["scale"]
+                "correctOption": 4
             },
             { "quesId":9,
             "quesType":"mcq",
@@ -159,7 +159,7 @@ const data = {
                        {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"cookieStorage"},
                        {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"sessionStorage"},
                        {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"A hidden input element"}],
-                "correctOption": ["sessionStorage"]
+                "correctOption": 3
             },
             { "quesId":10,
             "quesType":"mcq",
@@ -171,7 +171,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"margin, border, padding"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"border, padding, margin"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"margin, padding, border"}],
-                "correctOption": ["margin, border, padding"]
+                "correctOption": 2
             },
             { "quesId":11,
             "quesType":"mcq",
@@ -183,7 +183,7 @@ const data = {
                         {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"letter-margin"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"word-spacing"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"word-padding"}],
-                "correctOption": ["word-spacing"]
+                "correctOption": 3
             },
             { "quesId":12,
             "quesType":"mcq",
@@ -197,7 +197,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"background-color: hsl(0,0,0,0.5);"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"background-color: rgba(0,0,0,1);"}
                 ],
-                "correctOption": ["background-color: rgba(0,0,0,0.5);"]
+                "correctOption": 1
             },
             { "quesId":13,
             "quesType":"mcq",
@@ -210,7 +210,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"the .rem value will be equivalent to 25px, the .em value will be 20 px."},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"the .rem value will be equivalent to 20px, the .em value will be 40 px."}
                     ],
-                "correctOption": ["the .rem value will be equivalent to 15px, the .em value will be 40 px."]
+                "correctOption": 1
             },
             { "quesId":14,
             "quesType":"mcq",
@@ -223,7 +223,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"insert content before or after the element."},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"All of the above."}
                 ],
-                "correctOption": ["All of the above."]
+                "correctOption":4
             },
             { "quesId":15,
             "quesType":"mcq",
@@ -236,7 +236,7 @@ const data = {
                         {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"No such specific property is present"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}
                     ],
-                "correctOption": ["z-index"]
+                "correctOption": 1
             },
             { "quesId":16,
             "quesType":"mcq",
@@ -248,7 +248,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"visibility"}, 
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"filter"},
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}],
-                "correctOption": ["opacity"]
+                "correctOption": 1
             },
             { "quesId":17,
             "quesType":"mcq",
@@ -260,7 +260,7 @@ const data = {
                      {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"No"}, 
                      {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"Depends on property"}, 
                      {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}],
-                "correctOption": ["No"]
+                "correctOption": 2
             },
             {
                 "quesId":18,
@@ -294,7 +294,7 @@ const data = {
                         "optionProps":null
                     }
                 ],
-                "correctOption":["360px"]
+                "correctOption":4
             },
             { "quesId":19,
             "quesType":"mcq",
@@ -306,7 +306,7 @@ const data = {
                         {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"They can be used for text only"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"They can be repeated"},
                         {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"None of the above"}],
-                "correctOption": ["They can be repeated"]
+                "correctOption": 3
             },
             { "quesId":20,
             "quesType":"mcq",
@@ -318,7 +318,7 @@ const data = {
                        {"useCustomComponent":false,"optionProps":null,"optionId":2,"optionValue":"a:acitive, a:hover, a:link, a:visited"},
                        {"useCustomComponent":false,"optionProps":null,"optionId":3,"optionValue":"a:hover, a:visited, a:link, a:acitive"},
                        {"useCustomComponent":false,"optionProps":null,"optionId":4,"optionValue":"a:visited, a:link, a:active, a:hover"}],
-                "correctOption": ["a:link, a:visited, a:hover, a:acitive"]
+                "correctOption": 1
             },
             
 

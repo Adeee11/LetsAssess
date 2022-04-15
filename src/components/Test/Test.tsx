@@ -51,7 +51,7 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
     }
 
 
-    const selectOpt = (arg0: string) => {
+    const selectOpt = (arg0: string|number) => {
         if (data.Questions[queNo].quesType == "mcq") {
             selectedOpt[queNo] = arg0;
             setSelectedOpt([...selectedOpt]);
@@ -146,8 +146,8 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
                                     {data.Questions[queNo].quesType === "mcq" &&
                                         // if question type is mcq
                                         <Option
-                                            className={selectedOpt[queNo] == opt.optionValue ? "act" : ""}
-                                            onClick={() => selectOpt(opt.optionValue)}
+                                            className={selectedOpt[queNo] == opt.optionId ? "act" : ""}
+                                            onClick={() => selectOpt(opt.optionId)}
                                         >
                                           {!opt.useCustomComponent && <span>{opt.optionValue}</span>}
                                             
