@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Test } from '../../components/Test'
 import { Dashboard } from '../../components/Dashboard';
 import { Wrapper } from './Candidate.Styled';
@@ -6,6 +6,7 @@ import { Wrapper } from './Candidate.Styled';
 
 const Candidate = () => {
     const [selectedTest, setSelectedTest] = useState<string | null>(null);
+   
     return (
         <>
             {!selectedTest &&
@@ -17,7 +18,7 @@ const Candidate = () => {
 
             {selectedTest &&
 
-                <Test topic={selectedTest} backToDashBoard={()=>setSelectedTest(null)} />
+                <Test title={selectedTest}  backToDashBoard={()=>setSelectedTest(null)} />
             }
         </>
 

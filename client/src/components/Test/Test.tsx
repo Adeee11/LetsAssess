@@ -1,70 +1,103 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import {
     Column,
     Container,
     Section,
     Option,
     Question,
-    Timer, 
+    Timer,
     QuestionCode,
     OptionCode
 } from './Test.styled';
 import CountdownTimer from './CountdownTimer'
-import { data } from './jstest';
 import CustomComponent from '../CustomComponent/CustomComponent';
+import { GlobalContext } from '../../App';
 
 export const LocalContext = React.createContext({});
 
 
 type propsType = {
-    topic: string | null,
-    backToDashBoard:()=>void
+    backToDashBoard: () => void,
+    title: string
 }
 
 
 
-const Test = ({ topic , backToDashBoard}: propsType) => {
+const Test = ({ title, backToDashBoard }: propsType) => {
     const [queNo, setQueNo] = useState(0);
     const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>([]);
+    const [data1, setData1] = useState<any>();
+    const ctx = useContext<any>(GlobalContext)
+    const email = ctx.candidate.email;
+    const name = ctx.candidate.name;
 
     useEffect(() => {
-        window.addEventListener("beforeunload", (e)=>{
-            e.preventDefault();
-            const message ="if you refresh you marked as failed";
-            e.returnValue = message;
-            return message;           
-        });
-       
-      }, []);
 
+        fetch(`http://localhost:9000/assessment/${title}`).
+            then(res => res.json()).
+            then(result => {
+                setData1(result)
+                console.log(result)
+            })
+
+    }, [])
+
+    useEffect(() => {
+        window.onbeforeunload = function () {
+            return "Data will be lost "
+        }
+    }, [])
 
     const submitHandler = () => {
-        alert(selectedOpt);
-        console.log("selected option", selectedOpt);
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const obj: any = {
+            "assessmentId": `${title}`,
+            "candidateId": `${email}`,
+            "data": {
+                "candidateName": `${name}`
+            }
+        }
+        obj.data[email] = {
+            "optionsMarked": selectedOpt
+        }
+        var raw = JSON.stringify(obj);
+
+        fetch("http://localhost:9000/result/add-candidate", {
+            method: 'POST',
+            headers: myHeaders,
+            body: raw,
+            redirect: 'follow'
+        })
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+
         backToDashBoard();
     }
 
     const nextQuestion = () => {
-        if (queNo < data.Questions.length - 1)
+        if (queNo < data1.questions.length - 1)
             setQueNo((prevQueNo) => prevQueNo + 1);
         else submitHandler();
     }
 
 
-    const selectOpt = (arg0: string|number) => {
-        if (data.Questions[queNo].quesType == "mcq") {
+    const selectOpt = (arg0: string | number) => {
+        if (data1.questions[queNo].quesType == "mcq") {
             selectedOpt[queNo] = arg0;
             setSelectedOpt([...selectedOpt]);
         }
-        else if (data.Questions[queNo].quesType == "mcq-m") {
+        else if (data1.questions[queNo].quesType == "mcq-m") {
 
             if (selectedOpt[queNo] == undefined) {
                 selectedOpt[queNo] = [];
-                selectedOpt[queNo] = data.Questions[queNo].options.map(() => false)
+                selectedOpt[queNo] = data1.questions[queNo].options.map(() => false)
             }
 
-            for (let i = 0; i < data.Questions[queNo].options.length; i++) {
-                if (arg0 === data.Questions[queNo].options[i].optionValue) {
+            for (let i = 0; i < data1.questions[queNo].options.length; i++) {
+                if (arg0 === data1.questions[queNo].options[i].optionValue) {
                     selectedOpt[queNo][i] = !selectedOpt[queNo][i];
                 }
             }
@@ -78,7 +111,7 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
         if (selectedOpt[queNo] == undefined) {
             return true
         }
-        else if (data.Questions[queNo].quesType === "mcq-m") {
+        else if (data1.questions[queNo].quesType === "mcq-m") {
             let flag = true;
             for (let i = 0; i < selectedOpt[queNo].length; i++) {
                 if (selectedOpt[queNo][i] == true) flag = false;
@@ -96,21 +129,22 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
     }
 
 
-
+    console.log(ctx.candidate)
     console.log(selectedOpt);
     return (
         <>
             <LocalContext.Provider value={datatopass}>
-                <Container>
+                {!data1 && <p>Loading.......</p>}
+                {data1 && <Container>
                     <Column>
                         <div className='logo'>IWEBCODE</div>
-                        <div className='subject'>{data.title}</div>
-                        <div className='description'> {`Question ${queNo + 1} of ${data.Questions.length}`} </div>
-                        <Question>{data.Questions[queNo].quesValue}</Question>
+                        <div className='subject'>{data1.title}</div>
+                        <div className='description'> {`Question ${queNo + 1} of ${data1.questions.length}`} </div>
+                        <Question>{data1.questions[queNo].quesValue}</Question>
 
-                        {data.Questions[queNo].useCustomComponent === true &&
+                        {data1.questions[queNo].useCustomComponent === true &&
                             <QuestionCode>
-                                <CustomComponent data={data.Questions[queNo].props} />
+                                <CustomComponent data={data1.questions[queNo].props} />
                             </QuestionCode>
                         }
 
@@ -118,8 +152,8 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
 
                     <Column>
                         <header>
-                            {data.Questions[queNo].quesType === "mcq" && <p>Select one answer</p>}
-                            {data.Questions[queNo].quesType === "mcq-m" && <p>Select multiple answer</p>}
+                            {data1.questions[queNo].quesType === "mcq" && <p>Select one answer</p>}
+                            {data1.questions[queNo].quesType === "mcq-m" && <p>Select multiple answer</p>}
                             <Timer>
                                 <CountdownTimer />
                             </Timer>
@@ -127,14 +161,14 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
                                 className="next"
                                 onClick={() => nextQuestion()}
                                 disabled={setDisable()}>
-                                {queNo < data.Questions.length - 1 ? "Next Question" : "Finish"}
+                                {queNo < data1.questions.length - 1 ? "Next Question" : "Finish"}
                             </button>
                         </header>
                         <Section>
-                            {data.Questions[queNo].options.map((opt, index) =>
+                            {data1.questions[queNo].options.map((opt: any, index: any) =>
                                 <div key={opt.optionId}>
                                     {/* if question type is mcq-m */}
-                                    {data.Questions[queNo].quesType === "mcq-m" &&
+                                    {data1.questions[queNo].quesType === "mcq-m" &&
                                         <Option
                                             className={selectedOpt[queNo] && selectedOpt[queNo][index] == true ? "act" : ""}
                                             onClick={() => selectOpt(opt.optionValue)}
@@ -143,20 +177,20 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
                                             <span className='sn'>{index + 1}</span>
                                         </Option>
                                     }
-                                    {data.Questions[queNo].quesType === "mcq" &&
+                                    {data1.questions[queNo].quesType === "mcq" &&
                                         // if question type is mcq
                                         <Option
                                             className={selectedOpt[queNo] == opt.optionId ? "act" : ""}
                                             onClick={() => selectOpt(opt.optionId)}
                                         >
-                                          {!opt.useCustomComponent && <span>{opt.optionValue}</span>}
-                                            
+                                            {!opt.useCustomComponent && <span>{opt.optionValue}</span>}
+
                                             {opt.useCustomComponent &&
-                                            <OptionCode>
-                                                <CustomComponent data={opt.optionProps}/>
-                                            </OptionCode>
-                                            }    
-                                            
+                                                <OptionCode>
+                                                    <CustomComponent data={opt.optionProps} />
+                                                </OptionCode>
+                                            }
+
                                             <span className='sn'>{index + 1}</span>
                                         </Option>}
                                 </div>
@@ -164,7 +198,7 @@ const Test = ({ topic , backToDashBoard}: propsType) => {
                         </Section>
 
                     </Column>
-                </Container>
+                </Container>}
             </LocalContext.Provider>
         </>
     )
