@@ -7,7 +7,7 @@ import cors from "cors";
 // Need to check the difference between intialized without any parameter and with parameter
 admin.initializeApp({
   credential: admin.credential.cert(
-    "/home/nitin/Downloads/service-account-file.json"
+    "H:/Operating System/letsassess-ad436-firebase-adminsdk-rli5w-8e69a15e18.json"
   ), // default credentials were not working and the file path couldn't be imported
   databaseURL: "https://letsassess-ad436-default-rtdb.firebaseio.com",
 });
@@ -101,7 +101,7 @@ app.get("/assessment/:id", async (req, res) => {
   } catch (error) {
     res.json(error);
   }
-});
+});   
 
 // ADDING RESULTS
 app.post("/result", async (req, res) => {
@@ -113,14 +113,14 @@ app.post("/result", async (req, res) => {
     console.log("Result", result);
     res.sendStatus(200);
   } catch (error) {
-    res.json(error);
+    res.json(error);   
   }
 });
 
 // Add candidate for a particular assessment
 app.post("/result/add-candidate", async (req, res) => {
   const candidateId = slugify(req.body.candidateId, {
-    remove: /[*+~.()'"!:@]/g,
+    remove: /[*+~.()'"!:@]/g, 
     lower: true,
   });
   const data = req.body.data;
@@ -141,7 +141,7 @@ app.post("/result/add-answer", async (req, res) => {
   const assessmentId: string = slugify(req.body.assessmentId.toLowerCase());
   const candidateId: string = slugify(req.body.candidateId, {
     remove: /[*+~.()'"!:@]/g,
-    lower: true,
+    lower: true,   
   });
   const optionMarked: { optionId: string; quesId: string } =
     req.body.optionMarked;
@@ -212,4 +212,4 @@ const PORT = 9000;
 
 app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);
-});
+}); 

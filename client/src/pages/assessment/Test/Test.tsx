@@ -10,36 +10,29 @@ import {
     OptionCode
 } from './Test.styled';
 import CountdownTimer from './CountdownTimer'
-import CustomComponent from '../CustomComponent/CustomComponent';
-import { GlobalContext } from '../../App';
-
+import CustomComponent from '../../../components/CustomComponent/CustomComponent';
+import { GlobalContext } from '../../../App';
+import { useNavigate, useParams } from 'react-router-dom';
 export const LocalContext = React.createContext({});
 
 
-type propsType = {
-    backToDashBoard: () => void,
-    title: string
-}
 
 
 
-const Test = ({ title, backToDashBoard }: propsType) => {
-    const [queNo, setQueNo] = useState(0);
-    const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>([]);
-    const [data1, setData1] = useState<any>();
+
+const Test = () => {
+    const [data1, setData1] = useState<any>(); 
+    const { title } = useParams();
+    const nav = useNavigate();
     const ctx = useContext<any>(GlobalContext)
-    const email = ctx.candidate.email;
-    const name = ctx.candidate.name;
+    const {email, name, queNo, setQueNo, selectedOpt, setSelectedOpt} = ctx
+  
 
     useEffect(() => {
 
         fetch(`http://localhost:9000/assessment/${title}`).
             then(res => res.json()).
-            then(result => {
-                setData1(result)
-                console.log(result)
-            })
-
+            then(result => setData1(result))
     }, [])
 
     useEffect(() => {
@@ -52,16 +45,15 @@ const Test = ({ title, backToDashBoard }: propsType) => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
 
-        const obj: any = {
+        const obj = {
             "assessmentId": `${title}`,
             "candidateId": `${email}`,
-            "data": {
-                "candidateName": `${name}`
+            "data":{
+                "candidateName": `${name}`,
+                "optionsMarked": selectedOpt
             }
         }
-        obj.data[email] = {
-            "optionsMarked": selectedOpt
-        }
+       
         var raw = JSON.stringify(obj);
 
         fetch("http://localhost:9000/result/add-candidate", {
@@ -70,16 +62,24 @@ const Test = ({ title, backToDashBoard }: propsType) => {
             body: raw,
             redirect: 'follow'
         })
-            .then(response => response.text())
-            .then(result => console.log(result))
+            .then(response =>{ 
+                console.log(response)
+                if(response.status==200)
+                nav('/assessment')
+                return response.text()})
+            .then(result =>{
+                console.log(result)
+            } )
             .catch(error => console.log('error', error));
 
-        backToDashBoard();
+        
     }
 
-    const nextQuestion = () => {
-        if (queNo < data1.questions.length - 1)
-            setQueNo((prevQueNo) => prevQueNo + 1);
+    const nextQuestion = (queId: string | number, optionId: string | number) => {
+        if (queNo < data1.questions.length - 1) {
+            setQueNo(queNo+1);
+        }
+
         else submitHandler();
     }
 
@@ -159,7 +159,7 @@ const Test = ({ title, backToDashBoard }: propsType) => {
                             </Timer>
                             <button
                                 className="next"
-                                onClick={() => nextQuestion()}
+                                onClick={() => nextQuestion(data1.questions[queNo].quesId, data1.questions[queNo].options[queNo])}
                                 disabled={setDisable()}>
                                 {queNo < data1.questions.length - 1 ? "Next Question" : "Finish"}
                             </button>

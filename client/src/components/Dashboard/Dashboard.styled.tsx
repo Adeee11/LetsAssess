@@ -27,7 +27,6 @@ flex-basis: 33%;
     flex-basis: 100%;
 }
 .data{
-    cursor: pointer;
     background-color: white;
     margin: 0 auto;
     max-width:150px ;      
@@ -40,11 +39,16 @@ flex-basis: 33%;
     object-fit: contain;
     padding  :20px ;
 
-}   
+} 
+.start{
+    cursor: pointer;
+    padding: 0px;
+    color: blue;
+}  
 p{
     margin: 0;
     color: gray;
-    padding: 10px;
+    /* padding: 10px; */
     font-size: 16px;
     
 }
