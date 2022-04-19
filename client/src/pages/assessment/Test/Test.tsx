@@ -29,8 +29,14 @@ const Test = () => {
   
 
     useEffect(() => {
-
-        fetch(`http://localhost:9000/assessment/${title}`).
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
+        
+        fetch(`http://localhost:9000/assessment/${title}/questions`,{
+            method:'GET',    
+            headers:myHeaders,
+            redirect: 'follow'
+        }).
             then(res => res.json()).
             then(result => setData1(result))
     }, [])
@@ -44,19 +50,22 @@ const Test = () => {
     const submitHandler = () => {
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
 
         const obj = {
             "assessmentId": `${title}`,
             "candidateId": `${email}`,
             "data":{
                 "candidateName": `${name}`,
-                "optionsMarked": selectedOpt
+                "optionsMarked": [
+                    
+                ]
             }
         }
        
         var raw = JSON.stringify(obj);
 
-        fetch("http://localhost:9000/result/add-candidate", {
+        fetch("http://localhost:9000/submission/candidate", {
             method: 'POST',
             headers: myHeaders,
             body: raw,

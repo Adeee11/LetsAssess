@@ -10,6 +10,7 @@ const ctx=useContext<any>(GlobalContext)
 
 
 const submit=()=>{ 
+  
    nav('/assessment');  
 }
    return (

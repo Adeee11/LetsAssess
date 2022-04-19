@@ -1,53 +1,22 @@
-import React, { Dispatch, SetStateAction } from 'react'
+import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Card, Container } from './Dashboard.styled'
-import git from '../../assets/images/git.png'
-import html from '../../assets/images/html.png'
-import react from '../../assets/images/react.png'
-import js from '../../assets/images/js.png'
-import node from '../../assets/images/node.png'
-import ts from '../../assets/images/ts.svg'
-import cq from '../../assets/images/cq.png'
 import { useNavigate } from 'react-router-dom';
 import MyTimer from '../MyTimer/MyTimer'
 
-const listOfTests = [
-    {
-        title: "html-and-css",
-        imgSrc: "/images/html.png",
-        durationInMins: 20
-    },
-    {
-        title: "javaScript",
-        imgSrc: "/images/js.png",
-        durationInMins: 20
-    },
-    {
-        title: "typeScript",
-        imgSrc: "/images/ts.svg",
-        durationInMins: 20
-    },
-    {
-        title: "reactjs",
-        imgSrc: "/images/react.png",
-        durationInMins: 20
-    },
-    {
-        title: "node",
-        imgSrc: "/images/node.png",
-        durationInMins: 20
-    },
-    {
-        title: "code-quality",
-        imgSrc: "/images/cq.png",
-        durationInMins: 20
-    },
-]
+
+
 
 
 const DashBoard = () => {
-
+     
+    const [data, setData] = useState<{durationInMins:number, title:string}[]>([])
     const nav = useNavigate();
-
+    const imageSrc=(title:string)=>{
+          if(title=="JavaScript")
+             return "/images/js.png"
+          else if(title=="HTML and CSS")
+              return "/images/html.png"   
+    }
     const time = new Date();
 
     time.setSeconds(time.getSeconds() + 2400);
@@ -56,15 +25,34 @@ const DashBoard = () => {
         nav(arg);
     }
 
+    useEffect(() => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
+        
+        fetch("http://localhost:9000/assessment", {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+          })
+          .then(response => response.json())
+          .then(result => {console.log(result)
+                            setData(result)    
+        })
+          .catch(error => console.log('error', error));
+      
+    }, [])
+    
+
 
     return (<>
         <MyTimer expiryTimestamp={time} />
-        <Container>
+        {data.length>0 &&
+          <Container>
             {
-                listOfTests.map((test) =>
+                data.map((test, index) =>
                     <Card key={test.title}>
                         <div className='data'>
-                            <img src={test.imgSrc} />
+                            <img src={imageSrc(test.title)} />
                             <p>{test.title}</p>
                             <span>{test.durationInMins} minute</span>
                             <p className='start'
@@ -75,7 +63,7 @@ const DashBoard = () => {
                     </Card>)
             }
 
-        </Container>
+        </Container>}
     </>
     )
 }
