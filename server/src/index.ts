@@ -14,7 +14,7 @@ app.get("/", (req, res) => {
 app.use("/assessment", require("./routes/assessment"));
 
 // Submission routes
-app.use("/result", require("./routes/submission"));
+app.use("/submission", require("./routes/submission"));
 
 // Candidate routes
 app.use("/candidate", require("./routes/candidate"));

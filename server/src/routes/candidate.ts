@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 });
 
 // Calculate marks for the candidate
-router.post("/calculate-marks", async (req, res) => {
+router.post("/marks", async (req, res) => {
   const candidateId = slugify(req.body.email, {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
@@ -64,6 +64,7 @@ router.post("/calculate-marks", async (req, res) => {
           marksObtained: totalMarks,
         }),
       });
+      res.send(totalMarks)
     } else {
       res.send("No candidate found");
     }

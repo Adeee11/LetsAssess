@@ -23,7 +23,7 @@ router.post("/", async (req, res) => {
 
 // ADD QUESTION
 // need to ask how to name this api endpoint
-router.post("/add-question", async (req, res) => {
+router.post("/question", async (req, res) => {
   const data = req.body.question;
   const documentName = slugify(req.body.title.toLowerCase());
   try {
@@ -44,7 +44,7 @@ router.get("/", authenticateToken, async (req, res) => {
     const querySnapshot = await collectionRef
       .select("durationInMins", "title")
       .get();
-    const responseData:any[] = [];
+    const responseData: any[] = [];
     querySnapshot.forEach((documentSnapshot) =>
       responseData.push(documentSnapshot.data())
     );
@@ -55,7 +55,7 @@ router.get("/", authenticateToken, async (req, res) => {
 });
 
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
-router.get("/:id/test", authenticateToken, async (req, res) => {
+router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
   try {
     const docRef = firestore.doc(`assessment/${assessmentId}`);
@@ -70,3 +70,4 @@ router.get("/:id/test", authenticateToken, async (req, res) => {
 });
 
 module.exports = router;
+
