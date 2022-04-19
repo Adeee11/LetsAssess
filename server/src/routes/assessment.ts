@@ -37,8 +37,25 @@ router.post("/add-question", async (req, res) => {
   }
 });
 
+// GET ALL ASSESSMENT DETAILS
+router.get("/", authenticateToken, async (req, res) => {
+  try {
+    const collectionRef = firestore.collection("assessment");
+    const querySnapshot = await collectionRef
+      .select("durationInMins", "title")
+      .get();
+    const responseData:any[] = [];
+    querySnapshot.forEach((documentSnapshot) =>
+      responseData.push(documentSnapshot.data())
+    );
+    res.json(responseData);
+  } catch (error) {
+    res.json(error);
+  }
+});
+
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
-router.get("/:id", authenticateToken, async (req, res) => {
+router.get("/:id/test", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
   try {
     const docRef = firestore.doc(`assessment/${assessmentId}`);
@@ -52,4 +69,4 @@ router.get("/:id", authenticateToken, async (req, res) => {
   }
 });
 
-module.exports = router
+module.exports = router;
