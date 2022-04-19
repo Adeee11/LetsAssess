@@ -84,8 +84,8 @@ useEffect(()=>{
 })
     const calculateMarks=()=>{
         let mark=0;
-        for(let i=0; i<data.Questions.length; i++){
-            if(data.Questions[i].correctOption==listOfSubissions[i])
+        for(let i=0; i<data.questions.length; i++){
+            if(data.questions[i].correctOption==listOfSubissions[i])
             mark++;
         }
         setMarks(mark);
@@ -137,8 +137,8 @@ useEffect(()=>{
         {
             show.showSubmission &&
             <Submissions>
-                <p>{`${marks}/${data.Questions.length}`}</p>
-                {data.Questions.map((item, index)=>
+                <p>{`${marks}/${data.questions.length}`}</p>
+                {data.questions.map((item, index)=>
                 <div>
                     <Question><span>{item.quesId}.</span>{item.quesValue}{item.correctOption==listOfSubissions[index]?<span className='marks-right'>&#10003;</span>:<span className='marks-wrong'>&#10060;</span>}</Question>
                     {item.useCustomComponent && 

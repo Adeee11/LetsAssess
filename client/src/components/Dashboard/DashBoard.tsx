@@ -20,14 +20,14 @@ const [allData, setAllData] = useState([])
    
     return (
     <Container>
-                <Card onClick={() => setSelectedTest("html")}>
+                <Card onClick={() => setSelectedTest("html-and-css")}>
                     <div className='data'>
                     <img src={html} />
                     <p>HTML and CSS</p>
                     <span>20 minute</span>
                     </div>
                 </Card>
-                <Card onClick={() => setSelectedTest("js")}>
+                <Card onClick={() => setSelectedTest("javascript")}>
                 <div className='data'>
                     <img src={js} />
                     <p>JS</p>
