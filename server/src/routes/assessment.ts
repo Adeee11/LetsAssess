@@ -2,6 +2,7 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { removeCorrectOption } from "../helpers/helperFunction";
+import { authenticateToken } from "../middleware/middlewareFunctions";
 
 const router = express.Router();
 const firestore = admin.firestore();
@@ -37,7 +38,7 @@ router.post("/add-question", async (req, res) => {
 });
 
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
-router.get("/:id", async (req, res) => {
+router.get("/:id", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
   try {
     const docRef = firestore.doc(`assessment/${assessmentId}`);
