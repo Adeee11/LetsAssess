@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { useTimer } from 'react-timer-hook';
 import { useNavigate } from 'react-router-dom';
 
-function MyTimer({time}:any) {
+function MyTimer({time, onComplete}:any) {
   
   const nav = useNavigate();
 
@@ -21,21 +21,13 @@ function MyTimer({time}:any) {
     expiryTimestamp:time,
     autoStart: true,
     onExpire: () => {
-      console.log('onExpire called')
-      nav('/')
+      onComplete();
     }
   });
 
 
   return (
-    <div className="timer">
-      <p>
-        <span>TotalTime </span>
-        <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
-      </p>
-
-    
-    </div>
+    <span>{hours}:{minutes}:{seconds}</span>    
   );
 }
 

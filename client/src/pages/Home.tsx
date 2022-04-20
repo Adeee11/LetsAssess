@@ -7,11 +7,12 @@ const Home = () => {
 
 const nav= useNavigate();
 const ctx=useContext<any>(GlobalContext)
-
+const time= ctx.startTime
 
 const submit=()=>{ 
-  
-   nav('/assessment');  
+   time(); 
+   nav('/assessment');
+
 }
    return (
     <>
@@ -20,7 +21,6 @@ const submit=()=>{
       <div className='input-box'>
         <span>Email</span>
         <input type="text" 
-        value={ctx.candidate.email} 
         onChange={(e)=>ctx.saveCandidateEmail(e.target.value)}
         />
       </div>
@@ -33,7 +33,6 @@ const submit=()=>{
         <span>Name</span>
         <input 
         type="text" 
-        value={ctx.candidate.name} 
         onChange={(e)=>ctx.saveCandidateName(e.target.value)}
         />
       </div>

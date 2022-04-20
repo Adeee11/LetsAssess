@@ -1,27 +1,41 @@
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, SetStateAction, useCallback, useContext, useEffect, useState } from 'react'
 import { Card, Container } from './Dashboard.styled'
 import { useNavigate } from 'react-router-dom';
 import MyTimer from '../MyTimer/MyTimer'
+import { GlobalContext } from '../../App';
 
 
 
 
 
 const DashBoard = () => {
-     
+    
+    
     const [data, setData] = useState<{durationInMins:number, title:string}[]>([])
+   
     const nav = useNavigate();
+    const ctx = useContext<any>(GlobalContext);
+    const time2= ctx.startTime2
+    const time = ctx.time;
+    const flag= ctx.flag;
+    const setFlag= ctx.setFlag;
+    
+      console.log(time);
     const imageSrc=(title:string)=>{
           if(title=="JavaScript")
              return "/images/js.png"
           else if(title=="HTML and CSS")
               return "/images/html.png"   
     }
-    const time = new Date();
-
-    time.setSeconds(time.getSeconds() + 2400);
-
+    
+    
     const clickHandler = (arg: string) => {
+        setFlag(true)
+        if(flag==false){
+            time2();
+        }
+         
+
         nav(arg);
     }
 
@@ -45,7 +59,7 @@ const DashBoard = () => {
 
 
     return (<>
-        <MyTimer expiryTimestamp={time} />
+        <MyTimer time={time}/>
         {data.length>0 &&
           <Container>
             {
@@ -64,6 +78,7 @@ const DashBoard = () => {
             }
 
         </Container>}
+       
     </>
     )
 }

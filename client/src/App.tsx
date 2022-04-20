@@ -12,6 +12,7 @@ import { Assessment } from './pages/assessment';
 import { Dashboard } from './pages/user/Dashboard';
 import React, { useState } from 'react';
 import { Test } from './pages/assessment/Test';
+import { time } from 'console';
 
 
 
@@ -31,6 +32,11 @@ const [queNo, setQueNo] =useState<string|number>(0);
 
 const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>([]);
 
+const [time, setTime] = useState<any>();
+const [time2, setTime2] = useState<any>();
+
+const [flag, setFlag] = useState(false)
+
 const saveName=(name:string)=>{
        setCandidate({...candidate,
          name:name
@@ -46,9 +52,20 @@ const saveName=(name:string)=>{
         sessionStorage.setItem('email', email)
   }
 
-  
 
-
+  const startTime=()=>{
+    const time = new Date();
+    time.setSeconds(time.getSeconds() + 3000);
+    setTime(time)
+    return time
+}
+ 
+const startTime2=()=>{
+  const t = new Date();
+    t.setSeconds(t.getSeconds() + 1200);
+    setTime2(t)
+    return time2
+}
 
   const data={
     
@@ -58,7 +75,13 @@ const saveName=(name:string)=>{
     queNo,
     setQueNo,
     selectedOpt,
-    setSelectedOpt
+    setSelectedOpt,
+    startTime,
+    time,
+    time2,
+    startTime2,
+    flag,
+    setFlag 
   }
   return (
     <GlobalContext.Provider value={data}>

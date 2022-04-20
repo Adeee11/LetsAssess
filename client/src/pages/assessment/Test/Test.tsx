@@ -9,10 +9,11 @@ import {
     QuestionCode,
     OptionCode
 } from './Test.styled';
-import CountdownTimer from './CountdownTimer'
+// import CountdownTimer from './CountdownTimer'
 import CustomComponent from '../../../components/CustomComponent/CustomComponent';
 import { GlobalContext } from '../../../App';
 import { useNavigate, useParams } from 'react-router-dom';
+import MyTimer from './MyTimer';
 export const LocalContext = React.createContext({});
 
 
@@ -21,20 +22,22 @@ export const LocalContext = React.createContext({});
 
 
 const Test = () => {
-    const [data1, setData1] = useState<any>(); 
+    const [queNo, setQueNo] = useState(0);
+    const [selectedOpt, setSelectedOpt] = useState<string[] | any>([])
+    const [data1, setData1] = useState<any>();
     const { title } = useParams();
     const nav = useNavigate();
     const ctx = useContext<any>(GlobalContext)
-    const {email, name, queNo, setQueNo, selectedOpt, setSelectedOpt} = ctx
-  
+    const { candidate, time, time2 } = ctx
+
 
     useEffect(() => {
         var myHeaders = new Headers();
         myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
-        
-        fetch(`http://localhost:9000/assessment/${title}/questions`,{
-            method:'GET',    
-            headers:myHeaders,
+
+        fetch(`http://localhost:9000/assessment/${title}/questions`, {
+            method: 'GET',
+            headers: myHeaders,
             redirect: 'follow'
         }).
             then(res => res.json()).
@@ -47,22 +50,33 @@ const Test = () => {
         }
     }, [])
 
+
     const submitHandler = () => {
+        const list = [];
+          
+        for (let i = 0; i < selectedOpt.length; i++) {
+            if (typeof selectedOpt[i] == "string")
+                list[i+1] = [selectedOpt[i]]
+            else list[i+1] = selectedOpt[i]
+
+        }
+
+        console.log(list)
+        const obj1 = Object.assign({}, list);
+        console.log("obj1", obj1);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
         myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
 
         const obj = {
             "assessmentId": `${title}`,
-            "candidateId": `${email}`,
-            "data":{
-                "candidateName": `${name}`,
-                "optionsMarked": [
-                    
-                ]
+            "candidateId": `${candidate.email}`,
+            "data": {
+                "candidateName": `${candidate.name}`,
+                "optionsMarked": obj1
             }
         }
-       
+
         var raw = JSON.stringify(obj);
 
         fetch("http://localhost:9000/submission/candidate", {
@@ -71,22 +85,25 @@ const Test = () => {
             body: raw,
             redirect: 'follow'
         })
-            .then(response =>{ 
+            .then(response => {
                 console.log(response)
-                if(response.status==200)
-                nav('/assessment')
-                return response.text()})
-            .then(result =>{
-                console.log(result)
-            } )
+                if (response.status == 200)
+                    nav('/assessment')
+                return response.text()
+            })
+            .then(result => {
+                console.log(result);
+                setQueNo(0)
+                setSelectedOpt([])
+            })
             .catch(error => console.log('error', error));
 
-        
+
     }
 
     const nextQuestion = (queId: string | number, optionId: string | number) => {
         if (queNo < data1.questions.length - 1) {
-            setQueNo(queNo+1);
+            setQueNo(queNo + 1);
         }
 
         else submitHandler();
@@ -132,17 +149,14 @@ const Test = () => {
         }
     }
 
-    const datatopass = {
-        selectedOpt: selectedOpt,
-        submitHandler: submitHandler
-    }
+   
 
 
-    console.log(ctx.candidate)
-    console.log(selectedOpt);
+    // console.log(candidate)
+    // console.log(selectedOpt);
     return (
         <>
-            <LocalContext.Provider value={datatopass}>
+            
                 {!data1 && <p>Loading.......</p>}
                 {data1 && <Container>
                     <Column>
@@ -164,7 +178,7 @@ const Test = () => {
                             {data1.questions[queNo].quesType === "mcq" && <p>Select one answer</p>}
                             {data1.questions[queNo].quesType === "mcq-m" && <p>Select multiple answer</p>}
                             <Timer>
-                                <CountdownTimer />
+                               <MyTimer time={time2} onComplete={()=>submitHandler()}/>
                             </Timer>
                             <button
                                 className="next"
@@ -208,7 +222,7 @@ const Test = () => {
 
                     </Column>
                 </Container>}
-            </LocalContext.Provider>
+           
         </>
     )
 }
