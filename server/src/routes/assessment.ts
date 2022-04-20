@@ -57,17 +57,24 @@ router.get("/", authenticateToken, async (req, res) => {
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
 router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
+  const decodedJwt = res.locals.decodedJwt;
+  console.log("DECODED JWT Inside assessment", decodedJwt);
+
   try {
     const docRef = firestore.doc(`assessment/${assessmentId}`);
     const documentSnapShot = await docRef.get();
     const data = removeCorrectOption(
       JSON.parse(JSON.stringify(documentSnapShot.data()))
     );
-    res.json(data);
+
+    res.json({
+      data: data,
+      iat: decodedJwt.iat,
+      exp: decodedJwt.exp,
+    });
   } catch (error) {
     res.json(error);
   }
 });
 
 module.exports = router;
-
