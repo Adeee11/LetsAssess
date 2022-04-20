@@ -2,7 +2,6 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { areArraysEqual } from "../helpers/helperFunction";
-import { authenticateToken } from "../middleware/middlewareFunctions";
 
 const router = express.Router();
 const firestore = admin.firestore();

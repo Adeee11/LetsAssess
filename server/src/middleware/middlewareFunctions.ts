@@ -11,11 +11,17 @@ export async function authenticateToken(req: any, res: any, next: any) {
   const docRef = fireStore.doc("miscellaneous/ACCESS_KEY");
   const SECRET_KEY = (await docRef.get()).data();
   if (SECRET_KEY) {
-    jwt.verify(token, SECRET_KEY.JWT_KEY, (err: any, candidate: any) => {
-      if (err) return res.sendStatus(403);
-      res.candidate = candidate;
-      next();
-    });
+    jwt.verify(
+      token,
+      SECRET_KEY.JWT_KEY,
+      //{ complete: true },
+      (err: any, decodedJwt: any) => {
+        if (err) return res.sendStatus(403);
+        res.locals.decodedJwt = decodedJwt;
+        // console.log("DECODED JWT", decodedJwt);
+        next();
+      }
+    );
   } else {
     res.sendStatus(500);
   }
