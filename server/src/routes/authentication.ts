@@ -60,7 +60,10 @@ router.post("/", async (req, res) => {
           expiresIn: expiryTimeInMins * 60,
         }
       );
-      res.send(JWT_TOKEN);
+      res.json({
+        token: JWT_TOKEN,
+        exp: expiryTimeInMins * 60,
+      });
     } else {
       res.send(500).json({
         error: "SECRET KEY NOT FOUND",
