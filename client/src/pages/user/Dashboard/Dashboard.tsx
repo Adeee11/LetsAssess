@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Card, Header , CandidateDetails, Question, Option, Submissions} from './Dashboard.styled';
-import { data } from '../Dashboard/../../../components/Test/jstest';
+
 import CustomComponent from '../../../components/CustomComponent/CustomComponent';
+import { data } from '../../assessment/Test/jstest';
 const user = "Pramod";
 
 const candidatesList = [
@@ -51,7 +52,7 @@ const listOfTests=[
 ]
 
 const listOfSubissions=[
-    1,2,3,4,1,2,3,4,1,2,1,2,3,4,1,2,3,4,1,2
+    "1","2","3","4","1","2","3","4","1","2","1","2","3","4","1","2","3","4","1","2"
 ]
 
 const Dashboard = () => {

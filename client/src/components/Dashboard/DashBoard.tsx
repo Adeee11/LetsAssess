@@ -1,77 +1,71 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { Test } from '../../components/Test'
 import { Card, Container } from './Dashboard.styled'
-import git from '../../assets/images/git.png'
-import html from '../../assets/images/html.png'
-import react from '../../assets/images/react.png'
-import js from '../../assets/images/js.png'
-import node from '../../assets/images/node.png'
-import ts from '../../assets/images/ts.svg'
-import cq from '../../assets/images/cq.png'
-import { data } from '../Test/jstest'
-type propsType={
-    setSelectedTest:Dispatch<SetStateAction<string | null>>
-}
- 
-const DashBoard = ({setSelectedTest}:propsType) => {
-const [allData, setAllData] = useState([])
- 
+import { useNavigate } from 'react-router-dom';
+import MyTimer from '../MyTimer/MyTimer'
 
-   
-    return (
-    <Container>
-                <Card onClick={() => setSelectedTest("html-and-css")}>
-                    <div className='data'>
-                    <img src={html} />
-                    <p>HTML and CSS</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-                <Card onClick={() => setSelectedTest("javascript")}>
-                <div className='data'>
-                    <img src={js} />
-                    <p>JS</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-                <Card onClick={() => setSelectedTest("ts")}> 
-                <div className='data'>
-                    <img src={ts} />
-                    <p>TypeScript</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-                <Card onClick={() => setSelectedTest("react")}>
-                <div className='data'>
-                    <img src={react} />
-                    <p>React JS</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-               
-                <Card onClick={() => setSelectedTest("node")}>
-                <div className='data'>
-                    <img src={node} />
-                    <p>Node JS</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-                <Card onClick={() => setSelectedTest("git")}>
-                <div className='data'>
-                    <img src={git} />
-                    <p>Git</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-                <Card onClick={() => setSelectedTest("cq")}>
-                <div className='data'>
-                    <img src={cq} />
-                    <p>Code Quality</p>
-                    <span>20 minute</span>
-                    </div>
-                </Card>
-            </Container>
-  )
+
+
+
+
+const DashBoard = () => {
+     
+    const [data, setData] = useState<{durationInMins:number, title:string}[]>([])
+    const nav = useNavigate();
+    const imageSrc=(title:string)=>{
+          if(title=="JavaScript")
+             return "/images/js.png"
+          else if(title=="HTML and CSS")
+              return "/images/html.png"   
+    }
+    const time = new Date();
+
+    time.setSeconds(time.getSeconds() + 2400);
+
+    const clickHandler = (arg: string) => {
+        nav(arg);
+    }
+
+    useEffect(() => {
+        var myHeaders = new Headers();
+        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
+        
+        fetch("http://localhost:9000/assessment", {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+          })
+          .then(response => response.json())
+          .then(result => {console.log(result)
+                            setData(result)    
+        })
+          .catch(error => console.log('error', error));
+      
+    }, [])
+    
+
+
+    return (<>
+        <MyTimer expiryTimestamp={time} />
+        {data.length>0 &&
+          <Container>
+            {
+                data.map((test, index) =>
+                    <Card key={test.title}>
+                        <div className='data'>
+                            <img src={imageSrc(test.title)} />
+                            <p>{test.title}</p>
+                            <span>{test.durationInMins} minute</span>
+                            <p className='start'
+                                onClick={() => clickHandler(test.title)}>
+                                Start
+                            </p>
+                        </div>
+                    </Card>)
+            }
+
+        </Container>}
+    </>
+    )
 }
 
 export default DashBoard

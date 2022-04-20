@@ -10,7 +10,8 @@ const ctx=useContext<any>(GlobalContext)
 
 
 const submit=()=>{ 
-   nav('/candidate');  
+  
+   nav('/assessment');  
 }
    return (
     <>
@@ -19,8 +20,8 @@ const submit=()=>{
       <div className='input-box'>
         <span>Email</span>
         <input type="text" 
-        value={ctx.candidate.name} 
-        onChange={(e)=>ctx.saveCandidateName(e.target.value)}
+        value={ctx.candidate.email} 
+        onChange={(e)=>ctx.saveCandidateEmail(e.target.value)}
         />
       </div>
       
@@ -32,8 +33,8 @@ const submit=()=>{
         <span>Name</span>
         <input 
         type="text" 
-        value={ctx.candidate.email} 
-        onChange={(e)=>ctx.saveCandidateEmail(e.target.value)}
+        value={ctx.candidate.name} 
+        onChange={(e)=>ctx.saveCandidateName(e.target.value)}
         />
       </div>
       <button onClick={submit}>Submit</button>

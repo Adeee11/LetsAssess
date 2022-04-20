@@ -2,9 +2,6 @@ import React from 'react';
 import Countdown from 'react-countdown';
 import CompleteStatus from './CompleteStatus';
 
-
-
-
 const CountdownTimer = () => {
     const renderer = ({ hours, minutes, seconds, completed }) => {
     
