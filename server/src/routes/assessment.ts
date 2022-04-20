@@ -39,6 +39,7 @@ router.post("/question", async (req, res) => {
 
 // GET ALL ASSESSMENT DETAILS
 router.get("/", authenticateToken, async (req, res) => {
+  const decodedJwt = res.locals.decodedJwt;
   try {
     const collectionRef = firestore.collection("assessment");
     const querySnapshot = await collectionRef
@@ -48,7 +49,11 @@ router.get("/", authenticateToken, async (req, res) => {
     querySnapshot.forEach((documentSnapshot) =>
       responseData.push(documentSnapshot.data())
     );
-    res.json(responseData);
+    res.json({
+      data: responseData,
+      iat: decodedJwt.iat,
+      exp: decodedJwt.exp,
+    });
   } catch (error) {
     res.json(error);
   }
@@ -57,8 +62,6 @@ router.get("/", authenticateToken, async (req, res) => {
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
 router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
-  const decodedJwt = res.locals.decodedJwt;
-  console.log("DECODED JWT Inside assessment", decodedJwt);
 
   try {
     const docRef = firestore.doc(`assessment/${assessmentId}`);
@@ -66,12 +69,7 @@ router.get("/:id/questions", authenticateToken, async (req, res) => {
     const data = removeCorrectOption(
       JSON.parse(JSON.stringify(documentSnapShot.data()))
     );
-
-    res.json({
-      data: data,
-      iat: decodedJwt.iat,
-      exp: decodedJwt.exp,
-    });
+    res.json(data);
   } catch (error) {
     res.json(error);
   }
