@@ -33,9 +33,11 @@ const [queNo, setQueNo] =useState<string|number>(0);
 const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>([]);
 
 const [time, setTime] = useState<any>();
-const [time2, setTime2] = useState<any>();
 
-const [flag, setFlag] = useState(false)
+const [token, setToken] = useState();
+// const [time2, setTime2] = useState<any>();
+
+// const [flag, setFlag] = useState(false)
 
 const saveName=(name:string)=>{
        setCandidate({...candidate,
@@ -52,6 +54,8 @@ const saveName=(name:string)=>{
         sessionStorage.setItem('email', email)
   }
 
+  
+
 
   const startTime=()=>{
     const time = new Date();
@@ -60,12 +64,12 @@ const saveName=(name:string)=>{
     return time
 }
  
-const startTime2=()=>{
-  const t = new Date();
-    t.setSeconds(t.getSeconds() + 1200);
-    setTime2(t)
-    return time2
-}
+// const startTime2=()=>{
+//   const t = new Date();
+//     t.setSeconds(t.getSeconds() + 1200);
+//     setTime2(t)
+//     return time2
+// }
 
   const data={
     
@@ -78,10 +82,12 @@ const startTime2=()=>{
     setSelectedOpt,
     startTime,
     time,
-    time2,
-    startTime2,
-    flag,
-    setFlag 
+    token,
+    setToken
+    // time2,
+    // startTime2,
+    // flag,
+    // setFlag 
   }
   return (
     <GlobalContext.Provider value={data}>

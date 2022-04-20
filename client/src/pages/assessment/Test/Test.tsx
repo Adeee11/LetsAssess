@@ -28,7 +28,7 @@ const Test = () => {
     const { title } = useParams();
     const nav = useNavigate();
     const ctx = useContext<any>(GlobalContext)
-    const { candidate, time, time2 } = ctx
+    const { candidate, time, token } = ctx
 
 
     useEffect(() => {
@@ -66,7 +66,7 @@ const Test = () => {
         console.log("obj1", obj1);
         var myHeaders = new Headers();
         myHeaders.append("Content-Type", "application/json");
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
+        myHeaders.append("Authorization", `Bearer ${token}`);
 
         const obj = {
             "assessmentId": `${title}`,
@@ -178,7 +178,7 @@ const Test = () => {
                             {data1.questions[queNo].quesType === "mcq" && <p>Select one answer</p>}
                             {data1.questions[queNo].quesType === "mcq-m" && <p>Select multiple answer</p>}
                             <Timer>
-                               <MyTimer time={time2} onComplete={()=>submitHandler()}/>
+                               <MyTimer time={time} onComplete={()=>submitHandler()}/>
                             </Timer>
                             <button
                                 className="next"

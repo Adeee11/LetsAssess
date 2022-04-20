@@ -11,15 +11,15 @@ import { GlobalContext } from '../../App';
 const DashBoard = () => {
     
     
-    const [data, setData] = useState<{durationInMins:number, title:string}[]>([])
+    const [data, setData] = useState<{durationInMins:number, title:string}[]|any>({
+        data:[]
+    })
    
     const nav = useNavigate();
     const ctx = useContext<any>(GlobalContext);
-    const time2= ctx.startTime2
     const time = ctx.time;
-    const flag= ctx.flag;
-    const setFlag= ctx.setFlag;
-    
+    const token = ctx.token;
+ 
       console.log(time);
     const imageSrc=(title:string)=>{
           if(title=="JavaScript")
@@ -30,18 +30,14 @@ const DashBoard = () => {
     
     
     const clickHandler = (arg: string) => {
-        setFlag(true)
-        if(flag==false){
-            time2();
-        }
-         
-
+       
         nav(arg);
     }
 
     useEffect(() => {
+        console.log("token",token);
         var myHeaders = new Headers();
-        myHeaders.append("Authorization", "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg");
+        myHeaders.append("Authorization", `Bearer ${token}`);
         
         fetch("http://localhost:9000/assessment", {
             method: 'GET',
@@ -50,20 +46,20 @@ const DashBoard = () => {
           })
           .then(response => response.json())
           .then(result => {console.log(result)
-                            setData(result)    
+                            setData({...result})    
         })
           .catch(error => console.log('error', error));
       
     }, [])
     
-
+ console.log(data);
 
     return (<>
         <MyTimer time={time}/>
-        {data.length>0 &&
+        {data.data.length>0 &&
           <Container>
             {
-                data.map((test, index) =>
+                data.data.map((test:any, index:number) =>
                     <Card key={test.title}>
                         <div className='data'>
                             <img src={imageSrc(test.title)} />
@@ -77,7 +73,8 @@ const DashBoard = () => {
                     </Card>)
             }
 
-        </Container>}
+        </Container>
+        }
        
     </>
     )

@@ -23,7 +23,7 @@ app.use("/candidate", require("./routes/candidate"));
 app.use("/authenticate", require("./routes/authentication"));
 
 const PORT = 9000;
-
+ 
 app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);
 });
