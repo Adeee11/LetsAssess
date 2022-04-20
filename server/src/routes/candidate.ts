@@ -2,6 +2,7 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { areArraysEqual } from "../helpers/helperFunction";
+import { authenticateToken } from "../middleware/middlewareFunctions";
 
 const router = express.Router();
 const firestore = admin.firestore();
@@ -69,6 +70,21 @@ router.post("/marks", async (req, res) => {
     } else {
       res.send("No candidate found");
     }
+  } catch (error) {
+    res.json(error);
+  }
+});
+
+// Get all test done by a user
+router.get("/:id/assessments", async (req, res) => {
+  const candidateId = req.params.id;
+  try {
+    const docRef = firestore.doc(`candidates/${candidateId}`);
+    const data = (await docRef.get()).data();
+    data &&
+      res.json({
+        data: data.testsTaken,
+      });
   } catch (error) {
     res.json(error);
   }
