@@ -74,7 +74,7 @@ router.post("/marks", async (req, res) => {
   }
 });
 
-// Get all test done by a user
+// Get all test done by a candidate
 router.get("/:id/assessments", async (req, res) => {
   const candidateId = req.params.id;
   try {
