@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
     remove: /[*+~.()'"!:@]/g,
   });
   const data = req.body;
+  data["assessmentTaken"] = false;
   try {
     const docRef = firestore.doc(`candidates/${candidateId}`);
     await docRef.set(data);
@@ -29,14 +30,14 @@ router.post("/marks", async (req, res) => {
     remove: /[*+~.()'"!:@]/g,
   });
   const assessmentId = slugify(req.body.assessmentId, { lower: true });
-
+  // console.log("API CALLED");
+  // console.log("AssessmentId :", assessmentId);
   try {
-    const docRef = firestore.doc(`results/${assessmentId}`);
+    const docRef = firestore.doc(`submissions/${assessmentId}`);
     const documentSnapshot = await docRef.get();
     const data: any = documentSnapshot.data();
     if (candidateId in data) {
-      // res.json(data[candidateId]);
-      const answersMarked = data[candidateId].optionMarked;
+      const answersMarked = data[candidateId].optionsMarked;
       const assessmentDocRef = firestore.doc(`assessment/${assessmentId}`);
       const assessmentData = (await assessmentDocRef.get()).data();
       let questions: {
@@ -53,7 +54,7 @@ router.post("/marks", async (req, res) => {
           areArraysEqual(
             answersMarked[question.quesId],
             question.correctOption
-          ) && (totalMarks += 4);
+          ) && (totalMarks += 1);
         });
       }
 
@@ -64,7 +65,7 @@ router.post("/marks", async (req, res) => {
           marksObtained: totalMarks,
         }),
       });
-      res.send(totalMarks)
+      res.json({ marksObtained: totalMarks });
     } else {
       res.send("No candidate found");
     }
