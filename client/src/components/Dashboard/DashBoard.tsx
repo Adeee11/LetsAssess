@@ -30,6 +30,7 @@ const DashBoard = () => {
   const imageSrc = (title: string) => {
     if (title == "JavaScript") return "/images/js.png";
     else if (title == "HTML and CSS") return "/images/html.png";
+    else if(title ==="Typescript") return "/images/ts.svg"
   };
 
   const clickHandler = (arg: string) => {

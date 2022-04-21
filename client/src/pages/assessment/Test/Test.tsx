@@ -27,10 +27,7 @@ const Test = () => {
 
   useEffect(() => {
     var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibml0aW4iLCJpYXQiOjE2NTAzNTE5MzN9.QfRC8cw5P9_vr9TD63dQfnMjRSQthkuY5I72sBR1Hmg"
-    );
+    myHeaders.append("Authorization", `Bearer ${token}`);
 
     fetch(`http://localhost:9000/assessment/${title}/questions`, {
       method: "GET",
@@ -39,6 +36,35 @@ const Test = () => {
     })
       .then((res) => res.json())
       .then((result) => setData1(result));
+
+    fetch(`http://localhost:9000/submission/${title}/${candidate.email}`, {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    })
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        const optionsMarked = result.optionsMarked;
+        console.log("Result", result);
+        console.log("Option marked", optionsMarked);
+        let options: any[] = [];
+        const keys = Object.keys(optionsMarked);
+        console.log("Keys", keys);
+        keys.forEach((key) => {
+          console.log("Key", key, typeof key);
+          console.log("Option Marked", optionsMarked[key]);
+          if (optionsMarked[key].length === 4) {
+            options.push(optionsMarked[key]);
+          } else {
+            options.push(...optionsMarked[key]);
+          }
+        });
+
+        console.log("Options Array", options);
+        setSelectedOpt([...options]);
+      })
+      .catch((error) => console.log("error", error));
   }, []);
 
   useEffect(() => {
@@ -130,6 +156,7 @@ const Test = () => {
   const selectOpt = (arg0: string | number) => {
     if (data1.questions[queNo].quesType == "mcq") {
       selectedOpt[queNo] = arg0;
+      console.log("Selected Opt", selectedOpt);
       setSelectedOpt([...selectedOpt]);
     } else if (data1.questions[queNo].quesType == "mcq-m") {
       if (selectedOpt[queNo] == undefined) {

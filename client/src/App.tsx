@@ -25,7 +25,7 @@ function App() {
 
   const [time, setTime] = useState<Date>();
 
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   // const [time2, setTime2] = useState<any>();
 
   // const [flag, setFlag] = useState(false)
@@ -34,6 +34,11 @@ function App() {
     setCandidate({ ...candidate, name: name });
     sessionStorage.setItem("name", name);
   };
+
+  const saveToken = (token:string) => {
+    setToken(token)
+    sessionStorage.setItem("token", token)
+  }
 
   const saveEmail = (email: string) => {
     setCandidate({ ...candidate, email: email });
@@ -65,7 +70,7 @@ function App() {
     startTime,
     time,
     token,
-    setToken,
+    setToken:saveToken,
     setTime,
     // time2,
     // startTime2,
