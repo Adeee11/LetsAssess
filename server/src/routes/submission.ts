@@ -75,10 +75,16 @@ router.get("/:id", authenticateToken, async (req, res) => {
   }
 });
 
-// fetch the latest option marked by a user for a particular test
+// fetch the optionsMarked by a candidate for a particular test
 router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
-  const assessmentId = req.params.assessment;
-  const candidateId = req.params.candidate;
+  const assessmentId = slugify(req.params.assessment, {
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
+  const candidateId = slugify(req.params.candidate, {
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
     let optionsMarked: any;
@@ -88,6 +94,7 @@ router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
       const keys = Object.keys(optionsMarked);
       res.status(200).json({
         lastIndex: parseInt(keys[keys.length - 1]) - 1,
+        optionsMarked: optionsMarked,
       });
     } else {
       res.status(400).json({

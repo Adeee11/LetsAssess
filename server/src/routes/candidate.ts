@@ -73,7 +73,9 @@ router.post("/marks", async (req, res) => {
       });
       res.json({ marksObtained: totalMarks });
     } else {
-      res.send(`Candidate ${candidateId} hasn't given the assessment ${assessmentId}`);
+      res.send(
+        `Candidate ${candidateId} hasn't given the assessment ${assessmentId}`
+      );
     }
   } catch (error) {
     res.json(error);
@@ -82,7 +84,10 @@ router.post("/marks", async (req, res) => {
 
 // Get all test done by a candidate
 router.get("/:id/assessments", async (req, res) => {
-  const candidateId = req.params.id;
+  const candidateId = slugify(req.params.id, {
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
   try {
     const docRef = firestore.doc(`candidates/${candidateId}`);
     const data = (await docRef.get()).data();
