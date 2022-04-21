@@ -16,6 +16,12 @@ router.post("/", async (req, res) => {
   data["assessmentTaken"] = false;
   try {
     const docRef = firestore.doc(`candidates/${candidateId}`);
+    const documentSnapshot = await docRef.get();
+    if (documentSnapshot.exists) {
+      return res.status(418).json({
+        error: "Candidate already exist",
+      });
+    }
     await docRef.set(data);
     res.sendStatus(200);
   } catch (error) {
@@ -67,7 +73,7 @@ router.post("/marks", async (req, res) => {
       });
       res.json({ marksObtained: totalMarks });
     } else {
-      res.send("No candidate found");
+      res.send(`Candidate ${candidateId} hasn't given the assessment ${assessmentId}`);
     }
   } catch (error) {
     res.json(error);

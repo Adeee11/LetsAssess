@@ -50,11 +50,13 @@ router.post("/answer", authenticateToken, async (req, res) => {
     req.body.optionMarked;
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
-    await docRef.update({
-      [`${candidateId}.optionsMarked.${optionMarked.quesId}`]:
-        admin.firestore.FieldValue.arrayUnion(...optionMarked.optionId),
+
+    const result = await docRef.update({
+      [`${candidateId}.optionsMarked.${optionMarked.quesId}`]: [
+        ...optionMarked.optionId,
+      ],
     });
-    res.sendStatus(200);
+    return res.status(200).json(result);
   } catch (error) {
     res.json(error);
   }
@@ -70,6 +72,30 @@ router.get("/:id", authenticateToken, async (req, res) => {
     res.json(data);
   } catch (error) {
     res.json(error);
+  }
+});
+
+// fetch the latest option marked by a user for a particular test
+router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
+  const assessmentId = req.params.assessment;
+  const candidateId = req.params.candidate;
+  try {
+    const docRef = firestore.doc(`submissions/${assessmentId}`);
+    let optionsMarked: any;
+    const data = (await docRef.get()).data();
+    if (data) {
+      optionsMarked = data[candidateId].optionsMarked;
+      const keys = Object.keys(optionsMarked);
+      res.status(200).json({
+        lastIndex: parseInt(keys[keys.length - 1]) - 1,
+      });
+    } else {
+      res.status(400).json({
+        error: `Couldn't get the data for the assessment ${assessmentId} `,
+      });
+    }
+  } catch (error) {
+    res.status(500).json(error);
   }
 });
 
