@@ -130,4 +130,4 @@ dist
 .pnp.*
 
 #Firebase Config file
-src/congig/service-account-file.json
+src/config/service-account-file.json
