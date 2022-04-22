@@ -45,24 +45,33 @@ const Test = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        const optionsMarked = result.optionsMarked;
-        console.log("Result", result);
-        console.log("Option marked", optionsMarked);
-        let options: any[] = [];
-        const keys = Object.keys(optionsMarked);
-        console.log("Keys", keys);
-        keys.forEach((key) => {
-          console.log("Key", key, typeof key);
-          console.log("Option Marked", optionsMarked[key]);
-          if (optionsMarked[key].length === 4) {
-            options.push(optionsMarked[key]);
-          } else {
-            options.push(...optionsMarked[key]);
-          }
-        });
+        if (
+          result &&
+          Object.keys(result).length === 0 &&
+          Object.getPrototypeOf(result) === Object.prototype
+        ) {
+          console.log("No object");
+        } else {
+          const optionsMarked = result.optionsMarked;
+          console.log("Result", result);
+          console.log("Option marked", optionsMarked);
+          let options: any[] = [];
+          const keys = Object.keys(optionsMarked);
+          console.log("Keys", keys);
+          keys.forEach((key) => {
+            console.log("Key", key, typeof key);
+            console.log("Option Marked", optionsMarked[key]);
+            if (optionsMarked[key].length === 4) {
+              options.push(optionsMarked[key]);
+            } else {
+              options.push(...optionsMarked[key]);
+            }
+          });
 
-        console.log("Options Array", options);
-        setSelectedOpt([...options]);
+          console.log("Options Array", options);
+          setSelectedOpt([...options]);
+          setQueNo(result.lastIndex + 1);
+        }
       })
       .catch((error) => console.log("error", error));
   }, []);
@@ -193,7 +202,8 @@ const Test = () => {
   return (
     <>
       {!data1 && <p>Loading.......</p>}
-      {data1 && (
+
+      {data1 && queNo < data1.questions.length - 1 ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
@@ -280,6 +290,9 @@ const Test = () => {
             </Section>
           </Column>
         </Container>
+      ) : (
+        data1 &&
+        <>Test Completed</>
       )}
     </>
   );
