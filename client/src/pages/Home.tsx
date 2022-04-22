@@ -1,16 +1,20 @@
 import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
+import Spinner from "../components/Spinner/Spinner";
 import { Container } from "./Home.Styled";
 
 const Home = () => {
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
- 
+  const [showLoader, setShowLoader] = useState(false);
   const setToken = ctx.setToken;
   const token = ctx.token;
+ 
+ 
   const submit = async () => {
     
+    setShowLoader(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -42,11 +46,19 @@ const Home = () => {
           nav("/assessment");
         })
         .catch((error) => console.log("error", error));
+        
+      if(res.ok===false){
+        setShowLoader(false);
+        alert("Invalid credentials/ or user already entered the test")  
+      } 
+       
+     
   };
 
   // console.log(token);
   return (
     <>
+      {!showLoader &&
       <Container>
         <div className="input-box">
           <span>Email</span>
@@ -65,10 +77,12 @@ const Home = () => {
           />
         </div>
         <button onClick={submit}>Submit</button>
-      </Container>
+      </Container>}
       {/* <textarea onChange={(e)=>setData(e.target.value)} value={data}>
 
     </textarea> */}
+
+    {showLoader &&<Spinner/>}
     </>
   );
 };

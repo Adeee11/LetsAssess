@@ -5,9 +5,9 @@ background: #fafafa;
 justify-content: space-between;
 display:flex ;
 flex-direction: row;
-align-items: center;
+/* align-items: center; */
 flex-wrap: wrap;
-
+min-height: calc(100vh - 50px);
 :last-child{
  margin-bottom   :40px ;
 }
