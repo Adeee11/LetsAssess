@@ -1,0 +1,719 @@
+{
+    "title": "Node js",
+    "durationInMins": 20,
+    "questions": [
+      {
+        "quesId": "1",
+        "quesValue": "Which of the following methods resolves an IP address into n array of host names?",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "options": [
+          {
+            "optionId": "1",
+            "optionValue": "dns.reverse(ip, callback)",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "2",
+            "optionValue": "dns.resolve(hostname, rrtype, callback)",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "3",
+            "optionValue": "dns.resolve4(ip, callback)",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "4",
+            "optionValue": "dns.lookup(hostname, options, callback)",
+            "useCustomComponent": false,
+            "optionProps": null
+          }
+        ],
+        "correctOption": ["1"]
+      },
+      {
+        "quesId": "2",
+        "quesValue": " Which of the following incorrect statement about middleware in express?",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "options": [
+          {
+            "optionId": "1",
+            "optionValue": "Middleware is a function that is invoked by the express Routing layer before the final request handler",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "2",
+            "optionValue": "If the middleware does not call next the request will be left hanging.",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "3",
+            "optionValue": "Make Changes to request and the response  object .",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "4",
+            "optionValue": "None of the above  ",
+            "useCustomComponent": false,
+            "optionProps": null
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesValue": "What is the output of the code?",
+        "quesId": "3",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": {
+            "type":"code",
+            "format":"js",
+            "content": "try {\n  const m = 1;\n  const n = m + z;\n  console.log(n);\n} catch (err) {\n  console.log(err.name);\n}\n"
+        },
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "0"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "1"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Type Error"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Syntax Error"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "5",
+            "optionValue": "Reference Error"
+          }
+        ],
+        "correctOption": ["1"]
+      },
+      {
+        "quesId": "4",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Despite the fact that  Javascript is a single threaded, What allows you to perform  non-blocking I/O operations offloading operations to the system kernel whenever possible ?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "REPL"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "Timers"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Poll"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Process"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "5",
+            "optionValue": "Event Loop "
+          }
+        ],
+        "correctOption": ["5"]
+      },
+      {
+        "quesId": "5",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following is not a type of Node JS stream?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Readable"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "Writable"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Duplex"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Buffer "
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "5",
+            "optionValue": "transform"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "6",
+            "optionValue": "None of the above"
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesId": "6",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "How to get file information using node JS?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "fs.open(’file’, ‘+r’, (data)⇒{ })"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": " fs.stat(’file’, (data)⇒{ })  "
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "fs.readFile(’file’, (err, data)⇒{ })"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "None of the above"
+          }
+        ],
+        "correctOption": ["2"]
+      },
+      {
+        "quesId": "7",
+        "quesType": "mcq",
+        "useCustomComponent": true,
+        "props": {
+            "type":"code",
+            "format":"js",
+            "content":"console.log(1);\n\nsetTimeout(() => {\n  console.log(2);\n}, 0);\n\nPromise.resolve(3).then(console.log);\n\nconsole.log(4);"
+        },
+        "quesValue": "What is the output of this code?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "1 2 3 4"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "1 3 4 2"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "1 4 3 2"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "1 4 2 3"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "8",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "For which of the following is Node JS not recommended?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Single Page Application"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "JSON API’s based application"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Data Intensive Real time applications"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "CPU intensive applications  "
+          }
+        ],
+        "correctOption": ["2"]
+      },
+      {
+        "quesId": "9",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following is the correct way to get an extension of a file?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "path.extname(’main.js’)"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "fs.extname(’main.js’)"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "fs.pathinfo(’main.js’, callback)"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "path.pathinfo(’main.js’, callback)"
+          }
+        ],
+        "correctOption": ["1"]
+      },
+      {
+        "quesId": "10",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following is not a macrotask in an event loop?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "setTimeout"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "setInterval"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "setImmediate"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Promise"
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesId": "11",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which module allow us to create and handle custom events?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "eventemitter"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "emitter"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "events"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "event"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "12",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following was the earlier name of the Pug?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Terse"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "DRY"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Express"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Jade"
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesId": "13",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following method requests that the server accept the data enclosed in the request to modify an existing object identified by the URI?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "GET"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "DELETE"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "PUT"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "POST"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "14",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following facilitates us to create a skeleton for a web application easily?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Authentication"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "APIs"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Debugging"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": 4,
+            "optionValue": "Scaffolding"
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesId": "15",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "What is the way to store local variables that can be accessed within the application?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Using Config file"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "Using database"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Using app.locals"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "Using app.storage"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "16",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "How do you get the query string variables id from a GET request using Express.js on Node.js?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "const id=req.id;"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "const id=req.id();"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "const id= req.query.id;"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "All of these"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "17",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which module is used to serve static resources in Node JS?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "http"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "node-resource"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "static"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "node-static"
+          }
+        ],
+        "correctOption": ["4"]
+      },
+      {
+        "quesId": "18",
+        "quesValue": "Single or complex functionality organized in a single or multiple javascript files which can be reused throughout your Node JS application is called",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "options": [
+          {
+            "optionId": "1",
+            "optionValue": "Module",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "2",
+            "optionValue": "Library",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "3",
+            "optionValue": "Package",
+            "useCustomComponent": false,
+            "optionProps": null
+          },
+          {
+            "optionId": "4",
+            "optionValue": "Function",
+            "useCustomComponent": false,
+            "optionProps": null
+          }
+        ],
+        "correctOption": ["1"]
+      },
+      {
+        "quesId": "19",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "What is the use of underscore variable in REPL session in Node JS?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "It is used to store the result"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "It is used to get the last command used"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "It is used to get the last result"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "None of the above"
+          }
+        ],
+        "correctOption": ["3"]
+      },
+      {
+        "quesId": "20",
+        "quesType": "mcq",
+        "useCustomComponent": false,
+        "props": null,
+        "quesValue": "Which of the following engine Node in core?",
+        "options": [
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "1",
+            "optionValue": "Chrome V8"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "2",
+            "optionValue": "Microsoft Chakra"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "3",
+            "optionValue": "Spider Monkey"
+          },
+          {
+            "useCustomComponent": false,
+            "optionProps": null,
+            "optionId": "4",
+            "optionValue": "None of the above"
+          }
+        ],
+        "correctOption": ["1"]
+      }
+    ]
+  }
+  
