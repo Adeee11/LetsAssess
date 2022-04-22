@@ -1,13 +1,11 @@
 import { AppContainer } from "./App.styled";
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate,} from "react-router-dom";
 import { Home } from "./pages";
-
 import { User } from "./pages/user";
 import { Assessment } from "./pages/assessment";
 import { Dashboard } from "./pages/user/Dashboard";
 import React, { useState } from "react";
 import { Test } from "./pages/assessment/Test";
-import { time } from "console";
 
 export const GlobalContext = React.createContext({});
 
@@ -17,19 +15,17 @@ function App() {
     email: sessionStorage.getItem("email") || "",
   });
 
-  const [queNo, setQueNo] = useState<string | number>(0);
-
-  const [selectedOpt, setSelectedOpt] = useState<(string | boolean[])[] | any>(
-    []
-  );
-
-  const [time, setTime] = useState<Date>();
-
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
-  // const [time2, setTime2] = useState<any>();
-
-  // const [flag, setFlag] = useState(false)
-
+  let initData:string| null=sessionStorage.getItem('isCompleted')
+  const [isCompleted, setIsCompleted] = useState(initData && JSON.parse(initData) || {
+    "html-and-css":false,
+    "javascript":false,
+    "typescript":false,
+    "react":false,
+    "node-js":false,
+    "git":false,
+    // "code-quality":false
+  })
   const saveName = (name: string) => {
     setCandidate({ ...candidate, name: name });
     sessionStorage.setItem("name", name);
@@ -45,38 +41,21 @@ function App() {
     sessionStorage.setItem("email", email);
   };
 
-  const startTime = (timeStamp: number) => {
-    const time = new Date();
-    time.setSeconds(time.getSeconds() + 3000);
-    setTime(time);
-    return time;
-  };
-
-  // const startTime2=()=>{
-  //   const t = new Date();
-  //     t.setSeconds(t.getSeconds() + 1200);
-  //     setTime2(t)
-  //     return time2
-  // }
+  const saveIsCompleted=(i:object)=>{
+     setIsCompleted({...i});
+     sessionStorage.setItem('isCompleted',JSON.stringify(i))
+  }
 
   const data = {
     candidate: candidate,
     saveCandidateName: saveName,
     saveCandidateEmail: saveEmail,
-    queNo,
-    setQueNo,
-    selectedOpt,
-    setSelectedOpt,
-    startTime,
-    time,
     token,
     setToken:saveToken,
-    setTime,
-    // time2,
-    // startTime2,
-    // flag,
-    // setFlag
+    isCompleted,
+    setIsCompleted:saveIsCompleted
   };
+
   return (
     <GlobalContext.Provider value={data}>
       <AppContainer>
@@ -85,8 +64,10 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/user" element={<User />}></Route>
             <Route path="/user/dashboard" element={<Dashboard />}></Route>
-            <Route path="/assessment/*" element={<Assessment />}></Route>
-            <Route path="/assessment/:title" element={<Test />}></Route>
+            {token  &&<Route path="/assessment/*" element={<Assessment />}></Route>}
+            {token &&<Route path="/assessment/:title" element={<Test />}></Route>}
+            <Route path="*" element={<Navigate to="/" replace />}
+    />
           </Routes>
         </Router>
       </AppContainer>

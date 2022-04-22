@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 const Container=styled.div`
 background: #fafafa;
-justify-content: space-between;
+/* justify-content: space-between; */
 display:flex ;
 flex-direction: row;
 /* align-items: center; */

@@ -20,13 +20,15 @@ const DashBoard = () => {
 
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  //   let time = ctx.time;
-  const token = ctx.token;
-  const setTime = ctx.setTime;
+  
+  
+  const {token, isCompleted}= ctx
+
+  
   let expiryTimeStamp = new Date(0);
   const [expTime, setExpTime] = useState<any>();
-
-  //   console.log(time);
+  
+  
   const imageSrc = (title: string) => {
     if (title == "JavaScript") return "/images/js.png";
     else if (title == "HTML and CSS") return "/images/html.png";
@@ -56,11 +58,31 @@ const DashBoard = () => {
         console.log("Expiry time epoch", result.exp);
         console.log("DATE", expiryTimeStamp);
         setExpTime(expiryTimeStamp)
-        setTime(expiryTimeStamp);
+       sessionStorage.setItem('expTime',expiryTimeStamp.toUTCString())
       })
       .catch((error) => console.log("error", error));
   }, []);
+  let is:string| null=sessionStorage.getItem('isCompleted')  
+  
+  if(is) {console.log("session storage data",JSON.parse(is));}
+  console.log(is);
+  
+  console.log(isCompleted)
+  const keys =  Object.values(isCompleted)
+  let navigateToHome=true
+  for(let y=0; y<keys.length; y++){
+    if(keys[y]==false)
+    navigateToHome=false
 
+  }
+  if(navigateToHome){
+    nav('/');
+    alert("All Tests have completed")
+  }
+  navigateToHome && nav('/');
+  console.log("navigatetohome",navigateToHome);
+  console.log("keys",keys)
+  
   return (
     <>
       {data && data.data.length > 0 && (
@@ -73,9 +95,10 @@ const DashBoard = () => {
                   <img src={imageSrc(test.title)} />
                   <p>{test.title}</p>
                   <span>{test.durationInMins} minute</span>
-                  <p className="start" onClick={() => clickHandler(test.title)}>
+                  {!isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start" onClick={() => clickHandler(test.title)}>
                     Start
-                  </p>
+                  </p>}
+                  {isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start">Completed</p>}
                 </div>
               </Card>
             ))}
