@@ -1,5 +1,4 @@
-
-const javascript = {
+{
     "title":"JavaScript",
     "durationInMins":20,
     "questions":[

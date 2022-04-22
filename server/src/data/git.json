@@ -1,0 +1,692 @@
+{
+  "title": "Git",
+  "durationInMins": 20,
+  "questions": [
+    {
+      "quesId": "1",
+      "quesValue": "Which command is used to create a copy of existing git repository?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "git pull origin <remote-url>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "git pull origin <repo-name> <remote-url>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "git clone <remote-url>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "git pull <remote-url>",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": ["3"]
+    },
+    {
+      "quesId": "2",
+      "quesValue": "Which of the following commands will you use to set a user’s username before using git commands?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "git config --global user.name <your_name>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "git set remote user.name <name>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "No need to set the username, ssh key set it up automatically",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "git remote set user.name <name>",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesValue": "Which of the following commands is used in switching between branches?",
+      "quesId": "3",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git checkout"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git branch"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git merge"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git jump"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "4",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Command to check the created, modified, deleted files in gitbash before Commit?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git status"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git log"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git show"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "All of the above"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "5",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": " Which of the following is not a Git configuration scope?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "Local"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "User"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "System"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "Global"
+        }
+      ],
+      "correctOption": ["2"]
+    },
+    {
+      "quesId": "6",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Which command should you use to initialize a new git repository?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git bash"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git install"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git init"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git start"
+        }
+      ],
+      "correctOption": ["3"]
+    },
+    {
+      "quesId": "7",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Which file can you configure to ensure that certain files are never committed to the local Git repository?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "ignore.git"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": ".gitignore"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "gitignore.txt"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git.ignore"
+        }
+      ],
+      "correctOption": ["2"]
+    },
+    {
+      "quesId": "8",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Which Command is used to show limited number of commits?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git fetch <remote>"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git log -n <limit>"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git config <limit>"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git status"
+        }
+      ],
+      "correctOption": ["2"]
+    },
+    {
+      "quesId": "9",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "What command removes untracked files from your working directory?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git clean"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git clean -f <path>"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git reset"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git commit"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "10",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "What is the default text editor for the Bash shell with a Windows-based Git install?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "Vim"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "Emacs"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "Notepad++"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "Bash"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "11",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": ".......... is equivalent to fetch and merge",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "push"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "pull"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "synchronize"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "put"
+        }
+      ],
+      "correctOption": ["2"]
+    },
+    {
+      "quesId": "12",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "How can you stash your changes, not including anything in the staging area?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git stash"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git stash —keep-index"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git stash save"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git stash pop"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "5",
+          "optionValue": "None of the above"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "13",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "How would you change your default code editor to vscode in git?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git config —global core.editor “code —wait”"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git config —global editor “code —wait”"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git config —global core.ide “code —wait”"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git config —global core.editor “code”"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "14",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "What is the default EOL (end of line) character in windows and mac respectively?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "Windows: /r/n,\n Mac: /n "
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "Windows: /n,\n Mac: /r/n "
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "Windows: /n/r,\n Mac: /r "
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": 4,
+          "optionValue": "Windows: /r/n,\n Mac: /r/n "
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "15",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Which command would you use to change default EOL character in your machine?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git config —global core.autocrlf"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git config —global core.autoeol"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git config —global user.autocrlf"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "git config —global core.changeeol "
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "16",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "Which option is the correct workflow in git?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "Changes made in the code ⇒ Add the changes to the staging area ⇒ Commit the details in the staging area to the repository"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "Changes made in the code ⇒ Add the changes to the staging area ⇒ Commit the details to the staging area"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "Changes made in the code ⇒ Add the changes to the repository ⇒ Commit the details in the repository to the staging area"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "Changes made in the code ⇒ Add the changes to the staging area ⇒ Commit the details in the remote storage"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "17",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "You have two files in the staging area, let's say file1 and file2. You deleted file2 from your codebase. How would you remove this file from the staging area too?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git add file2"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git delete file2"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git remove file2"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "No need to do anything, it automatically gets removed from the staging area"
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "18",
+      "quesValue": "How can you skip staging your changes to the staging area and commit directly?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "git commit -am “Commit Message”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "git commit —skip -m “Commit Message”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "git commit —direct -m “Commit Message”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "git add commit -A -m “Commit Message”",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": ["1"]
+    },
+    {
+      "quesId": "19",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "You have added a file say file1.txt to your staging area by mistake. You don’t want this file to be included in the current commit, but the file is needed in the codebase. How will you remove the file from the staging area, without deleting it from the codebase?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "git rm file1.txt"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "git rm —cached file1.txt"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "git rm ."
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "There’s no way to remove file from the staging area"
+        }
+      ],
+      "correctOption": ["2"]
+    },
+    {
+      "quesId": "20",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "quesValue": "What does HEAD in output of git log tell us?",
+      "options": [
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "1",
+          "optionValue": "It is the reference to the current branch and the latest commit"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "2",
+          "optionValue": "It points to the first commit of current branch"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "3",
+          "optionValue": "It is at the latest commit of the main branch"
+        },
+        {
+          "useCustomComponent": false,
+          "optionProps": null,
+          "optionId": "4",
+          "optionValue": "It is at the first commit of the main branch"
+        }
+      ],
+      "correctOption": ["1"]
+    }
+  ]
+}

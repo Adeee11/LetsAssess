@@ -1,0 +1,762 @@
+{
+  "title": "React",
+  "durationInMins": 20,
+  "questions": [
+    {
+      "quesId": "1",
+      "quesValue": "Output for the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "function formatName(user) {\n  return user.firstName + ' ' + user.lastName;\n}\n\nconst user = {\n  firstName: 'Harper',\n  lastName: 'Perez'\n};\n\nconst element = (\n  <h1>\n    Hello, {formatName(user)}!\n  </h1>\n);\n\nReactDOM.render(\n  element,\n  document.getElementById('root')\n);",
+        "format": "js"
+      },
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Hello, Harper Perez",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Hello, Harper",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Hello, Perez",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Error. Can’t use functions inside jsx",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "2",
+      "quesValue": "Output for the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "let flag = true; \n\nconst element = (\n  <h1>\n    {\n        if(flag){\n          <h1>Hello</h1>\n        } else{\n\t\t\t\t\t<h1>Hi</h1>\n\t\t\t\t}\n      }\n  </h1>\n);\n\nReactDOM.render(\n  element,\n  document.getElementById('root')\n);",
+        "format": "js"
+      },
+      "correctOption": ["4"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Hello",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Hi",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Hello Hi",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Error. If can’t be used inside jsx expressions",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "3",
+      "quesValue": "All react components must be ...... functions with respect to their props",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Pure Functions",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Impure Functions",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Anonymous Functions",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Arrow Functions",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "4",
+      "quesValue": "Which of the following is the incorrect way to update a state?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["2"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "this.setState({comment: 'Hello'});",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "this.setState((state, props) => ({\n  counter: state.counter + props.increment\n}));",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "this.setState({\n  counter: this.state.counter + this.props.increment,\n});",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "this.setState(function(state, props) {\n  return {\n    counter: state.counter + props.increment\n  };\n});",
+            "format": "js"
+          }
+        }
+      ]
+    },
+    {
+      "quesId": "5",
+      "quesValue": "Which is the correct syntax for a button click event handler?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["2"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "<button onclick=\"activateLasers()\">\n  Activate Lasers\n</button>"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<button onClick={activateLasers}>\n  Activate Lasers\n</button>",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<button onClick={activateLasers}>\n  Activate Lasers\n</button>",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<button onClick={activateLasers}>\n  Activate Lasers\n</button>",
+            "format": "js"
+          }
+        }
+      ]
+    },
+    {
+      "quesId": "6",
+      "quesValue": "Which is the most suitable practice for assigning values to keys in a list?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Use ID from the data",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "const todoItems = todos.map((todo) =>\n  <li key={todo.id}>\n    {todo.text}\n  </li>\n);"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Use Index",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "const todoItems = todos.map((todo, index) =>\n  // Only do this if items have no stable IDs\n  <li key={index}>\n    {todo.text}\n  </li>\n);",
+            "format": "js"
+          }
+        }
+      ]
+    },
+    {
+      "quesId": "7",
+      "quesValue": "Which is incorrect for the key attribute in the lists in react?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Key must only be unique among siblings",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Key must be globally unique",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "8",
+      "quesValue": "Which of the following is syntactically correct?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["2"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "<input\n  type=\"text\"\n  ariaLabel={labelText}\n  ariaRequired=\"true\"\n  onChange={onchangeHandler}\n  value={inputValue}\n  name=\"name\"\n/>"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<input\n  type=\"text\"\n  aria-label={labelText}\n  aria-required=\"true\"\n  onChange={onchangeHandler}\n  value={inputValue}\n  name=\"name\"\n/>",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<input\n  type=\"text\"\n  ariaLabel={labelText}\n  aria-required=\"true\"\n  onChange={onchangeHandler}\n  value={inputValue}\n  name=\"name\"\n/>",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "<input\n  type=\"text\"\n  aria-label={labelText}\n  ariaRequired=\"true\"\n  onChange={onchangeHandler}\n  value={inputValue}\n  name=\"name\"\n/>",
+            "format": "js"
+          }
+        }
+      ]
+    },
+    {
+      "quesId": "9",
+      "quesValue": "Good way to fetch data using react-hooks?",
+      "quesType": "mcq-m",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": [false, true, false, true],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Call API to fetch data in useState hook",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Using useEffect hook to fetch data",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Call API in useReducer",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Using useLayoutEffect(()⇒{...},[]) to fetch data",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "10",
+      "quesValue": "To perform side effect after state change. Which hook should you use? ",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["4"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "useState",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "useCallback",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "useRef",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "useEffect",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "5",
+          "optionValue": "All of the above",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "11",
+      "quesValue": "Which of the following methods are served by the useEffect hook in React hooks?",
+      "quesType": "mcq-m",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": [true, true, false, false],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "componentDidMount",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "componentDidUpdate",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "componentDidUnmount",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "shouldComponentUpdate",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "12",
+      "quesValue": "What should you use to prevent re-render to improve performance?",
+      "quesType": "mcq-m",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": [true, true, false, false],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "shouldComponentUpdate",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "React.memo",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "useMemo",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "useCallback",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "5",
+          "optionValue": "All of the above",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "13",
+      "quesValue": "Consider the code snippet below",
+      "quesType": "mcq-m",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const Message = () =>{\nconst [messageObj, setMessage] = useSate({message: ''})\nreturn(\n\t<div>\n      <input type=\"text\" value={messageObj.message}\n        placeHolder=\"Enter a message\" onChange={e => {\n          // Todo: inpmement source code here\n        }} />\n        <p>\n          <strong>{messageObj.message}</strong>\n        </p>\n    </div>\t\t\n\t)\n}",
+        "format": "js"
+      },
+      "correctOption": [true, false, true, true],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Code:",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "messageObj.message = e.target.value;\nsetMessage(messageObj)"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Code: ",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "{messageObj} = e.target.value;\nsetMesage(MessageObj)"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Code: ",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "const newMessageObj = { message: e.target.value};\nsetMessage(newMessageObj)"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Code: ",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "format": "js",
+            "content": "setMessage({message: e.target.value})"
+          }
+        }
+      ]
+    },
+    {
+      "quesId": "14",
+      "quesValue": "What is wrong with this code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const MyComponent = ({names}) => (\n<h1>Hello</h1>\n<p>World</p>\n);",
+        "format": "js"
+      },
+      "correctOption": ["3"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "React components can’t be defined using functions",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "The component needs to use the return keyword",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "React does not allow components to return more than one element",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "String literals must be surrounded by quotes",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "15",
+      "quesValue": "What is wrong with this code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "React.createElement(\n\t\"h1\",\n\tnull,\n\t\"What's happening?\"\n);",
+        "format": "js"
+      },
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "<h1>What’s happening?</h1>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "<h1 id=\"component\">What’s happening?</h1>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "<h1 props={null}>What’s happening?</h1>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "<h1 id=\"null\">What’s happening?</h1>",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "16",
+      "quesValue": "For uncontrolled components in react",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Source of truth is DOM",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Source of truth is component state",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Source of truth can be anything",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "None of the above",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "17",
+      "quesValue": "What is true for the keys given to a list of elements in React?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "correctOption": ["2"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": " Unique in the DOM.",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Unique among the siblings only.",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Do not require to be unique.",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "None of the above",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "18",
+      "quesValue": "Output for the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const MyDiv = React.createClass({\n  render: function() {\n    return <div>{this.props.children}</div>\n  }\n})\n\nReactDOM.render(\n  <MyDiv>\n    <span>{'Hello'}</span>\n    <span>{'World'}</span>\n  </MyDiv>,\n  node\n)",
+        "format": "js"
+      },
+      "correctOption": ["2"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Error: No such props as children",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Hello World",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "<span>{'Hello'}</span><span>{'World'}</span>",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Blank white screen",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "19",
+      "quesValue": "What does this code do?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "handleInputChange(event) {\n  this.setState({ [event.target.id]: event.target.value })\n}",
+        "format": "js"
+      },
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Setting state with dynamic key names",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Error: Array can’t be used as keys",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    },
+    {
+      "quesId": "20",
+      "quesValue": "What’s the error in the following code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "import { useState, useEffect } from 'react';\n\n// helper function\nfunction FriendStatus(friendID) {\n  const [isOnline, setIsOnline] = useState(null);\n\n  useEffect(() => {\n    function handleStatusChange(status) {\n      setIsOnline(status.isOnline);\n    }\n\n    ChatAPI.subscribeToFriendStatus(friendID, handleStatusChange);\n    return () => {\n      ChatAPI.unsubscribeFromFriendStatus(friendID, handleStatusChange);\n    };\n  });\n\n  return isOnline;\n}",
+        "format": "js"
+      },
+      "correctOption": ["1"],
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Can’t use hooks inside a function. Hooks can be used only inside components or other hooks.",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "useEffect doesn’t have the dependency array, which will lead to exhaustive hooks",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "No error the function works fine",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Can’t use two hooks simultaneously",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ]
+    }
+  ]
+}
