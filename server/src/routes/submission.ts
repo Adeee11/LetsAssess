@@ -22,7 +22,8 @@ router.post("/", authenticateToken, async (req, res) => {
 
 // Add candidate for a particular assessment
 router.post("/candidate", authenticateToken, async (req, res) => {
-  const candidateId = slugify(req.body.candidateId, {
+  // getting candiateId from auth token so that the user logged in can only acess his data
+  const candidateId = slugify(String(res.locals.decodedJwt.email), {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
@@ -42,7 +43,8 @@ router.post("/candidate", authenticateToken, async (req, res) => {
 // Add answer marked by a candidate for a question for an assessment
 router.post("/answer", authenticateToken, async (req, res) => {
   const assessmentId: string = slugify(req.body.assessmentId.toLowerCase());
-  const candidateId: string = slugify(req.body.candidateId, {
+  // getting candiateId from auth token so that the user logged in can only acess his data
+  const candidateId: string = slugify(String(res.locals.decodedJwt.email), {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
@@ -50,6 +52,18 @@ router.post("/answer", authenticateToken, async (req, res) => {
     req.body.optionMarked;
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
+
+    // adding data if the document doesn't exist
+    if (!(await docRef.get()).exists) {
+      const result = await docRef.set({
+        [`${candidateId}`]: {
+          optionsMarked: {
+            [optionMarked.quesId]: [...optionMarked.optionId],
+          },
+        },
+      });
+      return res.status(200).send(result);
+    }
     const documentData: any = (await docRef.get()).data();
 
     // Checking whther the option is already marked or not
@@ -95,7 +109,8 @@ router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
   });
-  const candidateId = slugify(req.params.candidate, {
+  // getting candiateId from auth token so that the user logged in can only acess his data
+  const candidateId = slugify(String(res.locals.decodedJwt.email), {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
   });
