@@ -1,652 +1,747 @@
 {
-    "title":"JavaScript",
-    "durationInMins":20,
-    "questions":[
+  "title": "JavaScript",
+  "durationInMins": 20,
+  "questions": [
+    {
+      "quesId": "1",
+      "quesValue": "",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "function hungry() {\n   eatFruits();\n}\nfunction eatFruits() {\n   return \"I'm eating fruits\";\n}\n\n// Invoke the `hungry` function\nhungry();",
+        "format": "js"
+      },
+      "options": [
         {
-            "quesId":"1",
-            "quesValue":"",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"function hungry() {\n   eatFruits();\n}\nfunction eat…s() {\n   return 'I'm eating fruits';\n}\n\nhungry();", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"Empty: hungry() → eatfruits(), hungry() →hungry() →Empty",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"Empty: hungry() → eatfruits(), hungry() →Empty →hungry()",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"Empty: hungry() → eatfruits(), hungry() →eatFruits() →Empty",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"No changes in call stack.",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-            ],
-            "correctOption":["1"]
-        },
-
-        {
-            "quesId":"2",
-            "quesValue":"Which of the followings are the correct way to create an object?",
-            "quesType":"mcq-m",
-            "useCustomComponent":false,
-            "props":{"type":"code", "content":"", "format":""},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"var object = Object.create(null);",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"var object = new Object();",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"var object = Person('Sudheer');",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"var object = {name: 'Mohan'}",
-                    "useCustomComponent":false,
-                    "optionProps":null
-            }],
-            "correctOption":[true, true, false, true]
+          "optionId": "1",
+          "optionValue": "Empty: hungry() → eatfruits(), hungry() →hungry() →Empty",
+          "useCustomComponent": false,
+          "optionProps": null
         },
         {
-            "quesId":"3",
-            "quesValue":"What will this print out?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj = {\n    innerObj: {\n        x: 9\n    }\n}…nnerObj;\n\nz.x = 25;\n\nconsole.log(obj.innerObj.x);", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"9",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"25",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-
-               ],
-               "correctOption":["2"]
+          "optionId": "2",
+          "optionValue": "Empty: hungry() → eatfruits(), hungry() →Empty →hungry()",
+          "useCustomComponent": false,
+          "optionProps": null
         },
         {
-            "quesId":"4",
-            "quesValue":"What will this print out? ",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj = {\n    arr: [{ x: 17 }]\n};\n\nlet z = obj…rr;\n\nz = [{ x: 25 }];\n\nconsole.log(obj.arr[0].x);", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"17",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"25",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["1"]
+          "optionId": "3",
+          "optionValue": "Empty: hungry() → eatfruits(), hungry() →eatFruits() →Empty",
+          "useCustomComponent": false,
+          "optionProps": null
         },
         {
-            "quesId":"5",
-            "quesValue":"What will this print out? ",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj = {\n    arr: []\n};\n\nobj.arr.push(17);\n\nconsole.log(obj.arr === [17]);", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"true",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"false",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["2"]
-        },
-        {
-            "quesId":"6",
-            "quesValue":"Output for the following code:",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"let a = 5;\n\nfunction foo() {\n   let a = 6;\n  conso…oo();\nbar();\nconsole.log('Outside Functions: ',a)", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"Inside Foo: 6\nInside Bar: 7\nOutside Functions: 7", "format":"output"}
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"Inside Foo: 6\nInside Bar: 7\nOutside Functions: 5", "format":"output"}
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"Inside Foo: 5\nInside Bar: 6\nOutside Functions: 7", "format":"output"}
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"Inside Foo: 6\nInside Bar: 6\nOutside Functions: 7", "format":"output"}
-                }
-               ],
-               "correctOption":["1"]
-        },
-        {
-            "quesId":"7",
-            "quesValue":"Output for the following code:",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"let obj = {\n\tfoo: function(){\n\t(this === window)\n\t…('obj')\t\t \n\t}\n}\n\nobj.foo()\nobj.foo().bind(window)", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"window obj",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"window window",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"obj obj",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"obj window",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["4"]
-        },
-        {
-            "quesId":"8",
-            "quesValue":"Output of the following code:",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"console.log((1+2,3,4))", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"4",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"3,3,4",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"10",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"3",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["1"]
-        },
-        {
-            "quesId":"9",
-            "quesValue":"How will import the functions sayHello and sayGoodbye in another file from this module? ",
-            "quesType":"mcq-m",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"// lib.js\n\n// Export default function\nexport defau…ction sayGoodbye(){  \n  console.log('Goodbye');\n}", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"import { sayHello, sayGoodbye} from “./lib.js”",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"import  sayHello, {sayGoodbye} from “./lib.js”",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"import  sayHello as hello, {sayGoodbye} from “./lib.js”",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"import  sayHello, sayGoodbye from “./lib.js”",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":[false, true, true, false]
-        },
-        {
-            "quesId":"10",
-            "quesValue":"What’s the output of the following code?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"function main(){\n  console.log('A');\n  setTimeout(…tart < (sec*1000)) {\n    now = Date.now();\n  }\n}\n", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"A C B",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"A B C",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"B A C",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"C B A",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["1"]
-        },
-        {
-            "quesId":"11",
-            "quesValue":"What’s the correct way to call this function after 3s?",
-            "quesType":"mcq-m",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"function sayHi(phrase, who) {\n  alert( phrase + ', ' + who );\n}\n", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"setTimeout(sayHi, 3000, 'Hello', 'John');",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"setTimeout(sayHi('Hello', 'John'), 3000);",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"setTimeout(()=>sayHi('Hello', 'John'),3000 );",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"setTimeout(sayHi, 3000);",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":[true, false, true, false]
-        },
-        {
-            "quesId":"12",
-            "quesValue":"How will you stop the following setInterval function after 10s?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"// repeat with the interval of 2 seconds\nlet timerId = setInterval(() => alert('tick'), 2000);", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"setTimeout(() => {\n        clearInterval(timerId);\n        alert('stop'); \n          }, 10000);", "format":"js"}
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"setTimeout(() => {\n        stopInterval(timerId);\n        alert('stop'); \n          }, 10000);", "format":"js"}
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"setTimeout(() => {\n        pauseInterval(timerId);\n        alert('stop'); \n          }, 10000);", "format":"js"}
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"",
-                    "useCustomComponent":true,
-                    "optionProps":{"type":"code", "content":"setTimeout(() => {\n        removeInterval(timerId);\n        alert('stop'); \n          }, 10000);", "format":"js"}
-                }
-               ],
-               "correctOption":["1"]
-        },
-        {
-            "quesId":"13",
-            "quesValue":"Which of the following are the node types in the document object in the browser?",
-            "quesType":"mcq-m",
-            "useCustomComponent":false,
-            "props":null,
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"Element",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"Comment",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"Text",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"Quotation",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":[true, true, true, false]
-        },
-        {
-            "quesId":"14",
-            "quesValue":"What is the output of the following code:",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj={ a:1, b:2, c:{d:3}};\n\n           const …c.d=4 ;\n\n           console.log(obj.a, obj.c.d) ;", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"1, 3",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"1, 4",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"10, 3",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"10, 4",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["2"]
-        },
-        {
-            "quesId":"15",
-            "quesValue":"Which code line would successfully cancel an event?",
-            "quesType":"mcq",
-            "useCustomComponent":false,
-            "props":null,
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"window.event.returnValue=false;",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"return false;",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"window.event.Return()",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"window.Stop()",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["2"]
-        },
-        {
-            "quesId":"16",
-            "quesValue":"What is the output of the following code?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"let arr=[1, 'Hello World', {x:2}, [3,4]];\ndelete arr[1];\nconsole.log(arr.length)", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"3",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"4",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"5",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"Error",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["2"]
-        },
-        {
-            "quesId":"17",
-            "quesValue":"To have a script run continually every 30 seconds, which line of code should be used?",
-            "quesType":"mcq",
-            "useCustomComponent":false,
-            "props":null,
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"wsConnection.repeatWork('workerFile.js', 30000);",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"setTimeout(function(){worker.postMessage('')},30000);",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"setTimeout(worker.postMessage(''), 30000)",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"setInterval(function(){worker.postMessage('')}, 30000)",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["4"]
-        },
-        {
-            "quesId":"18",
-            "quesValue":"What’s the output of the following code?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"let a = 5;\nlet b = 6;\nlet c = '7';\n\nconsole.log(a+b+c);", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"567",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"117",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"18",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"123",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["2"]
-        },
-        {
-            "quesId":"19",
-            "quesValue":"What’s the output of the following code?",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"// first part\nconst a = ['Hello'];\nconst b = ['Hel…le.log(a===b)\n\n// second part\nconsole.log(5=='5')", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"true true",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"true false",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"false true",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"false false",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["3"]
-        },
-        {
-            "quesId":"20",
-            "quesValue":"Output of the following code:",
-            "quesType":"mcq",
-            "useCustomComponent":true,
-            "props":{"type":"code", "content":"(function(){\n\tconsole.log('Hello world')\n})()", "format":"js"},
-            "options":[
-                {
-                    "optionId":"1",
-                    "optionValue":"Hello world",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"2",
-                    "optionValue":"No output as the function isn’t called",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"3",
-                    "optionValue":"Syntax Error",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                },
-                {
-                    "optionId":"4",
-                    "optionValue":"undefined",
-                    "useCustomComponent":false,
-                    "optionProps":null
-                }
-               ],
-               "correctOption":["1"]
+          "optionId": "4",
+          "optionValue": "No changes in call stack.",
+          "useCustomComponent": false,
+          "optionProps": null
         }
+      ],
+      "correctOption": "1"
+    },
 
-    ]
+    {
+      "quesId": "2",
+      "quesValue": "Which of the followings are the correct way to create an object?",
+      "quesType": "mcq-m",
+      "useCustomComponent": false,
+      "props": { "type": "code", "content": "", "format": "" },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "var object = Object.create(null);",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "var object = new Object();",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "var object = Person('Sudheer');",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "var object = {name: 'Mohan'}",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": [true, true, false, true]
+    },
+    {
+      "quesId": "3",
+      "quesValue": "What will this print out?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const obj = {\n    innerObj: {\n        x: 9\n    }\n};\n\nconst z = obj.innerObj;\n\nz.x = 25;\n\nconsole.log(obj.innerObj.x);",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "9",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "25",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "4",
+      "quesValue": "What will this print out? ",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const obj = {\n    arr: [{ x: 17 }]\n};\n\nlet z = obj.arr;\n\nz = [{ x: 25 }];\n\nconsole.log(obj.arr[0].x);",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "17",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "25",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "1"
+    },
+    {
+      "quesId": "5",
+      "quesValue": "What will this print out? ",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const obj = {\n    arr: []\n};\n\nobj.arr.push(17);\n\nconsole.log(obj.arr === [17]);",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "true",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "false",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "6",
+      "quesValue": "Output for the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "let a = 5;\n\nfunction foo() {\n   let a = 6;\n  console.log('Inside Foo: ', a);\n}\n\nfunction bar(){\n  a = 7;\n  console.log('Inside Bar: ', a);\n}\n\nfoo();\nbar();\nconsole.log('Outside Functions: ',a)",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "Inside Foo: 6\nInside Bar: 7\nOutside Functions: 7",
+            "format": "output"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "Inside Foo: 6\nInside Bar: 7\nOutside Functions: 5",
+            "format": "output"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "Inside Foo: 5\nInside Bar: 6\nOutside Functions: 7",
+            "format": "output"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "Inside Foo: 6\nInside Bar: 6\nOutside Functions: 7",
+            "format": "output"
+          }
+        }
+      ],
+      "correctOption": "1"
+    },
+    {
+      "quesId": "7",
+      "quesValue": "Output for the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "let obj = {\n\tfoo: function(){\n\t(this === window)\n\t? console.log('window')\n\t: (this === obj) && console.log('obj')\t\t \n\t}\n}\n\nobj.foo()\nobj.foo().bind(window)",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "window obj",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "window window",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "obj obj",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "obj window",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "4"
+    },
+    {
+      "quesId": "8",
+      "quesValue": "Output of the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "console.log((1+2,3,4))",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "4",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "3,3,4",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "10",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "3",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "1"
+    },
+    {
+      "quesId": "9",
+      "quesValue": "How will import the functions sayHello and sayGoodbye in another file from this module? ",
+      "quesType": "mcq-m",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "// lib.js\n\n// Export default function\nexport default function sayHello(){  \n  console.log('Hello');\n}\n\n// Export non-default function\nexport function sayGoodbye(){  \n  console.log('Goodbye');\n}",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "import { sayHello, sayGoodbye} from “./lib.js”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "import  sayHello, {sayGoodbye} from “./lib.js”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "import  sayHello as hello, {sayGoodbye} from “./lib.js”",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "import  sayHello, sayGoodbye from “./lib.js”",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": [false, true, true, false]
+    },
+    {
+      "quesId": "10",
+      "quesValue": "What’s the output of the following code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "function main(){\n  console.log('A');\n  setTimeout(\n    function exec(){ console.log('B'); }\n  , 0);\n  runWhileLoopForNSeconds(3);\n  console.log('C');\n}\nmain();\nfunction runWhileLoopForNSeconds(sec){\n  let start = Date.now(), now = start;\n  while (now - start < (sec*1000)) {\n    now = Date.now();\n  }\n}\n",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "A C B",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "A B C",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "B A C",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "C B A",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "1"
+    },
+    {
+      "quesId": "11",
+      "quesValue": "What’s the correct way to call this function after 3s?",
+      "quesType": "mcq-m",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "function sayHi(phrase, who) {\n  alert( phrase + ', ' + who );\n}\n",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "setTimeout(sayHi, 3000, 'Hello', 'John');",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "setTimeout(sayHi('Hello', 'John'), 3000);",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "setTimeout(()=>sayHi('Hello', 'John'),3000 );",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "setTimeout(sayHi, 3000);",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": [true, false, true, false]
+    },
+    {
+      "quesId": "12",
+      "quesValue": "How will you stop the following setInterval function after 10s?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "// repeat with the interval of 2 seconds\nlet timerId = setInterval(() => alert('tick'), 2000);",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "setTimeout(() => {\n        clearInterval(timerId);\n        alert('stop'); \n          }, 10000);",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "2",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "setTimeout(() => {\n        stopInterval(timerId);\n        alert('stop'); \n          }, 10000);",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "3",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "setTimeout(() => {\n        pauseInterval(timerId);\n        alert('stop'); \n          }, 10000);",
+            "format": "js"
+          }
+        },
+        {
+          "optionId": "4",
+          "optionValue": "",
+          "useCustomComponent": true,
+          "optionProps": {
+            "type": "code",
+            "content": "setTimeout(() => {\n        removeInterval(timerId);\n        alert('stop'); \n          }, 10000);",
+            "format": "js"
+          }
+        }
+      ],
+      "correctOption": "1"
+    },
+    {
+      "quesId": "13",
+      "quesValue": "Which of the following are the node types in the document object in the browser?",
+      "quesType": "mcq-m",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Element",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "Comment",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Text",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Quotation",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": [true, true, true, false]
+    },
+    {
+      "quesId": "14",
+      "quesValue": "What is the output of the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "const obj={ a:1, b:2, c:{d:3}};\n\n           const obj2={...obj};\n\n           obj2.a=10;\n\n           obj2.c.d=4 ;\n\n           console.log(obj.a, obj.c.d) ;",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "1, 3",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "1, 4",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "10, 3",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "10, 4",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "15",
+      "quesValue": "Which code line would successfully cancel an event?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "window.event.returnValue=false;",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "return false;",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "window.event.Return()",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "window.Stop()",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "16",
+      "quesValue": "What is the output of the following code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "let arr=[1, 'Hello World', {x:2}, [3,4]];\ndelete arr[1];\nconsole.log(arr.length)",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "3",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "4",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "5",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "Error",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "17",
+      "quesValue": "To have a script run continually every 30 seconds, which line of code should be used?",
+      "quesType": "mcq",
+      "useCustomComponent": false,
+      "props": null,
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "wsConnection.repeatWork('workerFile.js', 30000);",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "setTimeout(function(){worker.postMessage('')},30000);",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "setTimeout(worker.postMessage(''), 30000)",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "setInterval(function(){worker.postMessage('')}, 30000)",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "4"
+    },
+    {
+      "quesId": "18",
+      "quesValue": "What’s the output of the following code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "let a = 5;\nlet b = 6;\nlet c = '7';\n\nconsole.log(a+b+c);",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "567",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "117",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "18",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "123",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "2"
+    },
+    {
+      "quesId": "19",
+      "quesValue": "What’s the output of the following code?",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "// first part\nconst a = ['Hello'];\nconst b = ['Hello'];\n\nconsole.log(a===b)\n\n// second part\nconsole.log(5=='5')",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "true true",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "true false",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "false true",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "false false",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "3"
+    },
+    {
+      "quesId": "20",
+      "quesValue": "Output of the following code:",
+      "quesType": "mcq",
+      "useCustomComponent": true,
+      "props": {
+        "type": "code",
+        "content": "(function(){\n\tconsole.log('Hello world')\n})()",
+        "format": "js"
+      },
+      "options": [
+        {
+          "optionId": "1",
+          "optionValue": "Hello world",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "2",
+          "optionValue": "No output as the function isn’t called",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "3",
+          "optionValue": "Syntax Error",
+          "useCustomComponent": false,
+          "optionProps": null
+        },
+        {
+          "optionId": "4",
+          "optionValue": "undefined",
+          "useCustomComponent": false,
+          "optionProps": null
+        }
+      ],
+      "correctOption": "1"
+    }
+  ]
 }
