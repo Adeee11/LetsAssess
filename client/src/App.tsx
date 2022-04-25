@@ -26,6 +26,9 @@ function App() {
     "git":false,
     // "code-quality":false
   })
+
+  const url='http://localhost:9000';
+
   const saveName = (name: string) => {
     setCandidate({ ...candidate, name: name });
     sessionStorage.setItem("name", name);
@@ -53,7 +56,8 @@ function App() {
     token,
     setToken:saveToken,
     isCompleted,
-    setIsCompleted:saveIsCompleted
+    setIsCompleted:saveIsCompleted,
+    url
   };
 
   return (

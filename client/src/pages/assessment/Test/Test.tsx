@@ -9,14 +9,13 @@ import {
   QuestionCode,
   OptionCode,
 } from "./Test.styled";
-// import CountdownTimer from './CountdownTimer'
 import CustomComponent from "../../../components/CustomComponent/CustomComponent";
 import { GlobalContext } from "../../../App";
 import { useNavigate, useParams} from "react-router-dom";
-// import MyTimer from "./MyTimer";
 import Spinner from "../../../components/Spinner/Spinner";
 import MyTimer from "../../../components/MyTimer/MyTimer";
-export const LocalContext = React.createContext({});
+
+
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);

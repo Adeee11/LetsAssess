@@ -1,11 +1,4 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import {useContext,useEffect,useState} from "react";
 import { Card, Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
 import MyTimer from "../MyTimer/MyTimer";
@@ -17,16 +10,13 @@ const DashBoard = () => {
     iat: number;
     exp: number;
   }>();
-
+  const [expTime, setExpTime] = useState<any>();
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  
-  
-  const {token, isCompleted}= ctx
+  const {token, isCompleted, url}= ctx
 
-  
   let expiryTimeStamp = new Date(0);
-  const [expTime, setExpTime] = useState<any>();
+  
   
   
   const imageSrc = (title: string) => {
@@ -49,7 +39,7 @@ const DashBoard = () => {
     (() => {
       console.log("IIFE");
     })();
-    fetch("http://localhost:9000/assessment", {
+    fetch(`${url}/assessment`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",

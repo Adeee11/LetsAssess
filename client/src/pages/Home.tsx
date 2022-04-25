@@ -9,12 +9,13 @@ const Home = () => {
   const ctx = useContext<any>(GlobalContext);
   const [showLoader, setShowLoader] = useState(false);
   const setToken = ctx.setToken;
+  const url= ctx.url;
   const token = ctx.token;
   const [data, setData] =useState('');
  
  
   const submit = async (e:FormEvent) => {
-      e.preventDefault();
+    e.preventDefault();
     setShowLoader(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -24,7 +25,7 @@ const Home = () => {
       candidateName: ctx.candidate.name,
     });
 
-    const res = await fetch("http://localhost:9000/candidate", {
+    const res = await fetch(`${url}/candidate`, {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -33,7 +34,7 @@ const Home = () => {
    
 
     res.status === 200 &&
-      fetch("http://localhost:9000/authenticate", {
+      fetch(`${url}/authenticate`, {
         method: "POST",
         headers: myHeaders,
         body: raw,
