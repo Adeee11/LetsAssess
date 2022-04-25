@@ -36,8 +36,7 @@ router.post("/marks", async (req, res) => {
     remove: /[*+~.()'"!:@]/g,
   });
   const assessmentId = slugify(req.body.assessmentId, { lower: true });
-  // console.log("API CALLED");
-  // console.log("AssessmentId :", assessmentId);
+
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
     const documentSnapshot = await docRef.get();

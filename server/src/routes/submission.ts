@@ -13,7 +13,7 @@ router.post("/", authenticateToken, async (req, res) => {
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
     const result = await docRef.set(data);
-    console.log("Result", result);
+
     res.sendStatus(200);
   } catch (error) {
     res.json(error);
@@ -50,6 +50,20 @@ router.post("/answer", authenticateToken, async (req, res) => {
     req.body.optionMarked;
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
+    const documentData: any = (await docRef.get()).data();
+
+    // Checking whther the option is already marked or not
+    if (
+      documentData &&
+      candidateId in documentData &&
+      optionMarked.quesId in documentData[candidateId].optionsMarked
+    ) {
+      const foo: any = documentData[candidateId].optionsMarked;
+      return (
+        foo[optionMarked.quesId] &&
+        res.status(403).send(`Question already answered`)
+      );
+    }
 
     const result = await docRef.update({
       [`${candidateId}.optionsMarked.${optionMarked.quesId}`]: [
@@ -85,13 +99,24 @@ router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
   });
+
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
     let optionsMarked: any;
     const data = (await docRef.get()).data();
+
     if (data) {
       optionsMarked = data[candidateId].optionsMarked;
+      if (!optionsMarked) {
+        return res.json({
+          msg: "No options marked yet.",
+          lastIndex: -1,
+          optionsMarked: {},
+        });
+      }
+
       const keys = Object.keys(optionsMarked);
+
       res.status(200).json({
         lastIndex: parseInt(keys[keys.length - 1]) - 1,
         optionsMarked: optionsMarked,

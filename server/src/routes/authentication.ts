@@ -27,7 +27,6 @@ router.post("/", async (req, res) => {
 
     // checking if the candidate has already taken the test or not
     const candidateData = (await candidateDocRef.get()).data();
-    console.log("Candidate Data ", candidateData);
     if (candidateData && candidateData.assessmentTaken) {
       return res.status(403).json({
         error: `Candidate ${candidateName} has already taken the test`,

@@ -14,11 +14,9 @@ export async function authenticateToken(req: any, res: any, next: any) {
     jwt.verify(
       token,
       SECRET_KEY.JWT_KEY,
-      //{ complete: true },
       (err: any, decodedJwt: any) => {
         if (err) return res.sendStatus(403);
         res.locals.decodedJwt = decodedJwt;
-        // console.log("DECODED JWT", decodedJwt);
         next();
       }
     );
