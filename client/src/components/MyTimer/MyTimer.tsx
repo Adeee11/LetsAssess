@@ -23,7 +23,8 @@ function MyTimer({time}:any) {
     autoStart: true,
     onExpire: () => {
       console.log('onExpire called')
-      nav('/')
+      sessionStorage.clear();
+      nav('/', {replace:true})
     }
   });
 

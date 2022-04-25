@@ -5,7 +5,7 @@ const Timer = styled.div`
     padding: 0;
     padding: 10px;
     justify-content: flex-end;
-    background-color:white;
+    /* background-color:white; */
     height: 25px;
     display: flex;
     align-items: center;

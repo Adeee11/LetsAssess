@@ -5,6 +5,7 @@ const Container=styled.div`
 display: flex;
 min-height: 100vh;
 max-height: 100vh;
+user-select: none;
 @media(max-width:900px){
     flex-direction: column;
 }

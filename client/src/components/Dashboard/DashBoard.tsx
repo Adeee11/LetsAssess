@@ -32,7 +32,10 @@ const DashBoard = () => {
   const imageSrc = (title: string) => {
     if (title == "JavaScript") return "/images/js.png";
     else if (title == "HTML and CSS") return "/images/html.png";
-    else if(title ==="Typescript") return "/images/ts.svg"
+    else if(title ==="Typescript") return "/images/ts.svg";
+    else if(title ==="Node js") return "/images/node.png";
+    else if(title ==="React") return "/images/react.png";
+    else if(title ==="Git") return "/images/git.png";
   };
 
   const clickHandler = (arg: string) => {
@@ -76,8 +79,9 @@ const DashBoard = () => {
 
   }
   if(navigateToHome){
-    nav('/');
-    alert("All Tests have completed")
+    nav('/', {replace:true});
+    // alert("All Tests have completed")
+    sessionStorage.clear();
   }
   navigateToHome && nav('/');
   console.log("navigatetohome",navigateToHome);

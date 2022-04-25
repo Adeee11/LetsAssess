@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
 import Spinner from "../components/Spinner/Spinner";
@@ -10,10 +10,11 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const setToken = ctx.setToken;
   const token = ctx.token;
+  const [data, setData] =useState('');
  
  
-  const submit = async () => {
-    
+  const submit = async (e:FormEvent) => {
+      e.preventDefault();
     setShowLoader(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -55,16 +56,17 @@ const Home = () => {
      
   };
 
-  // console.log(token);
+  // console.log({"a":data});
   return (
     <>
       {!showLoader &&
-      <Container>
+      <Container onSubmit={(e)=>submit(e)}>
         <div className="input-box">
           <span>Email</span>
           <input
-            type="text"
+            type="email"
             onChange={(e) => ctx.saveCandidateEmail(e.target.value)}
+            required
           />
         </div>
 
@@ -74,9 +76,10 @@ const Home = () => {
           <input
             type="text"
             onChange={(e) => ctx.saveCandidateName(e.target.value)}
+            required
           />
         </div>
-        <button onClick={submit}>Submit</button>
+        <button >Submit</button>
       </Container>}
       {/* <textarea onChange={(e)=>setData(e.target.value)} value={data}>
 
