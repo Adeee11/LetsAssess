@@ -122,9 +122,7 @@ router.get(
       const docRef = firestore.doc(`submissions/${assessmentId}`);
       let optionsMarked: any;
       const data = (await docRef.get()).data();
-      console.log("Data", data && data[candidateId].optionsMarked);
       if (data && !data[candidateId]) {
-        console.log(`Inside if`);
         if (!optionsMarked) {
           return res.json({
             msg: "No options marked yet.",
@@ -132,10 +130,8 @@ router.get(
             optionsMarked: {},
           });
         }
-        console.log("If finished");
       } else if (data) {
         optionsMarked = data[candidateId].optionsMarked;
-        console.log(`Options Marked are ${optionsMarked}`);
         const keys = Object.keys(optionsMarked);
 
         res.status(200).json({
