@@ -1,15 +1,9 @@
-import React, {
-  Dispatch,
-  SetStateAction,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
 import MyTimer from "../MyTimer/MyTimer";
 import { GlobalContext } from "../../App";
+import { MessageBox } from "../MessageBox";
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -17,25 +11,22 @@ const DashBoard = () => {
     iat: number;
     exp: number;
   }>();
-
-  const nav = useNavigate();
-  const ctx = useContext<any>(GlobalContext);
-  
-  
-  const {token, isCompleted}= ctx
-
-  
-  let expiryTimeStamp = new Date(0);
   const [expTime, setExpTime] = useState<any>();
-  
-  
+  const nav = useNavigate();
+  const ctx = useContext(GlobalContext);
+  const { token, isCompleted, url } = ctx
+
+  let expiryTimeStamp = new Date(0);
+
+
+
   const imageSrc = (title: string) => {
-    if (title == "JavaScript") return "/images/js.png";
-    else if (title == "HTML and CSS") return "/images/html.png";
-    else if(title ==="Typescript") return "/images/ts.svg";
-    else if(title ==="Node js") return "/images/node.png";
-    else if(title ==="React") return "/images/react.png";
-    else if(title ==="Git") return "/images/git.png";
+    if (title === "JavaScript") return "/images/js.png";
+    else if (title === "HTML and CSS") return "/images/html.png";
+    else if (title === "Typescript") return "/images/ts.svg";
+    else if (title === "Node js") return "/images/node.png";
+    else if (title === "React") return "/images/react.png";
+    else if (title === "Git") return "/images/git.png";
   };
 
   const clickHandler = (arg: string) => {
@@ -49,7 +40,7 @@ const DashBoard = () => {
     (() => {
       console.log("IIFE");
     })();
-    fetch("http://localhost:9000/assessment", {
+    fetch(`${url}/assessment`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -61,32 +52,33 @@ const DashBoard = () => {
         console.log("Expiry time epoch", result.exp);
         console.log("DATE", expiryTimeStamp);
         setExpTime(expiryTimeStamp)
-       sessionStorage.setItem('expTime',expiryTimeStamp.toUTCString())
+        sessionStorage.setItem('expTime', expiryTimeStamp.toUTCString())
       })
       .catch((error) => console.log("error", error));
   }, []);
-  let is:string| null=sessionStorage.getItem('isCompleted')  
   
-  if(is) {console.log("session storage data",JSON.parse(is));}
-  console.log(is);
-  
+  // let is: string | null = sessionStorage.getItem('isCompleted')
+
+  // if (is) { console.log("session storage data", JSON.parse(is)); }
+  // console.log(is);
+
   console.log(isCompleted)
-  const keys =  Object.values(isCompleted)
-  let navigateToHome=true
-  for(let y=0; y<keys.length; y++){
-    if(keys[y]==false)
-    navigateToHome=false
+  const keys = Object.values(isCompleted)
+  let navigateToHome = true
+  for (let y = 0; y < keys.length; y++) {
+    if (keys[y] == false)
+      navigateToHome = false
 
   }
-  if(navigateToHome){
-    nav('/', {replace:true});
+  if (navigateToHome) {
+    nav('/', { replace: true });
     // alert("All Tests have completed")
     sessionStorage.clear();
   }
-  navigateToHome && nav('/');
-  console.log("navigatetohome",navigateToHome);
-  console.log("keys",keys)
-  
+  // navigateToHome && nav('/');
+
+
+
   return (
     <>
       {data && data.data.length > 0 && (
@@ -102,13 +94,14 @@ const DashBoard = () => {
                   {!isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start" onClick={() => clickHandler(test.title)}>
                     Start
                   </p>}
-                  {isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start">Completed</p>}
+                  {isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start complete">Completed</p>}
                 </div>
               </Card>
             ))}
           </Container>
         </>
       )}
+      
     </>
   );
 };

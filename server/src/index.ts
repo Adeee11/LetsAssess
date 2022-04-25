@@ -22,7 +22,7 @@ app.use("/candidate", require("./routes/candidate"));
 // Authentication
 app.use("/authenticate", require("./routes/authentication"));
 
-const PORT = 9000;
+const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);

@@ -13,30 +13,10 @@ const CustomComponent = ({ data }: propsType) => {
   useEffect(() => {
     setTimeout(() => Prism.highlightAll(), 0);
   }, []);
-
-  let codeClass: string;
-
-  switch (data.format) {
-    case "js": {
-      codeClass = "language-javascript";
-      break;
-    }
-    case "css": {
-      codeClass = "language-css";
-      break;
-    }
-    case "html": {
-      codeClass = "language-html";
-      break;
-    }
-    default: {
-      codeClass = "language-react-jsx";
-    }
-  }
-
+  console.log(data);
   return (
-    <pre className="line-numbers">
-      <code className={codeClass}>{data.content}</code>
+    <pre>
+      <code className={`language-${data.format}`}>{data.content}</code>
     </pre>
   );
 };

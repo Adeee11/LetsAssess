@@ -9,30 +9,32 @@ import {
   QuestionCode,
   OptionCode,
 } from "./Test.styled";
-// import CountdownTimer from './CountdownTimer'
 import CustomComponent from "../../../components/CustomComponent/CustomComponent";
 import { GlobalContext } from "../../../App";
-import { useNavigate, useParams} from "react-router-dom";
-// import MyTimer from "./MyTimer";
+import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import MyTimer from "../../../components/MyTimer/MyTimer";
-export const LocalContext = React.createContext({});
+import { MessageBox } from "../../../components/MessageBox";
+
+
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
-  const { title="" } = useParams();
+  const [showMsg, setShowMsg] = useState(false);
+  const { title = "" } = useParams();
   const nav = useNavigate();
-  const ctx = useContext<any>(GlobalContext);
-  const { candidate,  token, isCompleted, setIsCompleted} = ctx;
+  const ctx = useContext(GlobalContext);
+  const { candidate, token, isCompleted, setIsCompleted, url } = ctx;
   
+
   useEffect(() => {
-         
+
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
-    fetch(`http://localhost:9000/assessment/${title}/questions`, {
+    fetch(`${url}/assessment/${title}/questions`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -40,12 +42,16 @@ const Test = () => {
       .then((res) => res.json())
       .then((result) => setData1(result));
 
-    fetch(`http://localhost:9000/submission/options-marked/${title}`, {
+    fetch(`${url}/submission/options-marked/${title}`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     })
-      .then((response) => response.json())
+      .then((response) =>{
+        console.log(response);
+      if(response.ok==true)  
+      return  response.json()
+      })
       .then((result) => {
         console.log("Result:",result);
         if (
@@ -76,7 +82,7 @@ const Test = () => {
           setQueNo(result.lastIndex + 1);
         }
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => console.log("error:----->", error));
   }, []);
 
   useEffect(() => {
@@ -85,25 +91,25 @@ const Test = () => {
     };
   }, []);
 
-  
+
 
   const submitHandler = () => {
- 
-    isCompleted[title.replace(/\s+/g, '-').toLowerCase()]=true
+    
+    isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
     setIsCompleted(isCompleted)
     console.log("Submit Handler called");
     nav("/assessment", { replace: true });
-    console.log(isCompleted);  
+    console.log(isCompleted);
 
   };
-  
- 
+
+
 
   const nextQuestion = async (
     queId: string | number,
     optionId: string | number | any[]
   ) => {
-   
+
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -117,7 +123,7 @@ const Test = () => {
       },
     });
 
-    fetch("http://localhost:9000/submission/answer", {
+    fetch(`${url}/submission/answer`, {
       method: "POST",
       headers: myHeaders,
       body: raw,
@@ -126,20 +132,20 @@ const Test = () => {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
-      
+
     if (queNo < data1.questions.length - 1) {
       setQueNo(queNo + 1);
- 
-    } else{
-   
+
+    } else {
+      
       submitHandler();
-    } 
+    }
   };
 
   const selectOpt = (arg0: string | number) => {
     if (data1.questions[queNo].quesType == "mcq") {
       selectedOpt[queNo] = arg0;
-  
+
       setSelectedOpt([...selectedOpt]);
     } else if (data1.questions[queNo].quesType == "mcq-m") {
       if (selectedOpt[queNo] == undefined) {
@@ -148,7 +154,7 @@ const Test = () => {
       }
 
       for (let i = 0; i < data1.questions[queNo].options.length; i++) {
-        if (arg0 === data1.questions[queNo].options[i].optionValue) {
+        if (arg0 == data1.questions[queNo].options[i].optionId) {
           selectedOpt[queNo][i] = !selectedOpt[queNo][i];
         }
       }
@@ -171,17 +177,18 @@ const Test = () => {
     }
   };
 
+
+
   // if(data1 ){
   //   let isTestCompleted=queNo == data1.questions.length - 1;
   //   isTestCompleted && nav('/assessment')
   // }
-  
+// console.log(selectedOpt);
 
   return (
     <>
-      {!data1 && <Spinner/>}
-
-      {data1 && queNo < data1.questions.length ? (
+      {!data1 && <Spinner />}
+      {data1 && queNo < data1?.questions?.length ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
@@ -208,7 +215,7 @@ const Test = () => {
                 <p>Select multiple answer</p>
               )}
               <Timer>
-                <MyTimer time={Date.parse( sessionStorage.getItem('expTime')||"")}/>
+                <MyTimer time={Date.parse(sessionStorage.getItem('expTime') || "")} />
               </Timer>
               <button
                 className="next"
@@ -236,9 +243,17 @@ const Test = () => {
                           ? "act"
                           : ""
                       }
-                      onClick={() => selectOpt(opt.optionValue)}
+                      onClick={() => selectOpt(opt.optionId)}
                     >
-                      <span>{opt.optionValue}</span>
+                      {/* <span>{opt.optionValue}</span> */}
+                      {!opt.useCustomComponent && (
+                        <span>{opt.optionValue}</span>
+                      )}
+                      {opt.useCustomComponent && (
+                        <OptionCode>
+                          <CustomComponent data={opt.optionProps} />
+                        </OptionCode>
+                      )}
                       <span className="sn">{index + 1}</span>
                     </Option>
                   )}
@@ -270,7 +285,7 @@ const Test = () => {
         </Container>
       ) : (
         data1 &&
-        <>Test Completed</>
+        <>Not Found</>
       )}
     </>
   );

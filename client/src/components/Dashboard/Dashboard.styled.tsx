@@ -44,7 +44,11 @@ flex-basis: 33%;
     cursor: pointer;
     padding: 0px;
     color: blue;
-}  
+} 
+.complete{
+    cursor: initial;
+    color:green;
+} 
 p{
     margin: 0;
     color: gray;

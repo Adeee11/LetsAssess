@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Container, Card, Header , CandidateDetails, Question, Option, Submissions} from './Dashboard.styled';
 
 import CustomComponent from '../../../components/CustomComponent/CustomComponent';
-import { data } from '../../assessment/Test/jstest';
+import { data } from '../jstest';
 const user = "Pramod";
 
 const candidatesList = [
@@ -80,20 +80,33 @@ const Dashboard = () => {
         setShow({showAllTest:false, showAllCandidates:false, showSubmission:true});
         
     }
-useEffect(()=>{
-    calculateMarks();
-})
-    const calculateMarks=()=>{
-        let mark=0;
-        for(let i=0; i<data.questions.length; i++){
-            if(data.questions[i].correctOption==listOfSubissions[i])
-            mark++;
-        }
-        setMarks(mark);
 
-    }
+
+    useEffect(() => {
     
-    return (<>
+    
+      return () => {
+        
+      }
+    }, [])
+    
+// useEffect(()=>{
+//     calculateMarks();
+// })
+//     const calculateMarks=()=>{
+//         let mark=0;
+//         for(let i=0; i<data.questions.length; i++){
+//             if(data.questions[i].correctOption==listOfSubissions[i])
+//             mark++;
+//         }
+//         setMarks(mark);
+
+//     }
+    
+    return (
+    
+    <>
+    
         <Header>
             <li>
                 {show.showAllCandidates && "All Candidates"}
@@ -141,7 +154,14 @@ useEffect(()=>{
                 <p>{`${marks}/${data.questions.length}`}</p>
                 {data.questions.map((item, index)=>
                 <div>
-                    <Question><span>{item.quesId}.</span>{item.quesValue}{item.correctOption==listOfSubissions[index]?<span className='marks-right'>&#10003;</span>:<span className='marks-wrong'>&#10060;</span>}</Question>
+                    <Question>
+                        <span>{item.quesId}.</span>
+                        {item.quesValue}
+                        {/* {item.correctOption==listOfSubissions[index]?
+                        <span className='marks-right'>&#10003;</span>:
+                        <span className='marks-wrong'>&#10060;</span>
+                        } */}
+                        </Question>
                     {item.useCustomComponent && 
                     <Question>
                          <CustomComponent data={item.props}/>
@@ -149,7 +169,7 @@ useEffect(()=>{
                     
                     }
                         {item.options.map((opt)=>
-                          <Option className={opt.optionId==item.correctOption?"right":""}>
+                          <Option >
                               {!opt.useCustomComponent && opt.optionValue}
                               {opt.useCustomComponent &&
                               <CustomComponent data={opt.optionProps}/>
