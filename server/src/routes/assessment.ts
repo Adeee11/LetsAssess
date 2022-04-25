@@ -22,7 +22,6 @@ router.post("/", async (req, res) => {
 });
 
 // ADD QUESTION
-// need to ask how to name this api endpoint
 router.post("/question", async (req, res) => {
   const data = req.body.question;
   const documentName = slugify(req.body.title.toLowerCase());

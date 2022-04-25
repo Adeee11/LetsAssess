@@ -134,7 +134,7 @@ const Test = () => {
     optionId: string | number | any[]
   ) => {
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
-
+    console.log(`Next ques called with question Id: ${queId}`) 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
@@ -203,7 +203,7 @@ const Test = () => {
     <>
       {!data1 && <p>Loading.......</p>}
 
-      {data1 && queNo < data1.questions.length - 1 ? (
+      {data1 && queNo < data1.questions.length ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
