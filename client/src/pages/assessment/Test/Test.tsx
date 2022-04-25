@@ -40,7 +40,7 @@ const Test = () => {
       .then((res) => res.json())
       .then((result) => setData1(result));
 
-    fetch(`${url}/submission/${title}/${candidate.email}`, {
+    fetch(`${url}/submission/options-marked/${title}`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
@@ -51,7 +51,7 @@ const Test = () => {
       return  response.json()
       })
       .then((result) => {
-        console.log(result);
+        console.log("Result:",result);
         if (
           result &&
           Object.keys(result).length === 0 &&
@@ -115,7 +115,6 @@ const Test = () => {
 
     var raw = JSON.stringify({
       assessmentId: `${title}`,
-      candidateId: `${candidate.email}`,
       optionMarked: {
         optionId: options,
         quesId: queId,
