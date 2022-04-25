@@ -104,46 +104,53 @@ router.get("/:id", authenticateToken, async (req, res) => {
 });
 
 // fetch the optionsMarked by a candidate for a particular test
-router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
-  const assessmentId = slugify(req.params.assessment, {
-    lower: true,
-    remove: /[*+~.()'"!:@]/g,
-  });
-  // getting candiateId from auth token so that the user logged in can only acess his data
-  const candidateId = slugify(String(res.locals.decodedJwt.email), {
-    lower: true,
-    remove: /[*+~.()'"!:@]/g,
-  });
+router.get(
+  "/options-marked/:assessment",
+  authenticateToken,
+  async (req, res) => {
+    const assessmentId = slugify(req.params.assessment, {
+      lower: true,
+      remove: /[*+~.()'"!:@]/g,
+    });
+    // getting candiateId from auth token so that the user logged in can only acess his data
+    const candidateId = slugify(String(res.locals.decodedJwt.email), {
+      lower: true,
+      remove: /[*+~.()'"!:@]/g,
+    });
 
-  try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    let optionsMarked: any;
-    const data = (await docRef.get()).data();
+    try {
+      const docRef = firestore.doc(`submissions/${assessmentId}`);
+      let optionsMarked: any;
+      const data = (await docRef.get()).data();
+      console.log("Data", data && data[candidateId].optionsMarked);
+      if (data && !data[candidateId]) {
+        console.log(`Inside if`);
+        if (!optionsMarked) {
+          return res.json({
+            msg: "No options marked yet.",
+            lastIndex: -1,
+            optionsMarked: {},
+          });
+        }
+        console.log("If finished");
+      } else if (data) {
+        optionsMarked = data[candidateId].optionsMarked;
+        console.log(`Options Marked are ${optionsMarked}`);
+        const keys = Object.keys(optionsMarked);
 
-    if (data) {
-      optionsMarked = data[candidateId].optionsMarked;
-      if (!optionsMarked) {
-        return res.json({
-          msg: "No options marked yet.",
-          lastIndex: -1,
-          optionsMarked: {},
+        res.status(200).json({
+          lastIndex: parseInt(keys[keys.length - 1]) - 1,
+          optionsMarked: optionsMarked,
+        });
+      } else {
+        res.status(400).json({
+          error: `Couldn't get the data for the assessment ${assessmentId} `,
         });
       }
-
-      const keys = Object.keys(optionsMarked);
-
-      res.status(200).json({
-        lastIndex: parseInt(keys[keys.length - 1]) - 1,
-        optionsMarked: optionsMarked,
-      });
-    } else {
-      res.status(400).json({
-        error: `Couldn't get the data for the assessment ${assessmentId} `,
-      });
+    } catch (error) {
+      res.status(500).json(error);
     }
-  } catch (error) {
-    res.status(500).json(error);
   }
-});
+);
 
 module.exports = router;
