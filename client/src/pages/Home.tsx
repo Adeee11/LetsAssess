@@ -1,6 +1,7 @@
-import React, { FormEvent, useContext, useState } from "react";
+import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
+import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { Container } from "./Home.Styled";
 
@@ -11,7 +12,9 @@ const Home = () => {
   const setToken = ctx.setToken;
   const url= ctx.url;
   const token = ctx.token;
+  const isCompleted= ctx.isCompleted;
   const [data, setData] =useState('');
+  const [showMsg, setShowMsg] = useState(false);
  
  
   const submit = async (e:FormEvent) => {
@@ -56,7 +59,12 @@ const Home = () => {
        
      
   };
-
+  console.log(isCompleted)
+ useEffect(()=>{
+  if(isCompleted["html-and-css"] && isCompleted["javascript"] && isCompleted["node-js"] && isCompleted["react"] && isCompleted["typescript"] && isCompleted["git"])
+  setShowMsg(true);
+ },[])
+   
   // console.log({"a":data});
   return (
     <>
@@ -87,6 +95,12 @@ const Home = () => {
     </textarea> */}
 
     {showLoader &&<Spinner/>}
+    {showMsg &&
+    <MessageBox 
+    msg={`Completed all the tests`} 
+    clickHandler={()=>setShowMsg(false)}
+    />
+    }
     </>
   );
 };

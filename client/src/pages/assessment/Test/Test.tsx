@@ -14,6 +14,7 @@ import { GlobalContext } from "../../../App";
 import { useNavigate, useParams } from "react-router-dom";
 import Spinner from "../../../components/Spinner/Spinner";
 import MyTimer from "../../../components/MyTimer/MyTimer";
+import { MessageBox } from "../../../components/MessageBox";
 
 
 
@@ -21,11 +22,12 @@ const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
+  const [showMsg, setShowMsg] = useState(false);
   const { title = "" } = useParams();
   const nav = useNavigate();
-  const ctx = useContext<any>(GlobalContext);
-  const { candidate, token, isCompleted, setIsCompleted } = ctx;
-  const url="http://localhost:9000";
+  const ctx = useContext(GlobalContext);
+  const { candidate, token, isCompleted, setIsCompleted, url } = ctx;
+  
 
   useEffect(() => {
 
@@ -92,7 +94,7 @@ const Test = () => {
 
 
   const submitHandler = () => {
-
+    
     isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
     setIsCompleted(isCompleted)
     console.log("Submit Handler called");
@@ -135,7 +137,7 @@ const Test = () => {
       setQueNo(queNo + 1);
 
     } else {
-
+      
       submitHandler();
     }
   };
@@ -175,17 +177,18 @@ const Test = () => {
     }
   };
 
+
+
   // if(data1 ){
   //   let isTestCompleted=queNo == data1.questions.length - 1;
   //   isTestCompleted && nav('/assessment')
   // }
-console.log(selectedOpt);
+// console.log(selectedOpt);
 
   return (
     <>
       {!data1 && <Spinner />}
-
-      {data1 && queNo < data1.questions.length ? (
+      {data1 && queNo < data1?.questions?.length ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
@@ -282,7 +285,7 @@ console.log(selectedOpt);
         </Container>
       ) : (
         data1 &&
-        <>Test Completed</>
+        <>Not Found</>
       )}
     </>
   );

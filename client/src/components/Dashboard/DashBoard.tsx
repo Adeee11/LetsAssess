@@ -3,6 +3,7 @@ import { Card, Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
 import MyTimer from "../MyTimer/MyTimer";
 import { GlobalContext } from "../../App";
+import { MessageBox } from "../MessageBox";
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -12,7 +13,7 @@ const DashBoard = () => {
   }>();
   const [expTime, setExpTime] = useState<any>();
   const nav = useNavigate();
-  const ctx = useContext<any>(GlobalContext);
+  const ctx = useContext(GlobalContext);
   const { token, isCompleted, url } = ctx
 
   let expiryTimeStamp = new Date(0);
@@ -74,7 +75,7 @@ const DashBoard = () => {
     // alert("All Tests have completed")
     sessionStorage.clear();
   }
-  navigateToHome && nav('/');
+  // navigateToHome && nav('/');
 
 
 
@@ -93,13 +94,14 @@ const DashBoard = () => {
                   {!isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start" onClick={() => clickHandler(test.title)}>
                     Start
                   </p>}
-                  {isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start">Completed</p>}
+                  {isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()] && <p className="start complete">Completed</p>}
                 </div>
               </Card>
             ))}
           </Container>
         </>
       )}
+      
     </>
   );
 };

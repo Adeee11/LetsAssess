@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 
-const Container=styled.div`
+const Container = styled.div`
 display: flex;
 min-height: 100vh;
 max-height: 100vh;
@@ -12,7 +12,7 @@ user-select: none;
 `
 
 
-const Column= styled.div`
+const Column = styled.div`
 flex-basis: 50%;
 overflow-y: scroll;
 @media(max-width:900px){
@@ -57,7 +57,7 @@ header{
 `
 
 
-const Question= styled.div`
+const Question = styled.div`
 margin-left: 50px;
 color: black;
 font-size: 14px;
@@ -72,7 +72,7 @@ width: 85%;
 }
 
 `
-const QuestionCode= styled.div`
+const QuestionCode = styled.div`
     margin: 20px 0 20px 50px;
     margin-left: 50px;
 color: black;
@@ -80,9 +80,9 @@ font-size: 14px;
 margin-top: 20px;
 margin-bottom: 20px;
 border: 1px dotted gray;
-padding: 4px;
+padding: 0px;
 width: 85%;
-background:lightgray;
+/* background:lightgray; */
 border-radius: 4px;
 overflow-x: auto;
 @media(max-width:900px){
@@ -91,11 +91,13 @@ overflow-x: auto;
 }
     pre{
         width: 100%;
-        
+        margin: 0;
+        padding: 10px;    
     }
     code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+  /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace; */
+    
     
 }
     
@@ -104,7 +106,7 @@ overflow-x: auto;
 `
 const Timer = styled.div``
 
-const Section=styled.div`
+const Section = styled.div`
 .act{
     color:black;
     border:1px solid black;
@@ -114,7 +116,7 @@ const Section=styled.div`
 
 }    
 `
-const Option= styled.div`
+const Option = styled.div`
 width: 70%;
 margin: 0 auto;
 border:1px solid gray;
@@ -147,13 +149,13 @@ span{
 }
 }
 `
-const OptionCode=styled.div`
+const OptionCode = styled.div`
  /* text-align: left; */
  margin: 0;
  padding: 0;
  font-size: 14px;
  display: inline-block;
- background-color:lightgray;
+ /* background-color:lightgray; */
  color:black;
  padding: 10px;
  width: 100%;
@@ -161,4 +163,4 @@ const OptionCode=styled.div`
  border-radius: 4px;
 `
 
-export {Container, Column, Question, Timer,Section, Option, QuestionCode, OptionCode};
+export { Container, Column, Question, Timer, Section, Option, QuestionCode, OptionCode };

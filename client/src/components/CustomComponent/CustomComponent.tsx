@@ -1,5 +1,6 @@
 import Prism from "prismjs";
 import { useEffect } from "react";
+import './prism.css';
 
 interface Idata{
     content:string,
@@ -16,10 +17,10 @@ const CustomComponent = ({data}:propsType) => {
   useEffect(()=>{
     setTimeout(() => Prism.highlightAll(), 0)
   },[])
-
+console.log(data)
   return (
-    <pre className="line-numbers">
-        <code className="language-css" >
+    <pre >
+        <code className={`language-${data.format}`} >
            {data.content}
         </code>
     </pre>
