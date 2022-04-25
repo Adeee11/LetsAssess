@@ -7,7 +7,7 @@ const data2={
             "quesValue":"",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"function hungry() {\n   eatFruits();\n}\nfunction eat…s() {\n   return 'I'm eating fruits';\n}\n\nhungry();", "format":"js"},
+            "props":{"type":"code", "content":"function hungry() {\n   eatFruits();\n}\nfunction eatFruits() {\n   return \"I'm eating fruits\";\n}\n\n// Invoke the `hungry` function\nhungry();", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -75,7 +75,7 @@ const data2={
             "quesValue":"What will this print out?",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj = {\n    innerObj: {\n        x: 9\n    }\n}…nnerObj;\n\nz.x = 25;\n\nconsole.log(obj.innerObj.x);", "format":"js"},
+            "props":{"type":"code", "content":"const obj = {\n    innerObj: {\n        x: 9\n    }\n};\n\nconst z = obj.innerObj;\n\nz.x = 25;\n\nconsole.log(obj.innerObj.x);", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -98,7 +98,7 @@ const data2={
             "quesValue":"What will this print out? ",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj = {\n    arr: [{ x: 17 }]\n};\n\nlet z = obj…rr;\n\nz = [{ x: 25 }];\n\nconsole.log(obj.arr[0].x);", "format":"js"},
+            "props":{"type":"code", "content":"const obj = {\n    arr: [{ x: 17 }]\n};\n\nlet z = obj.arr;\n\nz = [{ x: 25 }];\n\nconsole.log(obj.arr[0].x);", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -142,7 +142,7 @@ const data2={
             "quesValue":"Output for the following code:",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"let a = 5;\n\nfunction foo() {\n   let a = 6;\n  conso…oo();\nbar();\nconsole.log('Outside Functions: ',a)", "format":"js"},
+            "props":{"type":"code", "content":"let a = 5;\n\nfunction foo() {\n   let a = 6;\n  console.log('Inside Foo: ', a);\n}\n\nfunction bar(){\n  a = 7;\n  console.log('Inside Bar: ', a);\n}\n\nfoo();\nbar();\nconsole.log('Outside Functions: ',a)", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -176,7 +176,7 @@ const data2={
             "quesValue":"Output for the following code:",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"let obj = {\n\tfoo: function(){\n\t(this === window)\n\t…('obj')\t\t \n\t}\n}\n\nobj.foo()\nobj.foo().bind(window)", "format":"js"},
+            "props":{"type":"code", "content":"let obj = {\n\tfoo: function(){\n\t(this === window)\n\t? console.log('window')\n\t: (this === obj) && console.log('obj')\t\t \n\t}\n}\n\nobj.foo()\nobj.foo().bind(window)", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -244,7 +244,7 @@ const data2={
             "quesValue":"How will import the functions sayHello and sayGoodbye in another file from this module? ",
             "quesType":"mcq-m",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"// lib.js\n\n// Export default function\nexport defau…ction sayGoodbye(){  \n  console.log('Goodbye');\n}", "format":"js"},
+            "props":{"type":"code", "content":"// lib.js\n\n// Export default function\nexport default function sayHello(){  \n  console.log('Hello');\n}\n\n// Export non-default function\nexport function sayGoodbye(){  \n  console.log('Goodbye');\n}", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -278,7 +278,7 @@ const data2={
             "quesValue":"What’s the output of the following code?",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"function main(){\n  console.log('A');\n  setTimeout(…tart < (sec*1000)) {\n    now = Date.now();\n  }\n}\n", "format":"js"},
+            "props":{"type":"code", "content":"function main(){\n  console.log('A');\n  setTimeout(\n    function exec(){ console.log('B'); }\n  , 0);\n  runWhileLoopForNSeconds(3);\n  console.log('C');\n}\nmain();\nfunction runWhileLoopForNSeconds(sec){\n  let start = Date.now(), now = start;\n  while (now - start < (sec*1000)) {\n    now = Date.now();\n  }\n}\n", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -414,7 +414,7 @@ const data2={
             "quesValue":"What is the output of the following code:",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"const obj={ a:1, b:2, c:{d:3}};\n\n           const …c.d=4 ;\n\n           console.log(obj.a, obj.c.d) ;", "format":"js"},
+            "props":{"type":"code", "content":"const obj={ a:1, b:2, c:{d:3}};\n\n           const obj2={...obj};\n\n           obj2.a=10;\n\n           obj2.c.d=4 ;\n\n           console.log(obj.a, obj.c.d) ;", "format":"js"},
             "options":[
                 {
                     "optionId":"1",
@@ -584,7 +584,7 @@ const data2={
             "quesValue":"What’s the output of the following code?",
             "quesType":"mcq",
             "useCustomComponent":true,
-            "props":{"type":"code", "content":"// first part\nconst a = ['Hello'];\nconst b = ['Hel…le.log(a===b)\n\n// second part\nconsole.log(5=='5')", "format":"js"},
+            "props":{"type":"code", "content":"// first part\nconst a = ['Hello'];\nconst b = ['Hello'];\n\nconsole.log(a===b)\n\n// second part\nconsole.log(5=='5')", "format":"js"},
             "options":[
                 {
                     "optionId":"1",

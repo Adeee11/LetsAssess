@@ -12,20 +12,23 @@ import {
 // import CountdownTimer from './CountdownTimer'
 import CustomComponent from "../../../components/CustomComponent/CustomComponent";
 import { GlobalContext } from "../../../App";
-import { useNavigate, useParams } from "react-router-dom";
-import MyTimer from "./MyTimer";
+import { useNavigate, useParams} from "react-router-dom";
+// import MyTimer from "./MyTimer";
+import Spinner from "../../../components/Spinner/Spinner";
+import MyTimer from "../../../components/MyTimer/MyTimer";
 export const LocalContext = React.createContext({});
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
-  const { title } = useParams();
+  const { title="" } = useParams();
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { candidate, time, token } = ctx;
-
+  const { candidate,  token, isCompleted, setIsCompleted} = ctx;
+  
   useEffect(() => {
+         
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
@@ -68,7 +71,7 @@ const Test = () => {
             }
           });
 
-          console.log("Options Array", options);
+          // console.log("Options Array", options);
           setSelectedOpt([...options]);
           setQueNo(result.lastIndex + 1);
         }
@@ -82,59 +85,26 @@ const Test = () => {
     };
   }, []);
 
+  
+
   const submitHandler = () => {
+ 
+    isCompleted[title.replace(/\s+/g, '-').toLowerCase()]=true
+    setIsCompleted(isCompleted)
     console.log("Submit Handler called");
-    nav("/assessment");
-    // const list = [];
+    nav("/assessment", { replace: true });
+    console.log(isCompleted);  
 
-    // for (let i = 0; i < selectedOpt.length; i++) {
-    //   if (typeof selectedOpt[i] == "string") list[i + 1] = [selectedOpt[i]];
-    //   else list[i + 1] = selectedOpt[i];
-    // }
-
-    // // console.log(list);
-    // // const obj1 = Object.assign({}, list);
-    // // console.log("obj1", obj1);
-    // var myHeaders = new Headers();
-    // myHeaders.append("Content-Type", "application/json");
-    // myHeaders.append("Authorization", `Bearer ${token}`);
-
-    // const obj = {
-    //   assessmentId: `${title}`,
-    //   candidateId: `${candidate.email}`,
-    //   data: {
-    //     candidateName: `${candidate.name}`,
-    //     optionsMarked: obj1,
-    //   },
-    // };
-
-    // var raw = JSON.stringify(obj);
-
-    // fetch("http://localhost:9000/submission/candidate", {
-    //   method: "POST",
-    //   headers: myHeaders,
-    //   body: raw,
-    //   redirect: "follow",
-    // })
-    //   .then((response) => {
-    //     console.log(response);
-    //     if (response.status == 200) nav("/assessment");
-    //     return response.text();
-    //   })
-    //   .then((result) => {
-    //     console.log(result);
-    //     setQueNo(0);
-    //     setSelectedOpt([]);
-    //   })
-    //   .catch((error) => console.log("error", error));
   };
+  
+ 
 
   const nextQuestion = async (
     queId: string | number,
     optionId: string | number | any[]
   ) => {
+   
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
-    console.log(`Next ques called with question Id: ${queId}`) 
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
@@ -157,15 +127,20 @@ const Test = () => {
       .then((response) => response.text())
       .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
+      
     if (queNo < data1.questions.length - 1) {
       setQueNo(queNo + 1);
-    } else submitHandler();
+ 
+    } else{
+   
+      submitHandler();
+    } 
   };
 
   const selectOpt = (arg0: string | number) => {
     if (data1.questions[queNo].quesType == "mcq") {
       selectedOpt[queNo] = arg0;
-      console.log("Selected Opt", selectedOpt);
+  
       setSelectedOpt([...selectedOpt]);
     } else if (data1.questions[queNo].quesType == "mcq-m") {
       if (selectedOpt[queNo] == undefined) {
@@ -197,17 +172,21 @@ const Test = () => {
     }
   };
 
-  // console.log(candidate)
-  // console.log(selectedOpt);
+  // if(data1 ){
+  //   let isTestCompleted=queNo == data1.questions.length - 1;
+  //   isTestCompleted && nav('/assessment')
+  // }
+  
+
   return (
     <>
-      {!data1 && <p>Loading.......</p>}
+      {!data1 && <Spinner/>}
 
       {data1 && queNo < data1.questions.length ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
-            <div className="subject">{data1.title}</div>
+            <div className="subject">{title}</div>
             <div className="description">
               {" "}
               {`Question ${queNo + 1} of ${data1.questions.length}`}{" "}
@@ -230,7 +209,7 @@ const Test = () => {
                 <p>Select multiple answer</p>
               )}
               <Timer>
-                <MyTimer time={time} onComplete={() => submitHandler()} />
+                <MyTimer time={Date.parse( sessionStorage.getItem('expTime')||"")}/>
               </Timer>
               <button
                 className="next"
