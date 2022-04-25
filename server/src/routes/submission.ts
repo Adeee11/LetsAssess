@@ -22,7 +22,8 @@ router.post("/", authenticateToken, async (req, res) => {
 
 // Add candidate for a particular assessment
 router.post("/candidate", authenticateToken, async (req, res) => {
-  const candidateId = slugify(req.body.candidateId, {
+  // getting candiateId from auth token so that the user logged in can only acess his data
+  const candidateId = slugify(String(res.locals.decodedJwt.email), {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
@@ -42,7 +43,8 @@ router.post("/candidate", authenticateToken, async (req, res) => {
 // Add answer marked by a candidate for a question for an assessment
 router.post("/answer", authenticateToken, async (req, res) => {
   const assessmentId: string = slugify(req.body.assessmentId.toLowerCase());
-  const candidateId: string = slugify(req.body.candidateId, {
+  // getting candiateId from auth token so that the user logged in can only acess his data
+  const candidateId: string = slugify(String(res.locals.decodedJwt.email), {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
@@ -50,6 +52,18 @@ router.post("/answer", authenticateToken, async (req, res) => {
     req.body.optionMarked;
   try {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
+
+    // adding data if the document doesn't exist
+    if (!(await docRef.get()).exists) {
+      const result = await docRef.set({
+        [`${candidateId}`]: {
+          optionsMarked: {
+            [optionMarked.quesId]: [...optionMarked.optionId],
+          },
+        },
+      });
+      return res.status(200).send(result);
+    }
     const documentData: any = (await docRef.get()).data();
 
     // Checking whther the option is already marked or not
@@ -90,45 +104,49 @@ router.get("/:id", authenticateToken, async (req, res) => {
 });
 
 // fetch the optionsMarked by a candidate for a particular test
-router.get("/:assessment/:candidate", authenticateToken, async (req, res) => {
-  const assessmentId = slugify(req.params.assessment, {
-    lower: true,
-    remove: /[*+~.()'"!:@]/g,
-  });
-  const candidateId = slugify(req.params.candidate, {
-    lower: true,
-    remove: /[*+~.()'"!:@]/g,
-  });
+router.get(
+  "/options-marked/:assessment",
+  authenticateToken,
+  async (req, res) => {
+    const assessmentId = slugify(req.params.assessment, {
+      lower: true,
+      remove: /[*+~.()'"!:@]/g,
+    });
+    // getting candiateId from auth token so that the user logged in can only acess his data
+    const candidateId = slugify(String(res.locals.decodedJwt.email), {
+      lower: true,
+      remove: /[*+~.()'"!:@]/g,
+    });
 
-  try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    let optionsMarked: any;
-    const data = (await docRef.get()).data();
+    try {
+      const docRef = firestore.doc(`submissions/${assessmentId}`);
+      let optionsMarked: any;
+      const data = (await docRef.get()).data();
+      if (data && !data[candidateId]) {
+        if (!optionsMarked) {
+          return res.json({
+            msg: "No options marked yet.",
+            lastIndex: -1,
+            optionsMarked: {},
+          });
+        }
+      } else if (data) {
+        optionsMarked = data[candidateId].optionsMarked;
+        const keys = Object.keys(optionsMarked);
 
-    if (data) {
-      optionsMarked = data[candidateId].optionsMarked;
-      if (!optionsMarked) {
-        return res.json({
-          msg: "No options marked yet.",
-          lastIndex: -1,
-          optionsMarked: {},
+        res.status(200).json({
+          lastIndex: parseInt(keys[keys.length - 1]) - 1,
+          optionsMarked: optionsMarked,
+        });
+      } else {
+        res.status(400).json({
+          error: `Couldn't get the data for the assessment ${assessmentId} `,
         });
       }
-
-      const keys = Object.keys(optionsMarked);
-
-      res.status(200).json({
-        lastIndex: parseInt(keys[keys.length - 1]) - 1,
-        optionsMarked: optionsMarked,
-      });
-    } else {
-      res.status(400).json({
-        error: `Couldn't get the data for the assessment ${assessmentId} `,
-      });
+    } catch (error) {
+      res.status(500).json(error);
     }
-  } catch (error) {
-    res.status(500).json(error);
   }
-});
+);
 
 module.exports = router;
