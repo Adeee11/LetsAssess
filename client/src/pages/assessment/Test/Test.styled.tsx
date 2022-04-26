@@ -84,13 +84,13 @@ padding: 0px;
 width: 85%;
 /* background:lightgray; */
 border-radius: 4px;
-overflow-x: auto;
+/* overflow-x: auto; */
 @media(max-width:900px){
     flex-basis: 100%;
     margin: 20px auto;
 }
     pre{
-        width: 100%;
+        max-width: 100%;
         margin: 0;
         padding: 10px;    
     }
@@ -157,10 +157,11 @@ const OptionCode = styled.div`
  display: inline-block;
  /* background-color:lightgray; */
  color:black;
- padding: 10px;
+ /* padding: 10px; */
  width: 100%;
  overflow-x: auto;
  border-radius: 4px;
+ 
 `
 
 export { Container, Column, Question, Timer, Section, Option, QuestionCode, OptionCode };

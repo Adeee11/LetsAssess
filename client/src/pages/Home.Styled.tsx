@@ -16,7 +16,7 @@ box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
    margin-bottom: 30px;
    margin-top: 30px;
 }
-input{
+/* input{
     padding: 6px;
     border-radius: 4px;
     border: 1px solid gray;
@@ -26,7 +26,7 @@ input{
         min-width: auto;
         width: 100%;
     }
-}
+} */
 span{
     min-width: 70px;
     display: inline-block;
@@ -36,17 +36,7 @@ span{
         margin-bottom: 10px;
     }
 }
-button{
-    background-color: black;
-    color: white;
-    padding: 6px 20px;
-    border-radius: 4px;
-    border: none;
-    margin: 0 auto;
-    display: block;
-    font-size: 16px;
-    margin-bottom: 30px;
-}
+
 @media (max-width:768px){
     width: 80vw;
     padding: 10px;

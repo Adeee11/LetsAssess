@@ -4,6 +4,8 @@ import './prism.css';
 
 interface Idata{
     content:string,
+    format:string,
+    type:string
 
 }
 type propsType={

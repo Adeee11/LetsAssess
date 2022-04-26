@@ -1,4 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import {CustomComponent} from "../../../components/CustomComponent";
+import { GlobalContext } from "../../../App";
+import { useNavigate, useParams } from "react-router-dom";
+import {Spinner} from "../../../components/Spinner";
+import {MyTimer} from "../../../components/MyTimer";
 import {
   Column,
   Container,
@@ -9,24 +14,21 @@ import {
   QuestionCode,
   OptionCode,
 } from "./Test.styled";
-import CustomComponent from "../../../components/CustomComponent/CustomComponent";
-import { GlobalContext } from "../../../App";
-import { useNavigate, useParams } from "react-router-dom";
-import Spinner from "../../../components/Spinner/Spinner";
-import MyTimer from "../../../components/MyTimer/MyTimer";
-import { MessageBox } from "../../../components/MessageBox";
-
 
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
-  const [showMsg, setShowMsg] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
+  
   const { title = "" } = useParams();
+  
   const nav = useNavigate();
+  
   const ctx = useContext(GlobalContext);
-  const { candidate, token, isCompleted, setIsCompleted, url } = ctx;
+  
+  const { token, isCompleted, setIsCompleted, url } = ctx;
   
 
   useEffect(() => {
@@ -85,6 +87,7 @@ const Test = () => {
       .catch((error) => console.log("error:----->", error));
   }, []);
 
+  
   useEffect(() => {
     window.onbeforeunload = function () {
       return "Data will be lost ";
@@ -109,7 +112,7 @@ const Test = () => {
     queId: string | number,
     optionId: string | number | any[]
   ) => {
-
+    setShowLoader(true);
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -130,15 +133,15 @@ const Test = () => {
       redirect: "follow",
     })
       .then((response) => response.text())
-      .then((result) => console.log(result))
+      .then((result) =>{ console.log(result)
+                         setShowLoader(false);
+      })
       .catch((error) => console.log("error", error));
 
     if (queNo < data1.questions.length - 1) {
       setQueNo(queNo + 1);
-
     } else {
-      
-      submitHandler();
+         submitHandler();
     }
   };
 
@@ -178,17 +181,10 @@ const Test = () => {
   };
 
 
-
-  // if(data1 ){
-  //   let isTestCompleted=queNo == data1.questions.length - 1;
-  //   isTestCompleted && nav('/assessment')
-  // }
-// console.log(selectedOpt);
-
   return (
     <>
-      {!data1 && <Spinner />}
-      {data1 && queNo < data1?.questions?.length ? (
+      {(!data1|| showLoader) && <Spinner />}
+      {data1  && queNo < data1?.questions?.length && !showLoader ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
@@ -284,11 +280,13 @@ const Test = () => {
           </Column>
         </Container>
       ) : (
-        data1 &&
-        <>Not Found</>
+        data1 && !showLoader &&
+        <h3>Not Found</h3>
       )}
     </>
   );
 };
 
 export default Test;
+
+
