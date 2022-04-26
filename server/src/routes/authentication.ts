@@ -4,9 +4,11 @@ import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 
 const fireStore = admin.firestore();
+const getAuth = admin.auth()
 
 const router = express.Router();
 
+// Candidate authentication
 // generate a jwt token
 router.post("/", async (req, res) => {
   // have to verify whether candidate is present in the database
@@ -72,5 +74,6 @@ router.post("/", async (req, res) => {
     res.status(500).json(error);
   }
 });
+
 
 module.exports = router;

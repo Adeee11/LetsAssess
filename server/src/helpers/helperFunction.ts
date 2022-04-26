@@ -35,7 +35,7 @@ export const removeCorrectOption = (data: {
 
 // check if two arrays have same contents
 export const areArraysEqual = (arr1: any[], arr2: any[]) => {
-  if (arr1.sort().join(",") === arr2.sort().join(",")) {
+  if (arr1.join(",") === arr2.join(",")) {
     return true;
   } else {
     return false;

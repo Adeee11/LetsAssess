@@ -316,7 +316,7 @@
       "props": {
         "type": "code",
         "content": "function foo():void{\n    this.bar=10;\n}\n\nfoo.prototype.bar=42;\n\nvar obj=new foo();\nconsole.log(\"1:\", obj.bar);\n\ndelete obj.bar;\n\nconsole.log(\"2:\", obj.bar);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["2"],
       "options": [
@@ -354,7 +354,7 @@
       "props": {
         "type": "code",
         "content": "function Welcome(name:string){\nconsole.log(\"Hi\");\n\nsetTimeout(()=>{\n    console.log(`I am ${name}`);\n}, 0);\n\nconsole.log(`Bye ${name}`);\n}\n\nWelcome(\"John\");",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["2"],
       "options": [
@@ -392,7 +392,7 @@
       "props": {
         "type": "code",
         "content": "let a=[1, 'a', {x:1}, {y:2}, [1,2], {x:1}]\n\nconsole.log(a.indexOf({x:1}));",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["3"],
       "options": [
@@ -430,7 +430,7 @@
       "props": {
         "type": "code",
         "content": "interface calcy{\n    mul(n:number):any;\n    \n}\n\nclass display implements calcy{\n     x:number=0;\n     \n     mul(n:number):any{\n         this.x=n*n;\n     }\n     mul(n:string):any{\n         this.x=n+n\n     }\n}",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["4"],
       "options": [
@@ -468,7 +468,7 @@
       "props": {
         "type": "code",
         "content": "let a=[1, 'a', {x:1}, {y:2}, [1,2], {x:1}]\n\nconsole.log(a.indexOf({x:1}));",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["3"],
       "options": [
@@ -506,7 +506,7 @@
       "props": {
         "type": "code",
         "content": "module Vehicle{\n class Car{\n        constructor(public make: string, public modal:string){}\n      }\n\n    var teslaCar= new Car(\"Tesla\", \"S\")\n}\n\nvar honda =new Vehicle.Car(\"Honda\", \"CRV\");\nconsole.log(honda);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["4"],
       "options": [
@@ -544,7 +544,7 @@
       "props": {
         "type": "code",
         "content": "class Car{\n    readonly myReadonlyProperty=1;\n\n    CarMethod(){\n        console.log(this.myReadonlyProperty)\n    }\n}\n\nnew Car().myReadonlyProperty=5;",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["3"],
       "options": [
@@ -582,7 +582,7 @@
       "props": {
         "type": "code",
         "content": "(function(foo){\n    console.log(typeof foo)\n})([1,2,3]);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["3"],
       "options": [
@@ -620,7 +620,7 @@
       "props": {
         "type": "code",
         "content": "class Point{\n    x:number;\n    y:number;\n}\n\ninterface Point3d extends Point{\n    z:number;\n}\n\nlet point3d:Point3d={x:3, y:8, z:9}\n\nconsole.log(point3d);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["1"],
       "options": [
@@ -658,7 +658,7 @@
       "props": {
         "type": "code",
         "content": "let obj={\n    z:{a:99},\n    t:[1,2]\n}\n\nObject.freeze(obj);\n\nobj.z.a=1;\nobj.t[0]=3;\nobj.t[1]=4;\n\nconsole.log(obj);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["3"],
       "options": [
@@ -696,7 +696,7 @@
       "props": {
         "type": "code",
         "content": "let b:any=[];\nlet a=[] +b +\"IWEBCODE\".split('');\nconsole.log(a);",
-        "format": "js"
+        "format": "ts"
       },
       "correctOption": ["2"],
       "options": [
