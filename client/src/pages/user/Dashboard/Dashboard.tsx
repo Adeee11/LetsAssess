@@ -62,7 +62,7 @@ const Dashboard = () => {
 
     const clickHandler=(candidate:{candidateName:string, email:string})=>{
         setShow({showSubmission:false, showAllTest:true, showAllCandidates:false});
-        setCandidate({name:candidate.candidateName, email:candidate.email})
+        // setCandidate({name:candidate.candidateName, email:candidate.email})
         
           fetch(`http://localhost:9000/candidate/${candidate.email}/assessments`, {
             method: 'GET',
@@ -126,10 +126,9 @@ const Dashboard = () => {
         <Container>
 
             {show.showAllCandidates &&
-                allCandidates.map((candidate) => <Card >
+                allCandidates.map((candidate) => <Card onClick={()=>clickHandler(candidate)}>
                     <span>{candidate.candidateName}</span>
                     <span>{candidate.email}</span>
-                    <button onClick={()=>clickHandler(candidate)}>Show Marks</button>
                 </Card>)
             }
             

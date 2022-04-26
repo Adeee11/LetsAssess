@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
-import {CustomComponent} from "../../../components/CustomComponent";
+import { CustomComponent } from "../../../components/CustomComponent";
 import { GlobalContext } from "../../../App";
 import { useNavigate, useParams } from "react-router-dom";
-import {Spinner} from "../../../components/Spinner";
-import {MyTimer} from "../../../components/MyTimer";
+import { Spinner } from "../../../components/Spinner";
+import { MyTimer } from "../../../components/MyTimer";
 import {
   Column,
   Container,
@@ -21,15 +21,15 @@ const Test = () => {
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
-  
+
   const { title = "" } = useParams();
-  
+
   const nav = useNavigate();
-  
+
   const ctx = useContext(GlobalContext);
-  
-  const { token, isCompleted, setIsCompleted, url } = ctx;
-  
+
+  const { candidate, token, isCompleted, setIsCompleted, url } = ctx;
+
 
   useEffect(() => {
 
@@ -49,13 +49,13 @@ const Test = () => {
       headers: myHeaders,
       redirect: "follow",
     })
-      .then((response) =>{
+      .then((response) => {
         console.log(response);
-      if(response.ok==true)  
-      return  response.json()
+        if (response.ok == true)
+          return response.json()
       })
       .then((result) => {
-        console.log("Result:",result);
+        console.log("Result:", result);
         if (
           result &&
           Object.keys(result).length === 0 &&
@@ -87,7 +87,7 @@ const Test = () => {
       .catch((error) => console.log("error:----->", error));
   }, []);
 
-  
+
   useEffect(() => {
     window.onbeforeunload = function () {
       return "Data will be lost ";
@@ -96,14 +96,33 @@ const Test = () => {
 
 
 
-  const submitHandler = () => {
-    
-    isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
-    setIsCompleted(isCompleted)
-    console.log("Submit Handler called");
-    nav("/assessment", { replace: true });
-    console.log(isCompleted);
+  const submitHandler = async () => {
 
+    setShowLoader(true);
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      "email": `${candidate.email}`,
+      "assessmentId": `${title}`
+    });
+
+    await fetch("http://localhost:9000/candidate/marks", {
+      method: 'POST',
+      headers: myHeaders,
+      body: raw,
+      redirect: 'follow'
+    })
+      .then(response => {
+        isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
+        setIsCompleted(isCompleted)
+        console.log("Submit Handler called");
+        nav("/assessment", { replace: true });
+        console.log(isCompleted);
+        return response.json()
+      })
+      .then(result => { })
+      .catch(error => console.log('error', error));
   };
 
 
@@ -126,22 +145,23 @@ const Test = () => {
       },
     });
 
-    fetch(`${url}/submission/answer`, {
+    await fetch(`${url}/submission/answer`, {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     })
       .then((response) => response.text())
-      .then((result) =>{ console.log(result)
-                         setShowLoader(false);
+      .then((result) => {
+        console.log(result)
+        setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
 
     if (queNo < data1.questions.length - 1) {
       setQueNo(queNo + 1);
     } else {
-         submitHandler();
+      submitHandler();
     }
   };
 
@@ -183,8 +203,8 @@ const Test = () => {
 
   return (
     <>
-      {(!data1|| showLoader) && <Spinner />}
-      {data1  && queNo < data1?.questions?.length && !showLoader ? (
+      {(!data1 || showLoader) && <Spinner />}
+      {data1 && queNo < data1?.questions?.length && !showLoader ? (
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
