@@ -38,4 +38,43 @@ router.get("/:assessment/questions", async (req, res) => {
   }
 });
 
+// Get all options marked by a particular candidate
+router.get("/options-marked/:assessment/:candidate", async (req, res) => {
+  const assessmentId = slugify(req.params.assessment, {
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
+  const candidateId = slugify(req.params.candidate, {
+    lower: true,
+    remove: /[*+~.()'"!:@]/g,
+  });
+
+  try {
+    const docRef = firestore.doc(`submissions/${assessmentId}`);
+    let optionsMarked: any;
+    const data = (await docRef.get()).data();
+    if (data && !data[candidateId]) {
+      if (!optionsMarked) {
+        return res.json({
+          msg: "No options marked yet.",
+          optionsMarked: {},
+        });
+      }
+    } else if (data) {
+      optionsMarked = data[candidateId].optionsMarked;
+      const keys = Object.keys(optionsMarked);
+
+      res.status(200).json({
+        optionsMarked: optionsMarked,
+      });
+    } else {
+      res.status(400).json({
+        error: `Couldn't get the data for the assessment ${assessmentId} `,
+      });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;
