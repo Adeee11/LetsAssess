@@ -90,10 +90,13 @@ router.get("/:id/assessments", async (req, res) => {
   try {
     const docRef = firestore.doc(`candidates/${candidateId}`);
     const data = (await docRef.get()).data();
-    data &&
-      res.json({
-        data: data.testsTaken,
-      });
+    data && data.testsTaken
+      ? res.json({
+          data: data.testsTaken,
+        })
+      : res.json({
+          msg: "Marks not calculated for this candidate. First calculate marks please",
+        });
   } catch (error) {
     res.json(error);
   }

@@ -22,6 +22,9 @@ app.use("/candidate", require("./routes/candidate"));
 // Authentication
 app.use("/authenticate", require("./routes/authentication"));
 
+// User route
+app.use("/user", require("./routes/user"));
+
 const PORT = process.env.PORT || 9000;
 
 app.listen(PORT, () => {
