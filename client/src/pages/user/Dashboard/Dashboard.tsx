@@ -3,26 +3,10 @@ import { Container, Card, Header , CandidateDetails, Question, Option, Submissio
 
 import CustomComponent from '../../../components/CustomComponent/CustomComponent';
 import { data } from '../jstest';
+import { Button } from '../../../components/Button';
 const user = "Pramod";
 
-const candidatesList = [
-    {
-        username: "candidate1",
-        email: "candidate1@gmail.com"
-    },
-    {
-        username: "candidate2",
-        email: "candidate2@gmail.com"
-    },
-    {
-        username: "candidate3",
-        email: "candidate3@gmail.com"
-    },
-    {
-        username: "Candidate",
-        email: "candidate4@gmail.com"
-    }
-]
+
 
 const listOfTests=[
     {
@@ -66,42 +50,63 @@ const Dashboard = () => {
       email:""
   })
 
+  const [allCandidates, setAllCandidates] = useState([{
+      candidateName:'',
+      email:''
+  }]);
+
+  const [candidateData, setCandidateData] = useState<{marksObtained:number, assessmentId:string}[] |null>(null);
   const [title, setTitle] = useState('');
   
   const [marks, setMarks] = useState(0);
 
-    const clickHandler=(candidate:{username:string, email:string})=>{
+    const clickHandler=(candidate:{candidateName:string, email:string})=>{
         setShow({showSubmission:false, showAllTest:true, showAllCandidates:false});
-        setCandidate({name:candidate.username, email:candidate.email})
+        setCandidate({name:candidate.candidateName, email:candidate.email})
+        
+          fetch(`http://localhost:9000/candidate/${candidate.email}/assessments`, {
+            method: 'GET',
+            redirect: 'follow'
+          })
+            .then(response => response.json())
+            .then(result => {console.log(result)
+            setCandidateData(result.data)
+            })
+            .catch(error => console.log('error', error));
     }
 
     const showPaper=(title:string)=>{
         setTitle(title)
-        setShow({showAllTest:false, showAllCandidates:false, showSubmission:true});
-        
+        setShow({showAllTest:false, showAllCandidates:false, showSubmission:true});     
     }
 
 
     useEffect(() => {
-    
+        
+          fetch("http://localhost:9000/user/candidates", {
+            method: 'GET',
+            redirect: 'follow'
+          })
+            .then(response => response.json())
+            .then(result =>{
+                console.log(result)
+                setAllCandidates(result.data)
+            } )
+            .catch(error => console.log('error', error));
     
       return () => {
         
       }
     }, [])
     
-// useEffect(()=>{
-//     calculateMarks();
-// })
-//     const calculateMarks=()=>{
-//         let mark=0;
-//         for(let i=0; i<data.questions.length; i++){
-//             if(data.questions[i].correctOption==listOfSubissions[i])
-//             mark++;
-//         }
-//         setMarks(mark);
-
-//     }
+    const imageSrc = (title: string) => {
+        if (title === "javascript") return "/images/js.png";
+        else if (title === "html-and-css") return "/images/html.png";
+        else if (title === "typescript") return "/images/ts.svg";
+        else if (title === "node-js") return "/images/node.png";
+        else if (title === "react") return "/images/react.png";
+        else if (title === "git") return "/images/git.png";
+      };
     
     return (
     
@@ -121,9 +126,10 @@ const Dashboard = () => {
         <Container>
 
             {show.showAllCandidates &&
-                candidatesList.map((candidate) => <Card onClick={()=>clickHandler(candidate)}>
-                    <span>{candidate.username}</span>
+                allCandidates.map((candidate) => <Card >
+                    <span>{candidate.candidateName}</span>
                     <span>{candidate.email}</span>
+                    <button onClick={()=>clickHandler(candidate)}>Show Marks</button>
                 </Card>)
             }
             
@@ -138,11 +144,14 @@ const Dashboard = () => {
             }
         <Container>
             
-        {show.showAllTest &&
+        {show.showAllTest &&candidateData &&
                  
-                 listOfTests.map((test) => <Card onClick={()=>showPaper(test.title)}>
-                     <img src={test.imgSrc}/>
-                     <span>{test.title}</span>
+                 candidateData.map((test) => <Card >
+                     {/* <img src={test.imgSrc}/> */}
+                     {/* <span>{test.title}</span> */}
+                     <img src={imageSrc(test.assessmentId)}/>
+                     <span><b>Marks:</b>{test.marksObtained}</span> 
+                      <span>{test.assessmentId}</span>
                      
                  </Card>)
              }

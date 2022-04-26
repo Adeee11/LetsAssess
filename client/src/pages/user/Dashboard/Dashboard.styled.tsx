@@ -22,13 +22,15 @@ const Card= styled.div`
     font-size: 14px;
     text-align: center;
     width: 200px;
-    height: 100px;
+    /* height: 100px; */
     cursor: pointer;
     span{
         padding: 10px;
     }
     img{
         width: 50px;
+        height: 50px;
+        object-fit: contain;
     }
     @media (max-width:768px){
      margin-left: auto;
