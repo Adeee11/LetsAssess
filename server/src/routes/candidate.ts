@@ -57,14 +57,17 @@ router.post("/marks", async (req, res) => {
       let totalMarks: number = 0;
       if (assessmentData) {
         questions = assessmentData.questions;
-        questions.map((question) => {
-          typeof question.correctOption !== "string"
+        // used keys to loop as their's the case of candidate not marking a question
+        const keys = Object.keys(answersMarked);
+        keys.map((key, index) => {
+        
+          typeof questions[index].correctOption !== "string"
             ? areArraysEqual(
-                answersMarked[question.quesId],
-                question.correctOption
+                answersMarked[key],
+                questions[index].correctOption
               ) && (totalMarks += 1)
-            : areArraysEqual(answersMarked[question.quesId], [
-                question.correctOption,
+            : areArraysEqual(answersMarked[key], [
+                questions[index].correctOption,
               ]) && (totalMarks += 1);
         });
       }
