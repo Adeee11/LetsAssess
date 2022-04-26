@@ -41,8 +41,10 @@ router.post("/marks", async (req, res) => {
     const docRef = firestore.doc(`submissions/${assessmentId}`);
     const documentSnapshot = await docRef.get();
     const data: any = documentSnapshot.data();
+    // checking if a candidate has given the assessment or not
     if (candidateId in data) {
       const answersMarked = data[candidateId].optionsMarked;
+      // getting all questions
       const assessmentDocRef = firestore.doc(`assessment/${assessmentId}`);
       const assessmentData = (await assessmentDocRef.get()).data();
       let questions: {
@@ -55,11 +57,18 @@ router.post("/marks", async (req, res) => {
       let totalMarks: number = 0;
       if (assessmentData) {
         questions = assessmentData.questions;
-        questions.map((question) => {
-          areArraysEqual(
-            answersMarked[question.quesId],
-            question.correctOption
-          ) && (totalMarks += 1);
+        // used keys to loop as their's the case of candidate not marking a question
+        const keys = Object.keys(answersMarked);
+        keys.map((key, index) => {
+        
+          typeof questions[index].correctOption !== "string"
+            ? areArraysEqual(
+                answersMarked[key],
+                questions[index].correctOption
+              ) && (totalMarks += 1)
+            : areArraysEqual(answersMarked[key], [
+                questions[index].correctOption,
+              ]) && (totalMarks += 1);
         });
       }
 
