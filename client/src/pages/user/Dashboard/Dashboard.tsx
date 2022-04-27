@@ -1,28 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { Container, Card, Header , CandidateDetails, Question, Option, Submissions} from './Dashboard.styled';
 
 import CustomComponent from '../../../components/CustomComponent/CustomComponent';
-import { data } from '../jstest';
-const user = "Pramod";
+import { GlobalContext } from '../../../App';
 
-const candidatesList = [
-    {
-        username: "candidate1",
-        email: "candidate1@gmail.com"
-    },
-    {
-        username: "candidate2",
-        email: "candidate2@gmail.com"
-    },
-    {
-        username: "candidate3",
-        email: "candidate3@gmail.com"
-    },
-    {
-        username: "Candidate",
-        email: "candidate4@gmail.com"
-    }
-]
+const user = "Admin";
+
+
 
 const listOfTests=[
     {
@@ -66,42 +50,96 @@ const Dashboard = () => {
       email:""
   })
 
+  const [allCandidates, setAllCandidates] = useState([{
+      candidateName:'',
+      email:''
+  }]);
+
+  const [data, setData]= useState<any>(null)
+  
+  const [candidateData, setCandidateData] = useState<{marksObtained:number, assessmentId:string}[] |null>(null);
   const [title, setTitle] = useState('');
   
   const [marks, setMarks] = useState(0);
+  const [optionsMarked, setOptionsMarked] = useState<any>(null)
 
-    const clickHandler=(candidate:{username:string, email:string})=>{
+  const ctx= useContext(GlobalContext);
+  const {url}= ctx;
+    const clickHandler=(candidate:{candidateName:string, email:string})=>{
         setShow({showSubmission:false, showAllTest:true, showAllCandidates:false});
-        setCandidate({name:candidate.username, email:candidate.email})
-    }
-
-    const showPaper=(title:string)=>{
-        setTitle(title)
-        setShow({showAllTest:false, showAllCandidates:false, showSubmission:true});
+        setCandidate({name:candidate.candidateName, email:candidate.email})
         
+          fetch(`${url}/candidate/${candidate.email}/assessments`, {
+            method: 'GET',
+            redirect: 'follow'
+          })
+            .then(response => response.json())
+            .then(result => {console.log(result)
+            setCandidateData(result.data)
+            })
+            .catch(error => console.log('error', error));
     }
 
+    const showPaper=async(title:string, mark:number)=>{
+       
+         await fetch(`${url}/user/${title}/questions`)
+            .then(response => response.json())
+            .then(result =>{
+                console.log(result)
+                setMarks(mark);
+                setTitle(title)
+                setShow({showAllTest:false, showAllCandidates:false, showSubmission:true});
+                setData({...result}) 
+            } )
+            .catch(error => console.log('error', error));
 
+            
+              
+            await fetch(`${url}/user/options-marked/${title}/${candidate.email}`)
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result)
+                    setOptionsMarked(result.optionsMarked)    
+                })
+                .catch(error => console.log('error', error));  
+            
+    }
+
+console.log("optionsmarked:",optionsMarked)
     useEffect(() => {
-    
+        
+          fetch(`${url}/user/candidates`, {
+            method: 'GET',
+            redirect: 'follow'
+          })
+            .then(response => response.json())
+            .then(result =>{
+                console.log(result)
+                setAllCandidates(result.data)
+            } )
+            .catch(error => console.log('error', error));
     
       return () => {
         
       }
     }, [])
     
-// useEffect(()=>{
-//     calculateMarks();
-// })
-//     const calculateMarks=()=>{
-//         let mark=0;
-//         for(let i=0; i<data.questions.length; i++){
-//             if(data.questions[i].correctOption==listOfSubissions[i])
-//             mark++;
-//         }
-//         setMarks(mark);
+    const imageSrc = (title: string) => {
+        if (title === "javascript") return "/images/js.png";
+        else if (title === "html-and-css") return "/images/html.png";
+        else if (title === "typescript") return "/images/ts.svg";
+        else if (title === "node-js") return "/images/node.png";
+        else if (title === "react") return "/images/react.png";
+        else if (title === "git") return "/images/git.png";
+      };
 
-//     }
+      const arrayEquals=(a:any, b:any)=> {
+          
+        return Array.isArray(a) &&
+            Array.isArray(b) &&
+            a.length === b.length &&
+            a.every((val, index) => val === b[index]);
+    }
     
     return (
     
@@ -121,8 +159,8 @@ const Dashboard = () => {
         <Container>
 
             {show.showAllCandidates &&
-                candidatesList.map((candidate) => <Card onClick={()=>clickHandler(candidate)}>
-                    <span>{candidate.username}</span>
+                allCandidates.map((candidate) => <Card onClick={()=>clickHandler(candidate)}>
+                    <span>{candidate.candidateName}</span>
                     <span>{candidate.email}</span>
                 </Card>)
             }
@@ -138,46 +176,74 @@ const Dashboard = () => {
             }
         <Container>
             
-        {show.showAllTest &&
+        {show.showAllTest &&candidateData &&
                  
-                 listOfTests.map((test) => <Card onClick={()=>showPaper(test.title)}>
-                     <img src={test.imgSrc}/>
-                     <span>{test.title}</span>
+                 candidateData.map((test) => <Card onClick={()=>showPaper(test.assessmentId,test.marksObtained)}>
+                
+                     <img src={imageSrc(test.assessmentId)}/>
+                     <span><b>Marks:</b>{test.marksObtained}</span> 
+                      <span >{test.assessmentId}</span>
                      
                  </Card>)
              }
         </Container>
 
         {
-            show.showSubmission &&
+            (show.showSubmission && data && optionsMarked) &&
             <Submissions>
-                <p>{`${marks}/${data.questions.length}`}</p>
-                {data.questions.map((item, index)=>
-                <div>
+                <p className='marks'>{`${marks}/${data.questions.length}`}</p>
+                {data.questions.map((item:any, index:number)=>
+                <div className="section">
                     <Question>
                         <span>{item.quesId}.</span>
                         {item.quesValue}
-                        {/* {item.correctOption==listOfSubissions[index]?
+                        {/* {arrayEquals( item.correctOption, optionsMarked[(index+1).toString()])} */}
+                        {arrayEquals( item.correctOption, optionsMarked[(index+1).toString()])?
                         <span className='marks-right'>&#10003;</span>:
                         <span className='marks-wrong'>&#10060;</span>
-                        } */}
+                        }
                         </Question>
+                    
                     {item.useCustomComponent && 
                     <Question>
                          <CustomComponent data={item.props}/>
                     </Question>
-                    
                     }
-                        {item.options.map((opt)=>
-                          <Option >
+                    
+                        {item.quesType=="mcq" && item.options.map((opt:any)=>
+                          (<>
+                          {optionsMarked[item.quesId]==opt.optionId &&<Option >
+                            <span >{opt.optionId}.</span>
                               {!opt.useCustomComponent && opt.optionValue}
                               {opt.useCustomComponent &&
-                              <CustomComponent data={opt.optionProps}/>
-                              }
+                              <CustomComponent 
+                              data={opt.optionProps}
                               
-                              </Option>    
+                              />
+                              }
+                               
+                              </Option>}
+                              </>)    
                         )}
                     
+
+                    {item.quesType=="mcq-m" && item.options.map((opt:any, i:number)=>
+                          (<>
+                          {optionsMarked[item.quesId][i] &&<Option >
+                             
+                              <span >{opt.optionId}.</span>
+                              {!opt.useCustomComponent && opt.optionValue}
+                              {opt.useCustomComponent &&
+                              <CustomComponent 
+                              data={opt.optionProps}
+                              
+                              />
+                              }
+                               
+                              </Option>}
+                              </>)    
+                        )}
+
                 </div>
                 )}
           

@@ -4,6 +4,8 @@ import "./prism.css";
 
 interface Idata {
   content: string;
+  format: string;
+  type: string;
 }
 type propsType = {
   data: Idata | any;
@@ -11,12 +13,12 @@ type propsType = {
 
 const CustomComponent = ({ data }: propsType) => {
   useEffect(() => {
-    setTimeout(() => Prism.highlightAll(), 0);
+    Prism.highlightAll();
   }, []);
-  console.log(data);
+
   return (
     <pre className={`line-numbers`}>
-      <code className={`language-${data.format}`}>{data.content}</code>
+      <code className={`language-jsx`}>{data.content}</code>
     </pre>
   );
 };

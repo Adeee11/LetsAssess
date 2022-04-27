@@ -1,6 +1,8 @@
 import React, { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { GlobalContext } from "../App";
+import {Button} from "../components/Button";
+import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { Container } from "./Home.Styled";
@@ -12,9 +14,12 @@ const Home = () => {
   const setToken = ctx.setToken;
   const url = ctx.url;
   const token = ctx.token;
+  const candidate = ctx.candidate;
   const isCompleted = ctx.isCompleted;
-  const [data, setData] = useState("");
+  const saveIsCompleted = ctx.setIsCompleted;
+  const [data, setData] = useState('');
   const [showMsg, setShowMsg] = useState(false);
+
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -45,77 +50,73 @@ const Home = () => {
         .then(async (result) => {
           console.log(result);
           setToken(result.token);
-          sessionStorage.setItem(
-            "isCompleted",
-            JSON.stringify({
-              "html-and-css": false,
-              javascript: false,
-              typescript: false,
-              react: false,
-              "node-js": false,
-              git: false,
-            })
-          );
 
-          nav("/assessment");
+          nav("/assessment", { replace: true });
         })
         .catch((error) => console.log("error", error));
 
     if (res.ok === false) {
       setShowLoader(false);
-      alert("Invalid credentials/ or user already entered the test");
+      alert("Invalid credentials/ or user already entered the test")
     }
-  };
-  console.log(isCompleted);
-  useEffect(() => {
-    if (
-      isCompleted["html-and-css"] &&
-      isCompleted["javascript"] &&
-      isCompleted["node-js"] &&
-      isCompleted["react"] &&
-      isCompleted["typescript"] &&
-      isCompleted["git"]
-    )
-      setShowMsg(true);
-  }, []);
 
+
+  };
+  console.log(isCompleted)
+
+  useEffect(() => {
+    sessionStorage.clear();
+    saveIsCompleted(
+      {
+        "html-and-css": false,
+        "javascript": false,
+        "typescript": false,
+        "react": false,
+        "node-js": false,
+        "git": false,
+      }
+    )
+
+  }, [])
+
+  useEffect(() => {
+    if (isCompleted["html-and-css"] && isCompleted["javascript"] && isCompleted["node-js"] && isCompleted["react"] && isCompleted["typescript"] && isCompleted["git"])
+      setShowMsg(true);
+  }, [])
+  console.log(candidate)
   // console.log({"a":data});
   return (
     <>
-      {!showLoader && (
+      {!showLoader &&
         <Container onSubmit={(e) => submit(e)}>
           <div className="input-box">
             <span>Email</span>
-            <input
+            <Input
               type="email"
-              onChange={(e) => ctx.saveCandidateEmail(e.target.value)}
-              required
-            />
+              changeHandler={(i) => ctx.saveCandidateEmail(i)} />
           </div>
 
-          <pre></pre>
+          
           <div className="input-box">
             <span>Name</span>
-            <input
+            <Input
               type="text"
-              onChange={(e) => ctx.saveCandidateName(e.target.value)}
-              required
-            />
+              changeHandler={(i) => ctx.saveCandidateName(i)} />
           </div>
-          <button>Submit</button>
-        </Container>
-      )}
-      {/* <textarea onChange={(e)=>setData(e.target.value)} value={data}>
+          <Button
+            type="submit"
+            value="submit"
+          />
+        </Container>}
 
-    </textarea> */}
 
       {showLoader && <Spinner />}
-      {showMsg && (
+      {showMsg &&
         <MessageBox
           msg={`Completed all the tests`}
           clickHandler={() => setShowMsg(false)}
         />
-      )}
+      }
     </>
   );
 };

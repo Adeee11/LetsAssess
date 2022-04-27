@@ -22,13 +22,15 @@ const Card= styled.div`
     font-size: 14px;
     text-align: center;
     width: 200px;
-    height: 100px;
+    /* height: 100px; */
     cursor: pointer;
     span{
         padding: 10px;
     }
     img{
         width: 50px;
+        height: 50px;
+        object-fit: contain;
     }
     @media (max-width:768px){
      margin-left: auto;
@@ -81,18 +83,36 @@ border-radius: 7px;
 max-width: 800px;
 margin: 0 auto;
 font-size: 16px;
-box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2);
+/* box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2); */
+.marks{
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    /* background-color: red; */
+    text-align: right;
+    padding-right: 20px;
+    padding-top: 20px;
+    /* color: gray; */
+    letter-spacing: 1px;
+}
+.section{
+    box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2);;
+    border-color: #baafafdf;
+    padding: 20px;
+    /* background: #f6f1f161; */
+    margin-bottom: 40px;
+}
 .right{
        background-color :lightgreen ;
        font-weight: 700;
        
     }
     pre{
-        overflow-x: auto;
+        /* overflow-x: auto;
         background-color: #d1cfcff1;
         padding: 20px;
         color:black;
-        border-radius: 4px;
+        border-radius: 4px; */
       
     }
 `
@@ -121,14 +141,14 @@ const Option = styled.div`
     padding-left: 5px;
     border-radius: 4px;
     margin-bottom: 10px;
-    width: 50%;
+    width: 70%;
     border:1px solid lightgray;
     @media(max-width:768px){
         width:80%;
     }
     pre{
-        background-color: transparent;
-        border: none;
+        /* background-color: transparent;
+        border: none; */
         margin: 0;
     }
     
