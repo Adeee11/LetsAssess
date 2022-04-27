@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
 import { CustomComponent } from "../../../components/CustomComponent";
-import { GlobalContext } from "../../../App";
 import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../../../components/Spinner";
 import { MyTimer } from "../../../components/MyTimer";
@@ -14,6 +13,7 @@ import {
   QuestionCode,
   OptionCode,
 } from "./Test.styled";
+import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
 
 const Test = () => {
@@ -28,7 +28,7 @@ const Test = () => {
 
   const ctx = useContext(GlobalContext);
 
-  const { candidate, token, isCompleted, setIsCompleted, url } = ctx;
+  const { candidate, token, isCompleted, saveIsCompleted, url } = ctx;
 
 
   useEffect(() => {
@@ -115,7 +115,7 @@ const Test = () => {
     })
       .then(response => {
         isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
-        setIsCompleted(isCompleted)
+        saveIsCompleted(isCompleted)
         console.log("Submit Handler called");
         nav("/assessment", { replace: true });
         console.log(isCompleted);

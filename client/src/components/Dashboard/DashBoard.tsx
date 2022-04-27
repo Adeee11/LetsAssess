@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
-import {MyTimer} from "../MyTimer";
-import { GlobalContext } from "../../App";
+import { MyTimer } from "../MyTimer";
 import { CardComponent } from "../CardComponent";
 import slugify from 'slugify';
+import { GlobalContext } from "../../GlobalContext/GlobalContextProvider";
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -12,6 +12,7 @@ const DashBoard = () => {
     iat: number;
     exp: number;
   }>();
+
   const [expTime, setExpTime] = useState<any>();
 
   const nav = useNavigate();
@@ -48,9 +49,9 @@ const DashBoard = () => {
       })
       .catch((error) => console.log("error", error));
   }, []);
-  
 
-  
+
+
   const keys = Object.values(isCompleted)
   let navigateToHome = true
   for (let y = 0; y < keys.length; y++) {
@@ -61,7 +62,7 @@ const DashBoard = () => {
     nav('/', { replace: true });
     sessionStorage.clear();
   }
-  
+
 
 
   return (
@@ -69,21 +70,21 @@ const DashBoard = () => {
       {data && data.data.length > 0 && (
         <>
           {expTime && <MyTimer time={expTime} />}
-         
+
           <Container>
             {data.data.map((test: any, index: number) => (
               <CardComponent
-              key={test.title} 
-              title={test.title} 
-              durationInMins={20} 
-              isCompleted={isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()]} 
-              clickHandler={()=>clickHandler(slugify( test.title).toLowerCase())}
+                key={test.title}
+                title={test.title}
+                durationInMins={20}
+                isCompleted={isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()]}
+                clickHandler={() => clickHandler(slugify(test.title).toLowerCase())}
               />
             ))}
           </Container>
         </>
       )}
-      
+
     </>
   );
 };

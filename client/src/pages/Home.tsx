@@ -1,24 +1,18 @@
-import React, { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GlobalContext } from "../App";
-import {Button} from "../components/Button";
+import { Button } from "../components/Button";
 import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
+import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
 import { Container } from "./Home.Styled";
 
 const Home = () => {
+  const [showMsg, setShowMsg] = useState(false);
+  const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const [showLoader, setShowLoader] = useState(false);
-  const setToken = ctx.setToken;
-  const url = ctx.url;
-  const token = ctx.token;
-  const candidate = ctx.candidate;
-  const isCompleted = ctx.isCompleted;
-  const saveIsCompleted = ctx.setIsCompleted;
-  const [data, setData] = useState('');
-  const [showMsg, setShowMsg] = useState(false);
+  const { setToken, url, token, candidate, isCompleted, saveIsCompleted } = ctx
 
 
   const submit = async (e: FormEvent) => {
@@ -84,8 +78,7 @@ const Home = () => {
     if (isCompleted["html-and-css"] && isCompleted["javascript"] && isCompleted["node-js"] && isCompleted["react"] && isCompleted["typescript"] && isCompleted["git"])
       setShowMsg(true);
   }, [])
-  console.log(candidate)
-  // console.log({"a":data});
+
   return (
     <>
       {!showLoader &&
@@ -97,7 +90,7 @@ const Home = () => {
               changeHandler={(i) => ctx.saveCandidateEmail(i)} />
           </div>
 
-          
+
           <div className="input-box">
             <span>Name</span>
             <Input

@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from "styled-components";
+import styled from "styled-components";
 
 const Container= styled.form`
 width:700px;

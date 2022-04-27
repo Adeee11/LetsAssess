@@ -12,8 +12,9 @@ type propsType = {
 };
 
 const CustomComponent = ({ data }: propsType) => {
+  
   useEffect(() => {
-    setTimeout(() => Prism.highlightAll(), 0);
+    Prism.highlightAll();
   }, []);
  
   return (
