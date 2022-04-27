@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import {MyTimer} from "../MyTimer";
 import { GlobalContext } from "../../App";
 import { CardComponent } from "../CardComponent";
+import slugify from 'slugify';
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -76,7 +77,7 @@ const DashBoard = () => {
               title={test.title} 
               durationInMins={20} 
               isCompleted={isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()]} 
-              clickHandler={()=>clickHandler(test.title)}
+              clickHandler={()=>clickHandler(slugify( test.title).toLowerCase())}
               />
             ))}
           </Container>

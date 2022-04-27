@@ -15,9 +15,18 @@ const User = () => {
     
     
     //firebase function to login
+
+    if(isLogin){
+      if(email==="admin@gmail.com" && password==="ilovemyindia"){
+        nav("dashboard")
+      }
+      else{
+        alert("wrong email/password");
+      }
+    }
     
     // if entered email and password are correct than navigate it to user/dashboard
-     nav("dashboard")                 
+                      
   }
   return (
     <>

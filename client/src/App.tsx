@@ -1,9 +1,7 @@
 import { AppContainer } from "./App.styled";
 import { BrowserRouter as Router, Routes, Route, Navigate, } from "react-router-dom";
 import { Home } from "./pages";
-// import { User } from "./pages/user";
 import { Assessment } from "./pages/assessment";
-// import { Dashboard } from "./pages/user/Dashboard";
 import React, { useState } from "react";
 import { Test } from "./pages/assessment/Test";
 import { User } from "./pages/user";
@@ -43,6 +41,8 @@ function App() {
     // "code-quality":false
   })
 
+  
+
   const url = 'http://localhost:9000';
 
   const saveName = (name: string) => {
@@ -75,7 +75,7 @@ function App() {
     setToken: saveToken,
     isCompleted,
     setIsCompleted: saveIsCompleted,
-    url
+    url,   
   };
 
   return (

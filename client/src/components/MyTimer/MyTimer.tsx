@@ -31,7 +31,7 @@ function MyTimer({time}:any) {
 
   return (
     <Timer>
-        <span>{hours}</span>:<span>{minutes}</span>:<span>{seconds}</span>
+        <span>{hours<10?"0":""}{hours}</span>:<span>{minutes<10?"0":""}{minutes}</span>:<span>{seconds<10?"0":""}{seconds}</span>
     </Timer>
   );
 }
