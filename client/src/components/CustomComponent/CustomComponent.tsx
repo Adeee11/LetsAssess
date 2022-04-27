@@ -15,10 +15,11 @@ const CustomComponent = ({ data }: propsType) => {
   }, []);
   console.log(data);
   return (
-    <pre>
+    <pre className={`line-numbers`}>
       <code className={`language-${data.format}`}>{data.content}</code>
     </pre>
   );
 };
 
 export default CustomComponent;
+//
