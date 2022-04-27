@@ -107,7 +107,7 @@ const Test = () => {
       "assessmentId": `${title}`
     });
 
-    await fetch("http://localhost:9000/candidate/marks", {
+    await fetch(`${url}/candidate/marks`, {
       method: 'POST',
       headers: myHeaders,
       body: raw,

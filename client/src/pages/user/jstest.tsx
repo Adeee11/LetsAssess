@@ -34,7 +34,7 @@ const data2={
                     "optionProps":null
                 }
             ],
-            "correctOption":"1"
+            "correctOption":["1"]
         },
 
         {
@@ -91,7 +91,7 @@ const data2={
                 }
 
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"4",
@@ -113,7 +113,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         },
         {
             "quesId":"5",
@@ -135,7 +135,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"6",
@@ -169,7 +169,7 @@ const data2={
                     "optionProps":{"type":"code", "content":"Inside Foo: 6\nInside Bar: 6\nOutside Functions: 7", "format":"output"},
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         },
         {
             "quesId":"7",
@@ -203,7 +203,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"4"
+               "correctOption":["4"]
         },
         {
             "quesId":"8",
@@ -237,7 +237,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         },
         {
             "quesId":"9",
@@ -305,7 +305,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         },
         {
             "quesId":"11",
@@ -373,7 +373,7 @@ const data2={
                     "optionProps":{"type":"code", "content":"setTimeout(() => {\n        removeInterval(timerId);\n        alert('stop'); \n          }, 10000);", "format":"js"},
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         },
         {
             "quesId":"13",
@@ -441,7 +441,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"15",
@@ -475,7 +475,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"16",
@@ -509,7 +509,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"17",
@@ -543,7 +543,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"4"
+               "correctOption":["4"]
         },
         {
             "quesId":"18",
@@ -577,7 +577,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"2"
+               "correctOption":["2"]
         },
         {
             "quesId":"19",
@@ -611,7 +611,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"3"
+               "correctOption":["3"]
         },
         {
             "quesId":"20",
@@ -645,7 +645,7 @@ const data2={
                     "optionProps":null
                 }
                ],
-               "correctOption":"1"
+               "correctOption":["1"]
         }
 
     ]

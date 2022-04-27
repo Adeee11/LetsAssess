@@ -15,7 +15,7 @@ const CustomComponent = ({ data }: propsType) => {
   useEffect(() => {
     setTimeout(() => Prism.highlightAll(), 0);
   }, []);
-  console.log(data);
+ 
   return (
     <pre>
       <code className={`language-${data.format}`}>{data.content}</code>
