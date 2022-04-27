@@ -208,7 +208,7 @@ const Test = () => {
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
-            <div className="subject">{title}</div>
+            <div className="subject">{title.replaceAll('-', ' ').toUpperCase()}</div>
             <div className="description">
               {" "}
               {`Question ${queNo + 1} of ${data1.questions.length}`}{" "}
