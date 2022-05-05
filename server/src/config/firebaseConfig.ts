@@ -6,10 +6,10 @@ import { env } from "../env";
 // Need to check the difference between intialized without any parameter and with parameter
 
 const getCert = () => {
-  const JSON = env("FIREBASE_SERVICE_ACCOUNT_JSON");
+  const Json = env("FIREBASE_SERVICE_ACCOUNT_JSON");
   const file = env("FIREBASE_SERVICE_ACCOUNT_FILE");
-  if (JSON) {
-    return JSON;
+  if (Json) {
+    return JSON.parse(Json);
   }
   
   if (file) {
