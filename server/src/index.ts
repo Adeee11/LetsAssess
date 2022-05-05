@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import { env } from "env";
 
 const app = express();
 
@@ -25,7 +26,7 @@ app.use("/authenticate", require("./routes/authentication"));
 // User route
 app.use("/user", require("./routes/user"));
 
-const PORT = process.env.PORT || 9000;
+const PORT = env("PORT") || 9000;
 
 app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);
