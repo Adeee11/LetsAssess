@@ -6,11 +6,11 @@ import {
   Navigate,
 } from "react-router-dom";
 import { Home } from "./pages";
-import { User } from "./pages/user";
 import { Assessment } from "./pages/assessment";
-import { Dashboard } from "./pages/user/Dashboard";
 import React, { useState } from "react";
 import { Test } from "./pages/assessment/Test";
+import { User } from "./pages/user";
+import { Dashboard } from "./pages/user/Dashboard";
 
 type DataInterface = {
   candidate: {
