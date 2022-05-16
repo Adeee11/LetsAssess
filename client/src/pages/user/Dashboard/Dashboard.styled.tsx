@@ -54,6 +54,12 @@ const Header= styled.ul`
     display: flex;
     justify-content: space-between;
     flex-direction: row;
+    align-items: center;
+    li span{
+    
+        cursor: pointer;
+        color: black;   
+    }
 
 .avatar{
     margin-right:30px ;

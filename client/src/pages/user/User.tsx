@@ -1,33 +1,34 @@
-import React, { useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { Container, Form, Input, Button , Menu} from './User.styled';
 import {useNavigate} from 'react-router-dom';
+import { GlobalContext } from '../../GlobalContext/GlobalContextProvider';
+
+
 
 const User = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLogin, setIsLogin]= useState(true);
   const nav= useNavigate()
+  const ctx = useContext(GlobalContext);
+  const { url, saveAdmin, discardAdmin } = ctx;
+
   const submitHandler=()=>{
      
-    
-    //firebase function to signup
-    //  send to login page with field data then after login
-    
-    
-    //firebase function to login
-
     if(isLogin){
       if(email==="admin@gmail.com" && password==="ilovemyindia"){
-        nav("dashboard")
+        saveAdmin();
+        nav("dashboard", {replace:true})
       }
       else{
         alert("wrong email/password");
       }
-    }
-    
-    // if entered email and password are correct than navigate it to user/dashboard
-                      
+    }                 
   }
+
+  useEffect(()=>{
+    discardAdmin();
+  },[])
   return (
     <>
     <Menu>
