@@ -53,7 +53,7 @@ const Home = () => {
       alert("Invalid credentials/ or user already entered the test");
     }
   };
-  console.log(isCompleted);
+  // console.log(isCompleted);
 
   useEffect(() => {
     sessionStorage.clear();
@@ -65,7 +65,7 @@ const Home = () => {
       "node-js": false,
       git: false,
     });
-  }, [saveIsCompleted]);
+  }, []);
 
   useEffect(() => {
     if (

@@ -50,12 +50,12 @@ const Test = () => {
       redirect: "follow",
     })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response.ok === true)
           return response.json()
       })
       .then((result) => {
-        console.log("Result:", result);
+        // console.log("Result:", result);
         if (
           result &&
           Object.keys(result).length === 0 &&
@@ -64,14 +64,14 @@ const Test = () => {
           console.log("No object");
         } else {
           const optionsMarked = result.optionsMarked;
-          console.log("Result", result);
-          console.log("Option marked", optionsMarked);
+          // console.log("Result", result);
+          // console.log("Option marked", optionsMarked);
           let options: any[] = [];
           const keys = Object.keys(optionsMarked);
-          console.log("Keys", keys);
+          // console.log("Keys", keys);
           keys.forEach((key) => {
-            console.log("Key", key, typeof key);
-            console.log("Option Marked", optionsMarked[key]);
+            // console.log("Key", key, typeof key);
+            // console.log("Option Marked", optionsMarked[key]);
             if (optionsMarked[key].length === 4) {
               options.push(optionsMarked[key]);
             } else {
@@ -118,7 +118,7 @@ const Test = () => {
         saveIsCompleted(isCompleted)
         console.log("Submit Handler called");
         nav("/assessment", { replace: true });
-        console.log(isCompleted);
+        // console.log(isCompleted);
         return response.json()
       })
       .then(result => { })
