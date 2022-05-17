@@ -12,7 +12,7 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { setToken, url, token, candidate, isCompleted, saveIsCompleted } = ctx
+  const { setToken, url, isCompleted, saveIsCompleted } = ctx
 
 
   const submit = async (e: FormEvent) => {
@@ -57,7 +57,7 @@ const Home = () => {
 
 
   };
-  console.log(isCompleted)
+
 
   useEffect(() => {
     sessionStorage.clear();

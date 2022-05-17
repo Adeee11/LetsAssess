@@ -20,7 +20,7 @@ const Card = ({title, durationInMins, isCompleted, clickHandler}:propTypes) => {
     return (
         <CardContainer key={title}>
             <div className="data">
-                <img src={imageSrc(title)} />
+                <img src={imageSrc(title)} alt=""/>
                 <p>{title}</p>
                 <span>{durationInMins} minute</span>
                 {!isCompleted && <p className="start" onClick={clickHandler}>

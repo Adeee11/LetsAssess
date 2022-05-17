@@ -51,7 +51,7 @@ const Test = () => {
     })
       .then((response) => {
         console.log(response);
-        if (response.ok == true)
+        if (response.ok === true)
           return response.json()
       })
       .then((result) => {
@@ -85,7 +85,7 @@ const Test = () => {
         }
       })
       .catch((error) => console.log("error:----->", error));
-  }, []);
+  }, [title, token, url]);
 
 
   useEffect(() => {
@@ -166,18 +166,18 @@ const Test = () => {
   };
 
   const selectOpt = (arg0: string | number) => {
-    if (data1.questions[queNo].quesType == "mcq") {
+    if (data1.questions[queNo].quesType === "mcq") {
       selectedOpt[queNo] = arg0;
 
       setSelectedOpt([...selectedOpt]);
-    } else if (data1.questions[queNo].quesType == "mcq-m") {
-      if (selectedOpt[queNo] == undefined) {
+    } else if (data1.questions[queNo].quesType === "mcq-m") {
+      if (selectedOpt[queNo] === undefined) {
         selectedOpt[queNo] = [];
         selectedOpt[queNo] = data1.questions[queNo].options.map(() => false);
       }
 
       for (let i = 0; i < data1.questions[queNo].options.length; i++) {
-        if (arg0 == data1.questions[queNo].options[i].optionId) {
+        if (arg0 === data1.questions[queNo].options[i].optionId) {
           selectedOpt[queNo][i] = !selectedOpt[queNo][i];
         }
       }
@@ -187,12 +187,12 @@ const Test = () => {
 
   //  sets enable or disable next button
   const setDisable = () => {
-    if (selectedOpt[queNo] == undefined) {
+    if (selectedOpt[queNo] === undefined) {
       return true;
     } else if (data1.questions[queNo].quesType === "mcq-m") {
       let flag = true;
       for (let i = 0; i < selectedOpt[queNo].length; i++) {
-        if (selectedOpt[queNo][i] == true) flag = false;
+        if (selectedOpt[queNo][i] === true) flag = false;
       }
       return flag;
     } else {
@@ -255,7 +255,7 @@ const Test = () => {
                   {data1.questions[queNo].quesType === "mcq-m" && (
                     <Option
                       className={
-                        selectedOpt[queNo] && selectedOpt[queNo][index] == true
+                        selectedOpt[queNo] && selectedOpt[queNo][index] === true
                           ? "act"
                           : ""
                       }
@@ -277,7 +277,7 @@ const Test = () => {
                     // if question type is mcq
                     <Option
                       className={
-                        selectedOpt[queNo] == opt.optionId ? "act" : ""
+                        selectedOpt[queNo] === opt.optionId ? "act" : ""
                       }
                       onClick={() => selectOpt(opt.optionId)}
                     >

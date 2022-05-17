@@ -48,14 +48,14 @@ const DashBoard = () => {
         sessionStorage.setItem('expTime', expiryTimeStamp.toUTCString())
       })
       .catch((error) => console.log("error", error));
-  }, []);
+  }, [token, url]);
 
 
 
   const keys = Object.values(isCompleted)
   let navigateToHome = true
   for (let y = 0; y < keys.length; y++) {
-    if (keys[y] == false)
+    if (keys[y] === false)
       navigateToHome = false
   }
   if (navigateToHome) {

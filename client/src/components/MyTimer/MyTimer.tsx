@@ -2,9 +2,11 @@ import React, { useContext } from 'react';
 import { useTimer } from 'react-timer-hook';
 import { useNavigate } from 'react-router-dom';
 import { Timer } from './Mytimer.styled';
+import { GlobalContext } from '../../GlobalContext/GlobalContextProvider';
 
 function MyTimer({time}:any) {
-  
+  const ctx= useContext(GlobalContext);
+  const{saveIsCompleted} = ctx  
   const nav = useNavigate();
 
   
@@ -12,18 +14,28 @@ function MyTimer({time}:any) {
     seconds,
     minutes,
     hours,
-    days,
-    isRunning,
-    start,
-    pause,
-    resume,
-    restart,
+    // days,
+    // isRunning,
+    // start,
+    // pause,
+    // resume,
+    // restart,
   } = useTimer({
     expiryTimestamp:time,
     autoStart: true,
     onExpire: () => {
       console.log('onExpire called')
       sessionStorage.clear();
+      saveIsCompleted(
+        {
+          "html-and-css": false,
+          "javascript": false,
+          "typescript": false,
+          "react": false,
+          "node-js": false,
+          "git": false,
+        }
+      )
       nav('/', {replace:true})
     }
   });

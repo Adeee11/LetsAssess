@@ -11,7 +11,7 @@ const User = () => {
   const [isLogin, setIsLogin]= useState(true);
   const nav= useNavigate()
   const ctx = useContext(GlobalContext);
-  const { url, saveAdmin, discardAdmin } = ctx;
+  const { saveAdmin, discardAdmin } = ctx;
 
   const submitHandler=()=>{
      
