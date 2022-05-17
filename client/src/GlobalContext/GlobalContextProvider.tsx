@@ -31,7 +31,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
 
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   let initData: string | null = sessionStorage.getItem('isCompleted')
-  const [isCompleted, setIsCompleted] = useState(initData && JSON.parse(initData) || {
+  const [isCompleted, setIsCompleted] = useState((initData && JSON.parse(initData)) || {
     "html-and-css": false,
     "javascript": false,
     "typescript": false,
@@ -52,7 +52,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     localStorage.removeItem('isAdmin');
   }
 
-  const url = 'http://localhost:9000';
+  const url = 'https://lionfish-app-hb2nk.ondigitalocean.app';
 
   const saveName = (name: string) => {
     setCandidate({ ...candidate, name: name });

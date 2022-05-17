@@ -3,7 +3,7 @@ import { Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
 import { MyTimer } from "../MyTimer";
 import { CardComponent } from "../CardComponent";
-import slugify from 'slugify';
+import slugify from "slugify";
 import { GlobalContext } from "../../GlobalContext/GlobalContextProvider";
 
 const DashBoard = () => {
@@ -18,7 +18,7 @@ const DashBoard = () => {
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
-  const { token, isCompleted, url } = ctx
+  const { token, isCompleted, url } = ctx;
 
   let expiryTimeStamp = new Date(0);
 
@@ -44,26 +44,21 @@ const DashBoard = () => {
         expiryTimeStamp.setUTCSeconds(result.exp);
         console.log("Expiry time epoch", result.exp);
         console.log("DATE", expiryTimeStamp);
-        setExpTime(expiryTimeStamp)
-        sessionStorage.setItem('expTime', expiryTimeStamp.toUTCString())
+        setExpTime(expiryTimeStamp);
+        sessionStorage.setItem("expTime", expiryTimeStamp.toUTCString());
       })
       .catch((error) => console.log("error", error));
-  }, []);
+  }, [ token, url]);
 
-
-
-  const keys = Object.values(isCompleted)
-  let navigateToHome = true
+  const keys = Object.values(isCompleted);
+  let navigateToHome = true;
   for (let y = 0; y < keys.length; y++) {
-    if (keys[y] == false)
-      navigateToHome = false
+    if (keys[y] === false) navigateToHome = false;
   }
   if (navigateToHome) {
-    nav('/', { replace: true });
+    nav("/", { replace: true });
     sessionStorage.clear();
   }
-
-
 
   return (
     <>
@@ -77,14 +72,17 @@ const DashBoard = () => {
                 key={test.title}
                 title={test.title}
                 durationInMins={20}
-                isCompleted={isCompleted[test.title.replace(/\s+/g, '-').toLowerCase()]}
-                clickHandler={() => clickHandler(slugify(test.title).toLowerCase())}
+                isCompleted={
+                  isCompleted[test.title.replace(/\s+/g, "-").toLowerCase()]
+                }
+                clickHandler={() =>
+                  clickHandler(slugify(test.title).toLowerCase())
+                }
               />
             ))}
           </Container>
         </>
       )}
-
     </>
   );
 };

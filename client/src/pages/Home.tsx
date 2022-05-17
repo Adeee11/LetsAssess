@@ -12,8 +12,7 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { setToken, url, token, candidate, isCompleted, saveIsCompleted } = ctx
-
+  const { setToken, url, isCompleted, saveIsCompleted } = ctx;
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -51,65 +50,65 @@ const Home = () => {
 
     if (res.ok === false) {
       setShowLoader(false);
-      alert("Invalid credentials/ or user already entered the test")
+      alert("Invalid credentials/ or user already entered the test");
     }
-
-
   };
-  console.log(isCompleted)
+  console.log(isCompleted);
 
   useEffect(() => {
     sessionStorage.clear();
-    saveIsCompleted(
-      {
-        "html-and-css": false,
-        "javascript": false,
-        "typescript": false,
-        "react": false,
-        "node-js": false,
-        "git": false,
-      }
-    )
-
-  }, [])
+    saveIsCompleted({
+      "html-and-css": false,
+      javascript: false,
+      typescript: false,
+      react: false,
+      "node-js": false,
+      git: false,
+    });
+  }, [saveIsCompleted]);
 
   useEffect(() => {
-    if (isCompleted["html-and-css"] && isCompleted["javascript"] && isCompleted["node-js"] && isCompleted["react"] && isCompleted["typescript"] && isCompleted["git"])
+    if (
+      isCompleted["html-and-css"] &&
+      isCompleted["javascript"] &&
+      isCompleted["node-js"] &&
+      isCompleted["react"] &&
+      isCompleted["typescript"] &&
+      isCompleted["git"]
+    )
       setShowMsg(true);
-  }, [])
+  }, [isCompleted]);
 
   return (
     <>
-      {!showLoader &&
+      {!showLoader && (
         <Container onSubmit={(e) => submit(e)}>
           <div className="input-box">
             <span>Email</span>
             <Input
               type="email"
-              changeHandler={(i) => ctx.saveCandidateEmail(i)} />
+              changeHandler={(i) => ctx.saveCandidateEmail(i)}
+            />
           </div>
-
 
           <div className="input-box">
             <span>Name</span>
             <Input
               type="text"
-              changeHandler={(i) => ctx.saveCandidateName(i)} />
+              changeHandler={(i) => ctx.saveCandidateName(i)}
+            />
           </div>
-          <Button
-            type="submit"
-            value="submit"
-          />
-        </Container>}
-
+          <Button type="submit" value="submit" />
+        </Container>
+      )}
 
       {showLoader && <Spinner />}
-      {showMsg &&
+      {showMsg && (
         <MessageBox
           msg={`Completed all the tests`}
           clickHandler={() => setShowMsg(false)}
         />
-      }
+      )}
     </>
   );
 };

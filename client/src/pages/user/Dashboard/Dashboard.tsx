@@ -38,7 +38,7 @@ const Dashboard = () => {
     const [optionsMarked, setOptionsMarked] = useState<any>(null)
 
     const ctx = useContext(GlobalContext);
-    const { url, saveAdmin } = ctx;
+    const { url } = ctx;
 
     const clickHandler = (candidate: { candidateName: string, email: string }) => {
         setShow({ showSubmission: false, showAllTest: true, showAllCandidates: false });
@@ -98,7 +98,7 @@ const Dashboard = () => {
         return () => {
 
         }
-    }, [])
+    }, [url])
 
     const imageSrc = (title: string) => {
         if (title === "javascript") return "/images/js.png";
@@ -172,7 +172,7 @@ const Dashboard = () => {
 
                     candidateData.map((test) => <Card key={test.assessmentId} onClick={() => showPaper(test.assessmentId, test.marksObtained)}>
 
-                        <img src={imageSrc(test.assessmentId)} />
+                        <img src={imageSrc(test.assessmentId)} alt="Subject"/>
                         <span><b>Marks:</b>{test.marksObtained}</span>
                         <span >{test.assessmentId}</span>
 
@@ -202,9 +202,9 @@ const Dashboard = () => {
                                 </Question>
                             }
 
-                            {item.quesType == "mcq" && item.options.map((opt: any) =>
+                            {item.quesType === "mcq" && item.options.map((opt: any) =>
                             (<div key={opt.optionId}>
-                                {optionsMarked[item.quesId] == opt.optionId && <Option >
+                                {optionsMarked[item.quesId] === opt.optionId && <Option >
                                     <span >{opt.optionId}.</span>
                                     {!opt.useCustomComponent && opt.optionValue}
                                     {opt.useCustomComponent &&
@@ -219,7 +219,7 @@ const Dashboard = () => {
                             )}
 
 
-                            {item.quesType == "mcq-m" && item.options.map((opt: any, i: number) =>
+                            {item.quesType === "mcq-m" && item.options.map((opt: any, i: number) =>
                             (<>
                                 {optionsMarked[item.quesId][i] && <Option >
 
