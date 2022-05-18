@@ -1,4 +1,3 @@
-import React, { ChangeEvent } from 'react'
 import { InputContainer } from './Input.styled'
 
 type propTypes={

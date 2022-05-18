@@ -4,6 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalContextProvider from './GlobalContext/GlobalContextProvider';
+// import { createRoot } from 'react-dom/client';
+// const container = document.getElementById('root');
+// const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+
+// root.render(<React.StrictMode>
+//   <GlobalContextProvider>
+//     <App />
+//   </GlobalContextProvider>
+// </React.StrictMode>);
+
 
 ReactDOM.render(
   <React.StrictMode>

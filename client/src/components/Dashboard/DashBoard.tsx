@@ -27,11 +27,11 @@ const DashBoard = () => {
   };
 
   useEffect(() => {
-    console.log("token", token);
+    // console.log("token", token);
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     (() => {
-      console.log("IIFE");
+      // console.log("IIFE");
     })();
     fetch(`${url}/assessment`, {
       method: "GET",
@@ -50,15 +50,18 @@ const DashBoard = () => {
       .catch((error) => console.log("error", error));
   }, [ token, url]);
 
-  const keys = Object.values(isCompleted);
-  let navigateToHome = true;
-  for (let y = 0; y < keys.length; y++) {
-    if (keys[y] === false) navigateToHome = false;
-  }
-  if (navigateToHome) {
-    nav("/", { replace: true });
-    sessionStorage.clear();
-  }
+  useEffect(()=>{
+    const keys = Object.values(isCompleted);
+    let navigateToHome = true;
+    for (let y = 0; y < keys.length; y++) {
+      if (keys[y] === false) navigateToHome = false;
+    }
+    if (navigateToHome) {
+      nav("/", { replace: true });
+      sessionStorage.clear();
+    }
+  },[isCompleted, nav])
+  
 
   return (
     <>

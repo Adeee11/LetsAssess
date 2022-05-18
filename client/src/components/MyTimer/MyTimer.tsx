@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useTimer } from "react-timer-hook";
 import { useNavigate } from "react-router-dom";
 import { Timer } from "./Mytimer.styled";
-
+import { GlobalContext } from '../../GlobalContext/GlobalContextProvider';
 function MyTimer({ time }: any) {
   const nav = useNavigate();
+  const ctx= useContext(GlobalContext);
+  
+  const{saveIsCompleted} = ctx
 
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp: time,
@@ -12,6 +15,16 @@ function MyTimer({ time }: any) {
     onExpire: () => {
       console.log("onExpire called");
       sessionStorage.clear();
+      saveIsCompleted(
+        { 
+          "html-and-css": false,
+          "javascript": false,
+          "typescript": false,
+          "react": false,
+          "node-js": false,
+          "git": false,
+        }
+      )
       nav("/", { replace: true });
     },
   });
