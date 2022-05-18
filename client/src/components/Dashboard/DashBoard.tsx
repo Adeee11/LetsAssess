@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Container } from "./Dashboard.styled";
 import { useNavigate } from "react-router-dom";
 import { MyTimer } from "../MyTimer";
@@ -20,7 +20,7 @@ const DashBoard = () => {
   const ctx = useContext(GlobalContext);
   const { token, isCompleted, url } = ctx;
 
-  let expiryTimeStamp = new Date(0);
+  const expiryTimeStamp = useRef(new Date(0));
 
   const clickHandler = (arg: string) => {
     nav(arg);
@@ -41,11 +41,11 @@ const DashBoard = () => {
       .then((response) => response.json())
       .then((result) => {
         setData({ ...result });
-        expiryTimeStamp.setUTCSeconds(result.exp);
+        expiryTimeStamp.current.setUTCSeconds(result.exp);
         console.log("Expiry time epoch", result.exp);
         console.log("DATE", expiryTimeStamp);
         setExpTime(expiryTimeStamp);
-        sessionStorage.setItem("expTime", expiryTimeStamp.toUTCString());
+        sessionStorage.setItem("expTime", expiryTimeStamp.current.toUTCString());
       })
       .catch((error) => console.log("error", error));
   }, [ token, url]);
