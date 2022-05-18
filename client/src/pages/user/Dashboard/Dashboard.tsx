@@ -204,7 +204,7 @@ const Dashboard = () => {
 
                             {item.quesType === "mcq" && item.options.map((opt: any) =>
                             (<div key={opt.optionId}>
-                                {optionsMarked[item.quesId] === opt.optionId && <Option >
+                                {(optionsMarked[item.quesId]).toString() === (opt.optionId).toString() && <Option >
                                     <span >{opt.optionId}.</span>
                                     {!opt.useCustomComponent && opt.optionValue}
                                     {opt.useCustomComponent &&
@@ -220,7 +220,7 @@ const Dashboard = () => {
 
 
                             {item.quesType === "mcq-m" && item.options.map((opt: any, i: number) =>
-                            (<>
+                            (<div key={opt.optionId}>
                                 {optionsMarked[item.quesId][i] && <Option >
 
                                     <span >{opt.optionId}.</span>
@@ -233,7 +233,7 @@ const Dashboard = () => {
                                     }
 
                                 </Option>}
-                            </>)
+                            </div>)
                             )}
 
                         </div>
