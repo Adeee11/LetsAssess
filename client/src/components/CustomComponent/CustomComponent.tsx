@@ -19,7 +19,7 @@ const CustomComponent = ({ data }: propsType) => {
 
   return (
     <pre className={`line-numbers`}>
-      <code className={`language-jsx`}>{data.content}</code>
+      <code className={`language-${data.format}`}>{data.content}</code>
     </pre>
   );
 };

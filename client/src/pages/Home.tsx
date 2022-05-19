@@ -1,4 +1,4 @@
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { FormEvent,  useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import Input from "../components/Input/Input";
@@ -12,7 +12,7 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { setToken, url, isCompleted, saveIsCompleted } = ctx;
+  const { setToken, url, isCompleted, saveIsCompleted} = ctx;
 
   const submit = async (e: FormEvent) => {
     e.preventDefault();
@@ -55,17 +55,18 @@ const Home = () => {
   };
   // console.log(isCompleted);
 
-  useEffect(() => {
-    sessionStorage.clear();
-    saveIsCompleted({
-      "html-and-css": false,
-      javascript: false,
-      typescript: false,
-      react: false,
-      "node-js": false,
-      git: false,
-    });
-  }, [saveIsCompleted]);
+ 
+  // useEffect(() => {
+  //   sessionStorage.clear();
+    // saveIsCompleted({
+    //   "html-and-css": false,
+    //   javascript: false,
+    //   typescript: false,
+    //   react: false,
+    //   "node-js": false,
+    //   git: false,
+    // });
+  // },[]);
 
   useEffect(() => {
     if (
@@ -75,9 +76,18 @@ const Home = () => {
       isCompleted["react"] &&
       isCompleted["typescript"] &&
       isCompleted["git"]
-    )
+    ){
       setShowMsg(true);
-  }, [isCompleted]);
+      saveIsCompleted({
+        "html-and-css": false,
+        javascript: false,
+        typescript: false,
+        react: false,
+        "node-js": false,
+        git: false,
+      });
+    }
+  }, [isCompleted, saveIsCompleted]);
 
   return (
     <>
@@ -105,7 +115,7 @@ const Home = () => {
       {showLoader && <Spinner />}
       {showMsg && (
         <MessageBox
-          msg={`Completed all the tests`}
+          msg={`Completed all the tests.`}
           clickHandler={() => setShowMsg(false)}
         />
       )}

@@ -30,9 +30,6 @@ const DashBoard = () => {
     // console.log("token", token);
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
-    (() => {
-      // console.log("IIFE");
-    })();
     fetch(`${url}/assessment`, {
       method: "GET",
       headers: myHeaders,
@@ -44,7 +41,7 @@ const DashBoard = () => {
         expiryTimeStamp.current.setUTCSeconds(result.exp);
         console.log("Expiry time epoch", result.exp);
         console.log("DATE", expiryTimeStamp);
-        setExpTime(expiryTimeStamp);
+        setExpTime(expiryTimeStamp.current);
         sessionStorage.setItem("expTime", expiryTimeStamp.current.toUTCString());
       })
       .catch((error) => console.log("error", error));
