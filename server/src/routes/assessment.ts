@@ -1,4 +1,5 @@
 import express from "express";
+import { Assessment } from "models/Assessment";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { removeCorrectOption } from "../helpers/helperFunction";
@@ -12,10 +13,12 @@ const firestore = admin.firestore();
 router.post("/", async (req, res) => {
   const data = req.body;
   const documentName = slugify(data.title.toLowerCase());
+  data.assessmentId = documentName;
   try {
-    let docRef = firestore.doc(`assessment/${documentName}`);
-    await docRef.set(data);
-    res.sendStatus(200);
+    // need to check whether the assessment is already created or not
+    await Assessment.create(data);
+
+    res.status(200).send("Assessment stored");
   } catch (error) {
     res.json(error);
   }
@@ -26,11 +29,13 @@ router.post("/question", async (req, res) => {
   const data = req.body.question;
   const documentName = slugify(req.body.title.toLowerCase());
   try {
-    const docRef = firestore.doc(`assessment/${documentName}`);
-    await docRef.update({
-      questions: admin.firestore.FieldValue.arrayUnion(data),
-    });
-    res.sendStatus(200);
+    const result = await Assessment.findOneAndUpdate(
+      { assessmentId: documentName },
+      { $push: { questions: data } }
+    );
+    result
+      ? res.status(200).send("Question stored")
+      : res.status(500).send("Didn't add the question");
   } catch (error) {
     res.json(error);
   }
@@ -40,19 +45,18 @@ router.post("/question", async (req, res) => {
 router.get("/", authenticateToken, async (req, res) => {
   const decodedJwt = res.locals.decodedJwt;
   try {
-    const collectionRef = firestore.collection("assessment");
-    const querySnapshot = await collectionRef
-      .select("durationInMins", "title")
-      .get();
-    const responseData: any[] = [];
-    querySnapshot.forEach((documentSnapshot) =>
-      responseData.push(documentSnapshot.data())
-    );
-    res.json({
-      data: responseData,
-      iat: decodedJwt.iat,
-      exp: decodedJwt.exp,
+    const responseData = await Assessment.find({}).select({
+      durationInMins: 1,
+      title: 1,
+      _id: 0,
     });
+    responseData
+      ? res.json({
+          data: responseData,
+          iat: decodedJwt.iat,
+          exp: decodedJwt.exp,
+        })
+      : res.sendStatus(500);
   } catch (error) {
     res.json(error);
   }
@@ -63,12 +67,13 @@ router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
 
   try {
-    const docRef = firestore.doc(`assessment/${assessmentId}`);
-    const documentSnapShot = await docRef.get();
-    const data = removeCorrectOption(
-      JSON.parse(JSON.stringify(documentSnapShot.data()))
-    );
-    res.json(data);
+    const data = await Assessment.find({
+      assessmentId: assessmentId,
+    }).select({ "questions.correctOption": 0 });
+
+    data
+      ? res.json(data)
+      : res.status(500).send("Couldn't get data from the database");
   } catch (error) {
     res.json(error);
   }
