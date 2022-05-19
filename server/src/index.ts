@@ -1,8 +1,20 @@
 import express from "express";
 import cors from "cors";
 import { env } from "env";
+import mongoose from "mongoose";
 
 const app = express();
+
+// connectiing to database
+const databaseUrl = "mongodb://localhost:27017/letAssess";
+try {
+  (async function () {
+    await mongoose.connect(databaseUrl);
+    console.log("database connected");
+  })();
+} catch (error) {
+  console.log(error);
+}
 
 app.use(express.json());
 app.use(cors());
