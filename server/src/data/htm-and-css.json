@@ -708,7 +708,7 @@
           "optionValue": "a:visited, a:link, a:active, a:hover"
         }
       ],
-      "correctOption": [["1"]]
+      "correctOption": ["1"]
     }
   ]
 }

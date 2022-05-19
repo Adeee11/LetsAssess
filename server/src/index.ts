@@ -1,20 +1,9 @@
 import express from "express";
 import cors from "cors";
 import { env } from "env";
-import mongoose from "mongoose";
+import { connectToMongo } from "helpers/helperFunction";
 
 const app = express();
-
-// connectiing to database
-const databaseUrl = "mongodb://localhost:27017/letAssess";
-try {
-  (async function () {
-    await mongoose.connect(databaseUrl);
-    console.log("database connected");
-  })();
-} catch (error) {
-  console.log(error);
-}
 
 app.use(express.json());
 app.use(cors());
@@ -40,6 +29,13 @@ app.use("/user", require("./routes/user"));
 
 const PORT = env("PORT") || 9000;
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
   console.log(`Server running on Port: ${PORT}`);
+  const databaseUrl = "mongodb://localhost:27017/letAssess";
+  try {
+    await connectToMongo(databaseUrl);
+    console.log("database connected");
+  } catch (error) {
+    console.log(error);
+  }
 });

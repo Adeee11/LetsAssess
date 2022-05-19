@@ -1,3 +1,5 @@
+import mongoose from "mongoose";
+
 // function to remove correctOption from the data
 export const removeCorrectOption = (data: {
   durationInMins: number;
@@ -40,4 +42,9 @@ export const areArraysEqual = (arr1: any[], arr2: any[]) => {
   } else {
     return false;
   }
+};
+
+// connect to mongoDB database database
+export const connectToMongo = (databaseUrl: string) => {
+  return mongoose.connect(databaseUrl);
 };
