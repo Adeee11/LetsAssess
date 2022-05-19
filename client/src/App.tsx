@@ -13,6 +13,8 @@ function App() {
 
   const ctx = useContext(GlobalContext)
   const { isAdmin, token } = ctx
+  
+  
 
   return (
     <AppContainer>
