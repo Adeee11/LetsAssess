@@ -2,6 +2,7 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { areArraysEqual } from "../helpers/helperFunction";
+import { Candidate } from "models/Candidate";
 
 const router = express.Router();
 const firestore = admin.firestore();
@@ -14,16 +15,19 @@ router.post("/", async (req, res) => {
   });
   const data = req.body;
   data["assessmentTaken"] = false;
+  data["candidateId"] = candidateId;
   try {
-    const docRef = firestore.doc(`candidates/${candidateId}`);
-    const documentSnapshot = await docRef.get();
-    if (documentSnapshot.exists) {
-      return res.status(418).json({
-        error: "Candidate already exist",
-      });
-    }
-    await docRef.set(data);
-    res.sendStatus(200);
+    
+    // checking if a candidate already exists
+    const candidate = await Candidate.findOne({ candidateId: candidateId });
+
+    if (candidate) return res.status(400).send("Candidate already exist");
+    // adding candidate to the database
+    const result = await Candidate.create(data);
+    result
+      ? res.status(200).send("Candidate Added")
+      : res.status(500).send("Error while storing candidate in the database");
+   
   } catch (error) {
     res.json(error);
   }
@@ -60,7 +64,6 @@ router.post("/marks", async (req, res) => {
         // used keys to loop as their's the case of candidate not marking a question
         const keys = Object.keys(answersMarked);
         keys.map((key, index) => {
-        
           typeof questions[index].correctOption !== "string"
             ? areArraysEqual(
                 answersMarked[key],

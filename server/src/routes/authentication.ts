@@ -1,10 +1,13 @@
+import { env } from "env";
 import express from "express";
 import jwt from "jsonwebtoken";
+import { Assessment } from "models/Assessment";
+import { Candidate } from "models/Candidate";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 
 const fireStore = admin.firestore();
-const getAuth = admin.auth()
+const getAuth = admin.auth();
 
 const router = express.Router();
 
@@ -19,44 +22,34 @@ router.post("/", async (req, res) => {
   });
 
   try {
-    // checking if the candidate has been allowed to take the test
-    const candidateDocRef = fireStore.doc(`candidates/${candidateId}`);
-    if (!(await candidateDocRef.get()).exists) {
-      return res.status(404).json({
-        error: `Candidate ${candidateName} not found`,
-      });
-    }
+    // checking if the candidate exist
+    const candidate = await Candidate.findOne({ candidateId: candidateId });
+    if (!candidate)
+      return res.status(404).send(`Candidate ${candidateName} not found`);
 
     // checking if the candidate has already taken the test or not
-    const candidateData = (await candidateDocRef.get()).data();
-    if (candidateData && candidateData.assessmentTaken) {
-      return res.status(403).json({
-        error: `Candidate ${candidateName} has already taken the test`,
-      });
-    }
-    await candidateDocRef.update({
-      assessmentTaken: true,
-    });
+    if (candidate.assessmentTaken)
+      return res
+        .status(403)
+        .send(`Candidate ${candidateName} has already taken the test`);
     // calculating expiry time
     let expiryTimeInMins: number = 10;
-    const assessmentCollectionRef = fireStore.collection("assessment");
-    const querySnapshot = await assessmentCollectionRef
-      .select("durationInMins")
-      .get();
-    querySnapshot.forEach((docmentSnapshot) => {
-      expiryTimeInMins += docmentSnapshot.data().durationInMins;
+
+    const assessments = await Assessment.find({}).select({ durationInMins: 1 });
+
+    assessments.forEach((assessment) => {
+      expiryTimeInMins += assessment.durationInMins;
     });
 
-    const docRef = fireStore.doc("miscellaneous/ACCESS_KEY");
-    const SECRET_KEY = (await docRef.get()).data();
-    if (SECRET_KEY) {
+    const accessKey = env("ACCESS_KEY");
+    if (accessKey) {
       // didn't provide expiry time till now. Need to calculate it separately
       const JWT_TOKEN = jwt.sign(
         {
           email: candidateId,
           name: candidateName,
         },
-        SECRET_KEY.JWT_KEY,
+        accessKey,
         {
           expiresIn: expiryTimeInMins * 60,
         }
@@ -74,7 +67,5 @@ router.post("/", async (req, res) => {
     res.status(500).json(error);
   }
 });
-
-
 
 module.exports = router;

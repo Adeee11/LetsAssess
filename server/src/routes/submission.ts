@@ -2,39 +2,61 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { authenticateToken } from "../middleware/middlewareFunctions";
+import { Submission } from "models/Submissions";
 
 const router = express.Router();
 const firestore = admin.firestore();
 
-// ADDING RESULTS
-router.post("/", authenticateToken, async (req, res) => {
-  const data = req.body.data;
-  const assessmentId = slugify(req.body.assessmentId.toLowerCase());
-  try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    const result = await docRef.set(data);
+// No need for this
+// // ADDING RESULTS
+// router.post("/", authenticateToken, async (req, res) => {
+//   const data = req.body.data;
+//   const assessmentId = slugify(req.body.assessmentId.toLowerCase());
 
-    res.sendStatus(200);
-  } catch (error) {
-    res.json(error);
-  }
-});
+//   try {
+//     // const docRef = firestore.doc(`submissions/${assessmentId}`);
+//     // const result = await docRef.set(data);
+//     const result =
+
+//     res.sendStatus(200);
+//   } catch (error) {
+//     res.json(error);
+//   }
+// });
 
 // Add candidate for a particular assessment
 router.post("/candidate", authenticateToken, async (req, res) => {
-  // getting candiateId from auth token so that the user logged in can only acess his data
+  // getting candiateId from auth token so that the candidate logged in can only acess his data
   const candidateId = slugify(String(res.locals.decodedJwt.email), {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
-  const data = req.body.data;
+  const data = req.body;
+  data["candidateId"] = candidateId;
+  console.log(`Data: `, data);
   const assessmentId = slugify(req.body.assessmentId.toLowerCase());
   try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    await docRef.update({
-      [candidateId]: data,
+    // const docRef = firestore.doc(`submissions/${assessmentId}`);
+    // await docRef.update({
+    //   [candidateId]: data,
+    // });
+
+    // check if candidate has already given the test
+    const check = await Submission.findOne({
+      candidateId: candidateId,
+      assessmentId: assessmentId,
     });
-    res.sendStatus(200);
+    console.log(`Check`, check)
+    if (check)
+      return res.status(400).send("Candidate has already given the test");
+
+    // submitting the assessment for a particular candidate
+    const submission = await Submission.create(data);
+    submission
+      ? res
+          .status(200)
+          .send(`${assessmentId} assessment for ${candidateId} submitted`)
+      : res.status(500).send("Can't store assessment in the database");
   } catch (error) {
     res.json(error);
   }

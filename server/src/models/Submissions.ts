@@ -1,5 +1,16 @@
 import mongoose, { Schema } from "mongoose";
 
+interface OptionMarkedType {
+  quesId: string;
+  answers: string[];
+}
+
+interface SubmissionType {
+  assessmentId: string;
+  candidateId: string;
+  optionsMarked: OptionMarkedType[];
+}
+
 const optionMarkedSchema = new Schema({
   quesID: String,
   answers: [String], // it would contain options ID
@@ -11,6 +22,9 @@ const submissionSchema = new Schema({
   optionsMarked: [optionMarkedSchema],
 });
 
-const Submission = mongoose.model("Submission", submissionSchema);
+const Submission = mongoose.model<SubmissionType>(
+  "Submission",
+  submissionSchema
+);
 
 export { Submission };
