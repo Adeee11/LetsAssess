@@ -11,12 +11,12 @@ interface SubmissionType {
   optionsMarked: OptionMarkedType[];
 }
 
-const optionMarkedSchema = new Schema({
-  quesID: String,
+const optionMarkedSchema = new Schema<OptionMarkedType>({
+  quesId: String,
   answers: [String], // it would contain options ID
 });
 
-const submissionSchema = new Schema({
+const submissionSchema = new Schema<SubmissionType>({
   assessmentId: String, // need to connect it to assessment database
   candidateId: String, // need to connect it to candidate database
   optionsMarked: [optionMarkedSchema],
@@ -27,4 +27,4 @@ const Submission = mongoose.model<SubmissionType>(
   submissionSchema
 );
 
-export { Submission };
+export { Submission, OptionMarkedType, SubmissionType };

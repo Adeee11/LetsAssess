@@ -2,7 +2,7 @@ import express from "express";
 import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { authenticateToken } from "../middleware/middlewareFunctions";
-import { Submission } from "models/Submissions";
+import { OptionMarkedType, Submission } from "models/Submissions";
 
 const router = express.Router();
 const firestore = admin.firestore();
@@ -36,17 +36,12 @@ router.post("/candidate", authenticateToken, async (req, res) => {
   console.log(`Data: `, data);
   const assessmentId = slugify(req.body.assessmentId.toLowerCase());
   try {
-    // const docRef = firestore.doc(`submissions/${assessmentId}`);
-    // await docRef.update({
-    //   [candidateId]: data,
-    // });
-
     // check if candidate has already given the test
     const check = await Submission.findOne({
       candidateId: candidateId,
       assessmentId: assessmentId,
     });
-    console.log(`Check`, check)
+    console.log(`Check`, check);
     if (check)
       return res.status(400).send("Candidate has already given the test");
 
@@ -70,56 +65,67 @@ router.post("/answer", authenticateToken, async (req, res) => {
     remove: /[*+~.()'"!:@]/g,
     lower: true,
   });
-  const optionMarked: { optionId: string; quesId: string } =
-    req.body.optionMarked;
+  const optionMarked: OptionMarkedType = {
+    answers: req.body.optionMarked.optionId,
+    quesId: req.body.optionMarked.quesId,
+  };
+
   try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-
-    // adding data if the document doesn't exist
-    if (!(await docRef.get()).exists) {
-      const result = await docRef.set({
-        [`${candidateId}`]: {
-          optionsMarked: {
-            [optionMarked.quesId]: [...optionMarked.optionId],
-          },
+    // check if the candidate has already submitted the data for the assessment
+    const submission = await Submission.findOne({
+      candidateId: candidateId,
+      assessmentId: assessmentId,
+    }).select({ _id: 1 });
+    if (submission) {
+      const isUpdated = await Submission.updateOne(
+        {
+          _id: submission._id,
         },
-      });
-      return res.status(200).send(result);
-    }
-    const documentData: any = (await docRef.get()).data();
-
-    // Checking whther the option is already marked or not
-    if (
-      documentData &&
-      candidateId in documentData &&
-      optionMarked.quesId in documentData[candidateId].optionsMarked
-    ) {
-      const foo: any = documentData[candidateId].optionsMarked;
-      return (
-        foo[optionMarked.quesId] &&
-        res.status(403).send(`Question already answered`)
+        { $push: { optionsMarked: optionMarked } }
       );
+      isUpdated
+        ? res.status(200).send("Answer Marked")
+        : res
+            .status(500)
+            .send("Some error while submitting data in the database");
+    } else {
+      const newSubmission = Submission.create({
+        candidateId: candidateId,
+        assessmentId: assessmentId,
+        optionsMarked: [optionMarked],
+      });
+      newSubmission
+        ? res.status(200).send("Answer Marked")
+        : res
+            .status(500)
+            .send("Some error while submitting data in the database");
     }
-
-    const result = await docRef.update({
-      [`${candidateId}.optionsMarked.${optionMarked.quesId}`]: [
-        ...optionMarked.optionId,
-      ],
-    });
-    return res.status(200).json(result);
   } catch (error) {
-    res.json(error);
+    res.status(500).json({
+      error: error,
+    });
   }
 });
 
-// fetch users who submitted  a particular test
+// fetch candidateId of all candidates who submitted  a particular test
 router.get("/:id", authenticateToken, async (req, res) => {
   const assessmentId = req.params.id;
   try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    const documentSnapShot = await docRef.get();
-    const data = documentSnapShot.data();
-    res.json(data);
+    const candidates = await Submission.find({
+      assessmentId: assessmentId,
+    }).select({
+      candidateId: 1,
+      _id: 0,
+    });
+
+    console.log(`Candidates`, candidates);
+    candidates
+      ? res.status(200).json({
+          candidatesId: candidates,
+        })
+      : res
+          .status(500)
+          .send("Error while retrieving candidates from the database");
   } catch (error) {
     res.json(error);
   }
@@ -141,30 +147,17 @@ router.get(
     });
 
     try {
-      const docRef = firestore.doc(`submissions/${assessmentId}`);
-      let optionsMarked: any;
-      const data = (await docRef.get()).data();
-      if (data && !data[candidateId]) {
-        if (!optionsMarked) {
-          return res.json({
-            msg: "No options marked yet.",
-            lastIndex: -1,
-            optionsMarked: {},
-          });
-        }
-      } else if (data) {
-        optionsMarked = data[candidateId].optionsMarked;
-        const keys = Object.keys(optionsMarked);
-
-        res.status(200).json({
-          lastIndex: parseInt(keys[keys.length - 1]) - 1,
-          optionsMarked: optionsMarked,
-        });
-      } else {
-        res.status(400).json({
-          error: `Couldn't get the data for the assessment ${assessmentId} `,
-        });
-      }
+      const result = await Submission.find({
+        assessmentId: assessmentId,
+        candidateId: candidateId,
+      }).select({ optionsMarked: 1, _id: 0 });
+      result
+        ? res.status(200).json(result)
+        : res
+            .status(400)
+            .send(
+              `Candidate ${candidateId} hasn't given the assessment ${assessmentId}`
+            );
     } catch (error) {
       res.status(500).json(error);
     }
