@@ -10,7 +10,7 @@ interface CandidateType {
   assessmentTaken: boolean;
   candidateName: string;
   email: string;
-  testsTaken: TestResultType;
+  testsTaken: TestResultType[];
 }
 
 const testResultSchema = new Schema({

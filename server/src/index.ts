@@ -29,7 +29,7 @@ app.use("/user", require("./routes/user"));
 
 const PORT = env("PORT") || 9000;
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);
   const databaseUrl = env("DATABASE_URL");
   connectToMongo(databaseUrl);

@@ -3,6 +3,8 @@ import slugify from "slugify";
 import admin from "../config/firebaseConfig";
 import { areArraysEqual } from "../helpers/helperFunction";
 import { Candidate } from "models/Candidate";
+import { Submission } from "models/Submissions";
+import { Assessment } from "models/Assessment";
 
 const router = express.Router();
 const firestore = admin.firestore();
@@ -17,7 +19,6 @@ router.post("/", async (req, res) => {
   data["assessmentTaken"] = false;
   data["candidateId"] = candidateId;
   try {
-    
     // checking if a candidate already exists
     const candidate = await Candidate.findOne({ candidateId: candidateId });
 
@@ -27,7 +28,6 @@ router.post("/", async (req, res) => {
     result
       ? res.status(200).send("Candidate Added")
       : res.status(500).send("Error while storing candidate in the database");
-   
   } catch (error) {
     res.json(error);
   }
@@ -42,52 +42,56 @@ router.post("/marks", async (req, res) => {
   const assessmentId = slugify(req.body.assessmentId, { lower: true });
 
   try {
-    const docRef = firestore.doc(`submissions/${assessmentId}`);
-    const documentSnapshot = await docRef.get();
-    const data: any = documentSnapshot.data();
-    // checking if a candidate has given the assessment or not
-    if (candidateId in data) {
-      const answersMarked = data[candidateId].optionsMarked;
-      // getting all questions
-      const assessmentDocRef = firestore.doc(`assessment/${assessmentId}`);
-      const assessmentData = (await assessmentDocRef.get()).data();
-      let questions: {
-        quesId: string;
-        quesValue: string;
-        quesType: string;
-        props: any;
-        correctOption: string[];
-      }[];
-      let totalMarks: number = 0;
-      if (assessmentData) {
-        questions = assessmentData.questions;
-        // used keys to loop as their's the case of candidate not marking a question
-        const keys = Object.keys(answersMarked);
-        keys.map((key, index) => {
-          typeof questions[index].correctOption !== "string"
-            ? areArraysEqual(
-                answersMarked[key],
-                questions[index].correctOption
-              ) && (totalMarks += 1)
-            : areArraysEqual(answersMarked[key], [
-                questions[index].correctOption,
-              ]) && (totalMarks += 1);
-        });
-      }
+    // getting options marked by the candidate for the assessment
+    const submission = await Submission.findOne({
+      assessmentId: assessmentId,
+      candidateId: candidateId,
+    }).select({ optionsMarked: 1, _id: 0 });
+    if (!submission)
+      return res.status(400).send("Candidate hasn't taken the test");
+    const optionsMarked = submission.optionsMarked;
 
-      const candidateRef = firestore.doc(`candidates/${candidateId}`);
-      candidateRef.update({
-        testsTaken: admin.firestore.FieldValue.arrayUnion({
-          assessmentId: assessmentId,
-          marksObtained: totalMarks,
-        }),
-      });
-      res.json({ marksObtained: totalMarks });
-    } else {
-      res.send(
-        `Candidate ${candidateId} hasn't given the assessment ${assessmentId}`
-      );
-    }
+    // getting correct options for each question of the assessment
+    const correctOptions = await Assessment.findOne({
+      assessmentId: assessmentId,
+    }).select({ "questions.quesId": 1, "questions.correctOption": 1, _id: 0 });
+
+    // calculating marks obtained by the candidate for the assessment
+    let totalMarks: number = 0;
+
+    // need to change it so that it first check question id of optionsMarked inside
+    // correctOptions.questions array and then compare correctionOption and answers array.
+    // will work fine for the current id
+    optionsMarked.forEach((optionMarked, index) => {
+      if (
+        // checking if questions are same
+        optionMarked.quesId === correctOptions.questions[index].quesId &&
+        // checking if the answers and correct options are the same
+        areArraysEqual(
+          optionMarked.answers,
+          correctOptions.questions[index].correctOption
+        )
+      ) {
+        totalMarks += 1;
+      }
+    });
+
+    // need to store it candidate collection too
+    const isUpdated = await Candidate.updateOne(
+      { candidateId: candidateId },
+      {
+        $set: {
+          testsTaken: [
+            {
+              assessmentId: assessmentId,
+              marksObtained: totalMarks,
+            },
+          ],
+        },
+      }
+    );
+
+    isUpdated ? res.send(`${totalMarks}`) : res.sendStatus(500);
   } catch (error) {
     res.json(error);
   }
@@ -99,10 +103,13 @@ router.get("/:id/assessments", async (req, res) => {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
   });
+ 
   try {
-    const docRef = firestore.doc(`candidates/${candidateId}`);
-    const data = (await docRef.get()).data();
-    data && data.testsTaken
+    const data = await Candidate.findOne({ candidateId: candidateId }).select({
+      testsTaken: 1,
+    });
+    if (!data) return res.status(400).send("Candidate doesn't exist");
+    data.testsTaken.length !== 0
       ? res.json({
           data: data.testsTaken,
         })
