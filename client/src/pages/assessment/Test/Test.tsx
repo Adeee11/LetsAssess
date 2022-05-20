@@ -15,7 +15,6 @@ import {
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
-
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
@@ -30,63 +29,64 @@ const Test = () => {
 
   const { candidate, token, isCompleted, saveIsCompleted, url } = ctx;
 
-
   useEffect(() => {
-
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
 
+    // loading all questions
     fetch(`${url}/assessment/${title}/questions`, {
       method: "GET",
       headers: myHeaders,
       redirect: "follow",
     })
       .then((res) => res.json())
-      .then((result) => setData1(result));
-
-    fetch(`${url}/submission/options-marked/${title}`, {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    })
-      .then((response) => {
-        // console.log(response);
-        if (response.ok === true)
-          return response.json()
-      })
       .then((result) => {
-        // console.log("Result:", result);
-        if (
-          result &&
-          Object.keys(result).length === 0 &&
-          Object.getPrototypeOf(result) === Object.prototype
-        ) {
-          console.log("No object");
-        } else {
-          const optionsMarked = result.optionsMarked;
-          // console.log("Result", result);
-          // console.log("Option marked", optionsMarked);
-          let options: any[] = [];
-          const keys = Object.keys(optionsMarked);
-          // console.log("Keys", keys);
-          keys.forEach((key) => {
-            // console.log("Key", key, typeof key);
-            // console.log("Option Marked", optionsMarked[key]);
-            if (optionsMarked[key].length === 4) {
-              options.push(optionsMarked[key]);
-            } else {
-              options.push(...optionsMarked[key]);
-            }
-          });
+        setData1(result);
+        console.log(result);
+        console.log("Data1", data1);
+      });
 
-          // console.log("Options Array", options);
-          setSelectedOpt([...options]);
-          setQueNo(result.lastIndex + 1);
+    // calling optionsMarked API
+    const callOptionsApi = async () => {
+      console.log("Options Marked Api called");
+
+      const response: Response = await fetch(
+        `${url}/submission/options-marked/${title}`,
+        {
+          method: "GET",
+          headers: myHeaders,
+          redirect: "follow",
         }
-      })
-      .catch((error) => console.log("error:----->", error));
+      );
+      console.log("response status", response.status);
+      const res = await response.json();
+      // console.log("res", res);
+      const options: any[] = [];
+      if (response.status === 200) {
+        console.log("Called succesfully");
+        const optionsMarked: any[] = res.optionsMarked;
+        console.log("Options MArked", optionsMarked);
+        optionsMarked.forEach((optionMarked) => {
+          // question is mcq-m type
+          if (optionMarked.answers.length === 4) {
+            options.push(optionMarked.answers);
+          } else {
+            options.push(...optionMarked.answers);
+          }
+        });
+        console.log("Options", options);
+        setSelectedOpt([...options]);
+        setQueNo(optionsMarked.length + 1);
+      } else if (response.status === 400) {
+        console.log(response.statusText);
+      }
+    };
+    try {
+      callOptionsApi();
+    } catch (error) {
+      console.log(error);
+    }
   }, [title, token, url]);
-
 
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -94,38 +94,33 @@ const Test = () => {
     };
   }, []);
 
-
-
   const submitHandler = async () => {
-
     setShowLoader(true);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      "email": `${candidate.email}`,
-      "assessmentId": `${title}`
+      email: `${candidate.email}`,
+      assessmentId: `${title}`,
     });
 
     await fetch(`${url}/candidate/marks`, {
-      method: 'POST',
+      method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: 'follow'
+      redirect: "follow",
     })
-      .then(response => {
-        isCompleted[title.replace(/\s+/g, '-').toLowerCase()] = true
-        saveIsCompleted(isCompleted)
+      .then((response) => {
+        isCompleted[title.replace(/\s+/g, "-").toLowerCase()] = true;
+        saveIsCompleted(isCompleted);
         console.log("Submit Handler called");
         nav("/assessment", { replace: true });
         // console.log(isCompleted);
-        return response.json()
+        return response.json();
       })
-      .then(result => { })
-      .catch(error => console.log('error', error));
+      .then((result) => {})
+      .catch((error) => console.log("error", error));
   };
-
-
 
   const nextQuestion = async (
     queId: string | number,
@@ -153,7 +148,7 @@ const Test = () => {
     })
       .then((response) => response.text())
       .then((result) => {
-        console.log(result)
+        console.log(result);
         setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
@@ -200,7 +195,6 @@ const Test = () => {
     }
   };
 
-
   return (
     <>
       {(!data1 || showLoader) && <Spinner />}
@@ -208,7 +202,9 @@ const Test = () => {
         <Container>
           <Column>
             <div className="logo">IWEBCODE</div>
-            <div className="subject">{title.replaceAll('-', ' ').toUpperCase()}</div>
+            <div className="subject">
+              {title.replaceAll("-", " ").toUpperCase()}
+            </div>
             <div className="description">
               {" "}
               {`Question ${queNo + 1} of ${data1.questions.length}`}{" "}
@@ -231,7 +227,9 @@ const Test = () => {
                 <p>Select multiple answer</p>
               )}
               <Timer>
-                <MyTimer time={Date.parse(sessionStorage.getItem('expTime') || "")} />
+                <MyTimer
+                  time={Date.parse(sessionStorage.getItem("expTime") || "")}
+                />
               </Timer>
               <button
                 className="next"
@@ -300,13 +298,10 @@ const Test = () => {
           </Column>
         </Container>
       ) : (
-        data1 && !showLoader &&
-        <h3>Not Found</h3>
+        data1 && !showLoader && <h3>Not Found</h3>
       )}
     </>
   );
 };
 
 export default Test;
-
-

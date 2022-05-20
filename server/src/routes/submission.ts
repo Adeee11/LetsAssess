@@ -145,10 +145,11 @@ router.get(
     });
 
     try {
-      const result = await Submission.find({
+      const result = await Submission.findOne({
         assessmentId: assessmentId,
         candidateId: candidateId,
       }).select({ optionsMarked: 1, _id: 0 });
+
       result
         ? res.status(200).json(result)
         : res

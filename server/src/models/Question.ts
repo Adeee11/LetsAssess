@@ -32,7 +32,7 @@ const propsSchema = new Schema<PropsType>({
 const optionSchema = new Schema<OptionType>({
   useCustomComponent: Boolean,
   optionProps: propsSchema,
-  optionId: String,
+  optionId: String || Boolean,
   optionValue: String,
 });
 
