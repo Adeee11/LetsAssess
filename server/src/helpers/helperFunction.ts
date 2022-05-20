@@ -45,6 +45,11 @@ export const areArraysEqual = (arr1: any[], arr2: any[]) => {
 };
 
 // connect to mongoDB database database
-export const connectToMongo = (databaseUrl: string) => {
-  return mongoose.connect(databaseUrl);
+export const connectToMongo = async (databaseUrl: string) => {
+  try {
+    await mongoose.connect(databaseUrl);
+    console.log("database connected");
+  } catch (error) {
+    console.log(error);
+  }
 };
