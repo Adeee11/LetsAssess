@@ -4,10 +4,6 @@ import jwt from "jsonwebtoken";
 import { Assessment } from "models/Assessment";
 import { Candidate } from "models/Candidate";
 import slugify from "slugify";
-import admin from "../config/firebaseConfig";
-
-const fireStore = admin.firestore();
-const getAuth = admin.auth();
 
 const router = express.Router();
 

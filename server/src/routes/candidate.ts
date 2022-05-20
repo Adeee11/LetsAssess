@@ -1,13 +1,11 @@
 import express from "express";
 import slugify from "slugify";
-import admin from "../config/firebaseConfig";
 import { areArraysEqual } from "../helpers/helperFunction";
 import { Candidate } from "models/Candidate";
 import { Submission } from "models/Submissions";
 import { Assessment } from "models/Assessment";
 
 const router = express.Router();
-const firestore = admin.firestore();
 
 // ADD Candidate
 router.post("/", async (req, res) => {

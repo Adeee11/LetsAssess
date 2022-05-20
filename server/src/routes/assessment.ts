@@ -1,12 +1,9 @@
 import express from "express";
 import { Assessment } from "models/Assessment";
 import slugify from "slugify";
-import admin from "../config/firebaseConfig";
-import { removeCorrectOption } from "../helpers/helperFunction";
 import { authenticateToken } from "../middleware/middlewareFunctions";
 
 const router = express.Router();
-const firestore = admin.firestore();
 
 // ASSESSMENTS
 // POST

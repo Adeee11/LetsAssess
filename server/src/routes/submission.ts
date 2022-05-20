@@ -1,11 +1,9 @@
 import express from "express";
 import slugify from "slugify";
-import admin from "../config/firebaseConfig";
 import { authenticateToken } from "../middleware/middlewareFunctions";
 import { OptionMarkedType, Submission } from "models/Submissions";
 
 const router = express.Router();
-const firestore = admin.firestore();
 
 // No need for this
 // // ADDING RESULTS

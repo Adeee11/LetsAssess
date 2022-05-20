@@ -3,10 +3,8 @@ import { Assessment } from "models/Assessment";
 import { Candidate } from "models/Candidate";
 import { Submission } from "models/Submissions";
 import slugify from "slugify";
-import admin from "../config/firebaseConfig";
 
 const router = express.Router();
-const firestore = admin.firestore();
 
 // get all candidates
 router.get("/candidates", async (req, res) => {
