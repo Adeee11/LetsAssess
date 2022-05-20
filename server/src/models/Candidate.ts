@@ -1,8 +1,21 @@
 import mongoose, { Schema } from "mongoose";
 
+interface TestResultType {
+  assessmentId: string;
+  marksObtained: number;
+}
+
+interface CandidateType {
+  candidateId: string;
+  assessmentTaken: boolean;
+  candidateName: string;
+  email: string;
+  testsTaken: TestResultType[];
+}
+
 const testResultSchema = new Schema({
   assessmentId: String,
-  marksObtained: String,
+  marksObtained: Number,
 });
 
 const candidateSchema = new Schema({
@@ -13,6 +26,6 @@ const candidateSchema = new Schema({
   testsTaken: [testResultSchema],
 });
 
-const Candidate = mongoose.model("Candidate", candidateSchema);
+const Candidate = mongoose.model<CandidateType>("Candidate", candidateSchema);
 
 export { Candidate };

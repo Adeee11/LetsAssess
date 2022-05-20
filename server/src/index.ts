@@ -9,7 +9,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/", (req, res) => {
-  res.send("Firebase API");
+  res.send("LetAssess API");
 });
 
 // Assessment routes
@@ -29,13 +29,8 @@ app.use("/user", require("./routes/user"));
 
 const PORT = env("PORT") || 9000;
 
-app.listen(PORT, async () => {
+app.listen(PORT, () => {
   console.log(`Server running on Port: ${PORT}`);
-  const databaseUrl = "mongodb://localhost:27017/letAssess";
-  try {
-    await connectToMongo(databaseUrl);
-    console.log("database connected");
-  } catch (error) {
-    console.log(error);
-  }
+  const databaseUrl = env("DATABASE_URL");
+  connectToMongo(databaseUrl);
 });
