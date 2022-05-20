@@ -15,11 +15,11 @@ const CustomComponent = ({ data }: propsType) => {
   
   useEffect(() => {
     Prism.highlightAll();
-  }, []);
-
+  });
+console.log(data);
   return (
     <pre className={`line-numbers`}>
-      <code className={`language-${data.format}`}>{data.content}</code>
+      <code className={`language-${data.format==="jsx"?"js":data.format}`}>{data.content}</code>
     </pre>
   );
 };
