@@ -6,7 +6,7 @@ margin: 0 auto;
 padding: 30px;
 background: white;
 border-radius: 5px;
-margin-top: 50px;
+
 box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 
 .input-box{

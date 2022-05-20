@@ -5,21 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalContextProvider from './GlobalContext/GlobalContextProvider';
 import { ThemeProvider } from 'styled-components';
-// import { createRoot } from 'react-dom/client';
-// const container = document.getElementById('root');
-// const root = createRoot(container!); // createRoot(container!) if you use TypeScript
 
-// root.render(<React.StrictMode>
-//   <GlobalContextProvider>
-//     <App />
-//   </GlobalContextProvider>
-// </React.StrictMode>);
 
 const theme = {
   pellete:{
     primary:"rgb(253,254,254)",
-    secondary:"",
-    
+    secondary:"rgba(58, 53, 65, 0.87)",
+    main:"linear-gradient(98deg, rgb(198, 167, 254), rgb(145, 85, 253) 94%)",
+    success:"rgb(20, 230, 83)",
+    background:"rgb(244,245,250)"
+  },
+  boxShadow:{
+    card:" rgb(58 53 65 / 10%) 0px 2px 10px 0px"
   } 
  };
 

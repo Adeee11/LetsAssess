@@ -1,5 +1,7 @@
 import React from 'react'
-import { CardContainer } from './CardComponent.styled'
+import { CardContainer } from './CardComponent.styled';
+import { AiOutlineArrowRight } from 'react-icons/ai';
+import { TiTick } from 'react-icons/ti';
 
 type propTypes={
     title:string,
@@ -19,15 +21,19 @@ const Card = ({title, durationInMins, isCompleted, clickHandler}:propTypes) => {
       };
     return (
         <CardContainer key={title}>
-            <div className="data">
+            
                 <img src={imageSrc(title)} alt="CardImage" />
                 <p>{title}</p>
                 <span>{durationInMins} minute</span>
-                {!isCompleted && <p className="start" onClick={clickHandler}>
-                    Start
-                </p>}
-                {isCompleted && <p className="start complete">Completed</p>}
-            </div>
+                {!isCompleted && <div className="start" onClick={clickHandler}>
+                   <span> Start </span>
+                   <span className='arrow'><AiOutlineArrowRight/></span>
+                </div>}
+                <div className='completed'>
+                {isCompleted && <div className="complete"><TiTick/></div>}
+                {isCompleted && <div className="complete c-text">Completed</div>}
+                </div>
+        
         </CardContainer>
     )
 }

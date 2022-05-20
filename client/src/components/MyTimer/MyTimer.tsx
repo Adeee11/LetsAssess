@@ -3,6 +3,7 @@ import { useTimer } from "react-timer-hook";
 import { useNavigate } from "react-router-dom";
 import { Timer } from "./Mytimer.styled";
 import { GlobalContext } from '../../GlobalContext/GlobalContextProvider';
+import { MdOutlineTimer } from "react-icons/md";
 function MyTimer({ time }: any) {
   const nav = useNavigate();
   const ctx= useContext(GlobalContext);
@@ -31,6 +32,9 @@ function MyTimer({ time }: any) {
 
   return (
     <Timer>
+      
+      {/* <FaClock/> */}
+      <MdOutlineTimer color="rgb(145, 85, 253)"/>
       <span>
         {hours < 10 ? "0" : ""}
         {hours}

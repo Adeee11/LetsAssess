@@ -1,6 +1,9 @@
+import { escape } from "querystring";
 import { FormEvent,  useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
 import { Button } from "../components/Button";
+import Footer from "../components/Footer/Footer";
 import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
@@ -89,9 +92,25 @@ const Home = () => {
     }
   }, [isCompleted, saveIsCompleted]);
 
+  const fullscreen=()=>{
+    let elem:any = document.getElementById("root");
+    if(elem){
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+  
+  }
+  
   return (
     <>
+    <TheHome>
       {!showLoader && (
+       
         <Container onSubmit={(e) => submit(e)}>
           <div className="input-box">
             <span>Email</span>
@@ -109,9 +128,10 @@ const Home = () => {
             />
           </div>
           <Button type="submit" value="submit" />
+      
         </Container>
       )}
-
+        
       {showLoader && <Spinner />}
       {showMsg && (
         <MessageBox
@@ -119,8 +139,20 @@ const Home = () => {
           clickHandler={() => setShowMsg(false)}
         />
       )}
+
+
+      </TheHome>
+      <Footer/>      
     </>
   );
 };
 
 export default Home;
+
+
+const TheHome =styled.div`
+  min-height: 100vh;
+  background-color: white;
+  display: flex;
+  align-items: center;
+`
