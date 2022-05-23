@@ -43,7 +43,6 @@ const Test = () => {
       .then((result) => {
         setData1(result);
         console.log(result);
-        console.log("Data1", data1);
       });
 
     // calling optionsMarked API
@@ -86,7 +85,7 @@ const Test = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [title, token, url, data1]);
+  }, [title, token, url]);
 
   useEffect(() => {
     window.onbeforeunload = function () {
