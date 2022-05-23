@@ -12,12 +12,7 @@ router.post("/", async (req, res) => {
   const documentName = slugify(data.title.toLowerCase());
   data.assessmentId = documentName;
   try {
-    // check whether the assessment is already created or not
-    const assessmentCount = await Assessment.count({
-      assessmentId: documentName,
-    });
-    if (assessmentCount)
-      return res.status(400).send("Assessment already created");
+    // need to check whether the assessment is already created or not
     await Assessment.create(data);
 
     res.status(200).send("Assessment stored");
@@ -67,9 +62,9 @@ router.get("/", authenticateToken, async (req, res) => {
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
 router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
-  console.log("Assessment Id", assessmentId);
+
   try {
-    const data = await Assessment.findOne({
+    const data = await Assessment.find({
       assessmentId: assessmentId,
     }).select({ "questions.correctOption": 0 });
 

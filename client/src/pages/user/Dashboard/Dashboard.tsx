@@ -256,7 +256,6 @@ const Dashboard = () => {
               {item.quesType === "mcq" &&
                 item.options.map((opt: any) => (
                   <div key={opt.optionId}>
-                    {console.log("Question", item.quesId)}
                     {optionsMarked.length > parseInt(item.quesId) &&
                       optionsMarked[parseInt(item.quesId) - 1].answers[0] ===
                         opt.optionId && (

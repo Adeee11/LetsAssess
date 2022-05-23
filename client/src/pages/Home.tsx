@@ -56,21 +56,7 @@ const Home = () => {
       alert("Invalid credentials/ or user already entered the test");
     }
   };
-  // console.log(isCompleted);
-
- 
-  // useEffect(() => {
-  //   sessionStorage.clear();
-    // saveIsCompleted({
-    //   "html-and-css": false,
-    //   javascript: false,
-    //   typescript: false,
-    //   react: false,
-    //   "node-js": false,
-    //   git: false,
-    // });
-  // },[]);
-
+  
   useEffect(() => {
     if (
       isCompleted["html-and-css"] &&

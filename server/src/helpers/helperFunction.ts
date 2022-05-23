@@ -1,4 +1,3 @@
-import { OptionMarkedType } from "models/Submissions";
 import mongoose from "mongoose";
 
 // check if two arrays have same contents

@@ -62,25 +62,8 @@ const DashBoard = () => {
     }
   }, [isCompleted, nav])
 
-  const fullscreen=()=>{
-    let elem:any = document.getElementById("root");
-    if(elem){
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-    }
-  
-  }
 
-  const exitfullscreen=()=>{
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
+  
   
 
   return (

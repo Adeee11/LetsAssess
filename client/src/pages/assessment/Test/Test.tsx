@@ -43,7 +43,7 @@ const Test = () => {
       .then((result) => {
         setData1(result);
         console.log(result);
-        console.log("Data1", data1);
+        // console.log("Data1", data1);
       });
 
     // calling optionsMarked API
