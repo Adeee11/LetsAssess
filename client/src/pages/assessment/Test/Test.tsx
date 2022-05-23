@@ -86,7 +86,7 @@ const Test = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [title, token, url]);
+  }, [title, token, url, data1]);
 
   useEffect(() => {
     window.onbeforeunload = function () {
