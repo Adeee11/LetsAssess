@@ -1,4 +1,3 @@
-import { escape } from "querystring";
 import { FormEvent,  useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -18,6 +17,7 @@ const Home = () => {
   const { setToken, url, isCompleted, saveIsCompleted} = ctx;
 
   const submit = async (e: FormEvent) => {
+    
     e.preventDefault();
     setShowLoader(true);
     var myHeaders = new Headers();
@@ -92,19 +92,7 @@ const Home = () => {
     }
   }, [isCompleted, saveIsCompleted]);
 
-  const fullscreen=()=>{
-    let elem:any = document.getElementById("root");
-    if(elem){
-      if (elem.requestFullscreen) {
-        elem.requestFullscreen();
-      } else if (elem.webkitRequestFullscreen) { /* Safari */
-        elem.webkitRequestFullscreen();
-      } else if (elem.msRequestFullscreen) { /* IE11 */
-        elem.msRequestFullscreen();
-      }
-    }
-  
-  }
+ 
   
   return (
     <>
@@ -128,7 +116,6 @@ const Home = () => {
             />
           </div>
           <Button type="submit" value="submit" />
-      
         </Container>
       )}
         
@@ -155,4 +142,5 @@ const TheHome =styled.div`
   background-color: white;
   display: flex;
   align-items: center;
+  justify-content: center;
 `

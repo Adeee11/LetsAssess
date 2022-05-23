@@ -6,6 +6,7 @@ import { CardComponent } from "../CardComponent";
 import slugify from "slugify";
 import { GlobalContext } from "../../GlobalContext/GlobalContextProvider";
 import styled from "styled-components";
+import Footer from "../Footer/Footer";
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -25,6 +26,7 @@ const DashBoard = () => {
 
   const clickHandler = (arg: string) => {
     nav(arg);
+    // fullscreen();
   };
 
   useEffect(() => {
@@ -60,7 +62,26 @@ const DashBoard = () => {
     }
   }, [isCompleted, nav])
 
+  const fullscreen=()=>{
+    let elem:any = document.getElementById("root");
+    if(elem){
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
+  
+  }
 
+  const exitfullscreen=()=>{
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+  
 
   return (
     <>
@@ -183,6 +204,8 @@ const DashBoard = () => {
               </div>
             </div>
           </MyContainer>
+
+          <Footer/>
         </TheDashBoard>
       )}
     </>
