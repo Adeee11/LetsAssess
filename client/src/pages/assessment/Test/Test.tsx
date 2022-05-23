@@ -21,6 +21,8 @@ const Test = () => {
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
 
+  const [isFullScreen, setIsFullScreen] = useState(true);
+
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -43,7 +45,6 @@ const Test = () => {
       .then((result) => {
         setData1(result);
         console.log(result);
-        // console.log("Data1", data1);
       });
 
     // calling optionsMarked API
@@ -60,7 +61,7 @@ const Test = () => {
       );
       console.log("response status", response.status);
       const res = await response.json();
-      // console.log("res", res);
+      console.log("res", res);
       const options: any[] = [];
       if (response.status === 200) {
         console.log("Called succesfully");
@@ -86,7 +87,7 @@ const Test = () => {
     } catch (error) {
       console.log(error);
     }
-  }, [title, token, url, data1]);
+  }, [title, token, url]);
 
   useEffect(() => {
     window.onbeforeunload = function () {
@@ -94,8 +95,15 @@ const Test = () => {
     };
   }, []);
 
+  const exitfullscreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  }
+
   const submitHandler = async () => {
     setShowLoader(true);
+    exitfullscreen();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -118,7 +126,7 @@ const Test = () => {
         // console.log(isCompleted);
         return response.json();
       })
-      .then((result) => {})
+      .then((result) => { })
       .catch((error) => console.log("error", error));
   };
 
@@ -195,6 +203,10 @@ const Test = () => {
     }
   };
 
+  
+ 
+
+  
   return (
     <>
       {(!data1 || showLoader) && <Spinner />}

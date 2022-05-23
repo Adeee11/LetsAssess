@@ -7,6 +7,7 @@ min-height: 100vh;
 display: flex;
 justify-content: center;
 align-items: center;
+background-color: ${({theme})=>theme.pellete.primary};
     .loader {
   border: 7px solid #f3f3f3;
   border-radius: 50%;

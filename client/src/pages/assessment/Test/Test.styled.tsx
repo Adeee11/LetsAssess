@@ -6,6 +6,7 @@ display: flex;
 min-height: 100vh;
 max-height: 100vh;
 user-select: none;
+background-color: ${({theme})=>theme.pellete.primary};
 @media(max-width:900px){
     flex-direction: column;
 }
@@ -41,17 +42,20 @@ header{
     display: flex;
     align-items: center;
     justify-content  :space-evenly ;
+    padding: 10px;
     .next{
         font-size: 16px;
         padding: 6px 10px;
-        background: black;
-        color: white;
+        background:${({theme})=>theme.pellete.main};
+        color: ${({theme})=>theme.pellete.primary};
         border-radius: 4px;
         min-width: 126px;
         cursor: pointer;
+        border: none;
     }
     .next:disabled{
-        background: gray;
+        cursor:unset;
+        background:linear-gradient(98deg, rgb(202, 180, 241), rgb(202, 195, 214) 94%);
     }
 }
 `
@@ -111,7 +115,7 @@ const Section = styled.div`
     color:black;
     border:1px solid black;
     .sn{
-        color: skyblue;
+        color:rgb(145, 85, 253);
     }
 
 }    
