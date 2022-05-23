@@ -78,7 +78,7 @@ router.post("/marks", async (req, res) => {
     const isUpdated = await Candidate.updateOne(
       { candidateId: candidateId },
       {
-        $set: {
+        $push: {
           testsTaken: [
             {
               assessmentId: assessmentId,
@@ -101,7 +101,7 @@ router.get("/:id/assessments", async (req, res) => {
     lower: true,
     remove: /[*+~.()'"!:@]/g,
   });
- 
+
   try {
     const data = await Candidate.findOne({ candidateId: candidateId }).select({
       testsTaken: 1,
