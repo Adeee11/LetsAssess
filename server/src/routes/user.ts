@@ -29,7 +29,7 @@ router.get("/:assessment/questions", async (req, res) => {
   const assessmentId = slugify(req.params.assessment.toLowerCase());
 
   try {
-    const data = await Assessment.find({ assessmentId: assessmentId }).select({
+    const data = await Assessment.findOne({ assessmentId: assessmentId }).select({
       questions: 1,
     });
 
@@ -54,7 +54,7 @@ router.get("/options-marked/:assessment/:candidate", async (req, res) => {
   });
 
   try {
-    const result = await Submission.find({
+    const result = await Submission.findOne({
       assessmentId: assessmentId,
       candidateId: candidateId,
     }).select({ optionsMarked: 1, _id: 0 });
