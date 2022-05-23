@@ -236,10 +236,16 @@ const Dashboard = () => {
               <Question>
                 <span>{item.quesId}.</span>
                 {item.quesValue}
-                {/* {arrayEquals( item.correctOption, optionsMarked[(index+1).toString()])} */}
-                {arrayEquals(
+                {/* {console.log(
+                  "Correct Option",
                   item.correctOption,
-                  optionsMarked[(index + 1).toString()]
+                  "\nOption Marked",
+                  optionsMarked[index + 1].answers
+                )} */}
+                {optionsMarked[index + 1] &&
+                arrayEquals(
+                  item.correctOption,
+                  optionsMarked[index + 1].answers
                 ) ? (
                   <span className="marks-right">&#10003;</span>
                 ) : (

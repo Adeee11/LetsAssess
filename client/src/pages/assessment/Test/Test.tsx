@@ -21,7 +21,7 @@ const Test = () => {
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
 
-  const [isFullScreen, setIsFullScreen] = useState(true);
+  
 
   const { title = "" } = useParams();
 

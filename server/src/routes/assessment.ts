@@ -62,7 +62,6 @@ router.get("/", authenticateToken, async (req, res) => {
 //GET ASSESSMENT DATA WITHOUT CORRECT OPTION
 router.get("/:id/questions", authenticateToken, async (req, res) => {
   const assessmentId = slugify(req.params.id.toLowerCase());
-
   try {
     const data = await Assessment.find({
       assessmentId: assessmentId,

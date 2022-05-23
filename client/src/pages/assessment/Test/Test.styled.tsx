@@ -42,7 +42,7 @@ header{
     display: flex;
     align-items: center;
     justify-content  :space-evenly ;
-    padding: 10px;
+    padding: 20px 0 40px;
     .next{
         font-size: 16px;
         padding: 6px 10px;
