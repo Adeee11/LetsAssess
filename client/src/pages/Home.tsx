@@ -6,6 +6,7 @@ import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
+import assessmentImage from "../assets/assessment-2.jpg";
 
 import {
   Container,
@@ -91,7 +92,7 @@ const Home = () => {
             <img src="images/logo.png" alt="IWEBCODE" />
           </LogoConatiner>
           <ImageContainer>
-            <img src="images/assessment-2.jpg" alt="Assessment" />
+            <img src={assessmentImage} alt="Assessment" />
           </ImageContainer>
           <Form onSubmit={(e) => submit(e)} className={"Form"}>
             <Typography
