@@ -1,17 +1,22 @@
-import { InputContainer } from './Input.styled'
+import { TextField } from "@mui/material";
 
-type propTypes={
-    type:string,
-    changeHandler:(e:string)=>void
-}
-const Input = ({type, changeHandler}:propTypes) => {
+type propTypes = {
+  label: string;
+  type: string;
+  changeHandler: (e: string) => void;
+};
+const Input = ({ label, type, changeHandler }: propTypes) => {
   return (
-    <InputContainer 
-    type={type}
-    onChange={(e) => changeHandler(e.target.value)}
-    required
+    <TextField
+      id="outlined-basic"
+      variant="outlined"
+      label={label}
+      type={type}
+      fullWidth
+      onChange={(e) => changeHandler(e.target.value)}
+      required
     />
-  )
-}
+  );
+};
 
-export default Input
+export default Input;
