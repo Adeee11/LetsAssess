@@ -78,7 +78,7 @@ router.post("/marks", async (req, res) => {
     const isUpdated = await Candidate.updateOne(
       { candidateId: candidateId },
       {
-        $set: {
+        $push: {
           testsTaken: [
             {
               assessmentId: assessmentId,
