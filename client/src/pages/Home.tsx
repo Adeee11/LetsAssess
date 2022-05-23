@@ -1,9 +1,7 @@
-import { Typography, Box } from "@mui/material";
+import { Typography } from "@mui/material";
 import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Button } from "../components/Button";
-import Footer from "../components/Footer/Footer";
 import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
@@ -12,12 +10,9 @@ import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
 import {
   Container,
   Wrapper,
-  //   FooterContainer,
   Form,
-  //   ImageContainer,
   LogoConatiner,
   ImageContainer,
-  //   PageContainer,
 } from "./Home.Styled";
 
 const Home = () => {
@@ -90,70 +85,13 @@ const Home = () => {
 
   return (
     <Wrapper className="wrapper">
-      {/* <TheHome>
-        {!showLoader && (
-          <>
-            <PageContainer>
-              <LogoConatiner>
-                <img src="images/logo.png" alt="IWEBCODE" />
-              </LogoConatiner>
-              <Container  className="container">
-                <Typography variant="h5" component={"h1"} paddingLeft={"10px"}>
-                  Welcome to LetAssess
-                </Typography>
-                <Typography
-                  variant="body2" 
-                  component={"h2"}
-                  paddingLeft={"10px"}
-                  marginBottom={"20px"}
-                >
-                  Please fill in the details to start the test
-                </Typography>
-                <Form onSubmit={(e) => submit(e)} className={"Form"}>
-                  <div className="input-box">
-                    <Input
-                      label="Email"
-                      type="email"
-                      changeHandler={(i) => ctx.saveCandidateEmail(i)}
-                    />
-                  </div>
-
-                  <div className="input-box">
-                    <Input
-                      label="Name"
-                      type="text"
-                      changeHandler={(i) => ctx.saveCandidateName(i)}
-                    />
-                  </div>
-                  <Button type="submit" value="LOGIN" />
-                </Form>
-              </Container>
-              <ImageContainer>
-                <img src="images/assessment-1.jpg" alt="Assessment photo" />
-              </ImageContainer> 
-            </PageContainer>
-            {/* <FooterContainer>
-              <Footer />
-            </FooterContainer> 
-          </>
-        )}
-
-        {showLoader && <Spinner />}
-        {showMsg && (
-          <MessageBox
-            msg={`Completed all the tests.`}
-            clickHandler={() => setShowMsg(false)}
-          />
-        )}
-        </TheHome>*/}
-
       {!showLoader && (
         <Container className="container-s">
           <LogoConatiner>
             <img src="images/logo.png" alt="IWEBCODE" />
           </LogoConatiner>
           <ImageContainer>
-            <img src="images/assessment-2.jpg" alt="Assessment photo" />
+            <img src="images/assessment-2.jpg" alt="Assessment" />
           </ImageContainer>
           <Form onSubmit={(e) => submit(e)} className={"Form"}>
             <Typography
