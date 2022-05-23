@@ -16,7 +16,7 @@ import {
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
 
-const elem: any = document.getElementById('root');
+
   if (document.addEventListener) {
     document.addEventListener('fullscreenchange', exitHandler, false);
     document.addEventListener('mozfullscreenchange', exitHandler, false);
