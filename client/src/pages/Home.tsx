@@ -7,6 +7,10 @@ import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
 import assessmentImage from "../assets/assessment-2.jpg";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
 
 import {
   Container,
