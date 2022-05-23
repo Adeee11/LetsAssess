@@ -52,7 +52,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     localStorage.removeItem('isAdmin');
   }
 
-  const url = 'http://localhost:9000';
+  const url = 'https://lionfish-app-hb2nk.ondigitalocean.app/';
 
   const saveName = (name: string) => {
     setCandidate({ ...candidate, name: name });
