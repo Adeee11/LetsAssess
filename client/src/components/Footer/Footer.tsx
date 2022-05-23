@@ -17,6 +17,7 @@ export default Footer
 
 
 const FooterContainer= styled.footer`
+  width: 100%;
   background-color: ${({theme})=>theme.pellete.primary};
   color:${({theme})=>theme.pellete.psecondary};
   padding: 20px;

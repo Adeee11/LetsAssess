@@ -67,7 +67,7 @@ color: black;
 font-size: 14px;
 margin-top: 20px;
 margin-bottom: 20px;
-border: 1px dotted gray;
+border: 1px dotted rgb(145, 85, 253);
 padding: 4px;
 width: 85%;
 @media(max-width:900px){
@@ -83,7 +83,7 @@ color: black;
 font-size: 14px;
 margin-top: 20px;
 margin-bottom: 20px;
-border: 1px dotted gray;
+border: 1px dotted rgb(145, 85, 253);
 padding: 0px;
 width: 85%;
 /* background:lightgray; */
@@ -113,7 +113,7 @@ const Timer = styled.div``
 const Section = styled.div`
 .act{
     color:black;
-    border:1px solid black;
+    border:1px solid rgb(145, 85, 253);
     .sn{
         color:rgb(145, 85, 253);
     }
@@ -123,7 +123,7 @@ const Section = styled.div`
 const Option = styled.div`
 width: 70%;
 margin: 0 auto;
-border:1px solid gray;
+border:1px solid rgb(198, 167, 254);
 display: flex;
 align-items: center;
 justify-content: space-between;
@@ -143,7 +143,7 @@ span{
     padding-left: 10px;
 }
 &:hover{
-    border-color:black;
+    border:1px solid rgb(145, 85, 253);
 :first-child{
     
     color:black;
