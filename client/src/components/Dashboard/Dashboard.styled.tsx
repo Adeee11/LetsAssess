@@ -81,6 +81,8 @@ const LowerNavBar = styled.div`
 const TheDashBoard = styled.div`
       background:${({ theme }) => theme.pellete.background};
       min-height: calc(100vh - 125px);
+      width: 100%;
+      height: 100%;
   `
 
 

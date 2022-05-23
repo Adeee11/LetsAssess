@@ -15,13 +15,34 @@ import {
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
+
+
+  if (document.addEventListener) {
+    document.addEventListener('fullscreenchange', exitHandler, false);
+    document.addEventListener('mozfullscreenchange', exitHandler, false);
+    document.addEventListener('MSFullscreenChange', exitHandler, false);
+    document.addEventListener('webkitfullscreenchange', exitHandler, false);
+  }
+
+  function exitHandler() {
+    if (document.fullscreenElement !== null) {
+      console.log('Element has entered fullscreen mode');
+    }
+
+    else {
+      window.history.back();
+      console.log('Element has exited fullscreen mode');
+    }
+  }
+
+
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
 
-  
+
 
   const { title = "" } = useParams();
 
@@ -203,11 +224,8 @@ const Test = () => {
     }
   };
 
-  
- 
 
-  
-  return (
+return (
     <>
       {(!data1 || showLoader) && <Spinner />}
       {data1 && queNo < data1?.questions?.length && !showLoader ? (
