@@ -1,10 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
-import {Container,Card} from "./Dashboard.styled";
+import { Container, Card } from "./Dashboard.styled";
 
 const user = "Admin";
 
@@ -42,7 +41,7 @@ const Dashboard = () => {
 
   return (
     <>
-  
+
       <Header info="All Candidates" user={user} />
       <Container >
         <div className="container pb-4" >
@@ -51,22 +50,18 @@ const Dashboard = () => {
               allCandidates.map((candidate) => (
                 <div className=" col-sm-12  col-md-6 col-lg-4 pt-4" key={candidate.email} >
                   <Card onClick={() => clickHandler(candidate.email, candidate.candidateName)} isFlex={true}>
-                    <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt=""/>
+                    <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
                     <div className="right">
-                    <span>{candidate.candidateName}</span>
-                    <span>{candidate.email}</span>
+                      <span>{candidate.candidateName}</span>
+                      <span>{candidate.email}</span>
                     </div>
                   </Card>
                 </div>
               ))}
-
           </div>
-
-
         </div>
       </Container>
       <Footer />
-   
     </>
   );
 };
