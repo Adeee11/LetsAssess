@@ -25,6 +25,7 @@
     "react-countdown": "^2.3.2",
     "react-dom": "^18.0.0",
     "react-full-screen": "^1.1.0",
+    "react-hook-form": "^7.31.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.0",
@@ -59,7 +60,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-prismjs": "^2.1.0",
-    "@babel/runtime": "^7.15.4"
+    "@babel/runtime": "^7.15.4",
+    "babel-plugin-prismjs": "^2.1.0"
   }
 }

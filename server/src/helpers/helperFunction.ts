@@ -1,4 +1,4 @@
-import { OptionMarkedType } from "models/Submissions";
+import * as bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
 // check if two arrays have same contents
@@ -18,4 +18,17 @@ export const connectToMongo = async (databaseUrl: string) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+// encrypt Password
+export const encryptPassword = async (password: string) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
+  return hashPassword;
+};
+
+// compare Password
+export const comparePassword = async (password: string, dbPassword: string) => {
+  const isSame = bcrypt.compare(password, dbPassword);
+  return isSame;
 };

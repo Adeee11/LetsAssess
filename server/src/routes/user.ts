@@ -1,10 +1,32 @@
 import express from "express";
+import { encryptPassword } from "helpers/helperFunction";
 import { Assessment } from "models/Assessment";
 import { Candidate } from "models/Candidate";
 import { Submission } from "models/Submissions";
+import { User } from "models/User";
 import slugify from "slugify";
 
 const router = express.Router();
+
+// add a user
+router.post("/", async (req, res) => {
+  try {
+    const name = req.body.name;
+    const email = req.body.email;
+    const password = await encryptPassword(req.body.password);
+
+    const user = await User.create({
+      name: name,
+      email: email,
+      password: password,
+    });
+    user
+      ? res.status(200).send("User created")
+      : res.status(500).send("Some error when creating user in db");
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
 
 // get all candidates
 router.get("/candidates", async (req, res) => {
