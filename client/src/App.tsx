@@ -7,14 +7,13 @@ import { Test } from "./pages/assessment/Test";
 import { User } from "./pages/user";
 import { Dashboard } from "./pages/user/Dashboard";
 import { GlobalContext } from "./GlobalContext/GlobalContextProvider";
+import Alltests from "./pages/user/Dashboard/AllTests/Alltests";
+import Submissions from "./pages/user/Dashboard/AllTests/submissions/Submissions";
 
 
 function App() {
-
   const ctx = useContext(GlobalContext)
   const { isAdmin, token } = ctx
-  
-  
 
   return (
     <AppContainer>
@@ -23,6 +22,8 @@ function App() {
           <Route path="/" element={<Home />}></Route>
           <Route path="/user" element={<User />}></Route>
           {isAdmin && <Route path="/user/dashboard" element={<Dashboard />}></Route>}
+          {isAdmin && <Route path="/user/dashboard/:email" element={<Alltests />}></Route>}
+          {isAdmin && <Route path="/user/dashboard/:email/:title" element={<Submissions />}></Route>}
           {token && <Route path="/assessment/*" element={<Assessment />}></Route>}
           {token && <Route path="/assessment/:title" element={<Test />}></Route>}
           <Route path="*" element={<Navigate to="/" replace />} />

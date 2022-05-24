@@ -30,7 +30,8 @@ import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
     }
 
     else {
-      window.history.back();
+      // window.history.back();
+      window.location.replace(`${window.location.origin}/assessment`)
       console.log('Element has exited fullscreen mode');
     }
   }
@@ -110,11 +111,11 @@ const Test = () => {
     }
   }, [title, token, url]);
 
-  useEffect(() => {
-    window.onbeforeunload = function () {
-      return "Data will be lost ";
-    };
-  }, []);
+  // useEffect(() => {
+  //   window.onbeforeunload = function () {
+  //     return "Data will be lost ";
+  //   };
+  // }, []);
 
   const exitfullscreen = () => {
     if (document.exitFullscreen) {
@@ -224,7 +225,7 @@ const Test = () => {
     }
   };
 
-
+ 
 return (
     <>
       {(!data1 || showLoader) && <Spinner />}
