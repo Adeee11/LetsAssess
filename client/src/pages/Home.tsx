@@ -1,23 +1,33 @@
-import { FormEvent,  useContext, useEffect, useState } from "react";
+import { Typography } from "@mui/material";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import styled from "styled-components";
 import { Button } from "../components/Button";
-import Footer from "../components/Footer/Footer";
 import Input from "../components/Input/Input";
 import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
-import { Container } from "./Home.Styled";
+import assessmentImage from "../assets/assessment-2.jpg";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+
+import {
+  Container,
+  Wrapper,
+  Form,
+  LogoConatiner,
+  ImageContainer,
+} from "./Home.Styled";
 
 const Home = () => {
   const [showMsg, setShowMsg] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { setToken, url, isCompleted, saveIsCompleted} = ctx;
+  const { setToken, url, isCompleted, saveIsCompleted } = ctx;
 
   const submit = async (e: FormEvent) => {
-    
     e.preventDefault();
     setShowLoader(true);
     var myHeaders = new Headers();
@@ -56,7 +66,7 @@ const Home = () => {
       alert("Invalid credentials/ or user already entered the test");
     }
   };
-  
+
   useEffect(() => {
     if (
       isCompleted["html-and-css"] &&
@@ -65,7 +75,7 @@ const Home = () => {
       isCompleted["react"] &&
       isCompleted["typescript"] &&
       isCompleted["git"]
-    ){
+    ) {
       setShowMsg(true);
       saveIsCompleted({
         "html-and-css": false,
@@ -78,33 +88,52 @@ const Home = () => {
     }
   }, [isCompleted, saveIsCompleted]);
 
- 
-  
   return (
-    <>
-    <TheHome>
+    <Wrapper className="wrapper">
       {!showLoader && (
-       
-        <Container onSubmit={(e) => submit(e)}>
-          <div className="input-box">
-            <span>Email</span>
-            <Input
-              type="email"
-              changeHandler={(i) => ctx.saveCandidateEmail(i)}
-            />
-          </div>
+        <Container className="container-s">
+          <LogoConatiner>
+            <img src="images/logo.png" alt="IWEBCODE" />
+          </LogoConatiner>
+          <ImageContainer>
+            <img src={assessmentImage} alt="Assessment" />
+          </ImageContainer>
+          <Form onSubmit={(e) => submit(e)} className={"Form"}>
+            <Typography
+              variant="h5"
+              component={"h1"}
+              paddingLeft={"10px"}
+              paddingBottom={"3px"}
+            >
+              Welcome to LetAssess
+            </Typography>
+            <Typography
+              variant="body2"
+              component={"h2"}
+              paddingLeft={"10px"}
+              marginBottom={"20px"}
+            >
+              Please fill in the details to start the assessment
+            </Typography>
+            <div className="input-box">
+              <Input
+                label="Email"
+                type="email"
+                changeHandler={(i) => ctx.saveCandidateEmail(i)}
+              />
+            </div>
 
-          <div className="input-box">
-            <span>Name</span>
-            <Input
-              type="text"
-              changeHandler={(i) => ctx.saveCandidateName(i)}
-            />
-          </div>
-          <Button type="submit" value="submit" />
+            <div className="input-box">
+              <Input
+                label="Name"
+                type="text"
+                changeHandler={(i) => ctx.saveCandidateName(i)}
+              />
+            </div>
+            <Button type="submit" value="LOGIN" />
+          </Form>
         </Container>
       )}
-        
       {showLoader && <Spinner />}
       {showMsg && (
         <MessageBox
@@ -112,21 +141,8 @@ const Home = () => {
           clickHandler={() => setShowMsg(false)}
         />
       )}
-
-
-      </TheHome>
-      <Footer/>      
-    </>
+    </Wrapper>
   );
 };
 
 export default Home;
-
-
-const TheHome =styled.div`
-  min-height: 100vh;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-`

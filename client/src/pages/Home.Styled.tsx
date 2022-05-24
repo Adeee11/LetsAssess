@@ -1,49 +1,76 @@
 import styled from "styled-components";
 
-const Container= styled.form`
-width:700px;
-margin: 0 auto;
-padding: 30px;
-background: white;
-border-radius: 5px;
+const LogoConatiner = styled.div`
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  max-width: 200px;
+  height: fit-content;
+  background: white;
 
-box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+  img {
+    width: 100%;
+    height: auto;
+  }
+  @media (min-width: 768px) {
+    background: transparent;
+  }
+`;
 
-.input-box{
-    margin: 0 auto;
-    width:80%;
-    /* border:1px solid black; */
-   margin-bottom: 30px;
-   margin-top: 30px;
-}
-/* input{
-    padding: 6px;
-    border-radius: 4px;
-    border: 1px solid gray;
-    min-width: 400px;
-    outline: none;
-    @media (max-width:768px){
-        min-width: auto;
-        width: 100%;
-    }
-} */
-span{
-    min-width: 70px;
-    display: inline-block;
-    font-size: 16px;
-    color: gray;
-    @media(max-width:768px){
-        margin-bottom: 10px;
-    }
-}
+const Container = styled.div`
+  display: flex;
+  width: 100%;
+`;
 
-@media (max-width:768px){
-    width: 80vw;
-    padding: 10px;
-    
-}
+const Form = styled.form`
+  max-width: 400px;
+  padding: 0 20px;
+  padding-top: 100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: center;
 
-    
-`
+  @media (min-width: 768px) {
+    margin: 0;
+  }
 
-export {Container};
+  button {
+    background: #946bfd;
+    margin: 20px 0;
+    box-shadow: rgb(58 53 65 / 42%) 0px 4px 8px -4px;
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    padding: 8.5px 26px;
+  }
+
+  .input-box {
+    width: 100%;
+    margin-bottom: 30px;
+    margin-top: 30px;
+  }
+`;
+const Wrapper = styled.div`
+  width: 100vw;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+`;
+
+const ImageContainer = styled.div`
+  width: 70%;
+  display: none;
+  @media (min-width: 768px) {
+    display: flex;
+    background: #f4f5fa;
+  }
+  img {
+    width: 100%;
+    height: auto;
+  }
+`;
+
+export { Container, Form, LogoConatiner, Wrapper, ImageContainer };
