@@ -59,18 +59,21 @@ const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   align-content: center;
+ 
 `;
 
 const ImageContainer = styled.div`
   width: 70%;
   display: none;
-
+  background: #f4f5fa;
+  overflow: hidden;
   @media (min-width: 768px) {
     display: flex;
-    background: #f4f5fa;
   }
   img {
-    width: 100%;
+    margin: 0 auto;
+    margin-top: 100px;
+    width: 59%;
     height: auto;
   }
 `;

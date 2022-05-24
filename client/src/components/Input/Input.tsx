@@ -6,8 +6,9 @@ import "@fontsource/roboto/700.css";
 import { Path, UseFormRegister } from "react-hook-form";
 
 interface RegisterTypes {
-  email: string;
-  name: string;
+  email?: string;
+  name?: string;
+  password?: string;
 }
 
 type propTypes = {
@@ -15,11 +16,12 @@ type propTypes = {
   type: string;
   register: UseFormRegister<RegisterTypes>;
   registerValue: Path<RegisterTypes>;
+  id: string;
 };
-const Input = ({ label, type, register, registerValue }: propTypes) => {
+const Input = ({ id, label, type, register, registerValue }: propTypes) => {
   return (
     <TextField
-      id="outlined-basic"
+      id={id}
       variant="outlined"
       label={label}
       type={type}

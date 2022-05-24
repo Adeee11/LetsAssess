@@ -80,7 +80,7 @@ router.post("/user", async (req, res) => {
       const JWT_TOKEN = jwt.sign(userEmail, accessKey);
       return JWT_TOKEN
         ? res.status(200).send(JWT_TOKEN)
-        : res.status(500).send("Error while creating token");
+        : res.status(403).send("Error while creating token");
     }
   } catch (error) {
     res.status(500).json(error);
