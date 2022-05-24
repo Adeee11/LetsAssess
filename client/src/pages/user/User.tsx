@@ -5,7 +5,7 @@ import { Typography } from "@mui/material";
 import { Button } from "../../components/Button";
 import { Input } from "../../components/Input";
 import { SubmitHandler, useForm } from "react-hook-form";
-import assessmentImage from "../../assets/assessment-2.jpg";
+import assessmentImage from "../../assets/assessment-9.png";
 
 import Spinner from "../../components/Spinner/Spinner";
 import "@fontsource/roboto/300.css";
@@ -58,7 +58,7 @@ const User = () => {
 
   useEffect(() => {
     !isLoggedIn && discardAdmin();
-  }, [discardAdmin]);
+  }, [discardAdmin,isLoggedIn]);
   return (
     <>
       {showLoader ? (

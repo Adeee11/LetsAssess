@@ -7,7 +7,7 @@ import { MessageBox } from "../components/MessageBox";
 import Spinner from "../components/Spinner/Spinner";
 import { GlobalContext } from "../GlobalContext/GlobalContextProvider";
 import { SubmitHandler, useForm } from "react-hook-form";
-import assessmentImage from "../assets/assessment-2.jpg";
+import assessmentImage from "../assets/assessment-9.png";
 import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
@@ -31,13 +31,20 @@ const Home = () => {
   const [showLoader, setShowLoader] = useState(false);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
-  const { setToken, url, isCompleted, saveIsCompleted } = ctx;
+  const {
+    setToken,
+    url,
+    isCompleted,
+    saveIsCompleted,
+    saveCandidateName,
+    saveCandidateEmail,
+  } = ctx;
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setShowLoader(true);
-    ctx.candidate.email = data.email;
-    ctx.candidate.name = data.name;
+    saveCandidateEmail(data.email);
+    saveCandidateName(data.name);
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
