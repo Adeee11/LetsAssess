@@ -1,5 +1,5 @@
 import { Typography } from "@mui/material";
-import { FormEvent, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/Button";
 import Input from "../components/Input/Input";
@@ -32,12 +32,7 @@ const Home = () => {
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
   const { setToken, url, isCompleted, saveIsCompleted } = ctx;
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm<Inputs>();
+  const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     ctx.candidate.email = data.email;
