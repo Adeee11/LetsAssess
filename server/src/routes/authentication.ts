@@ -1,8 +1,10 @@
 import { env } from "env";
 import express from "express";
+import { comparePassword } from "helpers/helperFunction";
 import jwt from "jsonwebtoken";
 import { Assessment } from "models/Assessment";
 import { Candidate } from "models/Candidate";
+import { User } from "models/User";
 import slugify from "slugify";
 
 const router = express.Router();
@@ -58,6 +60,27 @@ router.post("/", async (req, res) => {
       res.send(500).json({
         error: "SECRET KEY NOT FOUND",
       });
+    }
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
+// User authenication and login
+router.post("/user", async (req, res) => {
+  const userEmail = req.body.email;
+  const password = req.body.password;
+  try {
+    const user = await User.findOne({ email: userEmail });
+    if (!comparePassword(password, user.password))
+      return res.status(403).send("Password doesn't match");
+    const accessKey = env("ACCESS_KEY");
+    if (accessKey) {
+      // currently giving no expiry time to user token
+      const JWT_TOKEN = jwt.sign(userEmail, accessKey);
+      return JWT_TOKEN
+        ? res.status(200).send(JWT_TOKEN)
+        : res.status(500).send("Error while creating token");
     }
   } catch (error) {
     res.status(500).json(error);
