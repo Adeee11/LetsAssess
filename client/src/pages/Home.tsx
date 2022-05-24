@@ -181,7 +181,7 @@ const Home = () => {
                 label="Name"
                 type="text"
                 register={register}
-                registerValue={"email"}
+                registerValue={"name"}
               />
             </div>
             <Button type="submit" value="LOGIN" />
