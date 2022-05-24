@@ -74,6 +74,13 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     sessionStorage.setItem('isCompleted', JSON.stringify(i))
   }
 
+  // const logout=()=>{
+  //   sessionStorage.clear();
+  //   setToken('');
+  //   setCandidate({name:'', email:''})
+  // }
+
+  
   const data = {
     candidate: candidate,
     saveCandidateName: saveName,
@@ -85,7 +92,8 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     url,
     isAdmin,
     saveAdmin,
-    discardAdmin
+    discardAdmin,
+  
   };
 
 

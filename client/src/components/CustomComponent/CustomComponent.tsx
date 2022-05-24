@@ -16,7 +16,7 @@ const CustomComponent = ({ data }: propsType) => {
   useEffect(() => {
     Prism.highlightAll();
   });
-console.log(data);
+// console.log(data);
   return (
     <pre className={`line-numbers`}>
       <code className={`language-${data.format==="jsx"?"js":data.format}`}>{data.content}</code>

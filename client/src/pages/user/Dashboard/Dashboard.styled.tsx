@@ -1,36 +1,52 @@
 import styled from 'styled-components';
 
 const Container= styled.div`
-    max-width:950px ;
-    align-items: center;
-    margin: 0 auto;
-    display: flex;
-    flex-wrap: wrap;
-    @media (max-width:768px){
-      max-width   :none ;
-      width: 100%;
-}
+   
+    margin-top: 125px;
+    min-height: calc(100vh - 125px);
+    background-color: ${({theme})=>theme.pellete.background};
+   
+   
 `
-const Card= styled.div`
-    border-radius: 4px;
-    padding: 20px;
-    display:inline-block;
-    margin-left: 30px;
-    margin-bottom: 30px;
-    margin-top: 30px;
-    box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2);
+type propType={
+    isFlex?:boolean
+}
+const Card= styled.div<propType>`
+    display :${({isFlex})=>isFlex?"flex":""};
+    align-items: center;
     font-size: 14px;
     text-align: center;
-    width: 200px;
-    /* height: 100px; */
+    width: 100%;
+    padding: 10px;
+    width:100%;
+    background-color:${({theme})=>theme.pellete.primary};
+    margin: 0 auto;
+    width:100% ;   
+    border-radius: 6px;
+    box-shadow:  ${({theme})=>theme.boxShadow.card};
+    color: rgba(58, 53, 65, 0.87);
+
     cursor: pointer;
     span{
         padding: 10px;
     }
     img{
+        width: 100px;
+        height: 100px;
+        padding: 20px;
+        object-fit: contain;
+        
+    }
+    .img{
+        border-radius: 50%;
+        padding: 0px;
         width: 50px;
         height: 50px;
-        object-fit: contain;
+        margin-right: 10px;
+    }
+    .right{
+     
+        text-align: left;
     }
     @media (max-width:768px){
      margin-left: auto;
@@ -42,38 +58,7 @@ const Card= styled.div`
 
     
 `
-const Header= styled.ul`
-    
-    list-style: none;
-    border-bottom: 1px solid lightgray;
-    color:gray;
-    padding: 10px;
-    display: flex;
-    align-items: center;
-    margin: 0;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: row;
-    align-items: center;
-    li span{
-    
-        cursor: pointer;
-        color: black;   
-    }
 
-.avatar{
-    margin-right:30px ;
-        width: 40px ;
-        height:40px;
-        border-radius: 50%;
-        background-color: blue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        color: white;
-        cursor: pointer;
-    }
-`
 const CandidateDetails= styled.div`
     padding: 10px;
     font-size: 14px;
@@ -89,6 +74,7 @@ border-radius: 7px;
 max-width: 800px;
 margin: 0 auto;
 font-size: 16px;
+padding-bottom: 40px;
 /* box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2); */
 .marks{
     margin-left: auto;
@@ -100,13 +86,16 @@ font-size: 16px;
     padding-top: 20px;
     /* color: gray; */
     letter-spacing: 1px;
+    
 }
 .section{
+    width: 100%;
     box-shadow:2px 4px 4px 2px rgba(0, 0, 0, 0.2);;
     border-color: #baafafdf;
     padding: 20px;
-    /* background: #f6f1f161; */
-    margin-bottom: 40px;
+    background: ${({theme})=>theme.pellete.primary};
+    margin-top: 40px;
+  
 }
 .right{
        background-color :lightgreen ;
@@ -114,11 +103,7 @@ font-size: 16px;
        
     }
     pre{
-        /* overflow-x: auto;
-        background-color: #d1cfcff1;
-        padding: 20px;
-        color:black;
-        border-radius: 4px; */
+     
       
     }
 `
@@ -132,9 +117,11 @@ span{
     color:green;
     margin-left: 20px;
     font-size: 25px;
+   
 }
 .marks-wrong{
     color:red;
+    font-size: unset;
 }
     
 `
@@ -153,11 +140,9 @@ const Option = styled.div`
         width:80%;
     }
     pre{
-        /* background-color: transparent;
-        border: none; */
         margin: 0;
     }
     
     
 `
-export { Container, Card, Header, CandidateDetails, Question, Option, Submissions};
+export { Container, Card, CandidateDetails, Question, Option, Submissions};
