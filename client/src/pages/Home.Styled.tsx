@@ -33,7 +33,8 @@ const Form = styled.form`
   justify-content: center;
 
   @media (min-width: 768px) {
-    margin: 0;
+    margin: 0 auto;
+    width: 30%;
   }
 
   button {
@@ -53,7 +54,7 @@ const Form = styled.form`
   }
 `;
 const Wrapper = styled.div`
-  width: 100vw;
+  max-width: 100vw;
   margin: 0 auto;
   display: flex;
   justify-content: center;
@@ -63,6 +64,7 @@ const Wrapper = styled.div`
 const ImageContainer = styled.div`
   width: 70%;
   display: none;
+
   @media (min-width: 768px) {
     display: flex;
     background: #f4f5fa;
