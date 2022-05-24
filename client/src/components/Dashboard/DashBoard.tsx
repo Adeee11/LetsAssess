@@ -76,9 +76,6 @@ const fullscreen=()=>{
   
   }
 
-  
-  
-  
 
   return (
     <>
@@ -200,9 +197,10 @@ const fullscreen=()=>{
                   /></div>
               </div>
             </div>
+            <Footer/>
           </MyContainer>
 
-          <Footer/>
+          
         </TheDashBoard>
       )}
     </>
