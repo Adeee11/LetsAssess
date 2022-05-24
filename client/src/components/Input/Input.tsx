@@ -1,15 +1,22 @@
 import { TextField } from "@mui/material";
-import '@fontsource/roboto/300.css';
-import '@fontsource/roboto/400.css';
-import '@fontsource/roboto/500.css';
-import '@fontsource/roboto/700.css';
+import "@fontsource/roboto/300.css";
+import "@fontsource/roboto/400.css";
+import "@fontsource/roboto/500.css";
+import "@fontsource/roboto/700.css";
+import { Path, UseFormRegister } from "react-hook-form";
+
+interface RegisterTypes {
+  email: string;
+  name: string;
+}
 
 type propTypes = {
   label: string;
   type: string;
-  changeHandler: (e: string) => void;
+  register: UseFormRegister<RegisterTypes>;
+  registerValue: Path<RegisterTypes>;
 };
-const Input = ({ label, type, changeHandler }: propTypes) => {
+const Input = ({ label, type, register, registerValue }: propTypes) => {
   return (
     <TextField
       id="outlined-basic"
@@ -17,8 +24,8 @@ const Input = ({ label, type, changeHandler }: propTypes) => {
       label={label}
       type={type}
       fullWidth
-      onChange={(e) => changeHandler(e.target.value)}
       required
+      {...register(registerValue, { required: true })}
     />
   );
 };
