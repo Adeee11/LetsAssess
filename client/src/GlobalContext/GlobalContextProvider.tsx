@@ -1,27 +1,27 @@
-import React, { createContext, useState } from 'react'
+import React, { createContext, useState } from "react";
 
 type GlobalContextProviderProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
 export type DataInterface = {
   candidate: {
-    name: string,
-    email: string
-  },
-  saveCandidateName: (name: string) => void,
-  saveCandidateEmail: (name: string) => void,
-  token: string,
-  setToken: (token: string) => void,
-  isCompleted: any,
-  saveIsCompleted: (i: object) => void,
-  url: string,
-  isAdmin: boolean,
-  saveAdmin: () => void,
-  discardAdmin: () => void
-}
+    name: string;
+    email: string;
+  };
+  saveCandidateName: (name: string) => void;
+  saveCandidateEmail: (name: string) => void;
+  token: string;
+  setToken: (token: string) => void;
+  isCompleted: any;
+  saveIsCompleted: (i: object) => void;
+  url: string;
+  isAdmin: boolean;
+  saveAdmin: () => void;
+  discardAdmin: () => void;
+};
 
-export const GlobalContext = createContext({} as DataInterface)
+export const GlobalContext = createContext({} as DataInterface);
 
 const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
   const [candidate, setCandidate] = useState({
@@ -30,29 +30,33 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
   });
 
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
-  let initData: string | null = sessionStorage.getItem('isCompleted')
-  const [isCompleted, setIsCompleted] = useState((initData && JSON.parse(initData)) || {
-    "html-and-css": false,
-    "javascript": false,
-    "typescript": false,
-    "react": false,
-    "node-js": false,
-    "git": false,
-    // "code-quality":false
-  })
-  const [isAdmin, setIsAdmin] = useState(localStorage.getItem('isAdmin') ? true : false || false);
+  let initData: string | null = sessionStorage.getItem("isCompleted");
+  const [isCompleted, setIsCompleted] = useState(
+    (initData && JSON.parse(initData)) || {
+      "html-and-css": false,
+      javascript: false,
+      typescript: false,
+      react: false,
+      "node-js": false,
+      git: false,
+      // "code-quality":false
+    }
+  );
+  const [isAdmin, setIsAdmin] = useState(
+    localStorage.getItem("isAdmin") ? true : false || false
+  );
 
   const saveAdmin = () => {
     setIsAdmin(true);
-    localStorage.setItem('isAdmin', "true");
-  }
+    localStorage.setItem("isAdmin", "true");
+  };
 
   const discardAdmin = () => {
     setIsAdmin(false);
-    localStorage.removeItem('isAdmin');
-  }
+    localStorage.removeItem("isAdmin");
+  };
 
-  const url = 'https://lionfish-app-hb2nk.ondigitalocean.app';
+  const url = "https://lionfish-app-hb2nk.ondigitalocean.app";
 
   const saveName = (name: string) => {
     setCandidate({ ...candidate, name: name });
@@ -60,9 +64,9 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
   };
 
   const saveToken = (token: string) => {
-    setToken(token)
-    sessionStorage.setItem("token", token)
-  }
+    setToken(token);
+    sessionStorage.setItem("token", token);
+  };
 
   const saveEmail = (email: string) => {
     setCandidate({ ...candidate, email: email });
@@ -71,8 +75,8 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
 
   const saveIsCompleted = (i: object) => {
     setIsCompleted({ ...i });
-    sessionStorage.setItem('isCompleted', JSON.stringify(i))
-  }
+    sessionStorage.setItem("isCompleted", JSON.stringify(i));
+  };
 
   const data = {
     candidate: candidate,
@@ -85,13 +89,12 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     url,
     isAdmin,
     saveAdmin,
-    discardAdmin
+    discardAdmin,
   };
 
+  return (
+    <GlobalContext.Provider value={data}>{children}</GlobalContext.Provider>
+  );
+};
 
-  return <GlobalContext.Provider value={data}>
-    {children}
-  </GlobalContext.Provider>
-}
-
-export default GlobalContextProvider
+export default GlobalContextProvider;

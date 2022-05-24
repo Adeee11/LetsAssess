@@ -22,8 +22,8 @@ import {
 } from "./Home.Styled";
 
 interface Inputs {
-  email: string;
-  name: string;
+  email?: string;
+  name?: string;
 }
 
 const Home = () => {
@@ -35,6 +35,7 @@ const Home = () => {
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
+    setShowLoader(true);
     ctx.candidate.email = data.email;
     ctx.candidate.name = data.name;
     var myHeaders = new Headers();
@@ -73,46 +74,6 @@ const Home = () => {
       alert("Invalid credentials/ or user already entered the test");
     }
   };
-
-  // const submit = async (e: FormEvent) => {
-  //   e.preventDefault();
-  //   setShowLoader(true);
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "application/json");
-
-  //   var raw = JSON.stringify({
-  //     email: ctx.candidate.email,
-  //     candidateName: ctx.candidate.name,
-  //   });
-
-  //   const res = await fetch(`${url}/candidate`, {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: "follow",
-  //   });
-
-  //   res.status === 200 &&
-  //     fetch(`${url}/authenticate`, {
-  //       method: "POST",
-  //       headers: myHeaders,
-  //       body: raw,
-  //       redirect: "follow",
-  //     })
-  //       .then((response) => response.json())
-  //       .then(async (result) => {
-  //         console.log(result);
-  //         setToken(result.token);
-
-  //         nav("/assessment", { replace: true });
-  //       })
-  //       .catch((error) => console.log("error", error));
-
-  //   if (res.ok === false) {
-  //     setShowLoader(false);
-  //     alert("Invalid credentials/ or user already entered the test");
-  //   }
-  // };
 
   useEffect(() => {
     if (
@@ -164,6 +125,7 @@ const Home = () => {
             </Typography>
             <div className="input-box">
               <Input
+                id={"outlined-email"}
                 label="Email"
                 type="email"
                 register={register}
@@ -173,6 +135,7 @@ const Home = () => {
 
             <div className="input-box">
               <Input
+                id={"outlined-basic"}
                 label="Name"
                 type="text"
                 register={register}
