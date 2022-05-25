@@ -103,6 +103,9 @@ const Home = () => {
     }
   }, [isCompleted, saveIsCompleted]);
 
+  useEffect(()=>{
+     sessionStorage.removeItem('i');  
+  },[])
   return (
     <Wrapper className="wrapper">
       {!showLoader && (

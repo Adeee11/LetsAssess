@@ -19,6 +19,7 @@ export type DataInterface = {
   isAdmin: boolean;
   saveAdmin: () => void;
   discardAdmin: () => void;
+
 };
 
 export const GlobalContext = createContext({} as DataInterface);
@@ -45,6 +46,10 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin") ? true : false || false
   );
+
+
+
+
 
   const saveAdmin = () => {
     setIsAdmin(true);
@@ -96,6 +101,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     isAdmin,
     saveAdmin,
     discardAdmin,
+
   };
 
   return (

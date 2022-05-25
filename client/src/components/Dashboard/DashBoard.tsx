@@ -7,6 +7,7 @@ import slugify from "slugify";
 import { GlobalContext } from "../../GlobalContext/GlobalContextProvider";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
+import Instructions from "../Instructions/Instructions";
 
 const DashBoard = () => {
   const [data, setData] = useState<{
@@ -16,7 +17,15 @@ const DashBoard = () => {
   }>();
 
   const [expTime, setExpTime] = useState<any>();
-
+  
+  const a= sessionStorage.getItem('i')
+  const [showNotInstructions, setShowNotInstructions] = useState(a);
+  
+  const notShowInstructions=()=>{
+    sessionStorage.setItem("i", "no");
+    setShowNotInstructions("no")
+  }
+  console.log("showInstructions", showNotInstructions)
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
@@ -62,19 +71,19 @@ const DashBoard = () => {
     }
   }, [isCompleted, nav])
 
-// const fullscreen=()=>{
-//     let elem:any = document.getElementById("root");
-//     if(elem){
-//       if (elem.requestFullscreen) {
-//         elem.requestFullscreen();
-//       } else if (elem.webkitRequestFullscreen) { /* Safari */
-//         elem.webkitRequestFullscreen();
-//       } else if (elem.msRequestFullscreen) { /* IE11 */
-//         elem.msRequestFullscreen();
-//       }
-//     }
-  
-//   }
+  // const fullscreen=()=>{
+  //     let elem:any = document.getElementById("root");
+  //     if(elem){
+  //       if (elem.requestFullscreen) {
+  //         elem.requestFullscreen();
+  //       } else if (elem.webkitRequestFullscreen) { /* Safari */
+  //         elem.webkitRequestFullscreen();
+  //       } else if (elem.msRequestFullscreen) { /* IE11 */
+  //         elem.msRequestFullscreen();
+  //       }
+  //     }
+
+  //   }
 
 
   return (
@@ -111,98 +120,103 @@ const DashBoard = () => {
               </div>
             </div>
           </TopNavBar>
-
-          <MyContainer>
-            <div className="container">
-              <div className="row justify-content-between text-center py-4" >
-                <div className=" col-sm-12  col-md-6 col-lg-4 my-4 " >
-
-                  <CardComponent
-                    key={data.data[0].title}
-                    title={data.data[0].title}
-                    durationInMins={data.data[0].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[0].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[0].title).toLowerCase())
-                    }
-                  /></div>
-
-                <div className=" col-sm-12  col-md-6 col-lg-4 mx-auto my-4" >
-
-                  <CardComponent
-                    key={data.data[1].title}
-                    title={data.data[1].title}
-                    durationInMins={data.data[1].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[1].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[1].title).toLowerCase())
-                    }
-                  /></div>
-
-                <div className=" col-sm-12  col-md-6 col-lg-4 mx-auto my-4" >
-
-                  <CardComponent
-                    key={data.data[2].title}
-                    title={data.data[2].title}
-                    durationInMins={data.data[2].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[2].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[2].title).toLowerCase())
-                    }
-                  /></div>
-                <div className=" col-sm-12  col-md-6 col-lg-4 my-4" >
-
-                  <CardComponent
-                    key={data.data[3].title}
-                    title={data.data[3].title}
-                    durationInMins={data.data[3].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[3].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[3].title).toLowerCase())
-                    }
-                  /></div>
-                <div className=" col-sm-12  col-md-6 col-lg-4  my-4" >
-
-                  <CardComponent
-                    key={data.data[4].title}
-                    title={data.data[4].title}
-                    durationInMins={data.data[4].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[4].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[4].title).toLowerCase())
-                    }
-                  /></div>
-                <div className=" col-sm-12  col-md-6 col-lg-4 my-4" >
-
-                  <CardComponent
-                    key={data.data[5].title}
-                    title={data.data[5].title}
-                    durationInMins={data.data[5].durationInMins}
-                    isCompleted={
-                      isCompleted[data.data[5].title.replace(/\s+/g, "-").toLowerCase()]
-                    }
-                    clickHandler={() =>
-                      clickHandler(slugify(data.data[5].title).toLowerCase())
-                    }
-                  /></div>
-              </div>
-            </div>
-            <Footer/>
-          </MyContainer>
-
+          {!showNotInstructions && <Instructions onClose={() => notShowInstructions()} />}
           
+            <MyContainer>
+            {showNotInstructions==="no" &&
+            <div className="container">
+
+                <div className="row justify-content-between text-center py-4" >
+                  <div className=" col-sm-12  col-md-6 col-lg-4 my-4 " >
+
+                    <CardComponent
+                      key={data.data[0].title}
+                      title={data.data[0].title}
+                      durationInMins={data.data[0].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[0].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[0].title).toLowerCase())
+                      }
+                    /></div>
+
+                  <div className=" col-sm-12  col-md-6 col-lg-4 mx-auto my-4" >
+
+                    <CardComponent
+                      key={data.data[1].title}
+                      title={data.data[1].title}
+                      durationInMins={data.data[1].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[1].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[1].title).toLowerCase())
+                      }
+                    /></div>
+
+                  <div className=" col-sm-12  col-md-6 col-lg-4 mx-auto my-4" >
+
+                    <CardComponent
+                      key={data.data[2].title}
+                      title={data.data[2].title}
+                      durationInMins={data.data[2].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[2].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[2].title).toLowerCase())
+                      }
+                    /></div>
+                  <div className=" col-sm-12  col-md-6 col-lg-4 my-4" >
+
+                    <CardComponent
+                      key={data.data[3].title}
+                      title={data.data[3].title}
+                      durationInMins={data.data[3].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[3].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[3].title).toLowerCase())
+                      }
+                    /></div>
+                  <div className=" col-sm-12  col-md-6 col-lg-4  my-4" >
+
+                    <CardComponent
+                      key={data.data[4].title}
+                      title={data.data[4].title}
+                      durationInMins={data.data[4].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[4].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[4].title).toLowerCase())
+                      }
+                    /></div>
+                  <div className=" col-sm-12  col-md-6 col-lg-4 my-4" >
+
+                    <CardComponent
+                      key={data.data[5].title}
+                      title={data.data[5].title}
+                      durationInMins={data.data[5].durationInMins}
+                      isCompleted={
+                        isCompleted[data.data[5].title.replace(/\s+/g, "-").toLowerCase()]
+                      }
+                      clickHandler={() =>
+                        clickHandler(slugify(data.data[5].title).toLowerCase())
+                      }
+                    /></div>
+                </div>
+              </div>
+}
+              <Footer />
+            </MyContainer>
+          
+
         </TheDashBoard>
-      )}
+      )
+      }
     </>
   );
 };
