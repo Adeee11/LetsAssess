@@ -73,7 +73,7 @@ const ImageContainer = styled.div`
   img {
     margin: 0 auto;
     margin-top: 100px;
-    width: 59%;
+    width: 55%;
     height: auto;
   }
 `;
