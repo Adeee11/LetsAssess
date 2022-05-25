@@ -61,6 +61,9 @@ const Column = styled.div`
       @media (max-width: 900px) {
         position: absolute;
         top: 116px;
+        right: 50px;
+      }
+      @media (max-width: 414px) {
         right: 20px;
       }
     }
@@ -125,7 +128,10 @@ const Timer = styled.div`
   @media (max-width: 900px) {
     position: absolute;
     top: 31px;
-    right: 10px;
+    right: 50px;
+  }
+  @media (max-width: 414px) {
+    right: 20px;
   }
 `;
 
