@@ -14,10 +14,9 @@ const Box=styled.div`
     position: fixed;
     width:300px;
     height: 200px;
-    background: white;
+    background:${({theme})=>theme.pellete.primary};
     border-radius: 5px;
     padding: 10px;
-    border: 1px solid gray;
     top: 50%;
     left: 50%;
     transform: translate(-150px, -100px);
@@ -27,13 +26,15 @@ const Box=styled.div`
     font-size: 16px;
     flex-direction: column;
     justify-content: space-evenly;
-    
+    color: ${({theme})=>theme.pellete.secondary};
+    box-shadow:${({theme})=>theme.boxShadow.card};
     button{
         padding: 5px 20px;
-        background-color: black;
+        background-image: ${(props)=>props.theme.pellete.main};
         color: white;
         border-radius: 4px;
         cursor: pointer;
+        border:none;
     }
 `
 

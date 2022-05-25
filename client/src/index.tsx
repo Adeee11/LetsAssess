@@ -4,10 +4,13 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import GlobalContextProvider from './GlobalContext/GlobalContextProvider';
-import { ThemeProvider } from 'styled-components';
+import { DefaultTheme, ThemeProvider } from 'styled-components';
 
 
-const theme = {
+ 
+
+
+const theme:DefaultTheme = {
   pellete:{
     primary:"rgb(253,254,254)",
     secondary:"rgba(58, 53, 65, 0.87)",
