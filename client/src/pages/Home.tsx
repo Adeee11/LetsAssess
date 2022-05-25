@@ -49,8 +49,8 @@ const Home = () => {
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
-      email: ctx.candidate.email,
-      candidateName: ctx.candidate.name,
+      email: data.email,
+      candidateName: data.name,
     });
 
     const res = await fetch(`${url}/candidate`, {
@@ -68,7 +68,7 @@ const Home = () => {
         redirect: "follow",
       })
         .then((response) => response.json())
-        .then(async (result) => {
+        .then((result) => {
           console.log(result);
           setToken(result.token);
 
