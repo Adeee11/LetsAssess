@@ -22,6 +22,9 @@ const Column = styled.div`
   .subject,
   .description {
     margin-left: 50px;
+    @media (max-width: 414px) {
+      margin-left: 20px;
+    }
   }
   .logo {
     font-weight: 700;
@@ -43,6 +46,9 @@ const Column = styled.div`
     align-items: center;
     justify-content: space-evenly;
     padding: 20px 0 40px;
+    p {
+      margin-bottom: 0;
+    }
     .next {
       font-size: 16px;
       padding: 6px 10px;
@@ -52,6 +58,14 @@ const Column = styled.div`
       min-width: 126px;
       cursor: pointer;
       border: none;
+      @media (max-width: 900px) {
+        position: absolute;
+        top: 116px;
+        right: 50px;
+      }
+      @media (max-width: 414px) {
+        right: 20px;
+      }
     }
     .next:disabled {
       cursor: unset;
@@ -67,16 +81,20 @@ const Column = styled.div`
 const Question = styled.div`
   margin-left: 50px;
   color: black;
-  font-size: 16px;
+  font-size: 18px;
   margin-top: 20px;
   margin-bottom: 20px;
-  /* font-weight: 700; */
-  border: 1px solid ${({ theme }) => theme.pellete.purple};
+  font-weight: 700;
+  /* border: 1px solid ${({ theme }) => theme.pellete.purple}; */
   padding: 4px;
   width: 85%;
   @media (max-width: 900px) {
     flex-basis: 100%;
     margin: 20px auto;
+    margin-left: 50px;
+  }
+  @media (max-width: 414px) {
+    margin-left: 20px;
   }
 `;
 const QuestionCode = styled.div`
@@ -106,12 +124,21 @@ const QuestionCode = styled.div`
     monospace; */
   }
 `;
-const Timer = styled.div``;
+const Timer = styled.div`
+  @media (max-width: 900px) {
+    position: absolute;
+    top: 31px;
+    right: 50px;
+  }
+  @media (max-width: 414px) {
+    right: 20px;
+  }
+`;
 
 const Section = styled.div`
   .act {
     color: black;
-    border: 1px solid rgb(145, 85, 253);
+    border: 3px solid rgb(145, 85, 253);
     .sn {
       color: rgb(145, 85, 253);
     }
@@ -140,7 +167,7 @@ const Option = styled.div`
     padding-left: 10px;
   }
   &:hover {
-    border: 1px solid rgb(145, 85, 253);
+    border: 3px solid rgb(145, 85, 253);
     :first-child {
       color: black;
     }

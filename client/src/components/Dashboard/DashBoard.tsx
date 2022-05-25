@@ -25,7 +25,7 @@ const DashBoard = () => {
     sessionStorage.setItem("i", "no");
     setShowNotInstructions("no")
   }
-  console.log("showInstructions", showNotInstructions)
+
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
@@ -51,8 +51,8 @@ const DashBoard = () => {
       .then((result) => {
         setData({ ...result });
         expiryTimeStamp.current.setUTCSeconds(result.exp);
-        console.log("Expiry time epoch", result.exp);
-        console.log("DATE", expiryTimeStamp);
+        // console.log("Expiry time epoch", result.exp);
+        // console.log("DATE", expiryTimeStamp);
         setExpTime(expiryTimeStamp.current);
         sessionStorage.setItem("expTime", expiryTimeStamp.current.toUTCString());
       })

@@ -83,6 +83,14 @@ const Home = () => {
   };
 
   useEffect(() => {
+    saveIsCompleted({
+      "html-and-css": false,
+      javascript: false,
+      typescript: false,
+      react: false,
+      "node-js": false,
+      git: false,
+    });
     if (
       isCompleted["html-and-css"] &&
       isCompleted["javascript"] &&
@@ -92,14 +100,14 @@ const Home = () => {
       isCompleted["git"]
     ) {
       setShowMsg(true);
-      saveIsCompleted({
-        "html-and-css": false,
-        javascript: false,
-        typescript: false,
-        react: false,
-        "node-js": false,
-        git: false,
-      });
+      // saveIsCompleted({
+      //   "html-and-css": false,
+      //   javascript: false,
+      //   typescript: false,
+      //   react: false,
+      //   "node-js": false,
+      //   git: false,
+      // });
     }
   }, [isCompleted, saveIsCompleted]);
 

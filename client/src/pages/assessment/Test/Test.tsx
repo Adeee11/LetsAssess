@@ -43,8 +43,6 @@ const Test = () => {
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
 
-
-
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -66,12 +64,12 @@ const Test = () => {
       .then((res) => res.json())
       .then((result) => {
         setData1(result);
-        console.log(result);
+        // console.log(result);
       });
 
     // calling optionsMarked API
     const callOptionsApi = async () => {
-      console.log("Options Marked Api called");
+      // console.log("Options Marked Api called");
 
       const response: Response = await fetch(
         `${url}/submission/options-marked/${title}`,
@@ -81,14 +79,14 @@ const Test = () => {
           redirect: "follow",
         }
       );
-      console.log("response status", response.status);
+      // console.log("response status", response.status);
       const res = await response.json();
-      console.log("res", res);
+      // console.log("res", res);
       const options: any[] = [];
       if (response.status === 200) {
-        console.log("Called succesfully");
+        // console.log("Called succesfully");
         const optionsMarked: any[] = res.optionsMarked;
-        console.log("Options MArked", optionsMarked);
+        // console.log("Options MArked", optionsMarked);
         optionsMarked.forEach((optionMarked) => {
           // question is mcq-m type
           if (optionMarked.answers.length === 4) {
@@ -97,7 +95,7 @@ const Test = () => {
             options.push(...optionMarked.answers);
           }
         });
-        console.log("Options", options);
+        // console.log("Options", options);
         setSelectedOpt([...options]);
         setQueNo(optionsMarked.length + 1);
       } else if (response.status === 400) {
@@ -117,15 +115,15 @@ const Test = () => {
   //   };
   // }, []);
 
-  const exitfullscreen = () => {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    }
-  }
+  // const exitfullscreen = () => {
+  //   if (document.exitFullscreen) {
+  //     document.exitFullscreen();
+  //   }
+  // };
 
   const submitHandler = async () => {
     setShowLoader(true);
-    exitfullscreen();
+    // exitfullscreen();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -148,7 +146,7 @@ const Test = () => {
         // console.log(isCompleted);
         return response.json();
       })
-      .then((result) => { })
+      .then((result) => {})
       .catch((error) => console.log("error", error));
   };
 
@@ -178,7 +176,7 @@ const Test = () => {
     })
       .then((response) => response.text())
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
@@ -225,14 +223,20 @@ const Test = () => {
     }
   };
 
- 
-return (
+  return (
     <>
       {(!data1 || showLoader) && <Spinner />}
       {data1 && queNo < data1?.questions?.length && !showLoader ? (
         <Container>
           <Column>
-            <div className="logo">IWEBCODE</div>
+            <div className="logo">
+              <img
+                src="/images/logo.png"
+                alt="IWEBCODE"
+                width={"130px"}
+                height={"auto"}
+              />
+            </div>
             <div className="subject">
               {title.replaceAll("-", " ").toUpperCase()}
             </div>
