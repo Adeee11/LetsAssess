@@ -61,10 +61,10 @@ const Submissions = () => {
                                     <span>{item.quesId}.</span>
                                     {item.quesValue}
 
-                                    {optionsMarked[index + 1] &&
+                                    {optionsMarked[index] &&
                                         arrayEquals(
                                             item.correctOption,
-                                            optionsMarked[index + 1].answers
+                                            optionsMarked[index].answers
                                         ) ? (
                                         <span className="marks-right"><TiTick /></span>
                                     ) : (
@@ -82,7 +82,7 @@ const Submissions = () => {
                                     item.options.map((opt: any) => (
                                         <div key={opt.optionId}>
                                             {optionsMarked.length >= parseInt(item.quesId) &&
-                                                optionsMarked[parseInt(item.quesId) - 1].answers[0] ===
+                                                optionsMarked[parseInt(item.quesId)-1].answers[0] ===
                                                 opt.optionId && (
                                                     <Option>
                                                         <span>{opt.optionId}.</span>
