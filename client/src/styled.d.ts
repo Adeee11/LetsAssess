@@ -1,17 +1,18 @@
-import 'styled-components';
+import "styled-components";
 
 // and extend them!
-declare module 'styled-components' {
+declare module "styled-components" {
   export interface DefaultTheme {
-    pellete:{
-        primary:string,
-        secondary:string,
-        main:string,
-        success:string,
-        background:string
-      },
-      boxShadow:{
-        card:string
-      }
+    pellete: {
+      primary: string;
+      secondary: string;
+      main: string;
+      success: string;
+      background: string;
+      purple: string;
+    };
+    boxShadow: {
+      card: string;
+    };
   }
 }
