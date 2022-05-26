@@ -109,11 +109,11 @@ const Home = () => {
       //   git: false,
       // });
     }
-  }, [isCompleted, saveIsCompleted]);
+  }, [isCompleted, saveIsCompleted, setShowMsg, showMsg]);
 
-  useEffect(()=>{
-     sessionStorage.removeItem('i');  
-  },[])
+  useEffect(() => {
+    sessionStorage.removeItem("i");
+  }, []);
   return (
     <Wrapper className="wrapper">
       {!showLoader && (

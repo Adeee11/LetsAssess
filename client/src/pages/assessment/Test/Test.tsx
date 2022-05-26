@@ -39,7 +39,6 @@ const Test = () => {
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
-
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -99,7 +98,7 @@ const Test = () => {
         });
         // console.log("Options", options);
         setSelectedOpt([...options]);
-        setQueNo(optionsMarked.length + 1);
+        setQueNo(optionsMarked.length);
       } else if (response.status === 400) {
         console.log(response.statusText);
       }

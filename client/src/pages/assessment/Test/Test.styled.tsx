@@ -85,7 +85,6 @@ const Question = styled.div`
   font-size: 18px;
   margin-top: 20px;
   margin-bottom: 20px;
-  font-weight: 700;
   /* border: 1px solid ${({ theme }) => theme.pellete.purple}; */
   padding: 4px;
   width: 85%;
@@ -139,7 +138,9 @@ const Timer = styled.div`
 const Section = styled.div`
   .act {
     color: black;
-    border: 3px solid rgb(145, 85, 253);
+    box-shadow: rgb(145, 85, 253) 0px 1px 4px, rgb(145, 85, 253) 0px 0px 0px 3px;
+
+    margin-bottom: 19px; // added so that on active the layout of options doesn't change
     .sn {
       color: rgb(145, 85, 253);
     }
@@ -154,6 +155,7 @@ const Option = styled.div`
   justify-content: space-between;
   padding: 20px;
   margin-bottom: 20px;
+  min-height: 90px;
   border-radius: 4px;
   cursor: pointer;
 
@@ -168,7 +170,9 @@ const Option = styled.div`
     padding-left: 10px;
   }
   &:hover {
-    border: 3px solid rgb(145, 85, 253);
+    
+    // added box-shadow so that on hover the layout of options doesn't change */
+    box-shadow: rgb(145, 85, 253) 0px 1px 4px, rgb(145, 85, 253) 0px 0px 0px 3px;
     :first-child {
       color: black;
     }
