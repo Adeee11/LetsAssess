@@ -14,7 +14,6 @@ import {
   OptionCode,
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
-import { exit } from "process";
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
