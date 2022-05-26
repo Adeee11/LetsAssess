@@ -9,6 +9,9 @@ import { Dashboard } from "./pages/user/Dashboard";
 import { GlobalContext } from "./GlobalContext/GlobalContextProvider";
 import Alltests from "./pages/user/Dashboard/AllTests/Alltests";
 import Submissions from "./pages/user/Dashboard/AllTests/submissions/Submissions";
+import StyleGuide from "./pages/styleguide";
+import Colors from "./pages/styleguide/colors";
+import Elements from "./pages/styleguide/elements";
 
 
 function App() {
@@ -26,6 +29,11 @@ function App() {
           {isAdmin && <Route path="/user/dashboard/:email/:title" element={<Submissions />}></Route>}
           {token && <Route path="/assessment/*" element={<Assessment />}></Route>}
           {token && <Route path="/assessment/:title" element={<Test />}></Route>}
+          <Route path="/styleguide" element={<StyleGuide />}>
+            <Route path="/styleguide" element={<Colors/>} />
+            <Route path="/styleguide/elements" element={<Elements/>} />
+          </Route>
+
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>

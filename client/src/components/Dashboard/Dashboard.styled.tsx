@@ -7,7 +7,7 @@ const TopNavBar = styled.header`
     position: fixed;
     width: 100%;
     background-color: ${props => props.theme.pellete.primary};
-    box-shadow: rgb(58 53 65 / 42%) 0px 4px 8px -4px;
+    box-shadow:${({theme})=>theme.boxShadow.header};
     margin-bottom: 10px;
     box-sizing: border-box;
     

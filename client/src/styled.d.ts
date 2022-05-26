@@ -13,6 +13,7 @@ declare module "styled-components" {
     };
     boxShadow: {
       card: string;
+      header:string;
     };
   }
 }
