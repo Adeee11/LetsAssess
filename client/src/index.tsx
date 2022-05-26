@@ -16,7 +16,8 @@ const theme: DefaultTheme = {
     purple: "rgb(145, 85, 253)",
   },
   boxShadow: {
-    card: " rgb(58 53 65 / 10%) 0px 2px 10px 0px",
+    card: "rgb(58 53 65 / 10%) 0px 2px 10px 0px",
+    header:"rgb(58 53 65 / 42%) 0px 4px 8px -4px"
   },
 };
 
