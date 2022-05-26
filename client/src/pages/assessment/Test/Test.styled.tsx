@@ -44,11 +44,19 @@ const Column = styled.div`
   header {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 20px 0 40px;
+    justify-content: space-between;
+    padding: 20px 20px;
+    @media (max-width: 900px) {
+       justify-content: center;
+      }
+      @media (max-width: 414px) {
+        justify-content: center;
+      }
     p {
       margin-bottom: 0;
       font-weight: 700;
+      text-align: center;
+      display: block;
     }
     .next {
       font-size: 16px;
@@ -136,6 +144,8 @@ const Timer = styled.div`
 `;
 
 const Section = styled.div`
+   padding-left: 20px;
+   padding-right: 20px;
   .act {
     color: black;
     box-shadow: rgb(145, 85, 253) 0px 1px 4px, rgb(145, 85, 253) 0px 0px 0px 3px;
@@ -148,7 +158,7 @@ const Section = styled.div`
 `;
 const Option = styled.div`
   box-sizing: border-box;
-  width: 70%;
+  width: 100%;
   margin: 0 auto;
   border: 1px solid rgb(198, 167, 254);
   display: flex;
