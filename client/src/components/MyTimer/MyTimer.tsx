@@ -8,7 +8,7 @@ function MyTimer({ time }: any) {
   const nav = useNavigate();
   const ctx= useContext(GlobalContext);
   
-  const{saveIsCompleted} = ctx
+  const{saveIsCompleted, logout} = ctx
 
   const { seconds, minutes, hours } = useTimer({
     expiryTimestamp: time,
@@ -27,6 +27,7 @@ function MyTimer({ time }: any) {
         }
       )
       nav("/", { replace: true });
+      logout()
     },
   });
 
