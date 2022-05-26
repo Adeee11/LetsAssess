@@ -29,7 +29,7 @@ const DashBoard = () => {
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
-  const { token, isCompleted, url, candidate, saveIsCompleted, logout } = ctx;
+  const { token, isCompleted, url, candidate, saveIsCompleted , logout} = ctx;
 
   const expiryTimeStamp = useRef(new Date(0));
 
@@ -220,14 +220,14 @@ const DashBoard = () => {
                 </div>
               </div>
             }
-            {/* <button onClick={()=> saveIsCompleted({
+            <button onClick={()=> saveIsCompleted({
         "html-and-css": true,
         javascript: true,
         typescript: true,
         react: true,
         "node-js": true,
         git: true,
-      }) }>Test Complete ALL</button> */}
+      }) }>Test Complete ALL</button>
             <Footer />
           </MyContainer>
 
