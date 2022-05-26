@@ -15,23 +15,6 @@ import {
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
-
-
-
-// const fullscreen=()=>{
-//   let elem:any = document.getElementById("root");
-//   if(elem){
-//     if (elem.requestFullscreen) {
-//       elem.requestFullscreen();
-//     } else if (elem.webkitRequestFullscreen) { /* Safari */
-//       elem.webkitRequestFullscreen();
-//     } else if (elem.msRequestFullscreen) { /* IE11 */
-//       elem.msRequestFullscreen();
-//     }
-//   }
-
-// }
-
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
@@ -45,6 +28,11 @@ const Test = () => {
   const ctx = useContext(GlobalContext);
 
   const { candidate, token, isCompleted, saveIsCompleted, url } = ctx;
+
+  const optionName = (index: number) => {
+    const startValue = 65;
+    return String.fromCharCode(startValue + index);
+  };
 
   useEffect(() => {
     var myHeaders = new Headers();
@@ -92,7 +80,7 @@ const Test = () => {
         });
         // console.log("Options", options);
         setSelectedOpt([...options]);
-        setQueNo(optionsMarked.length + 1);
+        setQueNo(optionsMarked.length);
       } else if (response.status === 400) {
         console.log(response.statusText);
       }
@@ -330,7 +318,7 @@ const Test = () => {
                           <CustomComponent data={opt.optionProps} />
                         </OptionCode>
                       )}
-                      <span className="sn">{index + 1}</span>
+                      <span className="sn">{optionName(index)}</span>
                     </Option>
                   )}
                   {data1.questions[queNo].quesType === "mcq" && (
@@ -351,7 +339,7 @@ const Test = () => {
                         </OptionCode>
                       )}
 
-                      <span className="sn">{index + 1}</span>
+                      <span className="sn">{optionName(index)}</span>
                     </Option>
                   )}
                 </div>

@@ -80,9 +80,12 @@ const LowerNavBar = styled.div`
   `
 const TheDashBoard = styled.div`
       background:${({ theme }) => theme.pellete.background};
-      min-height: calc(100vh - 125px);
+      min-height:100vh; //calc(100vh - 125px);
       width: 100%;
       height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
   `
 
 
