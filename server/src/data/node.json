@@ -74,7 +74,7 @@
         "quesValue": "What is the output of the code?",
         "quesId": "3",
         "quesType": "mcq",
-        "useCustomComponent": false,
+        "useCustomComponent": true,
         "props": {
             "type":"code",
             "format":"js",

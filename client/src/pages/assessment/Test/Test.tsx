@@ -15,27 +15,24 @@ import {
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
+// if (document.addEventListener) {
+//   document.addEventListener('fullscreenchange', exitHandler, false);
+//   document.addEventListener('mozfullscreenchange', exitHandler, false);
+//   document.addEventListener('MSFullscreenChange', exitHandler, false);
+//   document.addEventListener('webkitfullscreenchange', exitHandler, false);
+// }
 
+// function exitHandler() {
+//   if (document.fullscreenElement !== null) {
+//     console.log('Element has entered fullscreen mode');
+//   }
 
-  // if (document.addEventListener) {
-  //   document.addEventListener('fullscreenchange', exitHandler, false);
-  //   document.addEventListener('mozfullscreenchange', exitHandler, false);
-  //   document.addEventListener('MSFullscreenChange', exitHandler, false);
-  //   document.addEventListener('webkitfullscreenchange', exitHandler, false);
-  // }
-
-  // function exitHandler() {
-  //   if (document.fullscreenElement !== null) {
-  //     console.log('Element has entered fullscreen mode');
-  //   }
-
-  //   else {
-  //     // window.history.back();
-  //     window.location.replace(`${window.location.origin}/assessment`)
-  //     console.log('Element has exited fullscreen mode');
-  //   }
-  // }
-
+//   else {
+//     // window.history.back();
+//     window.location.replace(`${window.location.origin}/assessment`)
+//     console.log('Element has exited fullscreen mode');
+//   }
+// }
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
@@ -50,6 +47,11 @@ const Test = () => {
   const ctx = useContext(GlobalContext);
 
   const { candidate, token, isCompleted, saveIsCompleted, url } = ctx;
+
+  const optionName = (index: number) => {
+    const startValue = 65;
+    return String.fromCharCode(startValue + index);
+  };
 
   useEffect(() => {
     var myHeaders = new Headers();
@@ -303,7 +305,7 @@ const Test = () => {
                           <CustomComponent data={opt.optionProps} />
                         </OptionCode>
                       )}
-                      <span className="sn">{index + 1}</span>
+                      <span className="sn">{optionName(index)}</span>
                     </Option>
                   )}
                   {data1.questions[queNo].quesType === "mcq" && (
@@ -324,7 +326,7 @@ const Test = () => {
                         </OptionCode>
                       )}
 
-                      <span className="sn">{index + 1}</span>
+                      <span className="sn">{optionName(index)}</span>
                     </Option>
                   )}
                 </div>

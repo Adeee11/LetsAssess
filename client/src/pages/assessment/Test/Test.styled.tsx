@@ -48,6 +48,7 @@ const Column = styled.div`
     padding: 20px 0 40px;
     p {
       margin-bottom: 0;
+      font-weight: 700;
     }
     .next {
       font-size: 16px;
@@ -174,6 +175,17 @@ const Option = styled.div`
     .sn {
       /* color:gray; */
     }
+  }
+  @media (max-width: 900px) {
+    width: calc(100% - 100px);
+    margin: 0 50px;
+    margin-bottom: 20px;
+  }
+
+  @media (max-width: 414px) {
+    width: calc(100% - 40px);
+    margin: 0 20px;
+    margin-bottom: 20px;
   }
 `;
 const OptionCode = styled.div`
