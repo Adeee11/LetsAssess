@@ -31,6 +31,7 @@ const Form = styled.form`
   flex-direction: column;
   min-height: 100vh;
   justify-content: center;
+  background-color: ${({theme})=>theme.pellete.primary};
 
   @media (min-width: 768px) {
     margin: 0 auto;

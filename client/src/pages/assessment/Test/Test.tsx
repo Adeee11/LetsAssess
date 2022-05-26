@@ -14,25 +14,7 @@ import {
   OptionCode,
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
-
-// if (document.addEventListener) {
-//   document.addEventListener('fullscreenchange', exitHandler, false);
-//   document.addEventListener('mozfullscreenchange', exitHandler, false);
-//   document.addEventListener('MSFullscreenChange', exitHandler, false);
-//   document.addEventListener('webkitfullscreenchange', exitHandler, false);
-// }
-
-// function exitHandler() {
-//   if (document.fullscreenElement !== null) {
-//     console.log('Element has entered fullscreen mode');
-//   }
-
-//   else {
-//     // window.history.back();
-//     window.location.replace(`${window.location.origin}/assessment`)
-//     console.log('Element has exited fullscreen mode');
-//   }
-// }
+import { exit } from "process";
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
@@ -223,6 +205,34 @@ const Test = () => {
       return false;
     }
   };
+
+  useEffect(() => {
+    if (document.addEventListener) {
+      document.addEventListener("fullscreenchange", exitHandler, false);
+      document.addEventListener("mozfullscreenchange", exitHandler, false);
+      document.addEventListener("MSFullscreenChange", exitHandler, false);
+      document.addEventListener("webkitfullscreenchange", exitHandler, false);
+    }
+
+    function exitHandler() {
+      if (document.fullscreenElement !== null) {
+        console.log("Element has entered fullscreen mode");
+      } else {
+        // window.history.back();
+        // window.location.replace(`${window.location.origin}/assessment`)
+        console.log("Element has exited fullscreen mode");
+
+        nav("/assessment");
+      }
+    }
+    return function cleanupListener() {
+      console.log("Remove event listener called")
+      document.removeEventListener("fullscreenchange", exitHandler, false);
+      document.removeEventListener("mozfullscreenchange", exitHandler, false);
+      document.removeEventListener("MSFullscreenChange", exitHandler, false);
+      document.removeEventListener("webkitfullscreenchange", exitHandler, false);
+    };
+  }, [nav]);
 
   return (
     <>
