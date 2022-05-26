@@ -17,25 +17,20 @@ import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
 
 
 
-  // if (document.addEventListener) {
-  //   document.addEventListener('fullscreenchange', exitHandler, false);
-  //   document.addEventListener('mozfullscreenchange', exitHandler, false);
-  //   document.addEventListener('MSFullscreenChange', exitHandler, false);
-  //   document.addEventListener('webkitfullscreenchange', exitHandler, false);
-  // }
 
-  // function exitHandler() {
-  //   if (document.fullscreenElement !== null) {
-  //     console.log('Element has entered fullscreen mode');
-  //   }
+// const fullscreen=()=>{
+//   let elem:any = document.getElementById("root");
+//   if(elem){
+//     if (elem.requestFullscreen) {
+//       elem.requestFullscreen();
+//     } else if (elem.webkitRequestFullscreen) { /* Safari */
+//       elem.webkitRequestFullscreen();
+//     } else if (elem.msRequestFullscreen) { /* IE11 */
+//       elem.msRequestFullscreen();
+//     }
+//   }
 
-  //   else {
-  //     // window.history.back();
-  //     window.location.replace(`${window.location.origin}/assessment`)
-  //     console.log('Element has exited fullscreen mode');
-  //   }
-  // }
-
+// }
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
@@ -146,7 +141,7 @@ const Test = () => {
         // console.log(isCompleted);
         return response.json();
       })
-      .then((result) => {})
+      .then((result) => { })
       .catch((error) => console.log("error", error));
   };
 
@@ -222,6 +217,33 @@ const Test = () => {
       return false;
     }
   };
+
+  useEffect(() => {
+    if (document.addEventListener) {
+      document.addEventListener('fullscreenchange', exitHandler, false);
+      document.addEventListener('mozfullscreenchange', exitHandler, false);
+      document.addEventListener('MSFullscreenChange', exitHandler, false);
+      document.addEventListener('webkitfullscreenchange', exitHandler, false);
+    }
+
+    function exitHandler() {
+      if (document.fullscreenElement !== null) {
+        console.log('Element has entered fullscreen mode');
+      }
+
+      else {
+         
+          // window.history.back();
+          // window.location.replace(`${window.location.origin}/assessment`)
+          console.log('Element has exited fullscreen mode');
+
+          nav('/assessment');
+        
+
+      }
+    }
+  })
+
 
   return (
     <>

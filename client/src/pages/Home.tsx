@@ -29,6 +29,7 @@ interface Inputs {
 const Home = () => {
   const [showMsg, setShowMsg] = useState(false);
   const [showLoader, setShowLoader] = useState(false);
+  const [flag, setFlag] = useState(true);
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
   const {
@@ -83,14 +84,18 @@ const Home = () => {
   };
 
   useEffect(() => {
-    saveIsCompleted({
-      "html-and-css": false,
-      javascript: false,
-      typescript: false,
-      react: false,
-      "node-js": false,
-      git: false,
-    });
+    if(flag){
+      setFlag(false);
+      saveIsCompleted({
+        "html-and-css": false,
+        javascript: false,
+        typescript: false,
+        react: false,
+        "node-js": false,
+        git: false,
+      });
+    }
+
     if (
       isCompleted["html-and-css"] &&
       isCompleted["javascript"] &&
@@ -100,19 +105,20 @@ const Home = () => {
       isCompleted["git"]
     ) {
       setShowMsg(true);
-      // saveIsCompleted({
-      //   "html-and-css": false,
-      //   javascript: false,
-      //   typescript: false,
-      //   react: false,
-      //   "node-js": false,
-      //   git: false,
-      // });
+      saveIsCompleted({
+        "html-and-css": false,
+        javascript: false,
+        typescript: false,
+        react: false,
+        "node-js": false,
+        git: false,
+      });  
     }
-  }, [isCompleted, saveIsCompleted]);
+  },[showMsg, isCompleted, saveIsCompleted, flag]);
 
   useEffect(()=>{
-     sessionStorage.removeItem('i');  
+     sessionStorage.removeItem('i');
+      
   },[])
   return (
     <Wrapper className="wrapper">

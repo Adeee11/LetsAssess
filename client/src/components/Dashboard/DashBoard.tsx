@@ -17,11 +17,11 @@ const DashBoard = () => {
   }>();
 
   const [expTime, setExpTime] = useState<any>();
-  
-  const a= sessionStorage.getItem('i')
+
+  const a = sessionStorage.getItem('i')
   const [showNotInstructions, setShowNotInstructions] = useState(a);
-  
-  const notShowInstructions=()=>{
+
+  const notShowInstructions = () => {
     sessionStorage.setItem("i", "no");
     setShowNotInstructions("no")
   }
@@ -29,13 +29,13 @@ const DashBoard = () => {
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
-  const { token, isCompleted, url, candidate } = ctx;
+  const { token, isCompleted, url, candidate, saveIsCompleted, logout } = ctx;
 
   const expiryTimeStamp = useRef(new Date(0));
 
   const clickHandler = (arg: string) => {
     nav(arg);
-    // fullscreen();
+    fullscreen();
   };
 
   useEffect(() => {
@@ -66,24 +66,34 @@ const DashBoard = () => {
       if (keys[y] === false) navigateToHome = false;
     }
     if (navigateToHome) {
+      const exitfullscreen = () => {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      };
+      exitfullscreen();
       nav("/", { replace: true });
+      //need to fix dependency array for logout. 
+      logout();
       sessionStorage.clear();
+
+
     }
-  }, [isCompleted, nav])
+  }, [isCompleted, nav, logout])
 
-  // const fullscreen=()=>{
-  //     let elem:any = document.getElementById("root");
-  //     if(elem){
-  //       if (elem.requestFullscreen) {
-  //         elem.requestFullscreen();
-  //       } else if (elem.webkitRequestFullscreen) { /* Safari */
-  //         elem.webkitRequestFullscreen();
-  //       } else if (elem.msRequestFullscreen) { /* IE11 */
-  //         elem.msRequestFullscreen();
-  //       }
-  //     }
+  const fullscreen = () => {
+    let elem: any = document.getElementById("root");
+    if (elem) {
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.webkitRequestFullscreen) { /* Safari */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE11 */
+        elem.msRequestFullscreen();
+      }
+    }
 
-  //   }
+  }
 
 
   return (
@@ -121,10 +131,10 @@ const DashBoard = () => {
             </div>
           </TopNavBar>
           {!showNotInstructions && <Instructions onClose={() => notShowInstructions()} />}
-          
-            <MyContainer>
-            {showNotInstructions==="no" &&
-            <div className="container">
+
+          <MyContainer>
+            {showNotInstructions === "no" &&
+              <div className="container">
 
                 <div className="row justify-content-between text-center py-4" >
                   <div className=" col-sm-12  col-md-6 col-lg-4 my-4 " >
@@ -209,14 +219,25 @@ const DashBoard = () => {
                     /></div>
                 </div>
               </div>
-}
-              <Footer />
-            </MyContainer>
-          
+            }
+            {/* <button onClick={()=> saveIsCompleted({
+        "html-and-css": true,
+        javascript: true,
+        typescript: true,
+        react: true,
+        "node-js": true,
+        git: true,
+      }) }>Test Complete ALL</button> */}
+            <Footer />
+          </MyContainer>
+
 
         </TheDashBoard>
+        
       )
       }
+
+      {!data &&<WhiteScreen></WhiteScreen>}
     </>
   );
 };
@@ -226,4 +247,10 @@ export default DashBoard;
 
 const MyContainer = styled.div`
  margin-top :125px ;
+`
+
+const WhiteScreen = styled.div`
+  background-color:${({theme})=>theme.pellete.primary};
+  min-height: 100vh;
+
 `

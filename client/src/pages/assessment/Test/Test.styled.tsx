@@ -145,6 +145,7 @@ const Section = styled.div`
   }
 `;
 const Option = styled.div`
+  box-sizing: border-box;
   width: 70%;
   margin: 0 auto;
   border: 1px solid rgb(198, 167, 254);

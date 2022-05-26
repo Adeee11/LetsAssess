@@ -19,7 +19,7 @@ export type DataInterface = {
   isAdmin: boolean;
   saveAdmin: () => void;
   discardAdmin: () => void;
-
+  logout:()=>void; 
 };
 
 export const GlobalContext = createContext({} as DataInterface);
@@ -83,11 +83,11 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     sessionStorage.setItem("isCompleted", JSON.stringify(i));
   };
 
-  // const logout=()=>{
-  //   sessionStorage.clear();
-  //   setToken('');
-  //   setCandidate({name:'', email:''})
-  // }
+  const logout=()=>{
+    sessionStorage.clear();
+    setToken('');
+    setCandidate({name:'', email:''})
+  }
 
   const data = {
     candidate: candidate,
@@ -101,7 +101,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     isAdmin,
     saveAdmin,
     discardAdmin,
-
+    logout, 
   };
 
   return (
