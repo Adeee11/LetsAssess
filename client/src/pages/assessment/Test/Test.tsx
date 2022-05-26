@@ -21,6 +21,7 @@ const Test = () => {
   const [selectedOpt, setSelectedOpt] = useState<string[] | any>([]);
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
+  const [isFullScreen, setIsFullScreen] = useState(true);
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -130,7 +131,7 @@ const Test = () => {
         return response.json();
       })
       .then((result) => {})
-      .catch((error) => console.log("error", error));
+      .catch((error) => {});
   };
 
   const nextQuestion = async (
@@ -207,32 +208,36 @@ const Test = () => {
   };
 
   useEffect(() => {
-    if (document.addEventListener) {
-      document.addEventListener("fullscreenchange", exitHandler, false);
-      document.addEventListener("mozfullscreenchange", exitHandler, false);
-      document.addEventListener("MSFullscreenChange", exitHandler, false);
-      document.addEventListener("webkitfullscreenchange", exitHandler, false);
-    }
+    // if (document.addEventListener) {
+      document.addEventListener('fullscreenchange', exitHandler, false);
+      document.addEventListener('mozfullscreenchange', exitHandler, false);
+      document.addEventListener('MSFullscreenChange', exitHandler, false);
+      document.addEventListener('webkitfullscreenchange', exitHandler, false);
+    // }
 
     function exitHandler() {
       if (document.fullscreenElement !== null) {
-        console.log("Element has entered fullscreen mode");
-      } else {
-        // window.history.back();
-        // window.location.replace(`${window.location.origin}/assessment`)
-        console.log("Element has exited fullscreen mode");
-
-        nav("/assessment");
+        // console.log('Element has entered fullscreen mode');
+      }
+  else {
+         setIsFullScreen(false);
+        //  console.log('Element has exited fullscreen mode');
       }
     }
-    return function cleanupListener() {
-      console.log("Remove event listener called")
-      document.removeEventListener("fullscreenchange", exitHandler, false);
-      document.removeEventListener("mozfullscreenchange", exitHandler, false);
-      document.removeEventListener("MSFullscreenChange", exitHandler, false);
-      document.removeEventListener("webkitfullscreenchange", exitHandler, false);
-    };
-  }, [nav]);
+    return()=>{
+      document.removeEventListener('fullscreenchange', exitHandler, false);
+      document.removeEventListener('mozfullscreenchange', exitHandler, false);
+      document.removeEventListener('MSFullscreenChange', exitHandler, false);
+      document.removeEventListener('webkitfullscreenchange', exitHandler, false);
+    }  
+  })
+
+  useEffect(()=>{
+     if(!isFullScreen){
+       nav('/assessment')
+     } 
+  },[isFullScreen, nav])
+
 
   return (
     <>

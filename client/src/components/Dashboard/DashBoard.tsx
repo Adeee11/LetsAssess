@@ -35,7 +35,7 @@ const DashBoard = () => {
   const nav = useNavigate();
 
   const ctx = useContext(GlobalContext);
-  const { token, isCompleted, url, candidate, logout, saveIsCompleted } = ctx;
+  const { token, isCompleted, url, candidate, logout } = ctx;
 
   const expiryTimeStamp = useRef(new Date(0));
 
@@ -75,18 +75,18 @@ const DashBoard = () => {
       if (keys[y] === false) navigateToHome = false;
     }
     if (navigateToHome) {
-      // const exitfullscreen = () => {
-      //   if (document.exitFullscreen) {
-      //     document.exitFullscreen();
-      //   }
-      // };
-      // exitfullscreen();
+      const exitfullscreen = () => {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      };
+      exitfullscreen();
       nav("/", { replace: true });
       //need to fix dependency array for logout.
-      // logout();
+      logout();
       sessionStorage.clear();
     }
-  }, [isCompleted, nav]);
+  }, [isCompleted, nav, logout]);
 
   const fullscreen = () => {
     let elem: any = document.getElementById("root");
@@ -245,14 +245,6 @@ const DashBoard = () => {
                 </div>
               </div>
             )}
-            <button onClick={()=> saveIsCompleted({
-        "html-and-css": true,
-        javascript: true,
-        typescript: true,
-        react: true,
-        "node-js": true,
-        git: true,
-      }) }>Test Complete ALL</button>
           </MyContainer>
 
           <Footer />
