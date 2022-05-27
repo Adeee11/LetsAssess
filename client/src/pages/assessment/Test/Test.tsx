@@ -92,21 +92,16 @@ const Test = () => {
     }
   }, [title, token, url]);
 
-  // useEffect(() => {
-  //   window.onbeforeunload = function () {
-  //     return "Data will be lost ";
-  //   };
-  // }, []);
-
-  // const exitfullscreen = () => {
-  //   if (document.exitFullscreen) {
-  //     document.exitFullscreen();
-  //   }
-  // };
+ 
+  const exitfullscreen = () => {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    }
+  };
 
   const submitHandler = async () => {
     setShowLoader(true);
-    // exitfullscreen();
+    exitfullscreen();
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -137,7 +132,7 @@ const Test = () => {
     queId: string | number,
     optionId: string | number | any[]
   ) => {
-    setShowLoader(true);
+    // setShowLoader(true);
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -160,7 +155,7 @@ const Test = () => {
       .then((response) => response.text())
       .then((result) => {
         // console.log(result);
-        setShowLoader(false);
+        // setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
 
@@ -233,7 +228,7 @@ const Test = () => {
 
   useEffect(()=>{
      if(!isFullScreen){
-       nav('/assessment')
+       nav('/assessment', {replace:true});
      } 
   },[isFullScreen, nav])
 

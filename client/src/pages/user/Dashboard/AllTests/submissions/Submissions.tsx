@@ -13,6 +13,32 @@ import {
 import { ImCross } from "react-icons/im";
 import { TiTick } from "react-icons/ti";
 
+const Content = ({
+  marks,
+  totalMarks,
+}: {
+  marks?: string | null;
+  totalMarks?: number;
+}) => {
+  let inCorrectQuestions: any;
+  inCorrectQuestions =
+    marks && totalMarks ? totalMarks - parseInt(marks) : "couldn't calculate";
+  return (
+    <>
+      <div className="row">
+        <span className="marks">{`Marks Obtained: ${marks}/${totalMarks}`}</span>
+      </div>
+      <div className="row">
+        <div className="col">
+          <span className="marks">{`Correct : ${marks}`}</span>
+        </div>
+        <div className="col">
+          <span className="marks">{`Incorrect : ${inCorrectQuestions}`}</span>
+        </div>
+      </div>
+    </>
+  );
+};
 const Submissions = () => {
   const [data, setData] = useState<any>(null);
   const [optionsMarked, setOptionsMarked] = useState<any>(null);
@@ -57,13 +83,15 @@ const Submissions = () => {
     <>
       <Header
         user="Admin"
-        info={title}
+        info={"TOPIC: " + title}
         onClick={() => nav("/user/dashboard", { replace: true })}
+        // content={<Content marks={marks} totalMarks={data && data.questions.length} />}
       />
       <Container>
         {data && optionsMarked && (
           <Sub className="container">
-            <p className="marks">{`Marks Obtained: ${marks}/${data.questions.length}`}</p>
+            {/* <p className="marks">{`Marks Obtained: ${marks}/${data.questions.length}`}</p> */}
+            <Content marks={marks} totalMarks={data && data.questions.length} />
             {data.questions.map((item: any, index: number) => (
               <div className="section " key={item.quesId}>
                 <Question>

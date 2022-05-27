@@ -12,6 +12,7 @@ import Submissions from "./pages/user/Dashboard/AllTests/submissions/Submissions
 import StyleGuide from "./pages/styleguide";
 import Colors from "./pages/styleguide/colors";
 import Elements from "./pages/styleguide/elements";
+import TestOver from "./pages/TestOver";
 
 
 function App() {
@@ -33,7 +34,7 @@ function App() {
             <Route path="/styleguide" element={<Colors/>} />
             <Route path="/styleguide/elements" element={<Elements/>} />
           </Route>
-
+          <Route path="/testOver" element={<TestOver />} />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
