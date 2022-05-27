@@ -33,14 +33,14 @@ const DashBoard = () => {
   };
 
   const nav = useNavigate();
-
+            
   const ctx = useContext(GlobalContext);
   const { token, isCompleted, url, candidate, logout } = ctx;
 
   const expiryTimeStamp = useRef(new Date(0));
 
   const clickHandler = (arg: string) => {
-    nav(arg);
+    nav(`/assessment/${arg}`, { replace : true } );
     fullscreen();
   };
 
@@ -75,13 +75,7 @@ const DashBoard = () => {
       if (keys[y] === false) navigateToHome = false;
     }
     if (navigateToHome) {
-      const exitfullscreen = () => {
-        if (document.exitFullscreen) {
-          document.exitFullscreen();
-        }
-      };
-      exitfullscreen();
-      nav("/", { replace: true });
+      nav("/", { replace : true });
       //need to fix dependency array for logout.
       logout();
       sessionStorage.clear();
@@ -105,6 +99,7 @@ const DashBoard = () => {
 
   return (
     <>
+    
       {data && data.data.length > 0 && (
         <TheDashBoard className="the-dashboard">
           <TopNavBar>
@@ -252,6 +247,7 @@ const DashBoard = () => {
       )}
 
       {!data && <WhiteScreen></WhiteScreen>}
+      
     </>
   );
 };
@@ -260,10 +256,19 @@ export default DashBoard;
 
 const MyContainer = styled.div`
   margin-top: 125px;
-  min-height: calc(100vh -125px);
+  /* min-height: calc(100vh - 125px); */
+  overflow-y: auto; 
+ 
+ 
+  /* &:fullscreen{
+    height: 100vh;
+    overflow-y: scroll;
+    
+  }    */
 `;
 
 const WhiteScreen = styled.div`
   background-color: ${({ theme }) => theme.pellete.primary};
   min-height: 100vh;
 `;
+

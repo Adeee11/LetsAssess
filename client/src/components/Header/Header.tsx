@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
+
+import { GlobalContext } from '../../GlobalContext/GlobalContextProvider';
 import { LowerNavBar, TopNavBar, UpperNavBar } from './Header.styles'
 type propTypes={
 user:string;
 info:string
 }
 const Header = ({user,info}:propTypes) => {
+  const [showLogoutMenu, setShowLogoutMenu] = useState(false);
+  const {discardAdmin} = useContext(GlobalContext)
+  
+  const logoutHandler=()=>{
+  
+     discardAdmin(); 
+  }
   return (
     <TopNavBar>
         <div className="container-fluid border-bottom" >
@@ -12,10 +21,18 @@ const Header = ({user,info}:propTypes) => {
             <UpperNavBar>
               <img src="/images/logo.png" alt="iwebcode" />
               <div className="right">
-                <div className="avatar">
+                <div className="avatar" onClick={()=>setShowLogoutMenu(!showLogoutMenu)}>
                   {user[0]}
                 </div>
                 <span>{user}</span>
+                {showLogoutMenu &&<span className='logout' >
+                  <ul>
+                    <li>Help</li>
+                    <li>Admin Guide</li>
+                    <li>Setting</li>
+                    <li onClick={logoutHandler}>Logout</li>
+                  </ul>
+                  </span>}
               </div>
             </UpperNavBar>
           </div>

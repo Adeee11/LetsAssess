@@ -35,5 +35,12 @@ const TheStyleGuide= styled.div`
      color:gray;
      font-weight: 700;
      font-size: 16px;
+     transition: 0.3s;
  }
+ 
+ a:hover  {
+   color:${({theme})=>theme.pellete.purple} ;
+ }
+ 
+ 
 `

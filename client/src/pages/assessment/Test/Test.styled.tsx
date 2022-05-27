@@ -6,6 +6,15 @@ const Container = styled.div`
   max-height: 100vh;
   user-select: none;
   background-color: ${({ theme }) => theme.pellete.primary};
+  
+  overflow-y: auto;
+  position: relative;
+ 
+  &:fullscreen{
+  
+    overflow-y: scroll;
+   
+  }
   @media (max-width: 900px) {
     flex-direction: column;
   }
@@ -14,6 +23,9 @@ const Container = styled.div`
 const Column = styled.div`
   flex-basis: 50%;
   overflow-y: scroll;
+  &:fullscreen{
+    overflow-y: scroll;
+  }
   @media (max-width: 900px) {
     flex-basis: 100%;
     overflow-y: visible;

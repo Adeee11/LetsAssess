@@ -46,6 +46,47 @@ const UpperNavBar = styled.div`
         text-transform: uppercase;
         background-image: ${(props) => props.theme.pellete.main};
         color:${(props) => props.theme.pellete.primary};
+        cursor: pointer;
+    }
+  
+    @keyframes animation1{
+      from{
+        opacity: 0;
+      }
+      to{
+       opacity: 1; 
+      }
+    }
+    .logout{
+      
+      position: absolute;
+      box-shadow: ${({theme})=>theme.boxShadow.card};
+      top:64px;
+      padding: 10px 20px;
+      border-radius: 6px;
+      margin-left:-30px ;
+      margin-top: -7px;
+      padding-bottom: 0px;
+      animation-name: animation1;  
+      animation-duration: 0.7s;
+      background-color: ${({theme})=>theme.pellete.primary};
+     
+      ul{
+        text-align: left;
+        list-style: none;
+        padding: 0;
+        color: gray;
+        li{
+          font-size: 16px;
+          cursor: pointer;
+          padding: 5px;
+          transition: 0.3s;
+        }
+        li:hover{
+          color: ${({theme})=>theme.pellete.purple};
+        }
+      }
+
     }
   `
 const LowerNavBar = styled.div`
