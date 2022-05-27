@@ -81,11 +81,12 @@ padding-bottom: 40px;
     margin-right: auto;
     display: block;
     /* background-color: red; */
-    text-align: right;
+    text-align: center;
     padding-right: 20px;
     padding-top: 20px;
     /* color: gray; */
     letter-spacing: 1px;
+    font-size: 20px;
     
 }
 .section{
