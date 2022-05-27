@@ -73,7 +73,7 @@ const ColorBox= styled.div<propType>`
    align-items: center;
    justify-content: center;
    overflow: hidden;
-   border: 0.5px solid ${({theme})=>theme.pellete.background};
+   border: 1px solid rgb(224, 224, 224);
    span{
        display: none;
        width: 100%;

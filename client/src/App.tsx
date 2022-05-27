@@ -31,7 +31,7 @@ function App() {
           {token && <Route path="/assessment/*" element={<Assessment />}></Route>}
           {token && <Route path="/assessment/:title" element={<Test />}></Route>}
           <Route path="/styleguide" element={<StyleGuide />}>
-            <Route path="/styleguide" element={<Colors/>} />
+            <Route path="/styleguide/colors" element={<Colors/>} />
             <Route path="/styleguide/elements" element={<Elements/>} />
           </Route>
           <Route path="/testOver" element={<TestOver />} />

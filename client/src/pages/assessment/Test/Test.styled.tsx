@@ -167,6 +167,9 @@ const Section = styled.div`
       color: rgb(145, 85, 253);
     }
   }
+  @media (max-width:900px){
+    padding: 0;
+  }
 `;
 const Option = styled.div`
   box-sizing: border-box;
@@ -205,12 +208,14 @@ const Option = styled.div`
   }
   @media (max-width: 900px) {
     width: calc(100% - 100px);
+    
     margin: 0 50px;
     margin-bottom: 20px;
   }
 
   @media (max-width: 414px) {
     width: calc(100% - 40px);
+    
     margin: 0 20px;
     margin-bottom: 20px;
   }
