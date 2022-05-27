@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const StyledContainer = styled.div`
@@ -45,12 +43,12 @@ const StyledContainer = styled.div`
 `;
 
 const TestOver = () => {
-//   const nav = useNavigate();
-//   useEffect(() => {
-//     setTimeout(() => {
-//       nav("/");
-//     }, 4000);
-//   },[nav]);
+  //   const nav = useNavigate();
+  //   useEffect(() => {
+  //     setTimeout(() => {
+  //       nav("/");
+  //     }, 4000);
+  //   },[nav]);
   return (
     <StyledContainer>
       <main className="container main">

@@ -72,9 +72,10 @@ const ColorBox= styled.div<propType>`
    display: flex;
    align-items: center;
    justify-content: center;
+   overflow: hidden;
+   border: 0.5px solid ${({theme})=>theme.pellete.background};
    span{
        display: none;
-    
        width: 100%;
        text-align: center;
        height: inherit;

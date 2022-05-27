@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useTimer } from "react-timer-hook";
 import { useNavigate } from "react-router-dom";
 import { Timer } from "./Mytimer.styled";
