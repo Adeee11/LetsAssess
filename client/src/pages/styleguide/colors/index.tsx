@@ -43,7 +43,7 @@ const Colors = () => {
       <div className='container' >
 <div className='row ' >
     {
-        ColorsList.map((color, index)=>(<div className='mt-3 col-sm-12 col-md-6 col-lg-4'>
+        ColorsList.map((color, index)=>(<div className='mt-3 col-sm-12 col-md-6 col-lg-4' key={color.title}>
         <ColorBox boxColor={color.value}
         style={{background:`${color.value}`}} 
         onClick={()=> navigator.clipboard.writeText('$'+color.code)}

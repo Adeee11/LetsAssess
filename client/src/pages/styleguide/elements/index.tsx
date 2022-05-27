@@ -80,7 +80,7 @@ const CopyCode = ({ children }: CodeProps) => {
     navigator.clipboard.writeText(children);
   };
   return (
-    <div className="row code-block" onClick={clickHandler}>
+    <div className="code-block" onClick={clickHandler}>
       {children}
     </div>
   );
@@ -222,7 +222,7 @@ const Elements = () => {
             {`<CardComponent
               title="Typescript"
               durationInMins={20}
-              isCompleted={false}
+              isCompleted={true}
               clickHandler={() => console.log("Clicked")}
             />`}
           </CopyCode>
