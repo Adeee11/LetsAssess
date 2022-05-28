@@ -103,6 +103,7 @@ const Test = () => {
     setShowLoader(true);
     exitfullscreen();
     var myHeaders = new Headers();
+    myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
 
     var raw = JSON.stringify({
@@ -154,16 +155,17 @@ const Test = () => {
     })
       .then((response) => response.text())
       .then((result) => {
+        if (queNo < data1.questions.length - 1) {
+          setQueNo(queNo + 1);
+        } else {
+          submitHandler();
+        }
         console.log(result);
         setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
 
-    if (queNo < data1.questions.length - 1) {
-      setQueNo(queNo + 1);
-    } else {
-      submitHandler();
-    }
+    
   };
 
   const selectOpt = (arg0: string | number) => {
