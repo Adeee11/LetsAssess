@@ -10,6 +10,15 @@ const ButtonContainer = styled.button`
   display: block;
   font-size: 16px;
   margin-bottom: 30px;
+  &.success{
+    background:${({theme})=>theme.pellete.success} ;
+  }
+  &.dark{
+    background:${({theme})=>theme.pellete.secondary} ;
+  }
+  &.purple{
+    background:${({theme})=>theme.pellete.purple} ;
+  }
 `;
 
 export { ButtonContainer };

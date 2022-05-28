@@ -7,21 +7,28 @@ const StyleGuide = () => {
       <div className='container-fluid header' >
         <div className='container'>
           <div className='row pt-3 pb-3 ' >
-            <div className='col-6 col-sm-4 col-md-3 col-lg-2'><img src="/images/logo.png" alt="IWEBCODE" className='logo' /></div>
-            <div className='col-3 col-sm-4 col-md-3 col-lg-2'>
+            <div className='col col-sm-3 col-md-3 col-lg-2'><img src="/images/logo.png" alt="IWEBCODE" className='logo' /></div>
+            <div className='col col-sm-3 col-md-3 col-lg-1' >
               <NavLink
-                className={({ isActive }) => isActive ? 'act' : undefined}
-                to="/styleguide/colors" >
+                to="/styleguide" >
                 Colors
               </NavLink>
             </div>
-            <div className='col-3 col-sm-4 col-md-3 col-lg-2'>
+            <div className='col col-sm-3 col-md-3 col-lg-1' >
               <NavLink
-                className={({ isActive }) => isActive ? 'act' : undefined}
                 to="/styleguide/elements">
                 Elements
-              </NavLink></div>
+              </NavLink>
+              </div>
+              <div className='col col-sm-3 col-md-3 col-lg-1'>
+              <NavLink
+                to="/styleguide/layout" >
+                Layout
+              </NavLink>
+            </div>
           </div>
+          
+          
         </div>
       </div>
 

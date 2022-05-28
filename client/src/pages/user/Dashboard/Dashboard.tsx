@@ -1,9 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Card from "../../../components/card";
 import Footer from "../../../components/Footer/Footer";
 import Header from "../../../components/Header/Header";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
-import { Container, Card } from "./Dashboard.styled";
+import { Container} from "./Dashboard.styled";
 
 const user = "Admin";
 
@@ -49,13 +50,12 @@ const Dashboard = () => {
             {
               allCandidates.map((candidate) => (
                 <div className=" col-sm-12  col-md-6 col-lg-4 pt-4" key={candidate.email} >
-                  <Card onClick={() => clickHandler(candidate.email, candidate.candidateName)} isFlex={true}>
-                    <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
-                    <div className="right">
-                      <span>{candidate.candidateName}</span>
-                      <span>{candidate.email}</span>
-                    </div>
-                  </Card>
+                  <Card 
+                  clickHandler={()=>clickHandler(candidate.email, candidate.candidateName)}
+                  isFlex={true}
+                  email={candidate.email}
+                  name={candidate.candidateName}
+                  />
                 </div>
               ))}
           </div>
