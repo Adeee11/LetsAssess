@@ -21,7 +21,9 @@ const imageSrc = (title: string) => {
   };
 
 const Card = ({ clickHandler, email, name ,assessmentId, marks, isFlex}: cardPropType) => {
-    return (<>
+const totalMarks=20;
+
+return (<>
       {isFlex &&  <TheCard onClick={() => clickHandler()} isFlex={isFlex}>
             <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
             <div className="right">
@@ -35,7 +37,7 @@ const Card = ({ clickHandler, email, name ,assessmentId, marks, isFlex}: cardPro
     <TheCard onClick={() =>clickHandler()}>
     <img src={imageSrc(assessmentId||"")} alt="Subject" />
     <span>
-      <b>Marks:</b> {marks}
+      <b>Marks:</b> {marks} / {totalMarks}
     </span>
     <span>{assessmentId}</span>
   </TheCard>
