@@ -33,14 +33,14 @@ const DashBoard = () => {
   };
 
   const nav = useNavigate();
-            
+
   const ctx = useContext(GlobalContext);
   const { token, isCompleted, url, candidate, logout } = ctx;
 
   const expiryTimeStamp = useRef(new Date(0));
 
   const clickHandler = (arg: string) => {
-    nav(`/assessment/${arg}`, { replace : true } );
+    nav(`/assessment/${arg}`, { replace: true });
     fullscreen();
   };
 
@@ -75,7 +75,7 @@ const DashBoard = () => {
       if (keys[y] === false) navigateToHome = false;
     }
     if (navigateToHome) {
-      nav("/", { replace : true });
+      nav("/", { replace: true });
       //need to fix dependency array for logout.
       logout();
       sessionStorage.clear();
@@ -99,7 +99,7 @@ const DashBoard = () => {
 
   return (
     <>
-    
+
       {data && data.data.length > 0 && (
         <TheDashBoard className="the-dashboard">
           <TopNavBar>
@@ -146,22 +146,24 @@ const DashBoard = () => {
               <div className="container">
                 <div className="row justify-content-between text-center py-4">
                   {
-                    data.data.map((card, index)=><div className=" col-sm-12  col-md-6 col-lg-4 my-4 ">
-                    <CardComponent 
-                      key={card.title}
-                      title={card.title}
-                      durationInMins={card.durationInMins}
-                      isCompleted={
-                        isCompleted[
+                    data.data.map((card, index) => <div
+                      className=" col-sm-12  col-md-6 col-lg-4 my-4 "
+                      key={card.title}>
+                      <CardComponent
+
+                        title={card.title}
+                        durationInMins={card.durationInMins}
+                        isCompleted={
+                          isCompleted[
                           card.title.replace(/\s+/g, "-").toLowerCase()
-                        ]
-                      }
-                      clickHandler={() =>
-                        clickHandler(slugify(card.title).toLowerCase())
-                      }
-                    />
-                  </div>)
-                  }     
+                          ]
+                        }
+                        clickHandler={() =>
+                          clickHandler(slugify(card.title).toLowerCase())
+                        }
+                      />
+                    </div>)
+                  }
                 </div>
               </div>
             )}
@@ -172,7 +174,7 @@ const DashBoard = () => {
       )}
 
       {!data && <WhiteScreen></WhiteScreen>}
-      
+
     </>
   );
 };

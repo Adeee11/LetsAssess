@@ -532,7 +532,11 @@ const Elements = () => {
           <CopyCode>
             {`<CustomComponent
             data={{
-              content: "console.log('Some Code')",
+              content: ".element{
+                            margin:0;
+                            padding:0;
+                            box-sizing:border-box;
+                        }",
               type: "code",
               format: "css",
             }}
