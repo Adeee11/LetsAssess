@@ -121,10 +121,10 @@ const Test = () => {
         saveIsCompleted(isCompleted);
         console.log("Submit Handler called");
         nav("/assessment", { replace: true });
-        // console.log(isCompleted);
+        console.log(response);
         return response.json();
       })
-      .then((result) => {})
+      .then((result) => {console.log(result)})
       .catch((error) => {});
   };
 
@@ -132,7 +132,7 @@ const Test = () => {
     queId: string | number,
     optionId: string | number | any[]
   ) => {
-    // setShowLoader(true);
+    setShowLoader(true);
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -154,8 +154,8 @@ const Test = () => {
     })
       .then((response) => response.text())
       .then((result) => {
-        // console.log(result);
-        // setShowLoader(false);
+        console.log(result);
+        setShowLoader(false);
       })
       .catch((error) => console.log("error", error));
 
