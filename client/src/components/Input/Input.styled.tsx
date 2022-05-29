@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 const InputContainer = styled.input`
-
     padding: 6px;
     border-radius: 4px;
     border: 1px solid gray;

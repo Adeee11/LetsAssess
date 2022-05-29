@@ -14,6 +14,7 @@ import styled from "styled-components";
 import Footer from "../Footer/Footer";
 import Instructions from "../Instructions/Instructions";
 
+
 const DashBoard = () => {
   const [data, setData] =
     useState<{
@@ -74,11 +75,8 @@ const DashBoard = () => {
     for (let y = 0; y < keys.length; y++) {
       if (keys[y] === false) navigateToHome = false;
     }
-    if (navigateToHome) {
-      nav("/", { replace: true });
-      //need to fix dependency array for logout.
+    if (navigateToHome) {  
       logout();
-      sessionStorage.clear();
     }
   }, [isCompleted, nav, logout]);
 
@@ -108,8 +106,8 @@ const DashBoard = () => {
                 <UpperNavBar>
                   <img src="/images/logo.png" alt="iwebcode" />
                   <div className="right">
-                    <div className="avatar">{candidate.name[0]}</div>
-                    <span>{candidate.name}</span>
+                    <div className="avatar">{candidate && candidate.name[0]}</div>
+                    <span>{candidate && candidate.name}</span>
                   </div>
                 </UpperNavBar>
               </div>

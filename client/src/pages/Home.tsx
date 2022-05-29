@@ -37,15 +37,14 @@ const Home = () => {
     url,
     isCompleted,
     saveIsCompleted,
-    saveCandidateName,
-    saveCandidateEmail,
+    saveCandidateData,
   } = ctx;
   const { register, handleSubmit } = useForm<Inputs>();
 
   const onSubmit: SubmitHandler<Inputs> = async (data) => {
     setShowLoader(true);
-    saveCandidateEmail(data.email);
-    saveCandidateName(data.name);
+    const obj={name:data.name, email:data.email}
+    saveCandidateData(obj)
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
 
@@ -117,9 +116,9 @@ const Home = () => {
   },[showMsg, isCompleted, saveIsCompleted, flag]);
 
   useEffect(()=>{
-     sessionStorage.removeItem('i');
-      
+     sessionStorage.removeItem('i');     
   },[])
+ 
   return (
     <Wrapper className="wrapper">
       {!showLoader && (

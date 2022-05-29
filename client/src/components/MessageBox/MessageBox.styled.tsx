@@ -11,7 +11,7 @@ const Wrapper=styled.div`
 `
 
 const Box=styled.div`
-    z-index: 9999;
+    z-index: 99999;
     position: fixed;
     width:300px;
     height: 200px;

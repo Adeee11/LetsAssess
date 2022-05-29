@@ -101,39 +101,44 @@ const Test = () => {
 
   const submitHandler = async () => {
     setShowLoader(true);
-    exitfullscreen();
+    
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
     myHeaders.append("Content-Type", "application/json");
-
+    console.log("email", candidate.email);
+    console.log('title', title);
     var raw = JSON.stringify({
       email: `${candidate.email}`,
       assessmentId: `${title}`,
     });
 
-    await fetch(`${url}/candidate/marks`, {
+  const res=  await fetch(`${url}/candidate/marks`, {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     })
-      .then((response) => {
-        isCompleted[title.replace(/\s+/g, "-").toLowerCase()] = true;
-        saveIsCompleted(isCompleted);
-        console.log("Submit Handler called");
-        nav("/assessment", { replace: true });
-        console.log(response);
-        return response.json();
-      })
-      .then((result) => {console.log(result)})
-      .catch((error) => {});
-  };
+   
+    console.log("res",res);
+
+    const result=await res.text();
+  
+    console.log(result);
+
+  if(res.status===200){
+  isCompleted[title.replace(/\s+/g, "-").toLowerCase()] = true;
+  saveIsCompleted(isCompleted);
+  setShowLoader(false);
+  exitfullscreen();
+  nav("/assessment", { replace: true });
+  }    
+  }
 
   const nextQuestion = async (
     queId: string | number,
     optionId: string | number | any[]
   ) => {
-    setShowLoader(true);
+    // setShowLoader(true);
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -147,23 +152,27 @@ const Test = () => {
       },
     });
 
-    await fetch(`${url}/submission/answer`, {
+   const resN= await fetch(`${url}/submission/answer`, {
       method: "POST",
       headers: myHeaders,
       body: raw,
       redirect: "follow",
     })
-      .then((response) => response.text())
-      .then((result) => {
-        if (queNo < data1.questions.length - 1) {
-          setQueNo(queNo + 1);
-        } else {
-          submitHandler();
-        }
-        console.log(result);
-        setShowLoader(false);
-      })
-      .catch((error) => console.log("error", error));
+
+    console.log("resN",resN);
+    const resultN=await resN.text();
+    console.log("resultN",resultN);
+
+    if(resN.status===200){
+      if (queNo < data1.questions.length - 1) {
+        setQueNo(queNo + 1);
+      } else {
+        submitHandler();
+      }
+      
+      // setShowLoader(false);
+    }
+      
 
     
   };
@@ -233,7 +242,6 @@ const Test = () => {
        nav('/assessment', {replace:true});
      } 
   },[isFullScreen, nav])
-
 
   return (
     <>

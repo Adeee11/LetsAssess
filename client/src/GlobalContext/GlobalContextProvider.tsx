@@ -4,13 +4,17 @@ type GlobalContextProviderProps = {
   children: React.ReactNode;
 };
 
+type interfaceCandidate={
+  name:string;
+  email:string;
+}
+
 export type DataInterface = {
   candidate: {
     name: string;
     email: string;
   };
-  saveCandidateName: (name: string) => void;
-  saveCandidateEmail: (name: string) => void;
+  saveCandidateData:(i:interfaceCandidate)=>void;
   token: string;
   setToken: (token: string) => void;
   isCompleted: any;
@@ -25,13 +29,14 @@ export type DataInterface = {
 export const GlobalContext = createContext({} as DataInterface);
 
 const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
-  const [candidate, setCandidate] = useState({
-    name: sessionStorage.getItem("name") || "",
-    email: sessionStorage.getItem("email") || "",
-  });
+  
+  
+  const candidateInit= sessionStorage.getItem('candidate');
+  const [candidate, setCandidate] = useState(candidateInit && JSON.parse(candidateInit));
 
   const [token, setToken] = useState(sessionStorage.getItem("token") || "");
   let initData: string | null = sessionStorage.getItem("isCompleted");
+
   const [isCompleted, setIsCompleted] = useState(
     (initData && JSON.parse(initData)) || {
       "html-and-css": false,
@@ -40,16 +45,19 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
       react: false,
       "node-js": false,
       git: false,
-      // "code-quality":false
     }
   );
+
+  const url = "https://lionfish-app-hb2nk.ondigitalocean.app";
+
   const [isAdmin, setIsAdmin] = useState(
     localStorage.getItem("isAdmin") ? true : false || false
   );
 
-
-
-
+ const saveCandidateData=(i:interfaceCandidate)=>{
+    setCandidate({...i})
+    sessionStorage.setItem("candidate", JSON.stringify(i));
+  }
 
   const saveAdmin = () => {
     setIsAdmin(true);
@@ -61,38 +69,25 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     localStorage.removeItem("isAdmin");
   };
 
-  const url = "https://lionfish-app-hb2nk.ondigitalocean.app";
-
-  const saveName = (name: string) => {
-    setCandidate({ ...candidate, name: name });
-    sessionStorage.setItem("name", name);
-  };
-
   const saveToken = (token: string) => {
     setToken(token);
     sessionStorage.setItem("token", token);
   };
 
-  const saveEmail = (email: string) => {
-    setCandidate({ ...candidate, email: email });
-    sessionStorage.setItem("email", email);
-  };
-
-  const saveIsCompleted = (i: object) => {
+   const saveIsCompleted = (i: object) => {
     setIsCompleted({ ...i });
     sessionStorage.setItem("isCompleted", JSON.stringify(i));
   };
 
   const logout=()=>{
     sessionStorage.clear();
+    setCandidate({name:'', email:''});
     setToken('');
-    setCandidate({name:'', email:''})
   }
 
-  const data = {
+ const data = {
     candidate: candidate,
-    saveCandidateName: saveName,
-    saveCandidateEmail: saveEmail,
+    saveCandidateData,
     token,
     setToken: saveToken,
     isCompleted,
@@ -101,7 +96,7 @@ const GlobalContextProvider = ({ children }: GlobalContextProviderProps) => {
     isAdmin,
     saveAdmin,
     discardAdmin,
-    logout, 
+    logout,  
   };
 
   return (
