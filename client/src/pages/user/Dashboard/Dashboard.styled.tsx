@@ -158,8 +158,9 @@ const CorrectOption= styled.div`
     @media(max-width:768px){
         width: 80%;
     }
-    span::after{
-       content:".";
+    span{
+       /* content:"."; */
+       margin: 0;
     }
     .codes{
         border:1px solid ${({theme})=>theme.pellete.success};

@@ -127,7 +127,7 @@ const Submissions = () => {
                         optionsMarked[parseInt(item.quesId) - 1].answers[0] ===
                         opt.optionId && (
                           <Option>
-                            <span>{opt.optionId}.</span>
+                            <span>{opt.optionId}.</span>{" "}
                             {!opt.useCustomComponent && opt.optionValue}
                             {opt.useCustomComponent && (
                               <CustomComponent data={opt.optionProps} />
@@ -147,10 +147,10 @@ const Submissions = () => {
                         <>
                           <CorrectOption>
 
-                            <div> {!opt.useCustomComponent && <><span>{opt.optionId}</span>{opt.optionValue}</>}</div>
+                            <div> {!opt.useCustomComponent && <><span>{opt.optionId}. {" "}</span>{opt.optionValue}</>}</div>
                             {opt.useCustomComponent && (
                               <div className="codes">
-                                <span>{opt.optionId}</span>
+                                <span>{opt.optionId}.</span>
                                 <div className="pre">
                                   <CustomComponent data={opt.optionProps} />
                                 </div>
@@ -170,7 +170,7 @@ const Submissions = () => {
                       {optionsMarked[parseInt(item.quesId) - 1].answers[i] ===
                         "true" && (
                           <Option>
-                            <span>{opt.optionId}.</span>
+                            <span>{opt.optionId}.</span>{" "}
                             {!opt.useCustomComponent && opt.optionValue}
                             {opt.useCustomComponent && (
                               <CustomComponent data={opt.optionProps} />
@@ -192,13 +192,13 @@ const Submissions = () => {
 
                                 <div>  {!opt.useCustomComponent &&
                                   <>
-                                    <span>{opt.optionId}</span>
+                                    <span>{opt.optionId}.</span>{" "}
                                     {opt.optionValue}
                                   </>}
                                 </div>
                                 {opt.useCustomComponent && (
                                   <div className="codes">
-                                    <span>{opt.optionId}</span>
+                                    <span>{opt.optionId}.{" "}</span>
                                     <div className="pre">
                                       <CustomComponent data={opt.optionProps} />
                                     </div>
