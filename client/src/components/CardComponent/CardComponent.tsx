@@ -24,7 +24,7 @@ const Card = ({title, durationInMins, isCompleted, clickHandler}:propTypes) => {
             
                 <img src={imageSrc(title)} alt="CardImage" />
                 <p>{title}</p>
-                <span>{durationInMins} minute</span>
+                <span>{durationInMins} Questions</span>
                 {!isCompleted && <div className="start" onClick={clickHandler}>
                    <span> Start </span>
                    <span className='arrow'><AiOutlineArrowRight/></span>

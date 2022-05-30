@@ -146,4 +146,36 @@ const Option = styled.div`
     
     
 `
-export { Container, Card, CandidateDetails, Question, Option, Submissions};
+
+const CorrectOption= styled.div`
+    color:${({theme})=>theme.pellete.success};
+    /* border:1px solid black; */
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    margin-left: 35px;
+    width: 70%;
+    @media(max-width:768px){
+        width: 80%;
+    }
+    span::after{
+       content:".";
+    }
+    .codes{
+        border:1px solid ${({theme})=>theme.pellete.success};
+        padding: 5px;
+        padding-right: 0;
+        width: 100%;
+        @media(max-width:768px){
+        width: 100%;
+    }
+        border-radius: 4px;
+    }
+    .pre{
+        width: 100%;
+        background:#f5f2f0;
+     
+        
+    }
+`
+export { Container, Card, CandidateDetails, Question, Option, Submissions, CorrectOption};
