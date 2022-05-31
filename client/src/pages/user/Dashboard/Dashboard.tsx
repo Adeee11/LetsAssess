@@ -13,6 +13,11 @@ const Dashboard = () => {
     {
       candidateName: "",
       email: "",
+      testsTaken:[
+        {
+          marksObtained:0
+        }
+      ]
     },
   ]);
   const ctx = useContext(GlobalContext);
@@ -30,7 +35,7 @@ const Dashboard = () => {
     })
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
+        console.log("result",result);
         setAllCandidates(result.data);
       })
       .catch((error) => console.log("error", error));
@@ -38,7 +43,13 @@ const Dashboard = () => {
     return () => { };
   }, [url]);
 
- 
+ const addMarks=(arr:{marksObtained:number}[])=>{
+   let sum=0;
+   for(let i=0; i<arr.length; i++){
+     sum= sum+arr[i].marksObtained;  
+   }
+   return sum
+ }
 
   return (
     <>
@@ -55,8 +66,9 @@ const Dashboard = () => {
                   isFlex={true}
                   email={candidate.email}
                   name={candidate.candidateName}
-                  allMarks={10}
+                  allMarks={addMarks(candidate.testsTaken)}
                   />
+                
                 </div>
               ))}
           </div>
