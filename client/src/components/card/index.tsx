@@ -8,8 +8,8 @@ type cardPropType = {
     isFlex?: boolean;
     assessmentId?: string;
     marks?: number;
-    allMarks?:number
-
+    allMarks?: number
+    date?:string
 }
 
 const imageSrc = (title: string) => {
@@ -21,17 +21,27 @@ const imageSrc = (title: string) => {
     else if (title === "git") return "/images/git.png";
 };
 
-const Card = ({ clickHandler, email, name, assessmentId, marks, isFlex, allMarks }: cardPropType) => {
+const Card = ({ 
+    clickHandler,
+    email,
+    name,
+    assessmentId,
+    marks,
+    isFlex,
+    allMarks,
+    date
+}: cardPropType) => {
     const totalMarks = 20;
-    
-     
+
+
     return (<>
         {isFlex && <TheCard onClick={() => clickHandler()} isFlex={isFlex}>
             <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
             <div className="right">
                 <div className='right1'>
-                <span>{name}</span>
-                <span>{email}</span>
+                    <span>{name}</span>
+                    <span>{email}</span>
+                    <span>{date}</span>
                 </div>
                 <div className='right2'>
                     <span>Score:{" "}{allMarks}</span>
@@ -65,7 +75,7 @@ const TheCard = styled.div<propType>`
     font-size: 14px;
     text-align: center;
     width: 100%;
-    padding: ${(props)=>props.isFlex?"0px":"10px"};
+    padding: ${(props) => props.isFlex ? "0px" : "10px"};
     width:100%;
     background-color:${({ theme }) => theme.pellete.primary};
     margin: 0 auto;
@@ -110,8 +120,8 @@ const TheCard = styled.div<propType>`
             flex-basis: 40%;
             width: 40%;
             border-radius: 0 0 0 100%;
-            background-image: ${({theme})=>theme.pellete.main};
-            color:${({theme})=>theme.pellete.primary};
+            background-image: ${({ theme }) => theme.pellete.main};
+            color:${({ theme }) => theme.pellete.primary};
             position: absolute;
             padding-bottom: 10px;
             right: 0;

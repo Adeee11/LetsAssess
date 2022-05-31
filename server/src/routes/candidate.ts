@@ -22,8 +22,8 @@ router.post("/", async (req, res) => {
 
     if (candidate) return res.status(400).send("Candidate already exist");
     // adding candidate to the database
-    
-    const result = await Candidate.create(data);
+    const obj={...data, date:new Date()}
+    const result = await Candidate.create(obj);
     result
       ? res.status(200).send("Candidate Added")
       : res.status(500).send("Error while storing candidate in the database");

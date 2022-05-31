@@ -11,6 +11,7 @@ interface CandidateType {
   candidateName: string;
   email: string;
   testsTaken: TestResultType[];
+  date:string;
   }
 
 const testResultSchema = new Schema({
@@ -24,6 +25,7 @@ const candidateSchema = new Schema({
   candidateName: String,
   email: String,
   testsTaken: [testResultSchema],
+  date:String,
 });
 
 const Candidate = mongoose.model<CandidateType>("Candidate", candidateSchema);
