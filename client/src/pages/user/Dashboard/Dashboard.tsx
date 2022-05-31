@@ -63,14 +63,14 @@ const Dashboard = () => {
               allCandidates.map((candidate) => (
                 <div className=" col-sm-12  col-md-6 col-lg-4 pt-4" key={candidate.email} >
                   <>
-                  {console.log("date, ", candidate.date)}
+                
                   <Card 
                   clickHandler={()=>clickHandler(candidate.email, candidate.candidateName)}
                   isFlex={true}
                   email={candidate.email}
                   name={candidate.candidateName}
                   allMarks={addMarks(candidate.testsTaken)}
-                  date={candidate.date}
+                  date={candidate.date? candidate.date.substring(3, 15):""}
                   />
                   </>
                 </div>
