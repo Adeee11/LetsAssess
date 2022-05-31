@@ -116,6 +116,7 @@ const LowerNavBar = styled.div`
     font-size: 16px;
     min-width: 194px;
     justify-content: center;
+    cursor: pointer;
     svg {
       width: 20px;
       path {

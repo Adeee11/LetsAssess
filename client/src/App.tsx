@@ -14,12 +14,14 @@ import Colors from "./pages/styleguide/colors";
 import Elements from "./pages/styleguide/elements";
 import TestOver from "./pages/TestOver";
 import Layout from "./pages/styleguide/layout";
+import InstructionsComponent from "./pages/instructions";
 
 
 function App() {
   const ctx = useContext(GlobalContext)
-  const { isAdmin, token } = ctx
-
+  const { isAdmin, token, candidate } = ctx
+  const showInstructions= sessionStorage.getItem('showInstructions');
+  console.log("can",candidate);
   return (
     <AppContainer>
       <Router>
@@ -30,6 +32,7 @@ function App() {
           {isAdmin && <Route path="/user/dashboard/:email" element={<Alltests />}></Route>}
           {isAdmin && <Route path="/user/dashboard/:email/:title" element={<Submissions />}></Route>}
           {token && <Route path="/assessment/*" element={<Assessment />}></Route>}
+          {(!showInstructions && candidate) &&<Route path="/instructions" element={<InstructionsComponent/>}></Route>}
           {token && <Route path="/assessment/:title" element={<Test />}></Route>}
           <Route path="/styleguide" element={<StyleGuide />}>
             <Route path="/styleguide" element={<Colors/>} />

@@ -33,7 +33,7 @@ const Home = () => {
   const nav = useNavigate();
   const ctx = useContext<any>(GlobalContext);
   const {
-    setToken,
+    // setToken,
     url,
     isCompleted,
     saveIsCompleted,
@@ -60,22 +60,8 @@ const Home = () => {
       redirect: "follow",
     });
 
-    res.status === 200 &&
-      fetch(`${url}/authenticate`, {
-        method: "POST",
-        headers: myHeaders,
-        body: raw,
-        redirect: "follow",
-      })
-        .then((response) => response.json())
-        .then((result) => {
-          console.log(result);
-          setToken(result.token);
-
-          nav("/assessment", { replace: true });
-        })
-        .catch((error) => console.log("error", error));
-
+    res.status === 200 && nav("/instructions", { replace: true });
+      
     if (res.ok === false) {
       setShowLoader(false);
       alert("Invalid credentials/ or user already entered the test");
@@ -116,7 +102,8 @@ const Home = () => {
   },[showMsg, isCompleted, saveIsCompleted, flag]);
 
   useEffect(()=>{
-     sessionStorage.removeItem('i');     
+     sessionStorage.removeItem('showInstructions');
+
   },[])
  
   return (

@@ -147,10 +147,10 @@ const Submissions = () => {
                         <>
                           <CorrectOption>
 
-                            <div> {!opt.useCustomComponent && <><span>{opt.optionId}. {" "}</span>{opt.optionValue}</>}</div>
+                            <div> {!opt.useCustomComponent && <><span><b>Correct:</b>{" "}</span>{opt.optionValue}</>}</div>
                             {opt.useCustomComponent && (
                               <div className="codes">
-                                <span>{opt.optionId}.</span>
+                                <span><b>Correct:</b></span>
                                 <div className="pre">
                                   <CustomComponent data={opt.optionProps} />
                                 </div>
@@ -192,13 +192,13 @@ const Submissions = () => {
 
                                 <div>  {!opt.useCustomComponent &&
                                   <>
-                                    <span>{opt.optionId}.</span>{" "}
+                                    <span><b>Correct:</b></span>{" "}
                                     {opt.optionValue}
                                   </>}
                                 </div>
                                 {opt.useCustomComponent && (
                                   <div className="codes">
-                                    <span>{opt.optionId}.{" "}</span>
+                                    <span><b>Correct:{" "}</b></span>
                                     <div className="pre">
                                       <CustomComponent data={opt.optionProps} />
                                     </div>

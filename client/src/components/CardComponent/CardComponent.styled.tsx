@@ -73,6 +73,10 @@ span{
     font-size: 14px;
 }
 
+.est{
+    color:#ada9a9;;
+   
+}
     
 `
 

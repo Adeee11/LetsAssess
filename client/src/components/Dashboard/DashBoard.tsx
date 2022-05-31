@@ -12,7 +12,7 @@ import slugify from "slugify";
 import { GlobalContext } from "../../GlobalContext/GlobalContextProvider";
 import styled from "styled-components";
 import Footer from "../Footer/Footer";
-import Instructions from "../Instructions/Instructions";
+// import Instructions from "../Instructions/Instructions";
 
 
 const DashBoard = () => {
@@ -25,13 +25,6 @@ const DashBoard = () => {
 
   const [expTime, setExpTime] = useState<any>();
 
-  const a = sessionStorage.getItem("i");
-  const [showNotInstructions, setShowNotInstructions] = useState(a);
-
-  const notShowInstructions = () => {
-    sessionStorage.setItem("i", "no");
-    setShowNotInstructions("no");
-  };
 
   const nav = useNavigate();
 
@@ -135,12 +128,10 @@ const DashBoard = () => {
               </div>
             </div>
           </TopNavBar>
-          {!showNotInstructions && (
-            <Instructions onClose={() => notShowInstructions()} />
-          )}
+         
 
           <MyContainer>
-            {showNotInstructions === "no" && (
+          
               <div className="container">
                 <div className="row justify-content-between text-center py-4">
                   {
@@ -164,7 +155,7 @@ const DashBoard = () => {
                   }
                 </div>
               </div>
-            )}
+            
           </MyContainer>
 
           <Footer />
