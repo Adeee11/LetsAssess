@@ -55,6 +55,7 @@ const Dashboard = () => {
                   isFlex={true}
                   email={candidate.email}
                   name={candidate.candidateName}
+                  allMarks={10}
                   />
                 </div>
               ))}

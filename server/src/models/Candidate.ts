@@ -11,7 +11,7 @@ interface CandidateType {
   candidateName: string;
   email: string;
   testsTaken: TestResultType[];
-}
+  }
 
 const testResultSchema = new Schema({
   assessmentId: String,

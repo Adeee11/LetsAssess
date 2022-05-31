@@ -31,10 +31,7 @@ router.post("/", async (req, res) => {
 // get all candidates
 router.get("/candidates", async (req, res) => {
   try {
-    const data = await Candidate.find({}).select({
-      candidateName: 1,
-      email: 1,
-    });
+    const data = await Candidate.find({}).select({});
     data
       ? res.status(200).json({
           data: data,

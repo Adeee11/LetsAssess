@@ -8,6 +8,7 @@ type cardPropType = {
     isFlex?: boolean;
     assessmentId?: string;
     marks?: number;
+    allMarks?:number
 
 }
 
@@ -20,15 +21,21 @@ const imageSrc = (title: string) => {
     else if (title === "git") return "/images/git.png";
 };
 
-const Card = ({ clickHandler, email, name, assessmentId, marks, isFlex }: cardPropType) => {
+const Card = ({ clickHandler, email, name, assessmentId, marks, isFlex, allMarks }: cardPropType) => {
     const totalMarks = 20;
-
+    
+     
     return (<>
         {isFlex && <TheCard onClick={() => clickHandler()} isFlex={isFlex}>
             <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
             <div className="right">
+                <div className='right1'>
                 <span>{name}</span>
                 <span>{email}</span>
+                </div>
+                <div className='right2'>
+                    <span>Score:{" "}{allMarks}</span>
+                </div>
             </div>
         </TheCard>
         }
@@ -58,7 +65,7 @@ const TheCard = styled.div<propType>`
     font-size: 14px;
     text-align: center;
     width: 100%;
-    padding: 10px;
+    padding: ${(props)=>props.isFlex?"0px":"10px"};
     width:100%;
     background-color:${({ theme }) => theme.pellete.primary};
     margin: 0 auto;
@@ -66,8 +73,9 @@ const TheCard = styled.div<propType>`
     border-radius: 6px;
     box-shadow:  ${({ theme }) => theme.boxShadow.card};
     color: rgba(58, 53, 65, 0.87);
-
+    overflow: hidden;
     cursor: pointer;
+    position: relative;
     span{
         padding: 10px;
     }
@@ -76,7 +84,7 @@ const TheCard = styled.div<propType>`
         height: 100px;
         padding: 20px;
         object-fit: contain;
-        
+        margin-left: 10px;
     }
     .img{
         border-radius: 50%;
@@ -86,8 +94,36 @@ const TheCard = styled.div<propType>`
         margin-right: 10px;
     }
     .right{
-     
+        
         text-align: left;
+        flex: 1;
+        display: flex;
+        justify-content: space-between;
+        .right1{
+            width:50%;
+            flex-basis: 50%;
+            /* border:1px solid black; */
+            /* overflow: hidden; */
+        }
+        .right2{
+            max-width: 122px;
+            flex-basis: 40%;
+            width: 40%;
+            border-radius: 0 0 0 100%;
+            background-image: ${({theme})=>theme.pellete.main};
+            color:${({theme})=>theme.pellete.primary};
+            position: absolute;
+            padding-bottom: 10px;
+            right: 0;
+            top:0;
+            bottom:30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            span{
+                margin-left: 10px;
+            }
+        }
     }
     @media (max-width:768px){
      margin-left: auto;
