@@ -17,22 +17,22 @@ const CardContainer= styled.div`
         box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     }
     img{
-   width  :100px ;
+   width:100px;
    height: 100px;
    object-fit: contain;
-   padding  :20px ;
+   padding  :20px;
+   padding-top: 0;
+   padding-bottom: 0;
 
 } 
 .start{
     cursor: pointer;
     display: flex;
-    
     background-image: ${(props)=>props.theme.pellete.main};
     padding: 5px 20px;
     margin-top: 10px;
     border-radius: 21px;
     color: white;
-    
     span{
         /* border:1px solid black; */
     }

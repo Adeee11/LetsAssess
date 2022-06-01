@@ -8,6 +8,7 @@ const Container= styled.div`
     label{
             margin-left: 10px;
             margin-right: 10px;
+            min-width: 40px;
             /* min-width: 40px; */
         }  
     .filter{
@@ -26,7 +27,7 @@ const Container= styled.div`
         }
        
         select{
-            /* width: 70%; */
+         width: 100%;
           
           outline: none;
           padding: 5px;
@@ -43,7 +44,7 @@ const Container= styled.div`
          input{
             color   :gray ;
             cursor: pointer;  
-             /* width: 80%; */
+             width: 100%;
            margin-right: 0;
            outline: none;
            padding: 5px;
@@ -63,20 +64,30 @@ const Container= styled.div`
     .startdate, .enddate, .order, .filter-logo{
         display: flex;
         align-items: center;
-        padding: 10px;
+        padding: 10px 0;
+    }
+    .filter-logo{
+        width: 100%;
+        text-align: left;
+        button{
+            text-align: left;
+            margin-left: auto;
+        }
     }
     @media(max-width:768px){
         label{
-        min-width: 35px;
+        
+        margin-left: 0;
     }
     }
     label{
         color:gray
     }
    .filter-logo{
-       @media(min-width:991px){
-           label{
-               display: none;
+       @media(max-width:768px){
+           button{
+               width: 100%;
+               text-align: center;
            }
        }
    }

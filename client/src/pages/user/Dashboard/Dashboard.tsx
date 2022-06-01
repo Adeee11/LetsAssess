@@ -157,11 +157,11 @@ const Dashboard = () => {
         <div className="container pb-4" >
           <div className="row pt-4">
             <div className="col-12 px-4">
-              <div className="filter row ">
+              <div className="filter row d-flex  justify-content-between">
 
-                <div className="order col-sm-12 col-md-6 col-lg-3">
+                <div className="order col-sm-12 col-md-5 ">
 
-                  <label>Sort By </label>
+                  <label>SortBy </label>
                   <select onChange={(e) => { setSortingBy(e.target.value); sortByScore(e.target.value, orderingByAsc) }}>
                     <option value="date">Date</option>
                     <option value="score">Score</option>
@@ -169,7 +169,7 @@ const Dashboard = () => {
                   </select>
                 </div>
 
-                <div className="order col-sm-12 col-md-6 col-lg-3">
+                <div className="order col-sm-12 col-md-5 ">
 
                   <label>Order </label>
                 
@@ -179,7 +179,7 @@ const Dashboard = () => {
                   </select>
                 </div>
 
-                <div className="startdate col-sm-12 col-md-6 col-lg-3" >
+                <div className="startdate col-sm-12 col-md-5 " >
                   <label>Start </label>
                   <input
                     type="date"
@@ -187,7 +187,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="enddate col-sm-12 col-md-6 col-lg-3">
+                <div className="enddate col-sm-12 col-md-5 ">
                   <label>End</label>
                   <input
                     type="date"
@@ -195,7 +195,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="filter-logo col-sm-12 col-md-6 col-lg-3 ">
+                <div className="filter-logo col-sm-12 col-md-5 ">
                   <label></label>
                   <button onClick={applyFilter} className="filterbtn">Apply Filter{" "}<FiFilter /></button>
                 </div>
