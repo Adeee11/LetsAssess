@@ -21,6 +21,7 @@ const Test = () => {
   const [data1, setData1] = useState<any>();
   const [showLoader, setShowLoader] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(true);
+  const [disableBtn, setDisableBtn]= useState(false);
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -139,6 +140,7 @@ const Test = () => {
     optionId: string | number | any[]
   ) => {
     // setShowLoader(true);
+    setDisableBtn(true)
     const options = Array.isArray(optionId) ? [...optionId] : [optionId];
     var myHeaders = new Headers();
     myHeaders.append("Authorization", `Bearer ${token}`);
@@ -164,6 +166,7 @@ const Test = () => {
     console.log("resultN",resultN);
 
     if(resN.status===200){
+      setDisableBtn(false)
       if (queNo < data1.questions.length - 1) {
         setQueNo(queNo + 1);
       } else {
@@ -294,7 +297,7 @@ const Test = () => {
                     selectedOpt[queNo]
                   )
                 }
-                disabled={setDisable()}
+                disabled={setDisable()||disableBtn}
               >
                 {queNo < data1.questions.length - 1
                   ? "Next Question"

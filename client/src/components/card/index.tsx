@@ -112,6 +112,7 @@ const TheCard = styled.div<propType>`
         .right1{
             width:50%;
             flex-basis: 50%;
+            z-index: 5;
             /* border:1px solid black; */
             /* overflow: hidden; */
         }
@@ -130,6 +131,7 @@ const TheCard = styled.div<propType>`
             display: flex;
             justify-content: center;
             align-items: center;
+           
             span{
                 margin-left: 10px;
             }

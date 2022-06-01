@@ -6,12 +6,29 @@ type propTypes = {
   user: string;
   info: string;
   onClick?: React.MouseEventHandler<HTMLDivElement>;
-  content?: React.ReactNode;
+  content?: boolean;
+  getOrder?: any;
+  getDate?: any;
 };
-const Header = ({ user, info, onClick, content }: propTypes) => {
+
+const returnMonth = (n: string) => {
+  if (n === "01") return "Jan";
+  else if (n === "02") return "Feb";
+  else if (n === "03") return "Mar";
+  else if (n === "04") return "Apr";
+  else if (n === "05") return "May";
+  else if (n === "06") return "Jun";
+  else if (n === "07") return "Jul";
+  else if (n === "08") return "Aug";
+  else if (n === "09") return "Sep";
+  else if (n === "10") return "Oct";
+  else if (n === "11") return "Nov";
+  else if (n === "12") return "Dec";
+}
+const Header = ({ user, info, onClick, content, getOrder, getDate }: propTypes) => {
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
   const { discardAdmin } = useContext(GlobalContext);
-
+  const [value, setValue] = useState('ascending');
   const logoutHandler = () => {
     discardAdmin();
   };
@@ -60,7 +77,18 @@ const Header = ({ user, info, onClick, content }: propTypes) => {
                 <span>Dashboard</span>
               </div>
             </div>
-            <div className="content">{content}</div>
+            <div className="content">{content &&
+              <select value={value} onChange={(e) => { setValue(e.target.value); getOrder(e.target.value) }}>
+                <option value="ascending">ascending</option>
+                <option value="descending">descending</option>
+              </select>
+            }
+              <input
+                type="date"
+                onChange={(e) => getDate(`${returnMonth(e.target.value.substring(5, 7))} ${e.target.value.substring(8, 10)} ${e.target.value.substring(0, 4)}`)} />
+
+            </div>
+
             <span className="info">{info}</span>
           </LowerNavBar>
         </div>

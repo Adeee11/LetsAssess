@@ -124,6 +124,21 @@ const LowerNavBar = styled.div`
       }
     }
   }
+
+  select{
+    margin-right: 10px;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  input{
+    margin-right: 0;
+    outline: none;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: 1px solid gray;
+  }
 `;
 
 export { TopNavBar, UpperNavBar, LowerNavBar };
