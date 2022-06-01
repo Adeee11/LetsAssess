@@ -13,6 +13,9 @@ const CardContainer= styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    &:hover{
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    }
     img{
    width  :100px ;
    height: 100px;

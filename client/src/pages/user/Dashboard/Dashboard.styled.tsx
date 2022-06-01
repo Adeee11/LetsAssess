@@ -5,8 +5,81 @@ const Container= styled.div`
     margin-top: 125px;
     min-height: calc(100vh - 125px);
     background-color: ${({theme})=>theme.pellete.background};
-   
-   
+    label{
+            margin-left: 10px;
+            margin-right: 10px;
+            /* min-width: 40px; */
+        }  
+    .filter{
+        background-color: ${({theme})=>theme.pellete.primary};
+        box-shadow: ${({theme})=>theme.boxShadow.card};
+        padding: 30px;
+        border-radius: 6px;
+        display: flex;
+        justify-content: space-evenly;
+        .filterbtn{
+            border:none;
+            background: ${({theme})=>theme.pellete.main};
+            border-radius: 5px;
+            padding: 6px 20px;
+            color:${({theme})=>theme.pellete.primary};
+        }
+       
+        select{
+            /* width: 70%; */
+          
+          outline: none;
+          padding: 5px;
+          border-radius: 5px;
+          border:1px solid ${({theme})=>theme.pellete.purple};
+          cursor: pointer;
+          color   :gray ;
+              
+        @media(max-width:768px){
+            width: 100%;
+        }
+      
+        }
+         input{
+            color   :gray ;
+            cursor: pointer;  
+             /* width: 80%; */
+           margin-right: 0;
+           outline: none;
+           padding: 5px;
+           border-radius: 5px;
+           outline: none;
+           border: 1px solid gray;
+           border:1px solid ${({theme})=>theme.pellete.purple};
+           
+           @media(max-width:768px){
+            width: 100%;
+        }
+        }
+       
+
+    }
+
+    .startdate, .enddate, .order, .filter-logo{
+        display: flex;
+        align-items: center;
+        padding: 10px;
+    }
+    @media(max-width:768px){
+        label{
+        min-width: 35px;
+    }
+    }
+    label{
+        color:gray
+    }
+   .filter-logo{
+       @media(min-width:991px){
+           label{
+               display: none;
+           }
+       }
+   }
 `
 type propType={
     isFlex?:boolean

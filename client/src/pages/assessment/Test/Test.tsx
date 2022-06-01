@@ -14,6 +14,8 @@ import {
   OptionCode,
 } from "./Test.styled";
 import { GlobalContext } from "../../../GlobalContext/GlobalContextProvider";
+import styled from "styled-components";
+
 
 const Test = () => {
   const [queNo, setQueNo] = useState(0);
@@ -22,6 +24,7 @@ const Test = () => {
   const [showLoader, setShowLoader] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(true);
   const [disableBtn, setDisableBtn]= useState(false);
+  const [showGotoDashBoard, setShowGoToDashboard] = useState(false);
   const { title = "" } = useParams();
 
   const nav = useNavigate();
@@ -130,8 +133,9 @@ const Test = () => {
   isCompleted[title.replace(/\s+/g, "-").toLowerCase()] = true;
   saveIsCompleted(isCompleted);
   setShowLoader(false);
-  exitfullscreen();
-  nav("/assessment", { replace: true });
+  setShowGoToDashboard(true)
+  // exitfullscreen();
+  // nav("/assessment", { replace: true });
   }    
   }
 
@@ -246,10 +250,14 @@ const Test = () => {
      } 
   },[isFullScreen, nav])
 
+  const gotodashboard=()=>{
+    exitfullscreen();
+    nav("/assessment", { replace: true });
+  }
   return (
     <>
       {(!data1 || showLoader) && <Spinner />}
-      {data1 && queNo < data1?.questions?.length && !showLoader ? (
+      {data1 && queNo < data1?.questions?.length && !showLoader && !showGotoDashBoard? (
         <Container>
           <Column>
             <div className="logo">
@@ -356,10 +364,36 @@ const Test = () => {
           </Column>
         </Container>
       ) : (
-        data1 && !showLoader && <h3>Not Found</h3>
+        data1 && !showGotoDashBoard && !showLoader && <h3>Not Found</h3>
       )}
+{showGotoDashBoard &&
+     <GoToDashBoardPage>
+         <button 
+          type="button"
+          onClick={gotodashboard}
+          >Go To DashBoard</button>
+     </GoToDashBoardPage>   
+}     
     </>
   );
 };
 
 export default Test;
+
+
+const GoToDashBoardPage= styled.div`
+  
+  width:100%;
+  height:100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  button{
+    background: ${({theme})=>theme.pellete.main};
+    color:${({theme})=>theme.pellete.primary};
+    border:none;
+    padding: 10px;
+    border-radius: 6px;
+  }
+` 

@@ -27,7 +27,7 @@ const Card = ({title, durationInMins, isCompleted, clickHandler}:propTypes) => {
                 <span>20 Questions</span>
                 <span className='est'>Est. {durationInMins} Minutes </span>
                 {!isCompleted && <div className="start" onClick={clickHandler}>
-                   <span> Enter on Test</span>
+                   <span> Enter </span>
                    <span className='arrow'><AiOutlineArrowRight/></span>
                 </div>}
                 <div className='completed'>

@@ -39,12 +39,13 @@ const Card = ({
             <img className="img" src="https://demos.themeselection.com/marketplace/materio-mui-react-nextjs-admin-template/demo-5/images/avatars/1.png" alt="" />
             <div className="right">
                 <div className='right1'>
-                    <span>{name}</span>
-                    <span>{email}</span>
-                    <span>{date}</span>
+                    <span className='name'>{name}</span>
+                    <span className='email'>{email}</span>
+                    <span className='date'>{date}</span>
                 </div>
                 <div className='right2'>
-                    <span>Score:{" "}{allMarks}</span>
+                    <span>Score</span>
+                    <span>{allMarks}</span>
                 </div>
             </div>
         </TheCard>
@@ -115,25 +116,44 @@ const TheCard = styled.div<propType>`
             z-index: 5;
             /* border:1px solid black; */
             /* overflow: hidden; */
+            .name{
+               /* border:1px solid black; */
+               padding: 0;
+               padding-top: 10px;
+            }
+            .email{
+                /* border:1px solid black; */
+                padding: 0;
+                padding: 5px 0;
+            }
+            .date{
+                /* border:1px solid black; */
+                padding: 0;
+                padding-bottom: 10px;
+            }
         }
         .right2{
             max-width: 122px;
-            flex-basis: 40%;
-            width: 40%;
+            flex-basis: 25%;
+            width: 25%;
             border-radius: 0 0 0 100%;
             background-image: ${({ theme }) => theme.pellete.main};
             color:${({ theme }) => theme.pellete.primary};
             position: absolute;
-            padding-bottom: 10px;
+            
             right: 0;
             top:0;
-            bottom:30px;
+            height: 70px;
+            width: 70px;
             display: flex;
             justify-content: center;
             align-items: center;
+            justify-content: center;
+            flex-direction: column;
+
            
             span{
-                margin-left: 10px;
+             padding: 0;
             }
         }
     }
@@ -144,7 +164,9 @@ const TheCard = styled.div<propType>`
     span{
         display: block;
     }
-
+&:hover{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
     
 `
 
