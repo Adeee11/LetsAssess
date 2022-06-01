@@ -77,17 +77,17 @@ const Header = ({ user, info, onClick, content, getOrder, getDate }: propTypes) 
                 <span>Dashboard</span>
               </div>
             </div>
-            <div className="content">{content &&
+            {content &&<div className="content">
               <select value={value} onChange={(e) => { setValue(e.target.value); getOrder(e.target.value) }}>
                 <option value="ascending">ascending</option>
                 <option value="descending">descending</option>
               </select>
-            }
+            
               <input
                 type="date"
                 onChange={(e) => getDate(`${returnMonth(e.target.value.substring(5, 7))} ${e.target.value.substring(8, 10)} ${e.target.value.substring(0, 4)}`)} />
 
-            </div>
+            </div>}
 
             <span className="info">{info}</span>
           </LowerNavBar>
