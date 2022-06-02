@@ -61,22 +61,7 @@ const Dashboard = () => {
     return sum
   }
 
-
-  // const sorto = (order: string) => {
-  //   const arr1 = !filteredCandidates ? allCandidates : filteredCandidates;
-  //   setSortingOrder(order);
-  //   if(sortingOrder==="asc"){
-  //      arr1.reverse();
-
-  //      console.log(arr1); 
-  //   }else{
-  //     arr1.reverse();
-  //   }
-  //   setAllCandidates([...arr1])
-  // }
-
-
-  const sortByScore = (sortBy: string, isAscending?: boolean) => {
+ const sortByScore = (sortBy: string, isAscending?: boolean) => {
     const arr1 = !filteredCandidates ? allCandidates : filteredCandidates;
     if (sortBy === "score") {
 
@@ -130,6 +115,7 @@ const Dashboard = () => {
     }
 
   }
+
   const applyFilter = () => {
     const filterDate = {
       start_date: startDate?.toISOString() || '',
@@ -191,7 +177,7 @@ const Dashboard = () => {
                   <label>End</label>
                   <input
                     type="date"
-                    onChange={(e) => setEndDate(new Date(e.target.value))}
+                    onChange={(e) =>setEndDate(new Date(new Date(e.target.value).getTime() + 60 * 60 * 24 * 1000))}
                   />
                 </div>
 
