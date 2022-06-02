@@ -136,14 +136,14 @@ const TheCard = styled.div<propType>`
             max-width: 122px;
             flex-basis: 25%;
             width: 25%;
-            border-radius: 0 0 0 100%;
+            border-radius: 0 0 0 6px;
             background-image: ${({ theme }) => theme.pellete.main};
             color:${({ theme }) => theme.pellete.primary};
             position: absolute;
             
             right: 0;
             top:0;
-            height: 70px;
+            height: 58px;
             width: 70px;
             display: flex;
             justify-content: center;

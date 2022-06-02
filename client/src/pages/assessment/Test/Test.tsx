@@ -368,10 +368,16 @@ const Test = () => {
       )}
 {showGotoDashBoard &&
      <GoToDashBoardPage>
-         <button 
-          type="button"
-          onClick={gotodashboard}
-          >Go To DashBoard</button>
+       <div className="container">
+         <div className="row d-flex justify-content-center">
+            <div className="col-10">
+            <Box onClick={gotodashboard}>
+              <p>
+              Press Esc or Click Here to Go To DashBoard.</p> </Box>  
+         </div>
+         </div>
+       </div>
+         
      </GoToDashBoardPage>   
 }     
     </>
@@ -388,12 +394,24 @@ const GoToDashBoardPage= styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: white;
-  button{
-    background: ${({theme})=>theme.pellete.main};
-    color:${({theme})=>theme.pellete.primary};
-    border:none;
-    padding: 10px;
-    border-radius: 6px;
-  }
+  background-color:${({theme})=>theme.pellete.background};;
+  
 ` 
+const Box= styled.div`
+    width: 100%;
+    background: ${({theme})=>theme.pellete.primary};
+    box-shadow: ${({theme})=>theme.boxShadow.card};
+    border:none;
+    padding: 30px;
+    border-radius: 6px; 
+    text-align: center;
+p{
+  color:${({theme})=>theme.pellete.secondary};
+  cursor: pointer;
+  transition: 0.5s;
+  margin: 0;
+}
+p:hover{
+  color:${({theme})=>theme.pellete.purple};
+}
+`

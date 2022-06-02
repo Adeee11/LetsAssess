@@ -159,7 +159,7 @@ const Dashboard = () => {
             <div className="col-12 px-4">
               <div className="filter row d-flex  justify-content-between">
 
-                <div className="order col-sm-12 col-md-5 ">
+                <div className="order col-sm-12 col-md-5 col-lg-3">
 
                   <label>SortBy </label>
                   <select onChange={(e) => { setSortingBy(e.target.value); sortByScore(e.target.value, orderingByAsc) }}>
@@ -169,7 +169,7 @@ const Dashboard = () => {
                   </select>
                 </div>
 
-                <div className="order col-sm-12 col-md-5 ">
+                <div className="order col-sm-12 col-md-5 col-lg-3">
 
                   <label>Order </label>
                 
@@ -179,7 +179,7 @@ const Dashboard = () => {
                   </select>
                 </div>
 
-                <div className="startdate col-sm-12 col-md-5 " >
+                <div className="startdate col-sm-12 col-md-5 col-lg-3" >
                   <label>Start </label>
                   <input
                     type="date"
@@ -187,7 +187,7 @@ const Dashboard = () => {
                   />
                 </div>
 
-                <div className="enddate col-sm-12 col-md-5 ">
+                <div className="enddate col-sm-12 col-md-5 col-lg-3">
                   <label>End</label>
                   <input
                     type="date"

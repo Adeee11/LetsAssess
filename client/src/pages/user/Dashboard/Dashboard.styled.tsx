@@ -8,8 +8,7 @@ const Container= styled.div`
     label{
             margin-left: 10px;
             margin-right: 10px;
-            min-width: 40px;
-            /* min-width: 40px; */
+         
         }  
     .filter{
         background-color: ${({theme})=>theme.pellete.primary};
@@ -74,10 +73,11 @@ const Container= styled.div`
             margin-left: auto;
         }
     }
-    @media(max-width:768px){
+    @media(max-width:991px){
         label{
         
         margin-left: 0;
+        min-width: 40px;
     }
     }
     label{
